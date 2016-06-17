@@ -164,17 +164,20 @@ CREATE TABLE InsuranceAuthorization (
 	authorized_From INT,
 	authorized_To INT,
 	)
+
 CREATE TABLE SchoolInformation (
 	schoolInfoID INT,
 	clientID INT,
 	isd int,
 	)
+
 CREATE TABLE Diagnosis (
 	diagnosisID INT,
 	clientID INT,
 	icd_10_Code VARCHAR(15),
 	PRIMARY KEY (clientID, diagnosisID)
 	)
+
 CREATE TABLE DiagnosisType (
 	diagnosisTypeID INT,
 	diagnosisID INT,
