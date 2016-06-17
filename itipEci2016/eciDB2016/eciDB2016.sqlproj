@@ -63,5 +63,6 @@
   <ItemGroup>
     <None Include="v1\initialTableCreation.sql" />
     <None Include="v1\Docs\eci.table.Client.pdf" />
+    <None Include="v1\Docs\ColumnList.txt" />
   </ItemGroup>
 </Project>
