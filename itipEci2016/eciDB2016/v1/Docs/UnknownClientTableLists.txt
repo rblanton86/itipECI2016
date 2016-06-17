@@ -1,0 +1,50 @@
+ECI?
+MHMR#
+MHMR Income Level
+CIDC Case Number
+CIDC Valid Form
+CIDC Valid To	
+Date (too vague, what date is this referencing?)
+Due Date (Due Date of what???)
+Reason Past Due (What is past due???)
+Intake Date (too vague)
+IFSP Date
+Comp Svc Date
+MedicalChk
+MedicalChkDate
+ImmunChk
+Comments (too vague...)
+Home Elementary ???
+Developmental Proficiency ???
+Other comments
+PISD
+Best to call (<-- poss Family member?)
+From other FA to SCCIP FA
+From SCCIP's Comp to SCCIP's FA
+From SCCIP's FA to SCCIP's Comp to SCCIP's FA
+From SCCIP's FA to SCCIP's Comprehensive
+Service Area Exception
+Office Code (too vague)
+Reasonable Candidate for Foster?
+Current IFSP Date
+1 Annual IFSP Date
+2 Annual IFSP Date
+3 Annual IFSP Date
+1 Goal Set
+2 Goal Set
+3 Goal Set
+1 Goal Met
+2 Goal Met
+3 Goal Met
+TDH Connect
+Consent?
+Unantic Dismissal?
+Release Comments
+ReleaseInfo
+Outreach Code
+Inactive (too vague)
+TKIDS Case No
+Last Exam (medical exam? Date field?)
+Decline Date
+SevrArea
+Subdivision
