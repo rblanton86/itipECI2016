@@ -158,6 +158,7 @@ CREATE TABLE Insurance (
 	insurancePolicyID VARCHAR(75),
 	medPreAuthNumber VARCHAR(100),
 	)
+
 CREATE TABLE InsuranceAuthorization (
 	clientID INT,
 	insuranceAuthID INT,
