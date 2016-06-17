@@ -150,3 +150,45 @@ CREATE TABLE ClientStaff (
 	staffID INT,
 	PRIMARY KEY (clientID, staffID),
 )
+
+CREATE TABLE Insurance (
+	clientID INT,
+	insuranceID INT,
+	insuranceName VARCHAR(75),
+	insurancePolicyID VARCHAR(75),
+	medPreAuthNumber VARCHAR(100),
+	)
+CREATE TABLE InsuranceAuthorization (
+	clientID INT,
+	insuranceAuthID INT,
+	authorized_From INT,
+	authorized_To INT,
+	)
+CREATE TABLE SchoolInformation (
+	schoolInfoID INT,
+	clientID INT,
+	isd int,
+	)
+CREATE TABLE Diagnosis (
+	diagnosisID INT,
+	clientID INT,
+	icd_10_Code VARCHAR(15),
+	PRIMARY KEY (clientID, diagnosisID)
+	)
+CREATE TABLE DiagnosisType (
+	diagnosisTypeID INT,
+	diagnosisID INT,
+	isPrimary BIT,
+	diagnosisType VARCHAR(25)
+	)
+
+CREATE TABLE Comments (
+	clientID INT,
+	commentsID INT,
+	comments varchar(250),
+	)
+	
+
+/*
+This is a comment for testing commit and push in Git
+*/

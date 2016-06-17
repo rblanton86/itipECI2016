@@ -1,0 +1,9 @@
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.dacpac
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.dll
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.pdb
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\Model.xml
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\refactor.xml
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\postdeploy.sql
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\predeploy.sql
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.dll
+C:\Users\tyrell\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb
