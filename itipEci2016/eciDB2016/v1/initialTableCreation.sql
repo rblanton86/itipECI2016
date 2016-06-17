@@ -182,4 +182,9 @@ CREATE TABLE DiagnosisType (
 	diagnosisType VARCHAR(25)
 	)
 
+CREATE TABLE Comments (
+	clientID INT,
+	commentsID INT,
+	comments varchar(250),
+	)
 	
