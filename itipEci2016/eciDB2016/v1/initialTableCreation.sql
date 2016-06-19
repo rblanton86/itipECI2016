@@ -1,20 +1,23 @@
 ﻿--Main table: clients.
 CREATE TABLE Clients (
-	clientID INT IDENTITY (1,1),
-	raceID INT,
-	ethnicityID INT,
-	clientStatusID INT,
-	familyID INT,
-	referralSourceID INT,
-	physicianID INT,
-	staffID INT,
-	memberAddressID INT,
-	additionalContactInfoID INT,
+	clientID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID),
+	raceID INT FOREIGN KEY REFERENCES Race(raceID),
+	ethnicityID INT FOREIGN KEY REFERENCES Ethnicity(ethnicityID),
+	clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
+	familyID INT FOREIGN KEY REFERENCES FamilyMember(familyID),
+	-- referralSourceID INT FOREIGN KEY REFERENCES ReferralSource(referralSourceID), -- Removed so that after linking table ClientReferral is created, it will link to this instead.
+	physicianID INT FOREIGN KEY REFERENCES Physician(physicianID),
+	staffID INT FOREIGN KEY REFERENCES Staff(staffID),
+	memberAddressID INT FOREIGN KEY REFERENCES MemberAddress(memberAddressID),
+	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	firstName VARCHAR(25),
+	middleInitial VARCHAR(1),
 	lastName VARCHAR(25),
 	dob INT,
 	ssn INT,
-	referralSource VARCHAR(50),
+	weightLBS INT, -- do we need both weight fields? one can be figured off of the other mathematically rather than stored as a separate value later?
+	weightOZ INT, -- ??
 )
 
 /* Referral types in legacy database includ the following: 
@@ -30,97 +33,102 @@ CREATE TABLE Clients (
 
 */
 CREATE TABLE ReferralSource (
-	referralSourceID INT IDENTITY(1,1),
-	additionalContactInfoID INT,
+	referralSourceID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID),
+	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	referralSource VARCHAR(25),
+	referringAgencyName VARCHAR(25),
+	referringAgencyLocation VARCHAR(25), -- City, State
 )
 
 --Main table: family.
 CREATE TABLE FamilyMember (
-	familyID INT IDENTITY (1,1),	
-	familyTypeID INT,
+	familyID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID), -- I.E. Client, Physician, Referral Source, Family, etc.
+	familyTypeID INT FOREIGN KEY REFERENCES FamilyMemberType(familyTypeID), -- I.E. Parent, Sibling, Legal Guardian, etc.
+	raceID INT FOREIGN KEY REFERENCES Race(raceID),
 	firstName VARCHAR(25),
 	lastName VARCHAR(25),
 	isGuardian BIT,
+	dob INT,
+	occupation VARCHAR(25),
+	employer VARCHAR(25),
 )
 
 CREATE TABLE FamilyMemberType (
-	familyTypeID INT IDENTITY (1,1),
-	familyType VARCHAR(25),
+	familyTypeID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	familyType VARCHAR(25), -- Legal Guardian, Parent, Sibling
 )
 
 --Main table: Staff.
 CREATE TABLE Staff (
-	staffID INT IDENTITY (1,1),
-	staffTypeID INT,
-	memberAddressID INT,
-	additionalContactInfoID INT,
+	staffID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	staffTypeID INT FOREIGN KEY REFERENCES StaffType(staffTypeID),
+	memberAddressID INT FOREIGN KEY REFERENCES MemberAddress(memberAddressID),
+	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	firstName VARCHAR(25),
-	lastNAME VARCHAR(25),
+	lastName VARCHAR(25),
 )
 
 CREATE TABLE StaffType (
-	staffTypeID INT IDENTITY (1,1),
-	staffType VARCHAR(25),
+	staffTypeID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	staffType VARCHAR(25), -- Service Coordinator, Interpreter, PT, ST, OT,	NUT
 )
 
 --Main table: Holds all addresses on the database for any type. 
 CREATE TABLE MemberAddress (
-	memberAddressID INT IDENTITY(1,1),
+	memberAddressID INT IDENTITY(1,1) NOT NULL PRIMARY KEY,
+	organizationName VARCHAR(25),
 	address1 VARCHAR(50),
 	address2 VARCHAR(25),
 	city VARCHAR(25),
-	st NVARCHAR(2),
+	st VARCHAR(2),
 	zip INT,
+	county VARCHAR(25),
+	mapsco VARCHAR(10),
 )
 
 --Main table: phone, email, twitter, etc...
 CREATE TABLE AdditionalContactInfo (
-	additionalContactInfoID INT IDENTITY (1,1),
-	memberID INT, --Can be any table id, clientID, staffID, referralSourceID, etc.
-	memberTypeID INT,
+	additionalContactInfoID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	memberID INT, --Can be any table id, clientID, staffID, referralSourceID, etc. ??? Since this references may tables, how do we indicate it as a foreign key?
+	memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID),
 	additionalContactInfo VARCHAR(255),
 )
 
---Reference table. Client, physician, referralsource, family member, staff.
+--Reference table.
 CREATE TABLE MemberType (
-	memberTypeID INT IDENTITY (1,1),
-	memberType VARCHAR(25),	
+	memberTypeID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	memberType VARCHAR(25),	-- Client, physician, referralsource, family member, staff.
 )
 
 CREATE TABLE Race (
-	raceID INT IDENTITY (1,1),
+	raceID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
 	race VARCHAR(25),
 )
 
 CREATE TABLE Ethnicity (
-	ethnicityID INT IDENTITY (1,1),
+	ethnicityID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
 	ethnicity VARCHAR(25),
 )
 
 CREATE TABLE ClientStatus (
-	clientStatusID INT IDENTITY (1,1),
-	clientStatus VARCHAR(25),
+	clientStatusID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	clientStatus VARCHAR(25), -- Active, Inactive
 	initialDate INT,
 	dismissedDate INT,
-	dismissalReason VARCHAR(100),
+	dismissalReason VARCHAR(100), --- Declined Services, Moved, Could not contact, Deceased, Other -- Do we want this to be it's own table with a foreign key here?
 )
 
 CREATE TABLE Physician (
-	physicianID INT IDENTITY (1,1),
-	officeID INT,
-)
-
-CREATE TABLE Office (
-	officeID INT IDENTITY (1,1),
-	office VARCHAR(25),
-)
-
--- This table linking table to link Physicians and Offices together.
-CREATE TABLE PhysicianOffice (
-	officeID INT,
-	physicianID INT,
-	PRIMARY KEY (officeID, physicianID),
+	physicianID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	memberAddressID INT FOREIGN KEY REFERENCES MemberAddress(MemberAddressID),
+	memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID),
+	additionalContactInfoID	INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
+	firstName VARCHAR(25),
+	lastName VARCHAR(25),
+	physicianNPI INT,
+	physicianType VARCHAR(25),
 )
 
 -- This table links Clients and Physicians together.
@@ -142,6 +150,8 @@ CREATE TABLE ClientReferralSource (
 	clientID INT,
 	referralSourceID INT,
 	PRIMARY KEY (clientID, referralSourceID),
+	commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
+	referralDate INT,
 )
 
 -- This table links Clients and Staff togther.
@@ -152,46 +162,41 @@ CREATE TABLE ClientStaff (
 )
 
 CREATE TABLE Insurance (
-	clientID INT,
-	insuranceID INT,
+	insuranceID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	memberAddressID INT FOREIGN KEY REFERENCES MemberAddress(memberAddressID),
+	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	insuranceName VARCHAR(75),
-	insurancePolicyID VARCHAR(75),
-	medPreAuthNumber VARCHAR(100),
-	)
+)
+
 CREATE TABLE InsuranceAuthorization (
-	clientID INT,
-	insuranceAuthID INT,
-	authorized_From INT,
-	authorized_To INT,
+	insuranceAuthID INT IDENTITY (1,1) PRIMARY KEY NOT NULL,
+	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
+	insuranceAuthTypeID INT FOREIGN KEY REFERENCES InsuranceAuthorizationType(insuraneAuthTypeID),
+	authorizationNumber INT,
+	authorizedFrom INT,
+	authorizedTo INT,
 	)
 
 CREATE TABLE SchoolInformation (
-	schoolInfoID INT,
-	clientID INT,
+	schoolInfoID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
 	isd int,
 	)
 
 CREATE TABLE Diagnosis (
-	diagnosisID INT,
-	clientID INT,
-	icd_10_Code VARCHAR(15),
-	PRIMARY KEY (clientID, diagnosisID)
-	)
+	diagnosisID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
+	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
+	diagnosisTypeID INT FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
+	icd10 VARCHAR(15),
+)
 
 CREATE TABLE DiagnosisType (
-	diagnosisTypeID INT,
-	diagnosisID INT,
+	diagnosisTypeID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
 	isPrimary BIT,
-	diagnosisType VARCHAR(25)
+	diagnosisType VARCHAR(25), -- Primary, secondary, tertiary, inactive, active
 	)
 
 CREATE TABLE Comments (
-	clientID INT,
-	commentsID INT,
+	commentsID INT IDENTITY (1,1) NOT NULL PRIMARY KEY,
 	comments varchar(250),
 	)
-	
-
-/*
-This is a comment for testing commit and push in Git
-*/
