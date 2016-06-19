@@ -67,5 +67,7 @@
     <None Include="v1\CreateDevUser.sql" />
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
+    <None Include="v1\PrimaryLanguage.sql" />
+    <None Include="v1\CommunicationPreferences.sql" />
   </ItemGroup>
 </Project>
