@@ -165,7 +165,7 @@ CREATE TABLE Clients (
 	schoolInfoID INT FOREIGN KEY REFERENCES SchoolInformation(schoolInfoID),
 	commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
 	insuranceAuthID INT FOREIGN KEY REFERENCES InsuranceAuthorization(insuranceAuthID),
-	communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationsPreferencesID),
+	communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationPreferencesID),
 	firstName VARCHAR(25),
 	lastName VARCHAR(25),
 	dob INT,
