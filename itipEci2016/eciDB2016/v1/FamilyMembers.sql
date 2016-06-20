@@ -1,4 +1,16 @@
-﻿--Main Table: Holds Family Member names
+﻿/************************************************
+Description: 
+	Creates table to hold family member and related
+	information, including a table to link family information
+	together.
+Author: 
+	Jennifer M. Graves
+Date: 
+	06/20/2016
+Change history:
+
+**************************************************/
+
 CREATE TABLE FamilyMember (
 	familyMemberID INT IDENTITY (1,1) PRIMARY KEY (familyID),
 	familyMemberTypeID INT FOREIGN KEY REFERENCES FamilyMemberType(familyMemberTypeID),

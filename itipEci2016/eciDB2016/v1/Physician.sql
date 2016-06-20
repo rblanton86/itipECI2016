@@ -1,4 +1,15 @@
-﻿--Main Table: Holds Physician name
+﻿/************************************************
+Description: 
+	Creates main physicians table and linking tables which
+	contain information relating to each physician.
+Author: 
+	Jennifer M. Graves
+Date: 
+	06/20/2016
+Change history:
+
+**************************************************/
+
 CREATE TABLE Physician (
 	physicianID INT IDENTITY (1,1) PRIMARY KEY (physicianID),
 	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
