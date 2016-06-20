@@ -69,6 +69,7 @@
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
     <None Include="v1\PrimaryLanguage.sql" />
     <None Include="v1\CommunicationPreferences.sql" />
+    <None Include="v1\InsuranceAuthorization.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="v1\AdditionalContactInfo.sql" />

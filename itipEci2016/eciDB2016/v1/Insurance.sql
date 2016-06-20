@@ -8,7 +8,7 @@ Author:
 Date: 
 	06/20/2016
 Change history:
-
+	06.20.16 - tpc- Removed InsuranceAuthorization table and removed foreign keys to Insurance Table
 **************************************************/
 
 CREATE TABLE Insurance (
@@ -19,15 +19,7 @@ CREATE TABLE Insurance (
 	)
 --Link Table: Links Insurance and Client tables together
 CREATE TABLE LnkClientInsurance ( 
-	insuranceID INT,
-	clientID INT,
-	PRIMARY KEY (insuranceID, clientID)
-	)
---Type Table: Provides authorization information for clients insurance
-CREATE TABLE InsuranceAuthorization (
-	insuranceAuthID INT IDENTITY (1,1) PRIMARY KEY (insuranceAuthID),
 	insuranceID INT FOREIGN KEY REFERENCES Insurance(insuranceID),
-	authorized_From INT,
-	authorized_To INT,
-	insuranceAuthorizationType VARCHAR (25)
+	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
+	PRIMARY KEY (insuranceID, clientID)
 	)

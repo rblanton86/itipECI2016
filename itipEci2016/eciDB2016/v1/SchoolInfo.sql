@@ -12,7 +12,7 @@ Change history:
 **************************************************/
 
 CREATE TABLE SchoolInformation (
-	schoolInfoID INT IDENTITY (1,1) PRIMARY KEY (insuranceAuthID),
+	schoolInfoID INT IDENTITY (1,1) PRIMARY KEY (schoolInfoID),
 	isd int,
 	)
 	 

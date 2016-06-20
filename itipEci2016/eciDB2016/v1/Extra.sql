@@ -6,11 +6,10 @@ Author:
 Date: 
 	6.20.2016
 Change History:
-	
+	6.20.16 - tpc - Removed comments foreign key referencing client
 ************************************************************************************************************/
 CREATE TABLE Comments (
 	commentsID INT IDENTITY (1,1) PRIMARY KEY (commentsID) NOT NULL,
-	clientID INT FOREIGN KEY REFERENCES Clients(clientID) NOT NULL,
 	comments varchar(250) NOT NULL,
 	)
 	 
