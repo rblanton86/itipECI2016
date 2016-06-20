@@ -1,4 +1,13 @@
-﻿--Main table: Holds all addresses on the database for any type. 
+﻿/***********************************************************************************************************
+Description: 
+	 Creates Address tables that holds addresses and address type 
+Author: 
+	Tyrell Powers-Crane
+Date: 
+	6.20.2016
+Change History:
+	
+************************************************************************************************************/
 CREATE TABLE Addresses (
 	addressesID INT IDENTITY(1,1) PRIMARY KEY (addressesID),
 	addressesTypeID INT FOREIGN KEY REFERENCES AddressType(addressesTypeID),

@@ -70,4 +70,18 @@
     <None Include="v1\PrimaryLanguage.sql" />
     <None Include="v1\CommunicationPreferences.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <Build Include="v1\AdditionalContactInfo.sql" />
+    <Build Include="v1\Addresses.sql" />
+    <Build Include="v1\Clients.sql" />
+    <Build Include="v1\Diagnosis.sql" />
+    <Build Include="v1\Extra.sql" />
+    <Build Include="v1\FamilyMembers.sql" />
+    <Build Include="v1\Insurance.sql" />
+    <Build Include="v1\MemberType.sql" />
+    <Build Include="v1\Physician.sql" />
+    <Build Include="v1\ReferalSource.sql" />
+    <Build Include="v1\SchoolInfo.sql" />
+    <Build Include="v1\Staff.sql" />
+  </ItemGroup>
 </Project>

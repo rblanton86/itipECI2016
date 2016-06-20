@@ -1,4 +1,14 @@
-﻿CREATE LOGIN eciUser_Dev WITH PASSWORD = 'dev_user2016', 
+﻿/***********************************************************************************************************
+Description: 
+	 Creates a password protected user to access the database
+Author: 
+	Tyrell Powers-Crane
+Date: 
+	6.20.2016
+Change History:
+	
+************************************************************************************************************/
+CREATE LOGIN eciUser_Dev WITH PASSWORD = 'dev_user2016', 
 	CHECK_POLICY     = OFF,
     CHECK_EXPIRATION = OFF
 GO

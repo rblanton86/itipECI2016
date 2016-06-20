@@ -1,4 +1,13 @@
-﻿--Main Table: Holds the diagnosis icd-10 code
+﻿/***********************************************************************************************************
+Description: 
+	 Creates Diagnosis and Diganosis type tables to hold icd-10 info and insurance type (i.e. primary)
+Author: 
+	Tyrell Powers-Crane
+Date: 
+	6.20.2016
+Change History:
+	
+************************************************************************************************************/
 CREATE TABLE Diagnosis (
 	diagnosisID INT IDENTITY (1,1) PRIMARY KEY (diagnosisID),
 	diagnosisTypeID INT FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),

@@ -1,4 +1,13 @@
-﻿--Main Table: Holds Patient information
+﻿/***********************************************************************************************************
+Description: 
+	 Creates Client Table and information relating to the client table
+Author: 
+	Tyrell Powers-Crane
+Date: 
+	6.20.2016
+Change History:
+	
+************************************************************************************************************/
 CREATE TABLE Clients ( 
 	clientID INT IDENTITY (1,1) PRIMARY KEY (clientID),
 	raceID INT FOREIGN KEY REFERENCES Race(raceID),
