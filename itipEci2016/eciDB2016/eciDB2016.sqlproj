@@ -59,30 +59,13 @@
     <Folder Include="Properties" />
     <Folder Include="v1" />
     <Folder Include="v1\Docs" />
+    <Folder Include="v1\Sprint1" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\initialTableCreation.sql" />
     <None Include="v1\Docs\eci.table.Client.pdf" />
     <None Include="v1\Docs\ColumnList.txt" />
-    <None Include="v1\CreateDevUser.sql" />
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
-    <None Include="v1\PrimaryLanguage.sql" />
-    <None Include="v1\CommunicationPreferences.sql" />
-    <None Include="v1\InsuranceAuthorization.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <Build Include="v1\AdditionalContactInfo.sql" />
-    <Build Include="v1\Addresses.sql" />
-    <Build Include="v1\Clients.sql" />
-    <Build Include="v1\Diagnosis.sql" />
-    <Build Include="v1\Extra.sql" />
-    <Build Include="v1\FamilyMembers.sql" />
-    <Build Include="v1\Insurance.sql" />
-    <Build Include="v1\MemberType.sql" />
-    <Build Include="v1\Physician.sql" />
-    <Build Include="v1\ReferalSource.sql" />
-    <Build Include="v1\SchoolInfo.sql" />
-    <Build Include="v1\Staff.sql" />
+    <None Include="v1\Sprint1\InitializeDatabase.sql" />
   </ItemGroup>
 </Project>
