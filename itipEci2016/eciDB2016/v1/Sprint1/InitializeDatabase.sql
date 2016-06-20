@@ -102,6 +102,7 @@ CREATE TABLE Insurance (
 --CREATE TABLE InsuranceAuthorization (
 CREATE TABLE InsuranceAuthorization (
 	insuranceAuthID INT IDENTITY (1,1) PRIMARY KEY (insuranceAuthID),
+	commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
 	authorized_From INT,
 	authorized_To INT,
 	insuranceAuthorizationType VARCHAR (25)
@@ -159,6 +160,12 @@ CREATE TABLE Clients (
 	raceID INT FOREIGN KEY REFERENCES Race(raceID),
 	ethnicityID INT FOREIGN KEY REFERENCES Ethnicity(ethnicityID),
 	clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
+	diagnosisID INT FOREIGN KEY REFERENCES Diagnosis(diagnosisID),
+	primaryLanguageID INT FOREIGN KEY REFERENCES PrimaryLanguage(primaryLanguageID),
+	schoolInfoID INT FOREIGN KEY REFERENCES SchoolInformation(schoolInfoID),
+	commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
+	insuranceAuthID INT FOREIGN KEY REFERENCES InsuranceAuthorization(insuranceAuthID),
+	communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationsPreferencesID),
 	firstName VARCHAR(25),
 	lastName VARCHAR(25),
 	dob INT,
@@ -169,25 +176,26 @@ CREATE TABLE Clients (
 CREATE TABLE LnkAddressesFamily (
 	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
 	familyID INT FOREIGN KEY REFERENCES FamilyMember(familyMemberID),
-	PRIMARY KEY (addressesID, familyID)
+		PRIMARY KEY (addressesID, familyID)
 	)
 CREATE TABLE LnkClientFamily (
 	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
 	familyID INT FOREIGN KEY REFERENCES FamilyMember(familyMemberID),
-	PRIMARY KEY (clientID, familyID),
+		PRIMARY KEY (clientID, familyID),
 )
 CREATE TABLE LnkClientInsurance ( 
 	insuranceID INT FOREIGN KEY REFERENCES Insurance(insuranceID),
 	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
-	PRIMARY KEY (insuranceID, clientID)
+		PRIMARY KEY (insuranceID, clientID)
 	)
 CREATE TABLE LnkClientReferralSource (
 	clientID INT FOREIGN KEY REFERENCES Clients(clientID),
 	referralSourceID INT FOREIGN KEY REFERENCES ReferralSource(referralSourceID),
-	PRIMARY KEY (clientID, referralSourceID),
+		PRIMARY KEY (clientID, referralSourceID),
+	commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
 )
 CREATE TABLE ClientStaff (
 	clientID INT FOREIGN KEY REFERENCES Clients(clientID), 
 	staffID INT FOREIGN KEY REFERENCES Staff(staffID),
-	PRIMARY KEY (clientID, staffID),
+		PRIMARY KEY (clientID, staffID),
 )
