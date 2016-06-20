@@ -15,7 +15,6 @@ CREATE TABLE FamilyMember (
 	familyMemberID INT IDENTITY (1,1) PRIMARY KEY (familyID),
 	familyMemberTypeID INT FOREIGN KEY REFERENCES FamilyMemberType(familyMemberTypeID),
 	additionalContactInfo INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
-	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
 	firstName VARCHAR(25),
 	lastName VARCHAR(25),
 	isGuardian BIT,
@@ -32,3 +31,9 @@ CREATE TABLE LnkClientFamily (
 	familyID INT,
 	PRIMARY KEY (clientID, familyID),
 )
+--Lnk Table: Links Addresses and family
+CREATE TABLE LnkAddressesFamily (
+	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
+	familyID INT FOREIGN KEY REFERENCES FamilyMember(familyMemberID),
+	PRIMARY KEY (addressesID, familyID)
+	)
