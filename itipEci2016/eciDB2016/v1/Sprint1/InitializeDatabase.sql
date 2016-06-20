@@ -6,18 +6,33 @@ Author:
 Date: 
 	6.20.2016
 Change History:
-	
+	6.20.2016 -- jmg -- Clarification, edits to tables.
 ************************************************************************************************************/
+
+CREATE TABLE Race (
+	raceID INT IDENTITY (1,1) PRIMARY KEY,
+	race VARCHAR(25) NOT NULL
+)
+
+CREATE TABLE Ethnicity (
+	ethnicityID INT IDENTITY (1,1) PRIMARY KEY,
+	ethnicity VARCHAR(25) NOT NULL
+)
+
+CREATE TABLE ClientStatus (
+	clientStatusID INT IDENTITY (1,1) PRIMARY KEY,
+	clientStatus VARCHAR(25) NOT NULL
+)
 
 --Type Table: Provides description of address table then creates address table
 CREATE TABLE AddressesType (
-	addressesTypeID INT IDENTITY (1,1) PRIMARY KEY (addressesTypeID),
-	addressesType VARCHAR(25)
+	addressesTypeID INT IDENTITY (1,1) PRIMARY KEY (addressesTypeID) NOT NULL,
+	addressesType VARCHAR(25) NOT NULL
 	)
 --
 CREATE TABLE Addresses (
-	addressesID INT IDENTITY(1,1) PRIMARY KEY (addressesID),
-	addressesTypeID INT FOREIGN KEY REFERENCES AddressType(addressesTypeID),
+	addressesID INT IDENTITY(1,1) PRIMARY KEY (addressesID) NOT NULL,
+	addressesTypeID INT FOREIGN KEY REFERENCES AddressesType(addressesTypeID),
 	address1 VARCHAR(50),
 	address2 VARCHAR(25),
 	city VARCHAR(25), 
@@ -26,25 +41,25 @@ CREATE TABLE Addresses (
 )
 --
 CREATE TABLE MemberType (
-	memberTypeID INT IDENTITY (1,1) PRIMARY KEY (memberTypeID),
-	memberType VARCHAR(25),	
+	memberTypeID INT IDENTITY (1,1) PRIMARY KEY (memberTypeID) NOT NULL,
+	memberType VARCHAR(25) NOT NULL	
 ) 
 --Type Table: Provides description of Additional Contact Info then creates addContactInfo Table
 CREATE TABLE AdditionalContactInfoType (
-	additionalContactInfoTypeID INT IDENTITY (1,1) PRIMARY KEY (additionalContactInfoTypeID),
+	additionalContactInfoTypeID INT IDENTITY (1,1) PRIMARY KEY (additionalContactInfoTypeID) NOT NULL,
 	additionalContactInfoType VARCHAR(25)
 	) 
 --
 CREATE TABLE AdditionalContactInfo (
-	additionalContactInfoID INT IDENTITY (1,1) PRIMARY KEY (additionalContactInfoID),
+	additionalContactInfoID INT IDENTITY (1,1) PRIMARY KEY (additionalContactInfoID) NOT NULL,
 	memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID),
-	additionalContactInfoTypeID INT FOREIGN KEY REFERENCES AdditionalContactInfoType(additonalContactInfoTypeID),
-	additionalContactInfo VARCHAR(255),
+	additionalContactInfoTypeID INT FOREIGN KEY REFERENCES AdditionalContactInfoType(additionalContactInfoTypeID),
+	additionalContactInfo VARCHAR(255) NOT NULL,
 ) 
 --Creates CommPref Table
 CREATE TABLE CommunicationPreferences (
 	communicationPreferencesID INT IDENTITY (1,1) PRIMARY KEY (communicationPreferencesID),
-	communicationPreferences VARCHAR(25),
+	communicationPreferences VARCHAR(25) NOT NULL,
 	)
 --Type Table: Provides description of diagnosis (i.e. Primary) then creates diagnosis Table
 CREATE TABLE DiagnosisType (
@@ -54,9 +69,9 @@ CREATE TABLE DiagnosisType (
 	)
 --
 CREATE TABLE Diagnosis (
-	diagnosisID INT IDENTITY (1,1) PRIMARY KEY (diagnosisID),
+	diagnosisID INT IDENTITY (1,1) PRIMARY KEY (diagnosisID) NOT NULL,
 	diagnosisTypeID INT FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
-	icd_10_Code VARCHAR(15), 
+	icd_10_Code VARCHAR(15) NOT NULL, 
 	)
 --Creates Extra/comments table
 CREATE TABLE Comments (
@@ -65,12 +80,12 @@ CREATE TABLE Comments (
 	)
 --Type Table: Provides information regarding family members (i.e. Mother) and creates family member table
 CREATE TABLE FamilyMemberType (
-	familyMemberTypeID INT IDENTITY (1,1) PRIMARY KEY (familyTypeID),
-	familyMemberType VARCHAR(25),
+	familyMemberTypeID INT IDENTITY (1,1) PRIMARY KEY (familyMemberTypeID),
+	familyMemberType VARCHAR(25) NOT NULL,
 )
 --
 CREATE TABLE FamilyMember (
-	familyMemberID INT IDENTITY (1,1) PRIMARY KEY (familyID),
+	familyMemberID INT IDENTITY (1,1) PRIMARY KEY (familyMemberID),
 	familyMemberTypeID INT FOREIGN KEY REFERENCES FamilyMemberType(familyMemberTypeID),
 	additionalContactInfo INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	firstName VARCHAR(25),
@@ -94,31 +109,31 @@ CREATE TABLE InsuranceAuthorization (
 --Creates Primary Language Table
 CREATE TABLE PrimaryLanguage (
 	primaryLanguageID INT IDENTITY (1,1) PRIMARY KEY (primaryLanguageID),
-	primaryLanguage VARCHAR(20),
+	primaryLanguage VARCHAR(20) NOT NULL,
 	)
 --Type Table: Provides description of referral source and Creates Referral source Table
 CREATE TABLE ReferralSourceType (
-	referralSourceTypeID INT IDENTITY (1,1),
+	referralSourceTypeID INT IDENTITY (1,1) PRIMARY KEY (referralSourceTypeID),
 	referralSourceType VARCHAR(250),
 	referralNotificationType VARCHAR(20),
 	)
 --
 CREATE TABLE ReferralSource (
-	referralSourceID INT IDENTITY(1,1),
+	referralSourceID INT IDENTITY(1,1) PRIMARY KEY (referralSourceID),
 	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	referralSourceTypeID INT FOREIGN KEY REFERENCES ReferralSourceType(referralSourceTypeID),
 	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
-	referralSource VARCHAR(25),
+	referralSource VARCHAR(25) NOT NULL,
 ) 
 --Creates school information table
 CREATE TABLE SchoolInformation (
 	schoolInfoID INT IDENTITY (1,1) PRIMARY KEY (schoolInfoID),
-	isd int,
+	isd int NOT NULL
 	)
 --Creates stafftype table and creates staff table
 CREATE TABLE StaffType (
 	staffTypeID INT IDENTITY (1,1) PRIMARY KEY (staffTypeID),
-	staffType VARCHAR(25),
+	staffType VARCHAR(25) NOT NULL
 )
 --
 CREATE TABLE Staff (
@@ -127,27 +142,29 @@ CREATE TABLE Staff (
 	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
 	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 	firstName VARCHAR(25),
-	lastNAME VARCHAR(25),
+	lastName VARCHAR(25),
 )
 --Creates Physician tables
 CREATE TABLE Physician (
 	physicianID INT IDENTITY (1,1) PRIMARY KEY (physicianID),
 	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
 	additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
-	officeID INT,
+	title VARCHAR(10),
+	firstName VARCHAR(25),
+	lastName VARCHAR(25),
 )
 --Client Table
 CREATE TABLE Clients ( 
-		clientID INT IDENTITY (1,1) PRIMARY KEY (clientID),
-		raceID INT FOREIGN KEY REFERENCES Race(raceID),
-		ethnicityID INT FOREIGN KEY REFERENCES Ethnicity(ethnicityID),
-		clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
-		firstName VARCHAR(25),
-		lastName VARCHAR(25),
-		dob INT,
-		ssn INT,
-		referralSource VARCHAR(50),
-	)
+	clientID INT IDENTITY (1,1) PRIMARY KEY (clientID),
+	raceID INT FOREIGN KEY REFERENCES Race(raceID),
+	ethnicityID INT FOREIGN KEY REFERENCES Ethnicity(ethnicityID),
+	clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
+	firstName VARCHAR(25),
+	lastName VARCHAR(25),
+	dob INT,
+	ssn INT,
+	referralSource VARCHAR(50),
+)
 -- linking tables
 CREATE TABLE LnkAddressesFamily (
 	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
