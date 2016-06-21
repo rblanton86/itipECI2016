@@ -1,0 +1,205 @@
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<header>
+	<h1>Client Update</h1>
+</header>
+<nav>
+	<button type="button">Get Next Alt ID</button>
+	<button type="button">Add Client</button>
+	<button type="button">Delete Client</button>
+	<button type="button" onclick="location.href='Index.cshtml';">Close</button>
+</nav>		
+<div class="column">
+	<ul>
+		<li>
+			<label>Alt ID:</label>
+			<input type="text">
+		</li>
+		<li>
+			<label>Find Client:</label>
+			<input list="clientID">
+		</li>
+	</ul>
+	<ul class="flex">
+		<li>
+			<button type="button">Close if No Records</button>
+		</li>
+		<li>
+			<button type="button">Remove Filter</button>
+		</li>
+	</ul>
+</div>
+<div class="main">
+	<form>
+		<ul class="flex">
+			<li>
+				<label>Client ID:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Full Name:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Office:</label>
+				<select>
+					<option>M</option>
+				</select>
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Last Name:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>First Name:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>MI:</label>
+				<input type="text" size="1">
+			</li>
+			<li>
+				<label>Status:</label>
+				<select>
+					<option>A</option>
+				</select>
+			</li>
+			<li>
+				<label>Months Old:</label>
+				<input type="text" size="3">
+			</li>
+			<li>
+				<label>DOB:</label>
+				<input type="date">
+			</li>
+			<li>
+				<label>Sex:</label>
+				<select>
+					<option>M</option>
+					<option>F</option>
+				</select>
+			</li>
+			<li>
+				<label>Ethnicity:</label>
+				<select>
+					<option>Hispanic</option>
+					<option>Non-Hispanic</option>
+				</select>
+			</li>
+			<li>
+				<label>Race:</label>
+				<select>
+					<option>E</option>
+				</select>
+			</li>
+			<li>
+				<label>SSN:</label>
+				<input type="text" size="9">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Address 1:</label>
+				<input type="text" size="60">
+			</li>
+			<li>
+				<label>ISD:</label>
+				<input list>
+			</li>
+			<li>
+				<label>Address 2:</label>
+				<input type="text" size="60">
+			</li>
+			<li>
+				<label>Language:</label>
+				<select>
+					<option>E</option>
+				</select>
+			</li>
+			<li class="inline">
+				<label>City:</label>
+				<input type="text">
+			</li>
+			<li class="inline">
+				<label>State:</label>
+				<input type="text" size="2">
+			</li>
+			<li class="inline">
+				<label>Zip:</label>
+				<input list="zipCode" size="6">
+				<input type="text" size="4">
+			</li>
+			<li class="inline">
+				<label>MAPSCO:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Client Phone:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>County:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Service Area Expection:</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>Case Manager:</label>
+				<input list>
+			</li>
+			<li>
+				<label>TKID's Case Number:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Consent to Release Information?</label>
+				<input type="checkbox">
+			</li>
+		</ul>
+		<ul>
+			<span class="column">
+				<li>
+					<label>ECI:</label>
+					<select></select>
+				</li>
+				<li>
+					<label>Accounting System ID:</label>
+					<input type="text">
+				</li>
+				<li>
+					<button type="button">Insurance Update</button>
+				</li>
+				<li>
+					<button type="button">Cost Share and DRS</button>
+				</li>
+				<li>
+					<button type="button">Credit Card Update</button>
+				</li>
+			</span>
+		</ul>
+		<span class="center">
+			<ul>
+				<li>
+					<label>Primary</label>
+				</li>
+				<li>
+					<select>
+						<option>Primary</option>
+						<option>Alternate</option>
+					</select>
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<label>ICD-10 Code</label>
+				</li>
+				<li>
+					<input list>
+				</li>
+			</ul>
+	</form>
+</div>

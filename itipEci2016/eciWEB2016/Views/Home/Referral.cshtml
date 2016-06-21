@@ -1,0 +1,365 @@
+
+<link rel="stylesheet" href="~/Content/style.css" />
+<header>
+	<h1>Referral Input</h1>
+</header>
+<nav>
+	<button type="button">Print</button>
+	<button type="button">Add Client</button>
+	<button type="button">Delete Client</button>
+	<button type="button" onclick="location.href='index.htm';">Close</button>
+</nav>
+<div class="main">
+	<form>
+		<ul class="flex">
+			<li>
+				<label>Office:</label>
+				<select name="office">
+					<option>M</option>
+				</select>
+			</li>
+			<li>
+				<label>Referral Date:</label>
+				<input type="date" name="referral date">
+			</li>
+			<li>
+				<label>Due Date:</label>
+				<input type="date" name="due date">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Intake Coordinator:</label>
+				<select name="staff">
+					<option>StaffID</option>
+				</select>
+			</li>
+			<li>
+				<label>Service Coordinator:</label>
+				<select name="staff">
+					<option>StaffID</option>
+				</select>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<label>Reason for Referral:</label>
+				<textarea name="referral reason" rows="3" cols="110"></textarea>
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Re-Referral?</label>
+				<input type="checkbox" name="rereferral">
+			</li>
+			<li>
+				<label>Previous Referral Date:</label>
+				<input type="date" name="previous referral date">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Referral Source (name of person calling):</label>
+				<input type="text" name="referral source">
+			</li>
+			<li>
+				<label>Referral Code:</label>
+				<select name="referralCode">
+					<option>C</option>
+				</select>
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Secondary Referral Source:</label>
+				<input type="text" name="referral source">
+			</li>
+			<li>
+				<label>Referral Code:</label>
+				<select name="referralCode">
+					<option>C</option>
+				</select>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<label>Referral Comments:</label>
+				<textarea name="referralComments" rows="3" cols="110"></textarea>
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Outreach Code:</label>
+				<select></selct>
+				<input type="text">
+			</li>
+			<li>
+				<label>TKIDs Case Number:</label>
+				<input type="text">
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<label>Select Provider:</label>
+				<select name="provider">
+					<option>Select provider for this child.</option>
+				</select>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<table>
+					<tr>
+						<th>Entry Date</td>
+						<th>Provider First Name</th>
+						<th>Provider Last Name</th>
+						<th>Provider Company</th>
+						<th>Details...</th>
+					</tr>
+					<tr>
+						<td>Data</td>
+						<td>data</td>
+						<td>data</td>
+						<td>data</td>
+						<td><button type="button">Details</button></td>
+					</tr>
+				</table>
+			</li>
+		</ul>
+		<ul>
+			<li>
+				<button type="button">
+					View/Add/Edit Providers...
+				</button>
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>From Other Follow Along to ITIP's FA?</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>From ITIP's Comp to ITIP's Follow Along?</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>Referral Outcome:</label>
+				<select name="referralOutcome">
+					<option>*D</option>
+				</select>
+			</li>
+			<li>
+				<label>Outcome Date:</label>
+				<input type="date">
+			</li>
+			<li>
+				<label>From ITIP's FA to ITIP's Comp?</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>Transferred from another ECI program?</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>Agency transferred from:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>City/State where transferring agency is located:</label>
+				<input type="text">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Point of Access Referral?</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>ECI Agency Referred To:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Date referred:</label>
+				<input type="date">
+			</li>
+		</ul>
+		<ul class="center">
+			<li>
+				<label>Referral Sent By:</label>
+			</li>
+			<li>
+				<label>Fax:</label>
+				<input type="checkbox">
+			</li>
+			<li>
+				<label>Phone:</label>
+				<input type="checkbox">
+			</li>
+		</ul>
+		<ul class="center">
+			<li>
+				<label>Alt ID:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Client ID:</label>
+				<input type="text">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Last Name:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>First Name:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>MI:</label>
+				<input type="text" size="1">
+			</li>
+			<li>
+				<label>DOB:</label>
+				<input type="date">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Relationship:</label>
+				<select>
+					<option>Mother</option>
+				</select>
+			</li>
+			<li>
+				<label>Last Name:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>First Name:</label>
+				<input type="text">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Home Phone:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Work Phone:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Cell Phone:</label>
+				<input type="text">
+			</li>
+		</ul>
+		<ul class="flex">
+			<li>
+				<label>Email:</label>
+				<input type="text">
+			</li>
+			<li>
+				<label>Communication Preference:</label>
+				<input list="communicationPreference">
+			</li>
+			<li>
+				<label>Best to Call:</label>
+				<input list="bestToCall">
+			</li>
+		</ul>
+		<span>
+			<ul class="flex">
+				<li>
+					<label>Relationship:</label>
+					<select>
+						<option>Mother</option>
+					</select>
+				</li>
+				<li>
+					<label>Last Name:</label>
+					<input type="text">
+				</li>
+				<li>
+					<label>First Name:</label>
+					<input type="text">
+				</li>
+			</ul>
+			<ul class="flex">
+				<li>
+					<label>Home Phone:</label>
+					<input type="text">
+				</li>
+				<li>
+					<label>Work Phone:</label>
+					<input type="text">
+				</li>
+				<li>
+					<label>Cell Phone:</label>
+					<input type="text">
+				</li>
+			</ul>
+			<ul class="flex">
+				<li>
+					<label>Email:</label>
+					<input type="text">
+				</li>
+				<li>
+					<label>Communication Preference:</label>
+					<input list="communicationPreference">
+				</li>
+				<li>
+					<label>Best to Call:</label>
+					<input list="bestToCall">
+				</li>
+			</ul>
+		</span>
+		<span class="column">
+			<ul>
+				<li>
+					<label>Address 1:</label>
+					<input type="text" size="50">
+				</li>
+				<li>
+					<label>Address 2:</label>
+					<input type="text" size="50">
+				</li>
+				<li class="inline">
+					<label>City:</label>
+					<input type="text">
+				</li>
+				<li class="inline">
+					<label>State:</label>
+					<input type="text" size="2">
+				</li>
+				<li class="inline">
+					<label>Zip:</label>
+					<input list="zipCode" size="6">
+					<input type="text" size="4">
+				</li>
+				<li class="inline">
+					<label>County:</label>
+					<input type="text">
+				</li>
+			</ul>
+			<ul>
+				<li>
+					<label>Primary Language:</label>
+					<input list="language">
+				</li>
+				<li>
+					<label>Interpreter Needed?</label>
+					<input type="checkbox">
+				</li>
+				<li>
+					<label>ISD:</label>
+					<input list="isd">
+				</li>
+				<li>
+					<label>Medical Coverage:</label>
+					<select>
+						<option></option>
+					</select>
+				</li>
+			</ul>
+		</span>

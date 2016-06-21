@@ -15,8 +15,8 @@ SET NUMERIC_ROUNDABORT OFF;
 GO
 :setvar DatabaseName "eciDB2016"
 :setvar DefaultFilePrefix "eciDB2016"
-:setvar DefaultDataPath "C:\Users\tyrell\AppData\Local\Microsoft\VisualStudio\SSDT\itipEci2016"
-:setvar DefaultLogPath "C:\Users\tyrell\AppData\Local\Microsoft\VisualStudio\SSDT\itipEci2016"
+:setvar DefaultDataPath "C:\Users\jgraves\AppData\Local\Microsoft\VisualStudio\SSDT\itipEci2016"
+:setvar DefaultLogPath "C:\Users\jgraves\AppData\Local\Microsoft\VisualStudio\SSDT\itipEci2016"
 
 GO
 :on error exit
@@ -32,48 +32,6 @@ IF N'$(__IsSqlCmdEnabled)' NOT LIKE N'True'
     BEGIN
         PRINT N'SQLCMD mode must be enabled to successfully execute this script.';
         SET NOEXEC ON;
-    END
-
-
-GO
-IF EXISTS (SELECT 1
-           FROM   [master].[dbo].[sysdatabases]
-           WHERE  [name] = N'$(DatabaseName)')
-    BEGIN
-        ALTER DATABASE [$(DatabaseName)]
-            SET ARITHABORT ON,
-                CONCAT_NULL_YIELDS_NULL ON,
-                CURSOR_DEFAULT LOCAL 
-            WITH ROLLBACK IMMEDIATE;
-    END
-
-
-GO
-IF EXISTS (SELECT 1
-           FROM   [master].[dbo].[sysdatabases]
-           WHERE  [name] = N'$(DatabaseName)')
-    BEGIN
-        ALTER DATABASE [$(DatabaseName)]
-            SET PAGE_VERIFY NONE,
-                DISABLE_BROKER 
-            WITH ROLLBACK IMMEDIATE;
-    END
-
-
-GO
-ALTER DATABASE [$(DatabaseName)]
-    SET TARGET_RECOVERY_TIME = 0 SECONDS 
-    WITH ROLLBACK IMMEDIATE;
-
-
-GO
-IF EXISTS (SELECT 1
-           FROM   [master].[dbo].[sysdatabases]
-           WHERE  [name] = N'$(DatabaseName)')
-    BEGIN
-        ALTER DATABASE [$(DatabaseName)]
-            SET QUERY_STORE (CLEANUP_POLICY = (STALE_QUERY_THRESHOLD_DAYS = 367)) 
-            WITH ROLLBACK IMMEDIATE;
     END
 
 

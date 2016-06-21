@@ -1,0 +1,194 @@
+/* COLOR SWATCH
+
+tealish rgb(65, 181, 190)
+mud grey rgb(99, 103, 87)
+light grey rgb(216, 218, 217)
+
+*/
+
+/* Page sections. */
+	body {
+		width: 850px;
+		margin: auto;
+		font-family: Arial, Verdana, Tahoma, sans-serif;
+		font-size: 1em; 
+	}
+
+	div.menu, div.main {
+		border: 2px solid black;
+		border-bottom-left-radius: 10px;
+		border-bottom-right-radius: 10px;
+		background-color: rgb(216, 218, 217);
+		padding: 15px;
+		margin-bottom: 20px;
+	}
+
+	div.menu {	
+		display: flex;
+		justify-content: space-between;
+		margin: auto;
+	}
+
+	header {
+		margin-top: 20px;
+		margin-bottom: 0px;
+		border: 2px solid black;
+		border-top-left-radius: 10px;
+		border-top-right-radius: 10px;
+		background-color: rgb(99, 103, 87);
+		color: rgb(255, 255, 255);
+	}
+
+	div.column {
+		display: flex;
+		justify-content: space-between;
+		border: 2px solid black;
+		padding: 10px;
+	}
+
+	nav {
+		display: flex;
+		justify-content: space-around;
+		border: 2px solid black;	
+	}
+
+	section {
+		margin-top: 0px;
+		width: 100%;
+	}
+
+	span { margin-top: 20px; }
+
+	span.column {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	span.center {
+		display: flex;
+		justify-content: center;
+	}
+
+/* Header styling. */
+
+	h1, h2, h3 {
+		text-align: center;
+	}
+
+	h1 { 
+		text-shadow: 2px 2px 4px rgb(0, 0, 0);
+	}
+
+	h2 {
+		font-size: 1.15em;
+		text-transform: uppercase;
+		text-shadow: 1px 1px 2px rgb(99, 103, 87);
+	}
+
+	h3 {
+		margin-top: -15px;
+		font-size: 0.85em;
+	}
+
+/* Button styling. */
+
+	button {
+		margin: 10px auto;
+		padding: 7.5px;
+		border: 2px solid rgb(65, 181, 190);
+		background-color: rgb(255, 255, 255);
+		font-weight: bold;
+		font-size: 0.85em;
+		outline: none;
+	}
+
+	div.menu button {
+		display: block;
+		width: 75%;	
+		box-shadow: 5px 5px 2px rgb(99, 103, 87);
+	}
+
+	nav button {
+		width: 150px;
+		box-shadow: 5px 5px 2px rgb(99, 103, 87);
+	}
+
+	div.column button {		
+		box-shadow: 5px 5px 2px rgb(99, 103, 87);
+		margin: 10px;
+	}
+
+	table button { 
+		padding: 0px;
+		margin: 0px;
+		width: 100%;
+	}
+
+	table button:active, div.main button:active {		
+	  	transform: translateY(2px);
+	}
+
+	button:hover {
+		background-color: rgb(65, 181, 190);
+		color: rgb(255, 255, 255);
+	}
+
+	div.menu button:active, nav button:active, div.column button:active {
+		background-color: rgb(65, 181, 190);
+	 	box-shadow: 5px 5px 2px rgb(99, 103, 87);
+	  	transform: translateY(2px);
+	}
+
+/* Input styling. */
+	
+	input, select {
+		background-color: rgb(255, 255, 255);
+		border: 1px solid rgb(65, 181, 190);
+		outline: none;
+		margin: 2px;
+		padding: 5px;
+		font-size: 0.85em;
+	}
+
+	textarea { 
+		resize: none;
+		width: 100%;
+	}
+
+/* Table styling. */
+
+	table {
+		width: 100%;
+		background-color: white;
+		border-collapse: collapse;
+	}
+
+	th, td { 
+		border: 1px solid black;
+		padding: 5px;
+	}
+
+	th { text-align: center;}
+
+/* List styling. */
+	
+	ul, li {
+		list-style: none;
+		margin: 2px;
+		padding: 0px;
+	}
+
+	ul.flex {
+		display: flex;
+		justify-content: space-between;
+		flex-wrap: wrap;
+	}
+
+	ul.center {
+		display: flex;
+		justify-content: center;
+	}
+
+	li.inline {
+		display: inline-block;
+	}
