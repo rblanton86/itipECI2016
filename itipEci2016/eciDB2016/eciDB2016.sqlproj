@@ -60,8 +60,8 @@
     <Folder Include="v1" />
     <Folder Include="v1\Docs" />
     <Folder Include="v1\Sprint1" />
-    <Folder Include="v1\Stored_Procedures" />
     <Folder Include="v1\Sprint2" />
+    <Folder Include="v1\Stored_Procedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Docs\eci.table.Client.pdf" />
@@ -69,13 +69,11 @@
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
     <None Include="v1\Sprint1\InitializeDatabase.sql" />
+    <None Include="v1\Sprint1\AlterAddresses.sql" />
+    <None Include="v1\Sprint1\AlterSchoolInfo.sql" />
+    <None Include="v1\Sprint1\CreateSex.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Sprint2\AlterAddresses.sql" />
-    <None Include="v1\Sprint2\AlterSchoolInfo.sql" />
-    <None Include="v1\Sprint2\CreateSex.sql" />
-    <Build Include="v1\Sprint2\alt_InitialDummyData.sql" />
-    <Build Include="v1\Sprint2\InitializeLoggingTables.sql" />
     <Build Include="v1\Stored_Procedures\get_AdditionalContactInfo.sql" />
     <Build Include="v1\Stored_Procedures\get_AdditionalContactInfoType.sql" />
     <Build Include="v1\Stored_Procedures\get_Addresses.sql" />
@@ -91,5 +89,7 @@
     <Build Include="v1\Stored_Procedures\ins_Sex.sql" />
     <Build Include="v1\Stored_Procedures\ins_StaffMember.sql" />
     <Build Include="v1\Stored_Procedures\log_ErrorTimeStamp.sql" />
+    <Build Include="v1\Sprint2\alt_InitialDummyData.sql" />
+    <Build Include="v1\Sprint2\InitializeLoggingTables.sql" />
   </ItemGroup>
 </Project>
