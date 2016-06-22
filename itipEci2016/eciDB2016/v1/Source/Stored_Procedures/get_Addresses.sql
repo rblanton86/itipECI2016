@@ -16,8 +16,10 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT address1, address2, city, st, zip
-			FROM Addresses
+			SELECT addr.*, addrt.addressesType
+				FROM Addresses addr
+				LEFT JOIN AddressesType addrt ON
+				addr.addressTypeID = addrt.addressTypeID
 			WHERE @addressesID = addressesID
 
 		END TRY

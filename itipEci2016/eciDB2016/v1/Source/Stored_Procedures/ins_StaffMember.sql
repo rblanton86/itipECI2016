@@ -20,8 +20,19 @@ AS
 	BEGIN
 		BEGIN TRY
 		
-		INSERT Staff (staffTypeID, addressesID, additionalContactInfoID, firstName, lastName, handicapped)
-		VALUES (staffTypeID, @addressesID, @additionalContactInfoID, @firstName, @lastName, @handicapped)
+		INSERT Staff (staffTypeID, 
+						addressesID, 
+						additionalContactInfoID, 
+						firstName, 
+						lastName, 
+						handicapped)
+
+		VALUES (staffTypeID, 
+				@addressesID, 
+				@additionalContactInfoID, 
+				@firstName, 
+				@lastName, 
+				@handicapped)
 
 		END TRY
 		BEGIN CATCH

@@ -10,13 +10,17 @@ Change History:
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_AdditionalContactInfo]
 	@additionalContactInfoID int
-
+	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT additionalContactInfo
-			FROM AdditionalContactInfo
+			SELECT aci.*, mbt.memberType, acit.additionalContacatInfoType
+			FROM AdditionalContactInfo aci
+				LEFT JOIN MemberType mbt ON
+				aci.memberTypeID = mbt.memberTypeID
+				LEFT JOIN AdditionalContactInfoType acit ON
+				aci.additionalContactInfoTypeID = acit.additionalContactInfoID
 			WHERE @additionalContactInfoID = additonalContactInfoID
 
 		END TRY

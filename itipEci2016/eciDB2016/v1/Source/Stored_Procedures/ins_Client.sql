@@ -42,7 +42,20 @@ AS
 							dob,
 							ssn,
 							referralSource)
-			VALUES (@firstName, @lastName, @dob, @ssn, @referralSource)
+			VALUES (@raceID,
+					@ethnicityID,
+					@clientStatusID,
+					@diagnosisID,
+					@primaryLanguageID,
+					@schoolInfoID,
+					@commentsID,
+					@insuranceAuthID,
+					@commentsID,
+					@firstName, 
+					@lastName, 
+					@dob, 
+					@ssn, 
+					@referralSource)
 
 		END TRY
 		BEGIN CATCH

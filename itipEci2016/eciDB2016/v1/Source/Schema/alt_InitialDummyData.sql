@@ -20,7 +20,7 @@ Change History:
 			INSERT Clients 
 			VALUES ('First Name ' + CONVERT(VARCHAR(2), @i), 'Last Name ' + CONVERT(VARCHAR(2), @i))
 			
-			INSERT FamilyMember
+			INSERT FamilyMember 
 			SELECT 'Family FN ' + CONVERT(VARCHAR(2), @i), 'Family LN ' + CONVERT(VARCHAR(2), @i), true
 			UNION
 			SELECT 'Family2 FN ' + CONVERT(VARCHAR(2), @i), 'Family2 LN ' + CONVERT(VARCHAR(2), @i), true
@@ -43,7 +43,7 @@ Change History:
 
 		SET @x += 2
 			
-			INSERT Clients
+			INSERT Clients 
 			VALUES ('First Name ' + CONVERT(VARCHAR(2), @x), 'Last Name ' + CONVERT(VARCHAR(2), @x))
 
 			INSERT FamilyMember

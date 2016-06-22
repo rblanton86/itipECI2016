@@ -15,9 +15,8 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addressesType
-			FROM AddressesType
-			WHERE @ethnicity = ethnicityID
+			INSERT Ethnicity (ethnicity)
+			VALUES (@ethnicity)
 
 		END TRY
 		BEGIN CATCH

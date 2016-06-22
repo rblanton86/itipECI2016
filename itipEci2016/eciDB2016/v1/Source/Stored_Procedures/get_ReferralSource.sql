@@ -10,13 +10,19 @@ Change History:
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_ReferralSource]
 	@referralSourceID int
-
+	--aci, acit, addr
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT referralSource
-			FROM ReferralSource
+			SELECT refs.*, aci.additionalContactInfo, addr.addresses
+			FROM ReferralSource refs
+				LEFT JOIN AdditionalContactInfo aci ON
+					refs.additionalContactInfoID = aci.additionalContactInfoID
+				LEFT JOIN AdditionalContactInfoType acit ON
+					refs.additionalContactInfoTypeID = acit.additionalContactInfoTypeID
+				LEFT JOIN Addresses addr ON
+					refs.addressesID = addr.addressesID
 			WHERE @referralSourceID = referralSourceID
 
 		END TRY

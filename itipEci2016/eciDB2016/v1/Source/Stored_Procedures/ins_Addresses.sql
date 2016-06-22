@@ -15,12 +15,24 @@ CREATE PROCEDURE [dbo].[ins_Addresses]
 	@city varchar(15),
 	@st varchar(10),
 	@zip int
+
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT Addresses (addressTypeID, address1, address2, city, st, zip)
-			VALUES (@addressTypeID, @address1, @address2, @city, @st, @zip)
+			INSERT Addresses (addressTypeID, 
+								address1, 
+								address2, 
+								city, 
+								st, 
+								zip)
+
+			VALUES (@addressTypeID, 
+					@address1, 
+					@address2, 
+					@city, 
+					@st, 
+					@zip)
 
 		END TRY
 		BEGIN CATCH

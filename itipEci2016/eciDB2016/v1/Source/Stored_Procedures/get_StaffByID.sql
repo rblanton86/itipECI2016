@@ -8,16 +8,22 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffPerson]
+CREATE PROCEDURE [dbo].[get_StaffByID]
 	@staffID int
-
+	--stafft, addr, aci
 AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT lastName, firstName, handicapped
-		FROM Staff
-		WHERE @staffID = staffID;
+		SELECT staff.*, stafft.staffType, addr.addresses, aci.aditionalContactInfo
+			FROM Staff staff 
+				LEFT JOIN StaffType stafft ON
+				staff.staffTypeID = stafft.staffTypeID
+				LEFT JOIN Addresses addr ON
+				staff.addressesID = stafft.staffTypeID
+				LEFT JOIN AditionalContactInfo ON
+				staff.additionalContactInfoID = aci.additionalContactInfoID
+			WHERE @staffID = staffID;
 
 		END TRY
 		BEGIN CATCH

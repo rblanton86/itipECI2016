@@ -82,7 +82,7 @@
     <Build Include="v1\Source\Stored_Procedures\get_Race.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_ReferralSource.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_Sex.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_StaffPerson.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_StaffByID.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_AdditonalContactInfo.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_Addresses.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_Client.sql" />
