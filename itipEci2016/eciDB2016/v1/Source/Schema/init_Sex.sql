@@ -8,7 +8,16 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE TABLE Sex (
-	sexID INT IDENTITY (1,1) PRIMARY KEY,
-	sex VARCHAR(25),
-)
+
+-- Checks to see if Sex table already exitsts, creates if it does not.
+IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Sex')
+	BEGIN
+		PRINT 'This table already exists.'
+	END
+ELSE
+	BEGIN
+		CREATE TABLE Sex (
+			sexID INT IDENTITY (1,1) PRIMARY KEY,
+			sex VARCHAR(25),
+		)
+	END

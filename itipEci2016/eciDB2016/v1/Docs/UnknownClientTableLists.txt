@@ -1,23 +1,21 @@
-ECI?
-MHMR#
-MHMR Income Level
-CIDC Case Number
-CIDC Valid Form
-CIDC Valid To	
-Date (too vague, what date is this referencing?)
-Due Date (Due Date of what???)
-Reason Past Due (What is past due???)
-Intake Date (too vague)
-IFSP Date
-Comp Svc Date
-MedicalChk
-MedicalChkDate
-ImmunChk
-Comments (too vague...)
+* ECI?
+* MHMR# (Mental Health and Mental Retardation, ID#?)
+* MHMR Income Level
+* CIDC Case Number
+* CIDC Valid From
+* CIDC Valid To	
+[ ] Date (Add to Clients table as initial creation date.)
+[ ] Due Date (Due Date of what???) ----> COLUMN NAME '
+[O] Reason Past Due (What is past due???) ---> COLUMN NAME 'referralPastDueReason' to LnkClientReferralSource +dateAdded - DateTime -- date referral added (default value)
+[O] Intake Date (too vague) ----> COLUMN NAME 'intakeDate' to Clients table
+[O] IFSP Date ----> COLUM NAME 'ifspDate' to Clients table
+[O] Comp Svc Date ---> COLUMN NAME 'compSvcDate' to Clients table
+[O] MedicalChk ---> COLUMN NAME 'medicalReceived' to LnkClientPhysician table --bit
+[O] MedicalChkDate ---> COLUMN NAME 'medicalReceivedDate' to LnkClientPhysician table --DateTime
+[O] ImmunChk ---> COLUMN NAME 'immunizationReceived' to LnkClientPhysician table --bit
+[O] NULL ---> COLUMN NAME 'immunizationReceivedDate' to LnkClientPhysician table --DateTime
 Home Elementary ???
 Developmental Proficiency ???
-Other comments
-PISD
 Best to call (<-- poss Family member?)
 From other FA to SCCIP FA
 From SCCIP's Comp to SCCIP's FA
