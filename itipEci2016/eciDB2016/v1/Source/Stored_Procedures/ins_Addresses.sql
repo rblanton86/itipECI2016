@@ -9,6 +9,7 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_Addresses]
+	@addressTypeID int,
 	@address1 varchar(20),
 	@address2 varchar(20),
 	@city varchar(15),
@@ -18,8 +19,8 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT Addresses
-			VALUES (@address1, @address2, @city, @st, @zip)
+			INSERT Addresses (addressTypeID, address1, address2, city, st, zip)
+			VALUES (@addressTypeID, @address1, @address2, @city, @st, @zip)
 
 		END TRY
 		BEGIN CATCH

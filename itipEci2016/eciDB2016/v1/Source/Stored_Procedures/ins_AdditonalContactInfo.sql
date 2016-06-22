@@ -9,13 +9,16 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_AdditionalContactInfo]
+	@memberTypeID int,
+	@additionalContactInfoTypeID int,
 	@additionalContactInfo varchar (25)
+
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT AdditionalContactInfo
-			VALUES (@additionalContactInfo)
+			INSERT AdditionalContactInfo (memberTypeID, additionalContactInfoTypeID, additionalContactInfo)
+			VALUES (@memberTypeID, @additionalContactInfoTypeID, @additionalContactInfo)
 
 		END TRY
 		BEGIN CATCH

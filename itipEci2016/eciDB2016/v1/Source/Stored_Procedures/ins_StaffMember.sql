@@ -9,15 +9,19 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_StaffMember]
+	@staffTypeID int,
+	@addressesID int,
+	@additionalContactInfoID int,
 	@firstName varchar(20),
-	@lastName varchar(20)
+	@lastName varchar(20),
+	@handicapped bit
 	
 AS
 	BEGIN
 		BEGIN TRY
 		
-		INSERT Staff
-		VALUES (@firstName, @lastName)
+		INSERT Staff (staffTypeID, addressesID, additionalContactInfoID, firstName, lastName, handicapped)
+		VALUES (staffTypeID, @addressesID, @additionalContactInfoID, @firstName, @lastName, @handicapped)
 
 		END TRY
 		BEGIN CATCH

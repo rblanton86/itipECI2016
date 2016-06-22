@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT lastName, firstName
+		SELECT lastName, firstName, handicapped
 		FROM Staff
 		WHERE @staffID = staffID;
 

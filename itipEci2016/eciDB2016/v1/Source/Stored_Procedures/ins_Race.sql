@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to insert type information into AdditionalContactInfoType Table
+Description: Stored Procedure that inserts the race into the Race Table
 	 
 Author: 
 	Tyrell Powers-Crane 
@@ -8,14 +8,17 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_AdditionalContactInfoType]
-	@additionalContactInfoType varchar (25)
-AS
-	BEGIN
-		BEGIN TRY
 
-			INSERT AdditionalContactInfoType
-			VALUES (@additionalContactInfoType)
+CREATE PROCEDURE [dbo].[ins_Race]
+	@race varchar (25)
+
+	AS
+
+BEGIN
+		BEGIN TRY
+		
+			INSERT Race
+			VALUES (@race)
 
 		END TRY
 		BEGIN CATCH
@@ -32,5 +35,3 @@ AS
 
 		END CATCH
 	END
-
-

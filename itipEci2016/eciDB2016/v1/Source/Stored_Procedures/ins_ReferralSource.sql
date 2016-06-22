@@ -9,14 +9,24 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_ReferralSource]
+	@additionalContactInfoID int,
+	@referralSourceTypeID int,
+	@addressesID int,
 	@referralSource varchar(20)
 
 AS
 	BEGIN
 		BEGIN TRY
 			
-			INSERT ReferralSource
-			VALUES (@referralSource)
+			INSERT ReferralSource (additionalContactInfoID,
+									referralSourceTypeID, 
+									addressesID, 
+									referralSource)
+
+			VALUES (@additionalContactInfoID, 
+					@referralSourceTypeID, 
+					@addressesID, 
+					@referralSource)
 
 		END TRY
 		BEGIN CATCH

@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************
-Description: Adds in dummy data for Clients Table
+Description: Adds in dummy data for Clients 
 	 
 Author: 
 	Tyrell Powers-Crane 

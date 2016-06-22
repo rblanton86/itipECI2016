@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 			
-			INSERT Sex
+			INSERT Sex (sex)
 			VALUES (@sex)
 
 		END TRY

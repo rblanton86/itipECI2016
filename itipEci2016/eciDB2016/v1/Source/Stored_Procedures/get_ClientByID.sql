@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Client]
+CREATE PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT firstName, lastName, dob, ssn, referralSource
+			SELECT firstName, lastName, dob, ssn, referralSource 
 			FROM Clients
 			WHERE @clientID = clientID
 

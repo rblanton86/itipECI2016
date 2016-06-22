@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[log_ErrorTimeStamp]
 AS
 	BEGIN
 
-			INSERT ErrorLog
+			INSERT ErrorLog (errorTime, errorMessage, errorProcedure)
 			VALUES (@errorTime, @errorMessage, @errorProcedure)
 
 	END
