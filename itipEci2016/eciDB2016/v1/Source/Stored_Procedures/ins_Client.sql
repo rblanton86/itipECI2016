@@ -9,6 +9,15 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_Client]
+	@raceID int,
+	@ethnicityID int,
+	@clientStatusID int,
+	@diagnosisID int,
+	@primaryLanguageID int,
+	@schoolInfoID int,
+	@commentsID int,
+	@insuranceAuthID int,
+	@communicationPreferencesID int,
 	@firstName varchar(20),
 	@lastName varchar(20),
 	@dob varchar(15),
@@ -19,7 +28,20 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT Clients
+			INSERT Clients (raceID,
+							ethnicityID,
+							clientStatusID,
+							diagnosisID,
+							primaryLanguageID,
+							schoolInfoID,
+							commentsID,
+							insuranceAuthID,
+							communicationPreferencesID,
+							firstName,
+							lastName,
+							dob,
+							ssn,
+							referralSource)
 			VALUES (@firstName, @lastName, @dob, @ssn, @referralSource)
 
 		END TRY
