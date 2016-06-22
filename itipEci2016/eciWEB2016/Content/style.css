@@ -13,6 +13,7 @@ light grey rgb(216, 218, 217)
 		margin: auto;
 		font-family: Arial, Verdana, Tahoma, sans-serif;
 		font-size: 1em; 
+        background-image: url("../../Images/ChildServices.jpg");
 	}
 
 	div.menu, div.main {
