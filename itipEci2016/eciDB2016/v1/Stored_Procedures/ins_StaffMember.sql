@@ -10,14 +10,15 @@ Change History:
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@firstName varchar(20),
-	@lastName varchar(20)
+	@lastName varchar(20),
+	@handicapped bit
 	
 AS
 	BEGIN
 		BEGIN TRY
 		
 		INSERT Staff
-		VALUES (@firstName, @lastName)
+		VALUES (@firstName, @lastName, @handicapped)
 
 		END TRY
 		BEGIN CATCH

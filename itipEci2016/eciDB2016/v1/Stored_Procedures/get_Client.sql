@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT firstName, lastName, dob, ssn, referralSource
+			SELECT firstName, lastName, dob, ssn, referralSource, 
 			FROM Clients
 			WHERE @clientID = clientID
 

@@ -1,23 +1,24 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that gets last & first name from the Staff table
+Description: Stored Procedure that inserts the race into the Race Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.22.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffPerson]
-	@staffID int
 
-AS
-	BEGIN
+CREATE PROCEDURE [dbo].[ins_Race]
+	@race varchar (25)
+
+	AS
+
+BEGIN
 		BEGIN TRY
-
-		SELECT lastName, firstName, handicapped
-		FROM Staff
-		WHERE @staffID = staffID;
+		
+			INSERT Race
+			VALUES (@race)
 
 		END TRY
 		BEGIN CATCH

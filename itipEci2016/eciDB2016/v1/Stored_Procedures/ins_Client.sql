@@ -14,6 +14,7 @@ CREATE PROCEDURE [dbo].[ins_Client]
 	@dob varchar(15),
 	@ssn int,
 	@referralSource varchar(25)
+	
 AS
 	BEGIN
 		BEGIN TRY

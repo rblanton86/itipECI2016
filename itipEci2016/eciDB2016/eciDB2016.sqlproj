@@ -72,6 +72,7 @@
     <None Include="v1\Sprint1\AlterAddresses.sql" />
     <None Include="v1\Sprint1\AlterSchoolInfo.sql" />
     <None Include="v1\Sprint1\CreateSex.sql" />
+    <None Include="v1\Sprint2\alt_Staff.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="v1\Stored_Procedures\get_AdditionalContactInfo.sql" />
@@ -91,5 +92,7 @@
     <Build Include="v1\Stored_Procedures\log_ErrorTimeStamp.sql" />
     <Build Include="v1\Sprint2\alt_InitialDummyData.sql" />
     <Build Include="v1\Sprint2\InitializeLoggingTables.sql" />
+    <Build Include="v1\Stored_Procedures\get_Race.sql" />
+    <Build Include="v1\Stored_Procedures\ins_Race.sql" />
   </ItemGroup>
 </Project>

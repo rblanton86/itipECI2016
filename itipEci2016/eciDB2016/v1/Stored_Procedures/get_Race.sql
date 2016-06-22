@@ -1,23 +1,25 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that gets last & first name from the Staff table
+Description: Stored Procedure that retrieves the race from the Race Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.22.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffPerson]
-	@staffID int
 
-AS
-	BEGIN
+CREATE PROCEDURE [dbo].[get_Race]
+	@raceID int
+
+	AS
+
+BEGIN
 		BEGIN TRY
-
-		SELECT lastName, firstName, handicapped
-		FROM Staff
-		WHERE @staffID = staffID;
+		
+			SELECT race
+			FROM Race
+			WHERE @raceID = raceID	
 
 		END TRY
 		BEGIN CATCH
