@@ -1,23 +1,26 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from Clients table
+Description: Stored Procedure that inserts address information into the Addresses Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.22.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Client]
-	@clientID int
-
+CREATE PROCEDURE [dbo].[ins_Addresses]
+	@addressTypeID int,
+	@address1 varchar(20),
+	@address2 varchar(20),
+	@city varchar(15),
+	@st varchar(10),
+	@zip int
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT firstName, lastName, dob, ssn, referralSource, 
-			FROM Clients
-			WHERE @clientID = clientID
+			INSERT Addresses (addressTypeID, address1, address2, city, st, zip)
+			VALUES (@addressTypeID, @address1, @address2, @city, @st, @zip)
 
 		END TRY
 		BEGIN CATCH
@@ -34,3 +37,5 @@ AS
 
 		END CATCH
 	END
+
+

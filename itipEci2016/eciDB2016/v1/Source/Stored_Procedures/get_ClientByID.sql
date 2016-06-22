@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that inserts referral source into the Referral Source Table
+Description: Stored Procedure to pull information from Clients table
 	 
 Author: 
 	Tyrell Powers-Crane 
@@ -8,15 +8,16 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_ReferralSource]
-	@referralSource varchar(20)
+CREATE PROCEDURE [dbo].[get_ClientByID]
+	@clientID int
 
 AS
 	BEGIN
 		BEGIN TRY
-			
-			INSERT ReferralSource
-			VALUES (@referralSource)
+
+			SELECT firstName, lastName, dob, ssn, referralSource 
+			FROM Clients
+			WHERE @clientID = clientID
 
 		END TRY
 		BEGIN CATCH

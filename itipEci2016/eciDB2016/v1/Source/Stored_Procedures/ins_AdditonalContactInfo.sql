@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to insert type information into AdditionalContactInfoType Table
+Description: Stored Procedure to insert information into Additional Contact Info Table
 	 
 Author: 
 	Tyrell Powers-Crane 
@@ -8,14 +8,17 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_AdditionalContactInfoType]
-	@additionalContactInfoType varchar (25)
+CREATE PROCEDURE [dbo].[ins_AdditionalContactInfo]
+	@memberTypeID int,
+	@additionalContactInfoTypeID int,
+	@additionalContactInfo varchar (25)
+
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT AdditionalContactInfoType
-			VALUES (@additionalContactInfoType)
+			INSERT AdditionalContactInfo (memberTypeID, additionalContactInfoTypeID, additionalContactInfo)
+			VALUES (@memberTypeID, @additionalContactInfoTypeID, @additionalContactInfo)
 
 		END TRY
 		BEGIN CATCH

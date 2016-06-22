@@ -18,14 +18,31 @@ DECLARE @Staff int = 0
 
 	SELECT @Staff	
 
-IF EXISTS (SELECT 'handicapped' FROM sys.columns WHERE OBJECT_ID = @Staff)
+IF @Staff = 0
 	BEGIN
-		RETURN
+
+		CREATE TABLE Staff (
+			staffID INT IDENTITY (1,1) PRIMARY KEY (staffID),
+			staffTypeID INT FOREIGN KEY REFERENCES StaffType(staffTypeID),
+			addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
+			additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
+			firstName VARCHAR(25),
+			lastName VARCHAR(25),
+			handicapped bit
+			)
+
 	END
 ELSE
+	BEGIN
+		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @Staff AND name = 'handicapped')
+			BEGIN
+				RETURN
+			END
+	ELSE 
 	BEGIN
 
 		ALTER TABLE Staff
 			ADD handicapped bit
 
 	END
+END

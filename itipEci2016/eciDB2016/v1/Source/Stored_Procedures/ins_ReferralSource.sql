@@ -1,25 +1,32 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that inserts address information into the Addresses Table
+Description: Stored Procedure that inserts referral source into the Referral Source Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.21.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_Addresses]
-	@address1 varchar(20),
-	@address2 varchar(20),
-	@city varchar(15),
-	@st varchar(10),
-	@zip int
+CREATE PROCEDURE [dbo].[ins_ReferralSource]
+	@additionalContactInfoID int,
+	@referralSourceTypeID int,
+	@addressesID int,
+	@referralSource varchar(20)
+
 AS
 	BEGIN
 		BEGIN TRY
+			
+			INSERT ReferralSource (additionalContactInfoID,
+									referralSourceTypeID, 
+									addressesID, 
+									referralSource)
 
-			INSERT Addresses
-			VALUES (@address1, @address2, @city, @st, @zip)
+			VALUES (@additionalContactInfoID, 
+					@referralSourceTypeID, 
+					@addressesID, 
+					@referralSource)
 
 		END TRY
 		BEGIN CATCH
@@ -36,5 +43,3 @@ AS
 
 		END CATCH
 	END
-
-

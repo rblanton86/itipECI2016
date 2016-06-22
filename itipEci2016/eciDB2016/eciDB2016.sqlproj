@@ -59,40 +59,45 @@
     <Folder Include="Properties" />
     <Folder Include="v1" />
     <Folder Include="v1\Docs" />
-    <Folder Include="v1\Sprint1" />
-    <Folder Include="v1\Sprint2" />
-    <Folder Include="v1\Stored_Procedures" />
+    <Folder Include="v1\Source" />
+    <Folder Include="v1\Release" />
+    <Folder Include="v1\Source\Stored_Procedures" />
+    <Folder Include="v1\Source\Schema" />
+    <Folder Include="v1\Release\Sprint1" />
+    <Folder Include="v1\Release\Sprint2" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Docs\eci.table.Client.pdf" />
     <None Include="v1\Docs\ColumnList.txt" />
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
-    <None Include="v1\Sprint1\InitializeDatabase.sql" />
-    <None Include="v1\Sprint1\AlterAddresses.sql" />
-    <None Include="v1\Sprint1\AlterSchoolInfo.sql" />
-    <None Include="v1\Sprint1\CreateSex.sql" />
-    <None Include="v1\Sprint2\alt_Staff.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="v1\Stored_Procedures\get_AdditionalContactInfo.sql" />
-    <Build Include="v1\Stored_Procedures\get_AdditionalContactInfoType.sql" />
-    <Build Include="v1\Stored_Procedures\get_Addresses.sql" />
-    <Build Include="v1\Stored_Procedures\get_Client.sql" />
-    <Build Include="v1\Stored_Procedures\get_ReferralSource.sql" />
-    <Build Include="v1\Stored_Procedures\get_Sex.sql" />
-    <Build Include="v1\Stored_Procedures\get_StaffPerson.sql" />
-    <Build Include="v1\Stored_Procedures\ins_AdditionalContactInfoTye.sql" />
-    <Build Include="v1\Stored_Procedures\ins_AdditonalContactInfo.sql" />
-    <Build Include="v1\Stored_Procedures\ins_Addresses.sql" />
-    <Build Include="v1\Stored_Procedures\ins_Client.sql" />
-    <Build Include="v1\Stored_Procedures\ins_ReferralSource.sql" />
-    <Build Include="v1\Stored_Procedures\ins_Sex.sql" />
-    <Build Include="v1\Stored_Procedures\ins_StaffMember.sql" />
-    <Build Include="v1\Stored_Procedures\log_ErrorTimeStamp.sql" />
-    <Build Include="v1\Sprint2\alt_InitialDummyData.sql" />
-    <Build Include="v1\Sprint2\InitializeLoggingTables.sql" />
-    <Build Include="v1\Stored_Procedures\get_Race.sql" />
-    <Build Include="v1\Stored_Procedures\ins_Race.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AdditionalContactInfo.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AdditionalContactInfoType.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_Addresses.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AddressesType.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_ClientByID.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_Ethnicity.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_Race.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_ReferralSource.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_Sex.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_StaffPerson.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_AdditonalContactInfo.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Addresses.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Client.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Ethnicity.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Race.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_ReferralSource.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Sex.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_StaffMember.sql" />
+    <Build Include="v1\Source\Stored_Procedures\log_ErrorTimeStamp.sql" />
+    <None Include="v1\Source\Schema\AlterAddresses.sql" />
+    <None Include="v1\Source\Schema\AlterSchoolInfo.sql" />
+    <None Include="v1\Source\Schema\InitializeDatabase.sql" />
+    <None Include="v1\Release\Sprint1\InitializeDatabase.sql" />
+    <Build Include="v1\Source\Schema\alt_InitialDummyData.sql" />
+    <None Include="v1\Source\Schema\alt_Staff.sql" />
+    <Build Include="v1\Source\Schema\InitializeLoggingTables.sql" />
   </ItemGroup>
 </Project>

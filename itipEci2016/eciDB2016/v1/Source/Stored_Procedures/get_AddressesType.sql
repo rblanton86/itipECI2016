@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that inserts the sex into the Sex Table
+Description: Stored Procedure that retrieves the address type from the AddressType Table
 	 
 Author: 
 	Tyrell Powers-Crane 
@@ -8,15 +8,16 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_Sex]
-	@sex varchar(20)
+CREATE PROCEDURE [dbo].[get_AddressType]
+	@addressesTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
-			
-			INSERT Sex
-			VALUES (@sex)
+
+			SELECT addressesType
+			FROM AddressesType
+			WHERE @addressesTypeID = addressesTypeID
 
 		END TRY
 		BEGIN CATCH
@@ -33,3 +34,5 @@ AS
 
 		END CATCH
 	END
+
+

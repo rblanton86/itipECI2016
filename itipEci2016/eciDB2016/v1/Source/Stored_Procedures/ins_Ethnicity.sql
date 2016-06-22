@@ -1,5 +1,5 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to insert information into Additional Contact Info Table
+Description: Stored Procedure that inserts the ethnicity into the Ethnicity Table
 	 
 Author: 
 	Tyrell Powers-Crane 
@@ -8,14 +8,16 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_AdditionalContactInfo]
-	@additionalContactInfo varchar (25)
+CREATE PROCEDURE [dbo].[ins_Ethnicity]
+	@ethnicity VARCHAR (25)
+
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT AdditionalContactInfo
-			VALUES (@additionalContactInfo)
+			SELECT addressesType
+			FROM AddressesType
+			WHERE @ethnicity = ethnicityID
 
 		END TRY
 		BEGIN CATCH
