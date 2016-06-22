@@ -1,22 +1,14 @@
 ﻿/***********************************************************************************************************
-Description:
-	Referral Model
+Description: 
+	Creates sex table; will hold vaules M(male), F(female) and O(other).
 Author: 
 	Jennifer M. Graves
 Date: 
-	06-21/2016
+	06-22-2016
 Change History:
 	
 ************************************************************************************************************/
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
-
-namespace eciWEB2016.Models
-{
-    public class ReferralModels
-    {
-    }
-}
+CREATE TABLE Sex (
+	sexID INT IDENTITY (1,1) PRIMARY KEY,
+	sex VARCHAR(25),
+)

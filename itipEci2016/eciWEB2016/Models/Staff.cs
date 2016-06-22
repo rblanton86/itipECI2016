@@ -16,7 +16,7 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
-    public class StaffModels
+    public class Staff
     {
         public int ID { get; set; }
         public int firstName { get; set; }

@@ -67,5 +67,8 @@
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
     <None Include="v1\Sprint1\InitializeDatabase.sql" />
+    <None Include="v1\Sprint1\AlterAddresses.sql" />
+    <None Include="v1\Sprint1\AlterSchoolInfo.sql" />
+    <None Include="v1\Sprint1\CreateSex.sql" />
   </ItemGroup>
 </Project>

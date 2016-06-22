@@ -211,12 +211,15 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Address.cs" />
     <Compile Include="Models\ContactInfoModel.cs" />
-    <Compile Include="Models\ClientModels.cs" />
+    <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Family.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
-    <Compile Include="Models\ReferralModels.cs" />
-    <Compile Include="Models\StaffModels.cs" />
+    <Compile Include="Models\Referral.cs" />
+    <Compile Include="Models\Staff.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -227,6 +230,7 @@
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\childServices.jpg" />
     <Content Include="Scripts\ai.0.15.0-build58334.js" />
     <Content Include="Scripts\ai.0.15.0-build58334.min.js" />
     <Content Include="ApplicationInsights.config">
