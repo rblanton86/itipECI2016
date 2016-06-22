@@ -92,12 +92,13 @@
     <Build Include="v1\Source\Stored_Procedures\ins_Sex.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_StaffMember.sql" />
     <Build Include="v1\Source\Stored_Procedures\log_ErrorTimeStamp.sql" />
-    <None Include="v1\Source\Schema\AlterAddresses.sql" />
-    <None Include="v1\Source\Schema\AlterSchoolInfo.sql" />
-    <None Include="v1\Source\Schema\InitializeDatabase.sql" />
-    <None Include="v1\Release\Sprint1\InitializeDatabase.sql" />
     <Build Include="v1\Source\Schema\alt_InitialDummyData.sql" />
     <None Include="v1\Source\Schema\alt_Staff.sql" />
-    <Build Include="v1\Source\Schema\InitializeLoggingTables.sql" />
+    <Build Include="v1\Source\Schema\alt_Addresses.sql" />
+    <Build Include="v1\Source\Schema\alt_SchoolInfo.sql" />
+    <Build Include="v1\Source\Schema\init_LoggingTables.sql" />
+    <Build Include="v1\Source\Schema\init_Sex.sql" />
+    <Build Include="v1\Release\Sprint1\init_Database.sql" />
+    <Build Include="v1\Source\Schema\init_Database.sql" />
   </ItemGroup>
 </Project>
