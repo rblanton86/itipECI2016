@@ -19,13 +19,18 @@ SELECT @diagnosis = (
 	WHERE name = 'Diagnosis'
 )
 
+
 SELECT @diagnosis
-
-IF EXISTS (SELECT * FROM sys.columns WHERE @diagnosis = OBJECT_ID AND name = 'icd_10_Code')
+IF ISNULL((SELECT column_id FROM Sys.Columns WHERE @diagnosis = OBJECT_ID AND name = 'icd_10_Code'), 0) > 0
 	BEGIN
-		UPDATE Diagnosis
-		SET icd10Code = icd_10_Code
-
-	ALTER TABLE Diagnosis
-		DROP COLUMN icd_10_Code
+		DECLARE @some NVARCHAR(100) = 'UPDATE Diagnosis SET icd10Code = icd_10_Code'
+		EXEC sp_executesql @some
+		
+		--ALTER TABLE Diagnosis
+		--	DROP COLUMN icd_10_Code
+		PRINT 'Hello'
+	END
+ELSE
+	BEGIN
+		PRINT 'Run initDiagnosis script.'
 	END
