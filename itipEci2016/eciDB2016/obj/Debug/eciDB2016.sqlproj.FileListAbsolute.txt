@@ -12,3 +12,7 @@ C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debu
 C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.pdb
 C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.dll
 C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb
+C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\Model.xml
+C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\refactor.xml
+C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\postdeploy.sql
+C:\Users\jgraves\Dropbox\Coding\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\predeploy.sql

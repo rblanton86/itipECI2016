@@ -8,15 +8,35 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
+ALTER PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT firstName, lastName, dob, ssn, referralSource
-			FROM Clients
+			SELECT clnt.*,
+				rce.race,
+				eth.ethnicity,
+				sts.clientStatus,
+				dx.icd_10_Code
+			FROM Clients clnt
+			LEFT JOIN Race rce
+				ON clnt.raceID = rce.raceID
+			LEFT JOIN Ethnicity eth
+				ON clnt.ethnicityID = eth.ethnicityID
+			LEFT JOIN ClientStatus sts
+				ON clnt.clientStatusID = sts.clientStatusID
+			LEFT JOIN Diagnosis dx
+				ON clnt.diagnosisID = dx.diagnosisID
+			LEFT JOIN PrimaryLanguage plang
+				ON clnt.primaryLanguageID = plang.primaryLanguageID
+			LEFT JOIN SchoolInformation sclinf
+				ON clnt.schoolInfoID = sclinf.schoolInfoID
+			LEFT JOIN InsuranceAuthorization insauth
+				ON clnt.insruanceAuthID = insauth.insuranceAuthID
+			LEFT JOIN CommuniciationPreferences comprf
+				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 			WHERE @clientID = clientID
 
 		END TRY
