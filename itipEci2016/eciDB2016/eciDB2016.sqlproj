@@ -76,6 +76,7 @@
     <None Include="v1\Source\Schema\alt_Diagnosis.sql" />
     <None Include="v1\Source\Schema\init_DiagnosisColumns.sql" />
     <None Include="v1\Source\Schema\alt_LnkClientReferralSource.sql" />
+    <None Include="v1\Source\Schema\alt_LnkClientPhysician.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="v1\Source\Stored_Procedures\get_AdditionalContactInfo.sql" />
