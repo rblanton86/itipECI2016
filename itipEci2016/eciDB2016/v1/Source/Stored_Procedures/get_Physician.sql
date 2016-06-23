@@ -1,34 +1,31 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that gets last & first name from the Staff table
+Description: Stored Procedure to pull physician information from physician table by name
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffByID]
-	@staffID int
-	
+CREATE PROCEDURE [dbo].[get_Physician]
+	@firstName varchar(25),
+	@lastName varchar(25)
+
 AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT staff.*, 
-				stafft.staffType, 
-				addr.addresses1, addr.address2, addr.st, addr.city, addr.zip, 
-				aci.aditionalContactInfo
+			SELECT phy.*,
+					addr.addresses1, addr.address2, addr.st, addr.city, addr.zip,
+					aci.additionalContactInfo
 
-			FROM Staff staff 
-				LEFT JOIN StaffType stafft ON
-					staff.staffTypeID = stafft.staffTypeID
-				LEFT JOIN Addresses addr ON
-					staff.addressesID = stafft.staffTypeID
-				LEFT JOIN AditionalContactInfo ON
-					staff.additionalContactInfoID = aci.additionalContactInfoID
-
-			WHERE staffID = @staffID;
+			FROM Physician phy
+			LEFT JOIN Addresses addr ON
+				phy.addressesID = addr.addressesID
+			LEFT JOIN AdditionalContactInfo aci ON
+				phy.additionalContactInfoID = aci.additionalContactInfoID
+				
 
 		END TRY
 		BEGIN CATCH

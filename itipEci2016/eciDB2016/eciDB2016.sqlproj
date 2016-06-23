@@ -125,5 +125,6 @@
     <Build Include="v1\Source\Stored_Procedures\del_ReferralSource.sql" />
     <Build Include="v1\Source\Stored_Procedures\del_Sex.sql" />
     <Build Include="v1\Source\Stored_Procedures\del_Staff.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_Physician.sql" />
   </ItemGroup>
 </Project>
