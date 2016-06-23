@@ -17,7 +17,7 @@ AS
 
 			SELECT sex
 			FROM Sex
-			WHERE @sexID = sexID
+			WHERE sexID = @sexID
 
 		END TRY
 		BEGIN CATCH

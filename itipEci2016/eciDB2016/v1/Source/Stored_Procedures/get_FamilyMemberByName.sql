@@ -25,7 +25,7 @@ AS
 					LEFT JOIN AdditionalContactInfo aci ON
 						fmb.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE (@firstName = firstName) AND (@lastName = lastName)
+			WHERE (firstName = @firstName) AND (lastName = @lastName)
 
 		END TRY
 		BEGIN CATCH

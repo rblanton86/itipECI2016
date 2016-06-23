@@ -28,7 +28,7 @@ AS
 				LEFT JOIN AditionalContactInfo ON
 					staff.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE @staffID = staffID;
+			WHERE staffID = @staffID;
 
 		END TRY
 		BEGIN CATCH

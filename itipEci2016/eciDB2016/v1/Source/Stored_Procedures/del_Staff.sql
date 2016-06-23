@@ -1,23 +1,22 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure that deletes information from the Staff table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
-
+CREATE PROCEDURE [dbo].[del_StaffByID]
+	@staffID int
+	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+			DELETE FROM Staff
+			WHERE staffID = @staffID;
 
 		END TRY
 		BEGIN CATCH
@@ -34,4 +33,3 @@ AS
 
 		END CATCH
 	END
-

@@ -23,7 +23,7 @@ AS
 					LEFT JOIN AddressesType addrt ON
 						addr.addressTypeID = addrt.addressTypeID
 
-			WHERE @addressesID = addressesID
+			WHERE addressesID = @addressesID
 
 		END TRY
 		BEGIN CATCH

@@ -23,7 +23,7 @@ AS
 					refs.additionalContactInfoTypeID = acit.additionalContactInfoTypeID
 				LEFT JOIN Addresses addr ON
 					refs.addressesID = addr.addressesID
-			WHERE @referralSourceID = referralSourceID
+			WHERE referralSourceID = @referralSourceID
 
 		END TRY
 		BEGIN CATCH

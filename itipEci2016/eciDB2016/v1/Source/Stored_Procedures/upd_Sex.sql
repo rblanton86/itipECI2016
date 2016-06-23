@@ -1,23 +1,26 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure that updates the sex of the Sex Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
+CREATE PROCEDURE [dbo].[upd_Sex]
+	@sexID int,
+	@sex varchar(20)
 
 AS
 	BEGIN
 		BEGIN TRY
+			
+			UPDATE Sex 
 
-			SELECT additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+			SET sex = @sex
+			
+			WHERE sexID = @sexID
 
 		END TRY
 		BEGIN CATCH
@@ -34,4 +37,3 @@ AS
 
 		END CATCH
 	END
-

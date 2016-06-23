@@ -1,23 +1,34 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure to update information into Additional Contact Info Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
+CREATE PROCEDURE [dbo].[upd_AdditionalContactInfo]
+	@additionalContactInfoID int,
+	@additionalContactInfo varchar (25),
+	@memberTypeID int,
+	@memberType varchar (25),
+	@additionalContactInfoTypeID int,
+	@additionalContactInfoType varchar (25)
 
+	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+			UPDATE AdditionalContactInfo 
+			
+			SET	memberType = @memberType,			
+				additionalContactInfoType = @additionalContactInfoType,			
+				additionalContactInfo = @additionalContactInfo
+
+			WHERE additionalContactInfoID = @additionalContactInfoID
+			
 
 		END TRY
 		BEGIN CATCH
@@ -34,4 +45,5 @@ AS
 
 		END CATCH
 	END
+
 

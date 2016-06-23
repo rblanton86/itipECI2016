@@ -1,23 +1,26 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that retrieves the address type from the AddressType Table
+Description: Stored Procedure that updates the ethnicity of the Ethnicity Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AddressType]
-	@addressesTypeID int
+CREATE PROCEDURE [dbo].[upd_Ethnicity]
+	@ethnicityID int,
+	@ethnicity VARCHAR (25)
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addressesType
-			FROM AddressesType
-			WHERE addressesTypeID = @addressesTypeID
+			UPDATE Ethnicity 
+
+			SET ethnicity = @ethnicity
+			
+			WHERE ethnicityID = @ethnicityID
 
 		END TRY
 		BEGIN CATCH

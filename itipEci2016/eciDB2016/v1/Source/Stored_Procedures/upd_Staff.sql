@@ -1,23 +1,37 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure to updates first & last name of Staff Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
-
+CREATE PROCEDURE [dbo].[upd_Staff]
+	@staffID int,
+	@staffTypeID int,
+	@addressesID int,
+	@additionalContactInfoID int,
+	@firstName varchar(20),
+	@lastName varchar(20),
+	@handicapped bit
+	
 AS
 	BEGIN
 		BEGIN TRY
+		
+		UPDATE Staff 
+		
+		SET		staffTypeID = @staffTypeID,
+				addressesID = @addressesID, 
+				additionalContactInfoID = @additionalContactInfoID,
+				firstName = @firstName,
+				lastName = @lastName, 
+				handicapped= @handicapped
 
-			SELECT additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+		WHERE staffID = @staffID 
+								
 
 		END TRY
 		BEGIN CATCH
@@ -34,4 +48,3 @@ AS
 
 		END CATCH
 	END
-

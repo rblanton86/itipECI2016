@@ -1,23 +1,28 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure that updates the race of the Race Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
 
-AS
-	BEGIN
+CREATE PROCEDURE [dbo].[upd_Race]
+	@raceID int,
+	@race varchar (25)
+
+	AS
+
+BEGIN
 		BEGIN TRY
+		
+			UPDATE Race
 
-			SELECT additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+			SET	race = @race
+
+			WHERE raceID = @raceID
 
 		END TRY
 		BEGIN CATCH
@@ -34,4 +39,3 @@ AS
 
 		END CATCH
 	END
-

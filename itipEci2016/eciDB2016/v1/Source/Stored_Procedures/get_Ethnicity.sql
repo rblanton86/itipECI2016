@@ -17,7 +17,7 @@ AS
 
 			SELECT ethnicity
 			FROM Ethnicity
-			WHERE @ethnicityID = ethnicityID
+			WHERE ethnicityID = @ethnicityID
 
 		END TRY
 		BEGIN CATCH

@@ -1,23 +1,22 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure to delete information from additionalContactInfo
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
-
+CREATE PROCEDURE [dbo].[del_AdditionalContactInfo]
+	@additionalContactInfoID int
+	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+			DELETE FROM AdditionalContactInfo
+			WHERE additionalContactInfoID = @additionalContactInfoID
 
 		END TRY
 		BEGIN CATCH
