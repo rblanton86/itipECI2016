@@ -42,6 +42,7 @@ AS
 							dob,
 							ssn,
 							referralSource)
+
 			VALUES (@raceID,
 					@ethnicityID,
 					@clientStatusID,

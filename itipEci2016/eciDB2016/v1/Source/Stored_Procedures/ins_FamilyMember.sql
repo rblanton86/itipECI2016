@@ -1,34 +1,36 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that gets last & first name from the Staff table
+Description: Stored Procedure that inserts family information into the Family Member Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffByID]
-	@staffID int
-	
+CREATE PROCEDURE [dbo].[ins_FamilyMember]
+	@familyMemberTypeID int,
+	@additionalContactInfoID int,
+	@firstName varchar (25),
+	@lastName varchar (25),
+	@isGuardian bit
+
+
 AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT staff.*, 
-				stafft.staffType, 
-				addr.addresses, 
-				aci.aditionalContactInfo
-
-			FROM Staff staff 
-				LEFT JOIN StaffType stafft ON
-					staff.staffTypeID = stafft.staffTypeID
-				LEFT JOIN Addresses addr ON
-					staff.addressesID = stafft.staffTypeID
-				LEFT JOIN AditionalContactInfo ON
-					staff.additionalContactInfoID = aci.additionalContactInfoID
-
-			WHERE @staffID = staffID;
+			INSERT FamilyMember (familyMemberTypeID,
+									additionalContactInfoID,
+									firstName,
+									lastName,
+									isGuardian)
+									
+			VALUES (@familyMemberTypeID,
+					@additionalContactInfoID,
+					@firstName,
+					@lastName,
+					@isGuardian)	
 
 		END TRY
 		BEGIN CATCH
@@ -45,3 +47,6 @@ AS
 
 		END CATCH
 	END
+
+
+

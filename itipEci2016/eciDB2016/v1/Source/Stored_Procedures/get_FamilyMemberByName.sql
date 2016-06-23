@@ -1,34 +1,31 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that gets last & first name from the Staff table
+Description: Stored Procedure that retrieves family information from the Family Member Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffByID]
-	@staffID int
-	
+CREATE PROCEDURE [dbo].[get_FamilyMemberByName]
+	@firstName varchar (25),
+	@lastName varchar (25)
+
+
 AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT staff.*, 
-				stafft.staffType, 
-				addr.addresses, 
-				aci.aditionalContactInfo
+			SELECT fmb.*, fmbt.familyMemberType, aci
 
-			FROM Staff staff 
-				LEFT JOIN StaffType stafft ON
-					staff.staffTypeID = stafft.staffTypeID
-				LEFT JOIN Addresses addr ON
-					staff.addressesID = stafft.staffTypeID
-				LEFT JOIN AditionalContactInfo ON
-					staff.additionalContactInfoID = aci.additionalContactInfoID
+				FROM FamilyMember fmb
+					LEFT JOIN FamilyMemberType fmbt ON
+						fmb.familyMemberTypeID = fmbt.familyMemberTypeID
+					LEFT JOIN AdditionalContactInfo aci ON
+						fmb.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE @staffID = staffID;
+			WHERE (@firstName = firstName) AND (@lastName = lastName)
 
 		END TRY
 		BEGIN CATCH
@@ -45,3 +42,6 @@ AS
 
 		END CATCH
 	END
+
+
+

@@ -16,10 +16,13 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addr.*, addrt.addressesType
+			SELECT addr.*, 
+					addrt.addressesType
+
 				FROM Addresses addr
-				LEFT JOIN AddressesType addrt ON
-				addr.addressTypeID = addrt.addressTypeID
+					LEFT JOIN AddressesType addrt ON
+						addr.addressTypeID = addrt.addressTypeID
+
 			WHERE @addressesID = addressesID
 
 		END TRY

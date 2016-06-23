@@ -10,7 +10,7 @@ Change History:
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_ReferralSource]
 	@referralSourceID int
-	--aci, acit, addr
+	
 AS
 	BEGIN
 		BEGIN TRY

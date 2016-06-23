@@ -20,6 +20,7 @@ AS
 				eth.ethnicity,
 				sts.clientStatus,
 				dx.icd_10_Code
+
 			FROM Clients clnt
 			LEFT JOIN Race rce
 				ON clnt.raceID = rce.raceID

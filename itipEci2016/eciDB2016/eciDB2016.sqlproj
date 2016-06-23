@@ -103,5 +103,7 @@
     <Build Include="v1\Release\Sprint1\init_Database.sql" />
     <Build Include="v1\Source\Schema\init_Database.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_ClientByName.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_FamilyMemberByName.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_FamilyMember.sql" />
   </ItemGroup>
 </Project>

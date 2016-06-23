@@ -15,12 +15,15 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT aci.*, mbt.memberType, acit.additionalContacatInfoType
+			SELECT aci.*, 
+					mbt.memberType, 
+					acit.additionalContacatInfoType
+
 			FROM AdditionalContactInfo aci
-				LEFT JOIN MemberType mbt ON
-				aci.memberTypeID = mbt.memberTypeID
-				LEFT JOIN AdditionalContactInfoType acit ON
-				aci.additionalContactInfoTypeID = acit.additionalContactInfoID
+					LEFT JOIN MemberType mbt ON
+					aci.memberTypeID = mbt.memberTypeID
+					LEFT JOIN AdditionalContactInfoType acit ON
+					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
 			WHERE @additionalContactInfoID = additonalContactInfoID
 
 		END TRY
