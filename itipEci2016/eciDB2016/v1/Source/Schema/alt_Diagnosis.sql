@@ -1,6 +1,6 @@
 ﻿/***********************************************************************************************************
-Description: 
-	Alters the colument icd_10_Code to read icd10Code and adds column for icd9Code
+Description: 	
+	Copies info from icd_10 to icd10 column and drops icd_10
 Author: 
 	Jennifer M. Graves
 Date: 
@@ -21,27 +21,11 @@ SELECT @diagnosis = (
 
 SELECT @diagnosis
 
--- Checks if table exists, create table if it doesn't.
-IF @diagnosis = 0
+IF EXISTS (SELECT * FROM sys.columns WHERE @diagnosis = OBJECT_ID AND name = 'icd_10_Code')
 	BEGIN
-		CREATE TABLE Diagnosis (
-			diagnosisID INT IDENTITY(1,1) PRIMARY KEY,
-			diagnosisTypeID INT FOREIGN KEY REFERENCES DiagnosisTypeID(diagnosisTypeID),
-			icd10Code VARCHAR(15),
-			icd9Code VARCHAR(15),
-		)
-	END
-ELSE
-	BEGIN
-		-- Checks if icd10 column exists, alters table to add if it doesn't.
-		IF EXISTS (SELECT * FROM sys.columns WHERE @diagnosis = OBJECT_ID AND (name = 'icd10Code' OR name = 'icd9Code'))
-			BEGIN
-				RETURN
-			END
-		ELSE
-			BEGIN
-				ALTER TABLE Diagnosis
-					ADD icd10Code VARCHAR(15)
-					ADD icd9Code VARCHAR(15)
-			END
+		UPDATE Diagnosis
+		SET icd10Code = icd_10_Code
+
+	ALTER TABLE Diagnosis
+		DROP COLUMN icd_10_Code
 	END

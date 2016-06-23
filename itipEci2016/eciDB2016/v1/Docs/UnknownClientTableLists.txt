@@ -7,12 +7,12 @@
 [ ] Date (Add to Clients table as initial creation date.)
 [ ] Due Date (Due Date of what???) ----> COLUMN NAME '
 [O] Reason Past Due (What is past due???) ---> COLUMN NAME 'referralPastDueReason' to LnkClientReferralSource +dateAdded - DateTime -- date referral added (default value)
-[O] Intake Date (too vague) ----> COLUMN NAME 'intakeDate' to Clients table
-[O] IFSP Date ----> COLUM NAME 'ifspDate' to Clients table
-[O] Comp Svc Date ---> COLUMN NAME 'compSvcDate' to Clients table
+[X] Intake Date (too vague) ----> COLUMN NAME 'intakeDate' to Clients table
+[X] IFSP Date ----> COLUM NAME 'ifspDate' to Clients table
+[X] Comp Svc Date ---> COLUMN NAME 'compSvcDate' to Clients table
 [O] MedicalChk ---> COLUMN NAME 'medicalReceived' to LnkClientPhysician table --bit
 [O] MedicalChkDate ---> COLUMN NAME 'medicalReceivedDate' to LnkClientPhysician table --DateTime
-[O] ImmunChk ---> COLUMN NAME 'immunizationReceived' to LnkClientPhysician table --bit
+[O] ImmunChk ---> COLUMN NAME 'immunizatDaionReceived' to LnkClientPhysician table --bit
 [O] NULL ---> COLUMN NAME 'immunizationReceivedDate' to LnkClientPhysician table --DateTime
 Home Elementary ???
 Developmental Proficiency ???

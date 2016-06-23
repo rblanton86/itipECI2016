@@ -1,6 +1,6 @@
 ﻿/***********************************************************************************************************
 Description: 
-		 Drops ISD column and adds new 
+		Alters ISD column from integer to string
 Author: 
 		Jennifer M. Graves
 Date: 
@@ -11,8 +11,6 @@ Change History:
 	
 -- Declares table variable for addresses table
 DECLARE @schoolInfo INT = 0
-
-
 
 -- Assigns table ID to addresses variable.
 SELECT @schoolInfo = (

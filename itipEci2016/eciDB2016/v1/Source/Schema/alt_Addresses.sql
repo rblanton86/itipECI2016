@@ -12,8 +12,6 @@ Change History:
 -- Declares table variable for addresses table
 DECLARE @addresses INT = 0
 
-
-
 -- Assigns table ID to addresses variable.
 SELECT @addresses = (
 	SELECT OBJECT_ID

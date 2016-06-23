@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_ClientByID]
+CREATE PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
@@ -19,7 +19,14 @@ AS
 				rce.race,
 				eth.ethnicity,
 				sts.clientStatus,
-				dx.icd_10_Code
+				dx.icd10Code,
+				dx.icd9code,
+				plang.primaryLanguage,
+				sclinf.isd,
+				insauth.insuranceAuthorizationType,
+				insauth.authorizedFrom,
+				insauth.authorizedTo,
+				comprf.communicationPreferences
 
 			FROM Clients clnt
 			LEFT JOIN Race rce
