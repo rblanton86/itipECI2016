@@ -71,6 +71,9 @@
     <None Include="v1\Docs\ColumnList.txt" />
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
+    <None Include="v1\Source\Schema\alt_Clients.sql" />
+    <None Include="v1\Source\Schema\init_DummyData.sql" />
+    <None Include="v1\Source\Schema\alt_Diagnosis.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="v1\Source\Stored_Procedures\get_AdditionalContactInfo.sql" />
@@ -92,7 +95,6 @@
     <Build Include="v1\Source\Stored_Procedures\ins_Sex.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_StaffMember.sql" />
     <Build Include="v1\Source\Stored_Procedures\log_ErrorTimeStamp.sql" />
-    <Build Include="v1\Source\Schema\alt_InitialDummyData.sql" />
     <None Include="v1\Source\Schema\alt_Staff.sql" />
     <Build Include="v1\Source\Schema\alt_Addresses.sql" />
     <Build Include="v1\Source\Schema\alt_SchoolInfo.sql" />
