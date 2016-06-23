@@ -24,7 +24,7 @@ AS
 					aci.memberTypeID = mbt.memberTypeID
 					LEFT JOIN AdditionalContactInfoType acit ON
 					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
-			WHERE additionalContactInfoID = @additonalContactInfoID
+			WHERE additionalContactInfoID = @additionalContactInfoID
 
 		END TRY
 		BEGIN CATCH

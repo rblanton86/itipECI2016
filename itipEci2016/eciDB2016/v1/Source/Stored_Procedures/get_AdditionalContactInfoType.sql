@@ -17,7 +17,7 @@ AS
 
 			SELECT additionalContactInfoType
 			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additonalContactInfoTypeID
+			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
 
 		END TRY
 		BEGIN CATCH
