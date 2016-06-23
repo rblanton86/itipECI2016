@@ -1,23 +1,22 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that retrieves the address type from the AddressType Table
+Description: Stored Procedure that retrieves the ethnicity type from the ethnicity Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.22.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AddressType]
-	@addressesTypeID int
+CREATE PROCEDURE [dbo].[del_Ethnicity]
+	@ethnicityID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addressesType
-			FROM AddressesType
-			WHERE addressesTypeID = @addressesTypeID
+			DELETE FROM Ethnicity
+			WHERE ethnicityID = @ethnicityID
 
 		END TRY
 		BEGIN CATCH

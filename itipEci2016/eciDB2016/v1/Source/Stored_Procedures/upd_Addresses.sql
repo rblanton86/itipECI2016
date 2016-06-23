@@ -1,30 +1,36 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from additionalContactInfo
+Description: Stored Procedure that updates address information into the Addresses Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfo]
-	@additionalContactInfoID int
-	
+CREATE PROCEDURE [dbo].[upd_Addresses]
+	@addressID int,
+	@addressTypeID int,
+	@address1 varchar(20),
+	@address2 varchar(20),
+	@city varchar(15),
+	@st varchar(10),
+	@zip int
+
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT aci.*, 
-					mbt.memberType, 
-					acit.additionalContacatInfoType
+			UPDATE Addresses 
 
-			FROM AdditionalContactInfo aci
-					LEFT JOIN MemberType mbt ON
-					aci.memberTypeID = mbt.memberTypeID
-					LEFT JOIN AdditionalContactInfoType acit ON
-					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
-			WHERE additionalContactInfoID = @additonalContactInfoID
+			SET addressTypeID = @addressTypeID,
+				address1 = @address1,
+				address2 = @address2,
+				city = @city,
+				st = @st,
+				zip = @zip
+
+			WHERE addressID = @addressID
 
 		END TRY
 		BEGIN CATCH
@@ -41,4 +47,5 @@ AS
 
 		END CATCH
 	END
+
 

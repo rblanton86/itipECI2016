@@ -38,7 +38,7 @@ AS
 				ON clnt.insruanceAuthID = insauth.insuranceAuthID
 			LEFT JOIN CommuniciationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
-			WHERE @clientID = clientID
+			WHERE clientID = @clientID
 
 		END TRY
 		BEGIN CATCH

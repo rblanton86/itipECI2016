@@ -1,30 +1,22 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from additionalContactInfo
+Description: Stored Procedure that deletes the referral source from the ReferralSource Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfo]
-	@additionalContactInfoID int
+CREATE PROCEDURE [dbo].[del_ReferralSource]
+	@referralSourceID int
 	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT aci.*, 
-					mbt.memberType, 
-					acit.additionalContacatInfoType
-
-			FROM AdditionalContactInfo aci
-					LEFT JOIN MemberType mbt ON
-					aci.memberTypeID = mbt.memberTypeID
-					LEFT JOIN AdditionalContactInfoType acit ON
-					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
-			WHERE additionalContactInfoID = @additonalContactInfoID
+			DELETE FROM ReferralSource
+			WHERE referralSourceID = @referralSourceID
 
 		END TRY
 		BEGIN CATCH
@@ -41,4 +33,3 @@ AS
 
 		END CATCH
 	END
-

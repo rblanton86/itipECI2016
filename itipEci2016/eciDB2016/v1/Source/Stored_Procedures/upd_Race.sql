@@ -1,30 +1,28 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from additionalContactInfo
+Description: Stored Procedure that updates the race of the Race Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfo]
-	@additionalContactInfoID int
-	
-AS
-	BEGIN
+
+CREATE PROCEDURE [dbo].[upd_Race]
+	@raceID int,
+	@race varchar (25)
+
+	AS
+
+BEGIN
 		BEGIN TRY
+		
+			UPDATE Race
 
-			SELECT aci.*, 
-					mbt.memberType, 
-					acit.additionalContacatInfoType
+			SET	race = @race
 
-			FROM AdditionalContactInfo aci
-					LEFT JOIN MemberType mbt ON
-					aci.memberTypeID = mbt.memberTypeID
-					LEFT JOIN AdditionalContactInfoType acit ON
-					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
-			WHERE additionalContactInfoID = @additonalContactInfoID
+			WHERE raceID = @raceID
 
 		END TRY
 		BEGIN CATCH
@@ -41,4 +39,3 @@ AS
 
 		END CATCH
 	END
-

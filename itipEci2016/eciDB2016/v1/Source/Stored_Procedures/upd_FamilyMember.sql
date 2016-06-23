@@ -1,30 +1,39 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from additionalContactInfo
+Description: Stored Procedure that updates family information of the Family Member Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfo]
-	@additionalContactInfoID int
-	
+CREATE PROCEDURE [dbo].[upd_FamilyMember]
+	@familyMemberID int,
+	@familyMemberTypeID int,
+	@additionalContactInfoID int,
+	@firstName varchar (25),
+	@lastName varchar (25),
+	@isGuardian bit
+
+
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT aci.*, 
-					mbt.memberType, 
-					acit.additionalContacatInfoType
-
-			FROM AdditionalContactInfo aci
-					LEFT JOIN MemberType mbt ON
-					aci.memberTypeID = mbt.memberTypeID
-					LEFT JOIN AdditionalContactInfoType acit ON
-					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
-			WHERE additionalContactInfoID = @additonalContactInfoID
+			UPDATE FamilyMember 
+			
+			SET		familyMemberTypeID = @familyMemberTypeID,
+					additionalContactInfoID = @additionalContactInfoID,
+					firstName = @firstName,
+					lastName = @lastName,
+					isGuardian = @isGuardian
+									
+			WHERE familyMemberID = @familyMemberID  
+					
+					
+					
+						
 
 		END TRY
 		BEGIN CATCH
@@ -41,4 +50,6 @@ AS
 
 		END CATCH
 	END
+
+
 

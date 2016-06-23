@@ -105,5 +105,23 @@
     <Build Include="v1\Source\Stored_Procedures\get_ClientByName.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_FamilyMemberByName.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_FamilyMember.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Addresses.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_AdditionalContactInfo.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Clients.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Ethnicity.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_FamilyMember.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Race.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_ReferralSource.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Sex.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Staff.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_AdditionalContactInfo.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Addresses.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Clients.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Ethnicity.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_FamilyMember.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Race.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_ReferralSource.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Sex.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Staff.sql" />
   </ItemGroup>
 </Project>

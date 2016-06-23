@@ -19,7 +19,7 @@ BEGIN
 		
 			SELECT race
 			FROM Race
-			WHERE @raceID = raceID	
+			WHERE raceID = @raceID	
 
 		END TRY
 		BEGIN CATCH

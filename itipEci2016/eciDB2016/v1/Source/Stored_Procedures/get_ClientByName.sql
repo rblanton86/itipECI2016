@@ -39,7 +39,7 @@ AS
 				ON clnt.insruanceAuthID = insauth.insuranceAuthID
 			LEFT JOIN CommuniciationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
-			WHERE (@firstName = firstName) AND (@lastName = lastName)
+			WHERE (firstName = @firstName) AND (lastName = @lastName)
 
 		END TRY
 		BEGIN CATCH
