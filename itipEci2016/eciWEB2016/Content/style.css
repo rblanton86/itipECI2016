@@ -48,6 +48,13 @@ light grey rgb(216, 218, 217)
 		padding: 10px;
 	}
 
+	div.center {
+		display: flex;
+		justify-content: center;
+		border: 2px solid black;
+		padding: 10px;
+	}
+
 	nav {
 		display: flex;
 		justify-content: space-around;
