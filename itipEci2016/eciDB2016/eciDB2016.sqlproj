@@ -126,5 +126,12 @@
     <Build Include="v1\Source\Stored_Procedures\del_Sex.sql" />
     <Build Include="v1\Source\Stored_Procedures\del_Staff.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_Physician.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Physician.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Physician.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Physician.sql" />
+    <Build Include="v1\Source\Stored_Procedures\del_Comments.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_Comments.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_Comments.sql" />
+    <Build Include="v1\Source\Stored_Procedures\ins_Comments.sql" />
   </ItemGroup>
 </Project>
