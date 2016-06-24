@@ -8,8 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllClients]
-	@clientID int
+ALTER PROCEDURE [dbo].[get_AllClients]
 
 AS
 	BEGIN
@@ -19,13 +18,11 @@ AS
 				rce.race,
 				eth.ethnicity,
 				sts.clientStatus,
-				dx.icd10Code,
-				dx.icd9code,
 				plang.primaryLanguage,
 				sclinf.isd,
 				insauth.insuranceAuthorizationType,
-				insauth.authorizedFrom,
-				insauth.authorizedTo,
+				--insauth.authorizedFrom,
+				--insauth.authorizedTo,
 				comprf.communicationPreferences
 
 			FROM Clients clnt
@@ -42,8 +39,8 @@ AS
 			LEFT JOIN SchoolInformation sclinf
 				ON clnt.schoolInfoID = sclinf.schoolInfoID
 			LEFT JOIN InsuranceAuthorization insauth
-				ON clnt.insruanceAuthID = insauth.insuranceAuthID
-			LEFT JOIN CommuniciationPreferences comprf
+				ON clnt.insuranceAuthID = insauth.insuranceAuthID
+			LEFT JOIN CommunicationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 
 		END TRY

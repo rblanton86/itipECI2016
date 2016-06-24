@@ -17,7 +17,7 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Client/Details/5
-        public ActionResult GetClients(int id)
+        public ActionResult GetClients()
         {
             List<Client> clients = new List<Client>();
             ClientDataController dataController = new ClientDataController();
