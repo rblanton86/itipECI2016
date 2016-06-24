@@ -285,6 +285,7 @@
     <Content Include="Views\Client\Client_Update_pg2.cshtml" />
     <Content Include="Views\Client\Client_Update.cshtml" />
     <Content Include="Views\Referral\Referral.cshtml" />
+    <Content Include="Views\Staff\Time_Sheet.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
