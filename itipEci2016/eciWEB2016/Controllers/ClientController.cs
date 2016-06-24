@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eciWEB2016.Models;
+using eciWEB2016.Controllers.DataControllers;
 
 namespace eciWEB2016.Controllers
 {
@@ -15,9 +17,14 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Client/Details/5
-        public ActionResult Details(int id)
+        public ActionResult GetClients(int id)
         {
-            return View();
+            List<Client> clients = new List<Client>();
+            ClientDataController dataController = new ClientDataController();
+
+            clients = dataController.GetAllClients();
+
+            return Json(new { clients }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Client/Create
