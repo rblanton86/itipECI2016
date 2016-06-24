@@ -8,9 +8,9 @@
 		<form>
 			<h2>Screens</h2>
 			<button type="button">Time Sheet Input</button>
-			<button type="button" onclick="location.href = '../../Views/Home/Client_Update.cshtml';">Client Update</button>
-			<button type="button" onclick="location.href = '../../Views/Home/Referral.cshtml';">Referral Input</button>
-			<button type="button" onclick="location.href = '../../Views/Home/Staff_Update.cshtml';">Staff Update</button>
+			<button type="button" onclick="location.href ='@Url.Action("Client_Update", "Client" )'">Client Update</button>
+			<button type="button" onclick="location.href = '@Url.Action("Referral", "Referral" )'">Referral Input</button>
+			<button type="button" onclick="location.href = '@Url.Action("Staff_Update", "Staff" )'">Staff Update</button>
 			<button type="button">Volunteer/Board Update</button>
 			<button type="button">Validation Tables</button>
 			<button type="button">Providers</button>
