@@ -21,7 +21,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			UPDATE AdditionalContactInfo 
+			UPDATE AdditionalContactInfo
 			
 			SET	memberType = @memberType,			
 				additionalContactInfoType = @additionalContactInfoType,			

@@ -20,7 +20,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT Addresses (addressTypeID, 
+			INSERT Addresses (addressesTypeID, 
 								address1, 
 								address2, 
 								city, 

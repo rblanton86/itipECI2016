@@ -27,7 +27,7 @@ AS
 						lastName, 
 						handicapped)
 
-		VALUES (staffTypeID, 
+		VALUES (@staffTypeID, 
 				@addressesID, 
 				@additionalContactInfoID, 
 				@firstName, 

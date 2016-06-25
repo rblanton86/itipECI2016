@@ -23,14 +23,14 @@ AS
 
 			UPDATE Addresses 
 
-			SET addressTypeID = @addressTypeID,
+			SET addressesTypeID = @addressTypeID,
 				address1 = @address1,
 				address2 = @address2,
 				city = @city,
 				st = @st,
 				zip = @zip
 
-			WHERE addressID = @addressID
+			WHERE addressesID = @addressID
 
 		END TRY
 		BEGIN CATCH

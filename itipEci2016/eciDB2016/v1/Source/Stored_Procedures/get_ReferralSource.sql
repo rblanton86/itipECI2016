@@ -15,12 +15,12 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT refs.*, aci.additionalContactInfo, addr.addresses
+			SELECT refs.*, aci.additionalContactInfo, addr.addressesID
 			FROM ReferralSource refs
 				LEFT JOIN AdditionalContactInfo aci ON
 					refs.additionalContactInfoID = aci.additionalContactInfoID
 				LEFT JOIN AdditionalContactInfoType acit ON
-					refs.additionalContactInfoTypeID = acit.additionalContactInfoTypeID
+					refs.additionalContactInfoID = acit.additionalContactInfoTypeID
 				LEFT JOIN Addresses addr ON
 					refs.addressesID = addr.addressesID
 			WHERE referralSourceID = @referralSourceID

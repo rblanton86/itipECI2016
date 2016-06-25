@@ -17,7 +17,7 @@ AS
 		BEGIN TRY
 
 			SELECT phy.*,
-					addr.addresses1, addr.address2, addr.st, addr.city, addr.zip,
+					addr.address1, addr.address2, addr.st, addr.city, addr.zip,
 					aci.additionalContactInfo
 
 			FROM Physician phy

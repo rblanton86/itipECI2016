@@ -21,7 +21,7 @@ AS
 
 				FROM Addresses addr
 					LEFT JOIN AddressesType addrt ON
-						addr.addressTypeID = addrt.addressTypeID
+						addr.addressesTypeID = addrt.addressesTypeID
 
 			WHERE addressesID = @addressesID
 
