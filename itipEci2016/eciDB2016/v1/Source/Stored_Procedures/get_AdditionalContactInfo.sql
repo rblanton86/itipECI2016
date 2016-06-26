@@ -17,13 +17,13 @@ AS
 
 			SELECT aci.*, 
 					mbt.memberType, 
-					acit.additionalContacatInfoType
+					acit.additionalContactInfoType
 
 			FROM AdditionalContactInfo aci
 					LEFT JOIN MemberType mbt ON
 					aci.memberTypeID = mbt.memberTypeID
 					LEFT JOIN AdditionalContactInfoType acit ON
-					aci.additionalContactInfoTypeID = acit.additionalContactInfoID
+					acit.additionalContactInfoTypeID = aci.additionalContactInfoID
 			WHERE additionalContactInfoID = @additionalContactInfoID
 
 		END TRY

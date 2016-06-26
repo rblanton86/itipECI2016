@@ -17,7 +17,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT fmb.*, fmbt.familyMemberType, aci
+			SELECT fmb.*, fmbt.familyMemberType, aci.additionalContactInfoID
 
 				FROM FamilyMember fmb
 					LEFT JOIN FamilyMemberType fmbt ON

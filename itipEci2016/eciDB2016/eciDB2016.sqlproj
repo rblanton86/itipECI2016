@@ -78,6 +78,7 @@
     <None Include="v1\Source\Schema\alt_LnkClientReferralSource.sql" />
     <None Include="v1\Source\Schema\alt_LnkClientPhysician.sql" />
     <None Include="v1\Source\Schema\init_UserObj.sql" />
+    <None Include="v1\Source\Schema\alt_FamilyMember.sql" />
   </ItemGroup>
   <ItemGroup>
     <Build Include="v1\Source\Stored_Procedures\get_AdditionalContactInfo.sql" />

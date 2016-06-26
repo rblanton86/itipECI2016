@@ -36,7 +36,7 @@ AS
 			LEFT JOIN SchoolInformation sclinf
 				ON clnt.schoolInfoID = sclinf.schoolInfoID
 			LEFT JOIN InsuranceAuthorization insauth
-				ON clnt.insruanceAuthID = insauth.insuranceAuthID
+				ON clnt.insuranceAuthID = insauth.insuranceAuthID
 			LEFT JOIN CommuniciationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 			WHERE (firstName = @firstName) AND (lastName = @lastName)
