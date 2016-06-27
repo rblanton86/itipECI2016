@@ -13,7 +13,8 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
-        
+
+        // GET: Staff/TimeSheets
         public ActionResult Time_Sheets()
         {
             return View();
@@ -50,6 +51,8 @@ namespace eciWEB2016.Controllers
             try
             {
                 // TODO: Add insert logic here
+
+
 
                 return RedirectToAction("Index");
             }
