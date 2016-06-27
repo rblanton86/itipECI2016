@@ -1,0 +1,77 @@
+﻿<!--***********************************************************************************************************
+Description:   HTML page of staff's time headers page
+
+Author:
+    Tyrell Powers-Crane
+Date:
+    6.27.16
+Change History:
+
+*********************************************************************************************************-->
+
+@{
+    ViewBag.Title = "Time_Headers";
+}
+
+<h2>Time_Headers</h2>
+
+<!DOCTYPE html>
+<html>
+<head>
+    <link type="text/css" rel="stylesheet" href="styleSheet.css" />
+    <title></title>
+</head>
+<body>
+    <header>
+        <h1>All Staff Time Headers</h1>
+        <ul class="right">
+            <button> Refresh </button>
+            <button> Close </button>
+        </ul>
+        <li>
+            <label>Choose Staff</label><select>
+                <OPTION>Select Staff Member</OPTION>
+            </select>
+        </li>
+    </header>
+    <nav class="head">
+        <label>Staff ID:</label>
+        <input type="text" size=5></input>
+        <label>First Name:</label>
+        <input type="text"></input>
+        <label>Last Name:</label>
+        <input type="text"></input>
+        <label>Staff Status</label>
+        <select>
+            <option>A</option>
+            <option>I</option>
+        </select>
+    </nav>
+    <div class="main">
+        <li class="left">
+            Time Headers For This Staff Member
+        </li>
+
+        <div class="scroll">
+            <table class="2">
+                <thead>
+                    <ul>
+                        <li class="inline1">
+                            Staff ID
+                        </li>
+                        <li class="inline2">
+                            Week Ending
+                        </li>
+                    </ul>
+                </thead>
+                <tbody>
+                    <tr></tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</body>
+</html>
+
+
+

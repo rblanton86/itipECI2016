@@ -1,34 +1,20 @@
 /* COLOR SWATCH
 
 tealish rgb(65, 181, 190)
-mud grey rgb(99, 103, 87)
+mud grey #1E8977
 light grey rgb(216, 218, 217)
 
 */
 
-/* Background */
-
-    .background-image {
-        -webkit-filter: blur(10px);
-        filter: blur(10px);
-        position: fixed;
-        left: 0px;
-        top: 0px;
-        z-index: -1;
-    }
-
 /* Page sections. */
 
 	body {
+		width: 850px;
+		margin: auto;
 		font-family: Arial, Verdana, Tahoma, sans-serif;
-		font-size: 1em;
+		font-size: 1em; 
+        background-image: url("../../Images/ChildServices.jpg");
 	}
-
-    .renderbody {
-        width: 850px;
-        margin: auto;
-        margin-top: 100px;
-    }
 
 	div.menu, div.main {
 		border: 2px solid black;
@@ -51,7 +37,7 @@ light grey rgb(216, 218, 217)
 		border: 2px solid black;
 		border-top-left-radius: 10px;
 		border-top-right-radius: 10px;
-		background-color: rgb(99, 103, 87);
+		background-color: #1E8977;
 		color: rgb(255, 255, 255);
 	}
 
@@ -59,7 +45,6 @@ light grey rgb(216, 218, 217)
 		display: flex;
 		justify-content: space-between;
 		border: 2px solid black;
-        background-color: white;
 		padding: 10px;
 	}
 
@@ -67,16 +52,32 @@ light grey rgb(216, 218, 217)
 		display: flex;
 		justify-content: center;
 		border: 2px solid black;
-        background-color: white;
+		padding: 10px;
+	}
+
+	ul.center {
+		display: flex;
+		align-items: center;
+		flex-direction: column;
+		border: 2px solid black;
 		padding: 10px;
 	}
 
 	nav {
 		display: flex;
 		justify-content: space-around;
-		border: 2px solid black;
-        background-color: white;
+		border: 2px solid black;	
 	}
+
+	nav.head {
+
+		display: flex;
+		list-style: none;
+		justify-content: space-around;
+		border: 2px solid black;
+		background-color: rgb(216, 218, 217);
+	}
+
 
 	section {
 		margin-top: 0px;
@@ -105,10 +106,19 @@ light grey rgb(216, 218, 217)
 		text-shadow: 2px 2px 4px rgb(0, 0, 0);
 	}
 
+	h1.left {
+
+		margin-right: 10em;
+		margin-left: 2em;
+		display: inline-block;
+		text-shadow: 2px 2px 4px rgb(0,0,0);
+		font-size: 20px;
+	}
+
 	h2 {
 		font-size: 1.15em;
 		text-transform: uppercase;
-		text-shadow: 1px 1px 2px rgb(99, 103, 87);
+		text-shadow: 1px 1px 2px #1E8977;
 	}
 
 	h3 {
@@ -123,24 +133,57 @@ light grey rgb(216, 218, 217)
 		padding: 7.5px;
 		border: 2px solid rgb(65, 181, 190);
 		background-color: rgb(255, 255, 255);
+		box-shadow: 5px 5px 2px #1E8977;
 		font-weight: bold;
 		font-size: 0.85em;
 		outline: none;
 	}
 
+	table.2 {
+
+		margin-top: .5em;
+	}
+
+	thead {
+
+		display: flex;
+		justify-content: space-between;
+
+	}
+
+	div.scroll {
+
+		height: 25em;
+		width: 45em;
+		overflow: scroll;
+		margin-left: 3em;
+		margin-top: .5em;
+		border: 2px solid black;
+	}
+
+div.scroll1 {
+
+		height: 25em;
+		width: 50em;
+		overflow: scroll;
+		margin-left: 1em;
+		margin-top: .5em;
+		border: 2px solid black;
+	}
+
 	div.menu button {
 		display: block;
 		width: 75%;	
-		box-shadow: 5px 5px 2px rgb(99, 103, 87);
+		box-shadow: 5px 5px 2px #1E8977;
 	}
 
 	nav button {
 		width: 150px;
-		box-shadow: 5px 5px 2px rgb(99, 103, 87);
+		box-shadow: 5px 5px 2px #1E8977;
 	}
 
 	div.column button {		
-		box-shadow: 5px 5px 2px rgb(99, 103, 87);
+		box-shadow: 5px 5px 2px #1E8977;
 		margin: 10px;
 	}
 
@@ -148,6 +191,12 @@ light grey rgb(216, 218, 217)
 		padding: 0px;
 		margin: 0px;
 		width: 100%;
+	}
+
+	button.right {
+
+		display: inline-block;
+		margin-left: 30em;
 	}
 
 	table button:active, div.main button:active {		
@@ -161,7 +210,7 @@ light grey rgb(216, 218, 217)
 
 	div.menu button:active, nav button:active, div.column button:active {
 		background-color: rgb(65, 181, 190);
-	 	box-shadow: 5px 5px 2px rgb(99, 103, 87);
+	 	box-shadow: 5px 5px 2px #1E8977;
 	  	transform: translateY(2px);
 	}
 
@@ -198,6 +247,7 @@ light grey rgb(216, 218, 217)
 
 /* List styling. */
 	
+
 	ul, li {
 		list-style: none;
 		margin: 2px;
@@ -212,9 +262,42 @@ light grey rgb(216, 218, 217)
 
 	ul.center {
 		display: flex;
-		justify-content: center;
+		justify-content: flex-end;
+		align-content: center;
+
+	}
+
+	ul.right {
+
+		display: inline;
+		margin-left: 40em;
+		
 	}
 
 	li.inline {
 		display: inline-block;
+	}
+
+	li.inline1 {
+
+		display: inline-block;
+		margin-left: 1em;
+	}
+
+	li.inline2 {
+
+		display: inline-block;
+		margin-left: 3em;
+	}
+	li.center {
+
+		display: flex;
+		justify-content: center;
+	}
+
+	li.left {
+
+		display:  flex;
+		justify-content: flex-start;
+		margin-top: 1em;
 	}
