@@ -7,14 +7,26 @@ light grey rgb(216, 218, 217)
 */
 
 /* Page sections. */
+    .background-image {
+
+        margin-left: 0px;
+        width: 150%;
+        z-index: -1;
+    }
 
 	body {
 		width: 850px;
 		margin: auto;
 		font-family: Arial, Verdana, Tahoma, sans-serif;
 		font-size: 1em; 
-        background-image: url("../../Images/ChildServices.jpg");
+
 	}
+
+    .layout {
+
+        margin-left: 0px;
+        z-index: -1;
+    }
 
 	div.menu, div.main {
 		border: 2px solid black;

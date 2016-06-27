@@ -13,38 +13,46 @@ Change History:
     ViewBag.Title = "Time_Sheet";
 }
 
-<h2>Time_Sheet_Input</h2>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="styleSheet.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
     <title></title>
 </head>
 <body>
     <header>
-        <h1 class="left">Time Sheets</h1>
-        <button class="right"> Close </button>
+        <h1>Enter Or View Time Sheets</h1>
     </header>
     <nav class="head">
-        <label>Staff ID:</label>
-        <input type="text" size=10></input>
-        <label>Week Ending:</label>
-        <input type="text"></input>
+        <button onclick="location.href = '@Url.Action("Time_Headers", "Staff")' "> All Staff </button>
+        <button onclick="location.href = '@Url.Action("Index", "Home")' "> Main Menu </button>
+    </nav>
+    <nav class="head">
+        <button onclick="location.href = '@Url.Action("Time_Sheet_Service_Code", "Staff")' "> Edit Service Code or Cross Reference </button>
     </nav>
     <div class="main">
-        <div class="scroll">
-            <table class="2">
-                <thead>
-                    <ul></ul>
-                </thead>
-                <tbody>
-                    <tr></tr>
-                </tbody>
-            </table>
-        </div>
+        <li class="center">
+            Reports
+        </li>
+        <ul class="center">
+            <li>
+                <button>Show Dup Entries</button>
+            </li>
+            <li>
+                <button>Billed After Dismissal</button>
+            </li>
+            <li>
+                <button>Private CPT</button>
+            </li>
+            <li>
+                <button>Medicaid CPT</button>
+            </li>
+        </ul>
     </div>
 </body>
 </html>
+
+
 
 

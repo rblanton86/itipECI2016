@@ -13,6 +13,23 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
+        
+        public ActionResult Time_Sheets()
+        {
+            return View();
+        }
+        public ActionResult Time_Sheet_Service_Code()
+        {
+            return View();
+        }
+        public ActionResult Time_Headers()
+        {
+            return View();
+        }
+        public ActionResult Time_Sheet_Input()
+        {
+            return View();
+        }
 
         // GET: Staff/Details/5
         public ActionResult Details(int id)

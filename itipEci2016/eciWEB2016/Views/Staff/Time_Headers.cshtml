@@ -13,20 +13,19 @@ Change History:
     ViewBag.Title = "Time_Headers";
 }
 
-<h2>Time_Headers</h2>
 
 <!DOCTYPE html>
 <html>
 <head>
-    <link type="text/css" rel="stylesheet" href="styleSheet.css" />
+    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
     <title></title>
 </head>
 <body>
     <header>
         <h1>All Staff Time Headers</h1>
         <ul class="right">
-            <button> Refresh </button>
-            <button> Close </button>
+            <button onclick="location.href = '@Url.Action("Time_Headers", "Staff")' "> Refresh </button>
+            <button onclick="location.href = '@Url.Action("Time_Sheet_Input", "Staff")' "> Close </button>
         </ul>
         <li>
             <label>Choose Staff</label><select>
@@ -63,6 +62,11 @@ Change History:
                             Week Ending
                         </li>
                     </ul>
+                    <li>
+                        <button onclick="location.href = '@Url.Action("Time_Sheets", "Staff")' ">
+                            Time Sheets
+                        </button>
+                    </li>
                 </thead>
                 <tbody>
                     <tr></tr>
