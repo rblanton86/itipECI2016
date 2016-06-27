@@ -47,7 +47,7 @@ AS
 					referralSource = @referralSource
 
 			WHERE
-					ClientsID = @ClientsID
+					clientID = @clientsID
 
 		END TRY
 		BEGIN CATCH
