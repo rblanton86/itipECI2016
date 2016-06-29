@@ -1,4 +1,14 @@
-﻿using System;
+﻿/***********************************************************************************************************
+Description: Data Controller for Staff Controller
+	 
+Author: 
+	Tyrell Powers-Crane 
+Date: 
+	6.29.2016
+Change History:
+	
+************************************************************************************************************/
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
