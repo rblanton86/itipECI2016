@@ -13,7 +13,22 @@ namespace eciWEB2016.Controllers
         // GET: Client
         public ActionResult Client_Update()
         {
-            return View();
+
+            var list = new[] { "Jennifer", "Graves", "Rodrick", "Blanton", "Ty", "Crane" };
+
+            var clientList = new List<SelectListItem>();
+
+            for (int i = 0; i < list.Length; i++)
+            {
+                clientList.Add(new SelectListItem
+                    {
+                        Text = list[i],
+                        Value = i.ToString()
+                    }
+                );
+            }
+
+            return View(clientList);
         }
 
         // GET: Client/Details/5
@@ -24,8 +39,7 @@ namespace eciWEB2016.Controllers
 
             clients = dataController.GetAllClients();
 
-            //return Json(new { clients }, JsonRequestBehavior.AllowGet);
-            return View(clients);
+            return Json(new { clients }, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Client/Create

@@ -1,0 +1,10 @@
+﻿@helper DataList(string name, IEnumerable<System.Web.Mvc.SelectListItem> SelectList)
+{
+    <input list = "name"/>
+
+    <datalist id = "name">
+        @foreach(var item in SelectList) {
+        <option value="@item.Text">@item.Value</option>
+        }
+    </datalist>
+}
