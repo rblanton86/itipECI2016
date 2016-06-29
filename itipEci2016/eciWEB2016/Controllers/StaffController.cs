@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eciWEB2016.Models;
+using eciWEB2016.Controllers.DataControllers;
 
 namespace eciWEB2016.Controllers
 {
@@ -25,7 +27,13 @@ namespace eciWEB2016.Controllers
         }
         public ActionResult Time_Headers()
         {
-            return View();
+            List<Client> clients = new List<Client>();
+            ClientDataController dataController = new ClientDataController();
+
+            clients = dataController.GetAllClients();
+
+         
+            return View(clients);
         }
         public ActionResult Time_Sheet_Input()
         {

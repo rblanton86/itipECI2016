@@ -26,7 +26,13 @@ Change History:
 			SELECT 'Family2 FN ' + CONVERT(VARCHAR(2), @i), 'Family2 LN ' + CONVERT(VARCHAR(2), @i), 1
 				
 			INSERT Addresses (address1)
-			VALUES ('Akard # ' + CONVERT(VARCHAR(2), @i))			
+			VALUES ('Akard # ' + CONVERT(VARCHAR(2), @i))	
+			
+			INSERT Staff (firstName, lastName)
+			VALUES ('Staff FN ' + CONVERT(VARCHAR(2), @i), 'Staff LN ' + CONVERT(VARCHAR(2), @i))
+			
+			INSERT Physician (firstName, lastName)
+			VALUES ('Phys FN ' + CONVERT(VARCHAR(2), @i), 'Phys LN ' + CONVERT(VARCHAR(2), @i))
 
 			IF @i = 2 OR @i = 4 OR @i = 6
 				BEGIN
@@ -39,7 +45,7 @@ Change History:
 
 				END
 
-
+				
 
 		SET @x += 2
 			
