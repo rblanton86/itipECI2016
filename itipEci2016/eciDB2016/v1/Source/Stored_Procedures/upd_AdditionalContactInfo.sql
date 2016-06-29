@@ -12,9 +12,7 @@ CREATE PROCEDURE [dbo].[upd_AdditionalContactInfo]
 	@additionalContactInfoID int,
 	@additionalContactInfo varchar (25),
 	@memberTypeID int,
-	@memberType varchar (25),
-	@additionalContactInfoTypeID int,
-	@additionalContactInfoType varchar (25)
+	@additionalContactInfoTypeID int
 
 	
 AS
@@ -23,9 +21,7 @@ AS
 
 			UPDATE AdditionalContactInfo
 			
-			SET	memberType = @memberType,			
-				additionalContactInfoType = @additionalContactInfoType,			
-				additionalContactInfo = @additionalContactInfo
+			SET	additionalContactInfo = @additionalContactInfo
 
 			WHERE additionalContactInfoID = @additionalContactInfoID
 			
