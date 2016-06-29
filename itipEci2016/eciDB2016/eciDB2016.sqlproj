@@ -137,5 +137,6 @@
     <Build Include="v1\Source\Stored_Procedures\upd_Comments.sql" />
     <Build Include="v1\Source\Stored_Procedures\ins_Comments.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_AllClients.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AllStaff.sql" />
   </ItemGroup>
 </Project>

@@ -19,10 +19,10 @@ namespace eciWEB2016.Models
     public class Staff
     {
         public int ID { get; set; }
-        public int firstName { get; set; }
-        public int lastName { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
         public int phone { get; set; }
-        public int addressesID { get; set; }
+        public string addressesID { get; set; }
         public string address1 { get; set; }
         public string address2 { get; set; }
         public string city { get; set; }

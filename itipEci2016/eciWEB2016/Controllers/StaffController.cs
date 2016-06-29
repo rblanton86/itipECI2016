@@ -27,13 +27,13 @@ namespace eciWEB2016.Controllers
         }
         public ActionResult Time_Headers()
         {
-            List<Client> clients = new List<Client>();
-            ClientDataController dataController = new ClientDataController();
+            List<Staff> staff = new List<Staff>();
+            StaffDataController dataController = new StaffDataController();
 
-            clients = dataController.GetAllClients();
+            staff = dataController.GetAllStaff();
 
          
-            return View(clients);
+            return View(staff);
         }
         public ActionResult Time_Sheet_Input()
         {
