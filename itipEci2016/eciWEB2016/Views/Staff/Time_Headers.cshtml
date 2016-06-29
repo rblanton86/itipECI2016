@@ -9,10 +9,11 @@ Change History:
 
 *********************************************************************************************************-->
 
-@using GridMvc.Html
+
 @model IEnumerable<eciWEB2016.Models.Client>
 @{
     ViewBag.Title = "Time_Headers";
+    var grid = new WebGrid(source: Model);
 }
 
 
@@ -53,13 +54,13 @@ Change History:
         <li class="left">
             Time Headers For This Staff Member
         </li>
-
+        
         <div class="scroll">
-            @Html.Grid(Model).Columns(columns =>
-       {
-           columns.Add(Client => Client.firstName).Titled("Custom column title").SetWidth(110);
-           columns.Add(Client => Client.lastName).Sortable(false);
-       }).WithPaging(20)
+            @grid.GetHtml(columns: grid.Columns(
+
+                    grid.Column(columnName: "firstName", header: "First Name"),
+                    grid.Column(columnName: "lastName", header: "Last Name")
+            ))
             <table class="2">
                 <thead>
                     <ul>
