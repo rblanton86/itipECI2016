@@ -24,7 +24,8 @@ namespace eciWEB2016.Controllers
 
             clients = dataController.GetAllClients();
 
-            return Json(new { clients }, JsonRequestBehavior.AllowGet);
+            //return Json(new { clients }, JsonRequestBehavior.AllowGet);
+            return View(clients);
         }
 
         // GET: Client/Create

@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_AllClients]
+CREATE PROCEDURE [dbo].[get_AllClients]
 
 AS
 	BEGIN

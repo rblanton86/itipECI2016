@@ -9,9 +9,12 @@ Change History:
 
 *********************************************************************************************************-->
 
+@using GridMvc.Html
+@model IEnumerable<eciWEB2016.Models.Client>
 @{
     ViewBag.Title = "Time_Headers";
 }
+
 
 
 <!DOCTYPE html>
@@ -52,6 +55,11 @@ Change History:
         </li>
 
         <div class="scroll">
+            @Html.Grid(Model).Columns(columns =>
+       {
+           columns.Add(Client => Client.firstName).Titled("Custom column title").SetWidth(110);
+           columns.Add(Client => Client.lastName).Sortable(true);
+       }).WithPaging(20)
             <table class="2">
                 <thead>
                     <ul>
