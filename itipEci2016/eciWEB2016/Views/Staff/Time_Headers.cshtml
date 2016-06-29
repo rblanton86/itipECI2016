@@ -58,7 +58,7 @@ Change History:
             @Html.Grid(Model).Columns(columns =>
        {
            columns.Add(Client => Client.firstName).Titled("Custom column title").SetWidth(110);
-           columns.Add(Client => Client.lastName).Sortable(true);
+           columns.Add(Client => Client.lastName).Sortable(false);
        }).WithPaging(20)
             <table class="2">
                 <thead>
