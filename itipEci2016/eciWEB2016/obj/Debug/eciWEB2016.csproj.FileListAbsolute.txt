@@ -170,7 +170,6 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsof
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.csprojResolveAssemblyReference.cache
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.pdb
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\GridMvc.dll
 C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\ApplicationInsights.config
 C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\roslyn\csc.exe
 C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
