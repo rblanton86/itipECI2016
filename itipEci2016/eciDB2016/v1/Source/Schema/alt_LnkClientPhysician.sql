@@ -74,8 +74,8 @@ IF @lnkclmd > 0
 ELSE
 	BEGIN
 		CREATE TABLE LnkClientPhysician (
-				clientID INT,
-				physicianID INT
+				clientID INT FOREIGN KEY REFERENCES Clients(clientID),
+				physicianID INT FOREIGN KEY REFERENCES Physician(physicianID)
 					PRIMARY KEY (clientID, physicianID),
 				medicalReceived BIT,
 				medicalReceivedDate DATE,
