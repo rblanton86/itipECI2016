@@ -8,13 +8,7 @@
     @Scripts.Render("~/bundles/modernizr")
 </head>
 <body class="layout">
-    <img class="background-image" src="../Images/ChildServices.jpg" />
-    <div class="container body-content">
-        
-        <div class="renderbody">
             @RenderBody()
-        </div>
-    </div>
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
     @RenderSection("scripts", required: false)
