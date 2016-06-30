@@ -27,7 +27,7 @@ SELECT @lnkclmd = (
 SELECT @lnkclmd
 
 -- Checks if table exists, create table if it doesn't.
-IF @lnkclmd > 0
+IF ISNULL(@lnkclmd, 0) > 0
 	BEGIN
 		
 		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @lnkclmd AND name = 'medicalReceived')

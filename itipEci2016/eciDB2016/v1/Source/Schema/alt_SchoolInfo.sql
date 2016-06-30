@@ -22,7 +22,7 @@ SELECT @schoolInfo = (
 SELECT @schoolInfo
 
 -- Checks if school info table exists, creates table if it doesn't.
-IF @schoolInfo = 0
+IF ISNULL(@schoolInfo, 0) = 0
 	BEGIN
 		CREATE TABLE SchoolInformation (
 			schoolInfoID INT IDENTITY (1,1) PRIMARY KEY,

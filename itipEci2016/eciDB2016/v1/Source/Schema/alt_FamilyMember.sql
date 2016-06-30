@@ -6,11 +6,16 @@ Author:
 Date: 
 		06-23-2016
 Change History:
-		
+		06-30-2016 -- jmg: Corrected if statement
 ************************************************************************************************************/
 	
 -- Declares table variable for aci table
 DECLARE @fm INT = 0
+DECLARE @fkn NVARCHAR(50)
+DECLARE @databaseName NVARCHAR(50) -- Variable to hold your database's name
+DECLARE @dtscript NVARCHAR(255) -- Variable to hold the script, which we will build later, and which drops all constraints for the table you are dropping
+    
+SET @databaseName = 'eciDB2016'
 
 -- Assigns table ID to aci variable.
 SELECT @fm = (
@@ -19,10 +24,18 @@ SELECT @fm = (
 	WHERE name = 'FamilyMember'
 )
 
+-- Assigns a foreign key name for use in later script which will drop the foreign key constraint
+SELECT @fkn = (
+    SELECT name
+    FROM sys.foreign_keys
+    WHERE referenced_object_id = object_id('AdditionalContactInfo') AND parent_object_id = object_id('FamilyMember')
+)
+
+
 SELECT @fm
 
 -- Checks if additional contact info table exists, creates if it doesn't..
-IF @fm = 0
+IF ISNULL(@fm, 0) = 0
 	BEGIN
 		CREATE TABLE FamilyMember (
 			familyMemberID INT IDENTITY (1,1) PRIMARY KEY,
@@ -36,10 +49,10 @@ IF @fm = 0
 	END
 ELSE
 	BEGIN
-		-- Checks if additionalContactInfo column exists, alters table to add if it doesn't.
+		-- Checks if additionalContactInfoID column exists, alters table to add if it doesn't.
 		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'additionalContactInfoID')
 			BEGIN
-				RETURN
+				PRINT 'Unneeded: additionalContactInfoID already exists.'
 			END
 		ELSE
 			BEGIN
@@ -52,26 +65,34 @@ ELSE
 			BEGIN
 				DECLARE @some NVARCHAR(100) = 'UPDATE FamilyMember SET additionalContactInfoID = additionalContactInfo'
 				EXEC sp_executesql @some
-		
-				ALTER TABLE FamilyMember
-					DROP CONSTRAINT FK__FamilyMem__addit__412EB0B6
+				
+				WHILE EXISTS(select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where constraint_catalog = @databaseName and table_name = 'FamilyMember')
+					BEGIN
+						SELECT @dtscript = (
+						  'ALTER TABLE FamiyMember' + 
+						  ' DROP CONSTRAINT ' + 
+						  @fkn
+						  )
+						FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+						WHERE constraint_catalog = @databaseName and table_name = 'FamilyMember'
+						exec sp_executesql @dtscript
+					END
 
 				ALTER TABLE FamilyMember
 					DROP COLUMN additionalContactInfo
 			END
 		ELSE
 			BEGIN
-				ALTER TABLE FamilyMember
-					ADD additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID)
+				PRINT 'Unneeded: ContactInfoID exists and ContactInfo does not, no update needed.'
 			END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'sexID')
 			BEGIN
-				RETURN
+				PRINT 'Unneeded: sexID already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE FamilyMember
-					DROP COLUMN sexID
+					ADD sexID INT FOREIGN KEY REFERENCES Sex(sexID)
 			END
 	END

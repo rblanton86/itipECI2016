@@ -18,7 +18,7 @@ DECLARE @Staff int = 0
 
 	SELECT @Staff	
 
-IF @Staff = 0
+IF ISNULL(@Staff, 0) = 0
 	BEGIN
 
 		CREATE TABLE Staff (
@@ -26,6 +26,7 @@ IF @Staff = 0
 			staffTypeID INT FOREIGN KEY REFERENCES StaffType(staffTypeID),
 			addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
 			additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
+			sexID INT FOREIGN KEY REFERENCES Sex(sexID),
 			firstName VARCHAR(25),
 			lastName VARCHAR(25),
 			handicapped bit
@@ -36,13 +37,35 @@ ELSE
 	BEGIN
 		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @Staff AND name = 'handicapped')
 			BEGIN
-				RETURN
+				PRINT 'Unneeded: Handicapped column exists'
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @Staff = OBJECT_ID AND name = 'sexID')
+			BEGIN
+				PRINT 'Unneeded: sexID already exists.'
 			END
+		ELSE
+			BEGIN
+				ALTER TABLE Staff
+					ADD sexID INT FOREIGN KEY REFERENCES Sex(sexID)
+				PRINT 'Added sexID column on Clients table.'
+			END
+		END
 	ELSE 
-	BEGIN
+		BEGIN
 
-		ALTER TABLE Staff
-			ADD handicapped bit
+			ALTER TABLE Staff
+				ADD handicapped bit
 
-	END
+			IF EXISTS (SELECT * FROM sys.columns WHERE @Staff = OBJECT_ID AND name = 'sexID')
+				BEGIN
+					PRINT 'Unneeded: sexID already exists.'
+				END
+			ELSE
+				BEGIN
+					ALTER TABLE Staff
+						ADD sexID INT FOREIGN KEY REFERENCES Sex(sexID)
+					PRINT 'Added sexID column on Clients table.'
+				END
+
+		END
 END

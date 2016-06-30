@@ -6,7 +6,7 @@ Author:
 Date: 
 	06-22-2016
 Change History:
-	
+	06-30-2016 -- jmg: Corrected if statement
 ************************************************************************************************************/
 
 -- Declares table variable for Clients.
@@ -23,7 +23,7 @@ SELECT @clients
 
 -- Checks if table exists, creates table if it doesn't.
 
-IF @clients = 0
+IF ISNULL(@clients,0) = 0
 	BEGIN
 		CREATE TABLE Clients ( 
 			clientID INT IDENTITY (1,1) PRIMARY KEY (clientID),
@@ -36,6 +36,7 @@ IF @clients = 0
 			commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
 			insuranceAuthID INT FOREIGN KEY REFERENCES InsuranceAuthorization(insuranceAuthID),
 			communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationPreferencesID),
+			sexID INT FOREIGN KEY REFERENCES Sex(sexID),
 			firstName VARCHAR(25),
 			lastName VARCHAR(25),
 			dob DATE,
@@ -51,11 +52,18 @@ ELSE
 		
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'dob')
 			BEGIN
-				ALTER TABLE Clients
-					DROP COLUMN dob
-				ALTER TABLE Clients
-					ADD dob DATE
-				PRINT 'dob column on Clients table altered to DATE type.'
+				IF (SELECT DATA_TYPE FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'Clients' AND COLUMN_NAME = 'dob' AND data_type = 'DATE') IS NOT NULL
+					BEGIN
+						PRINT 'Unneeded: dob Column exists on Clients table and is correct Data Type.'
+					END
+				ELSE
+					BEGIN
+						ALTER TABLE Clients
+							DROP COLUMN dob
+						ALTER TABLE Clients
+							ADD dob DATE
+						PRINT 'dob column on Clients table altered to DATE type.'
+					END
 			END
 		ELSE
 			BEGIN
@@ -66,35 +74,45 @@ ELSE
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'intakeDate')
 			BEGIN
-				RETURN
-				PRINT 'intakeDate column on Clients table already exists.'
+				PRINT 'Unneeded: intakeDate column on Clients table already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE Clients
 					ADD intakeDate DATETIME
-				PRINT 'intakeDate column on Clients table added.'
+				PRINT 'Added intakeDate column on Clients table.'
 			END
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'ifspDate')
 			BEGIN
-				RETURN
-				PRINT 'ifspDate column on Clients table already exists.'
+				PRINT 'Unneeded: ifspDate column on Clients table already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE Clients
 					ADD ifspDate DATE
-				PRINT 'ifspDate column on Clients table added.'
+				PRINT 'Added ifspDate column on Clients table.'
 			END
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'compSvcDate')
 			BEGIN
-				RETURN
-				PRINT 'compSvcDate column on Clients table already exists.'
+				PRINT 'Unneeded: compSvcDate column on Clients table already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE Clients
 					ADD compSvcDate DATE
-				PRINT 'compSvcDate column on Clients table added.'
+				PRINT 'Added compSvcDate column on Clients table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'sexID')
+			BEGIN
+				PRINT 'Unneeded: sexID already exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Clients
+					ADD sexID INT FOREIGN KEY REFERENCES Sex(sexID)
+				PRINT 'Added sexID column on Clients table.'
 			END
 	END
