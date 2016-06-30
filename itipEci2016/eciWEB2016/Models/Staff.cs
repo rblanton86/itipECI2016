@@ -18,7 +18,7 @@ namespace eciWEB2016.Models
 {
     public class Staff
     {
-        public int ID { get; set; }
+        public int staffID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int phone { get; set; }

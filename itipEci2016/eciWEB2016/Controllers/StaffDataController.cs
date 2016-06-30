@@ -51,7 +51,8 @@ namespace eciWEB2016.Controllers.DataControllers
                            select new Staff()
                            {
                                firstName = drRow.Field<string>("firstName"),
-                               lastName = drRow.Field<string>("lastName")
+                               lastName = drRow.Field<string>("lastName"),
+                               staffID = drRow.Field<int>("staffID")
                            }).ToList();
 
             return staff;
