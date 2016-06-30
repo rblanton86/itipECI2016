@@ -10,6 +10,7 @@ Change History:
 			diagnosisType VARCHAR(15),
 			diagnosisCode VARCHAR(15),
 			diagnosis VARCHAR(100),
+	06-30-2016 -- jmg -- Added diagnosisFrom and diagnosisTo columns, which were missing.
 ************************************************************************************************************/
 
 -- Declares table variable for diagnosis table
@@ -29,9 +30,11 @@ IF @diagnosis = 0
 	BEGIN
 		CREATE TABLE Diagnosis (
 			diagnosisID INT IDENTITY(1,1) PRIMARY KEY,
-			diagnosisType VARCHAR(15),
-			diagnosisCode VARCHAR(15),
 			diagnosis VARCHAR(100),
+			diagnosisCode VARCHAR(15),
+			diagnosisType VARCHAR(15),
+			diagnoisFrom DATE,
+			diagnosisTo DATE
 		)
 	END
 -- Because table exists, addes columns for diagnosisType, diagnosisCode and diagnosis.
@@ -65,6 +68,26 @@ ELSE
 			BEGIN
 				ALTER TABLE Diagnosis
 					ADD diagnosis VARCHAR(100)
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @diagnosis AND name = 'diagnosisFrom')
+			BEGIN
+				PRINT 'diagnosisFrom Column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Diagnosis
+					ADD diagnosisFrom DATE
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @diagnosis AND name = 'diagnosisTo')
+			BEGIN
+				PRINT 'diagnosisTo Column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Diagnosis
+					ADD diagnosisTo DATE
 			END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @diagnosis AND name = 'icd10Code')

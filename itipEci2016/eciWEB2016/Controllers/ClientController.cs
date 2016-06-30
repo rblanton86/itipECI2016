@@ -11,20 +11,27 @@ namespace eciWEB2016.Controllers
     public class ClientController : Controller
     {
         // GET: Client
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <returns></returns>
         public ActionResult Client_Update()
         {
-
-            var list = new[] { "Jennifer", "Graves", "Rodrick", "Blanton", "Ty", "Crane" };
+            List<Client> list = new List<Client>();
+            ClientDataController dataController = new ClientDataController();
 
             var clientList = new List<SelectListItem>();
 
-            for (int i = 0; i < list.Length; i++)
+            list = dataController.GetAllClients();
+
+            for (int i = 0; i < list.Count; i++)
             {
                 clientList.Add(new SelectListItem
-                    {
-                        Text = list[i],
-                        Value = i.ToString()
-                    }
+                {
+                    Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
+                    Value = list[i].clientID.ToString()
+                }
+                    
                 );
             }
 
