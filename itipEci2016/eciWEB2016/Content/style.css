@@ -11,7 +11,14 @@ light grey rgb(216, 218, 217)
 		margin: auto;
 		font-family: Arial, Verdana, Tahoma, sans-serif;
 		font-size: 1em;
-        background-image: url('../../Images/ChildServices_bg.jpg');
+        /*background-image: url('../../Images/ChildServices_bg.jpg');*/
+        /*background-image: url('../../Images/aqua-stripes-background.jpg');*/
+        /*background-image: url('../../Images/tealquatra.jpg');*/
+        /*background-image: url('../../Images/ballpitleft.jpg');*/
+        background-image: url('../../Images/theballpit.jpg');
+        /*background-image: url('../../Images/ballpitrotated.jpg');*/
+        background-attachment: fixed;
+        background-size: cover;
 	}
 
 	div.menu, div.main {
