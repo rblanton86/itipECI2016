@@ -13,7 +13,7 @@ Change History:
 @model IEnumerable<eciWEB2016.Models.Staff>
 @{
     ViewBag.Title = "Time_Headers";
-    var grid = new WebGrid(source: Model);
+    var grid = new WebGrid(source: Model,  canSort:false, columnNames: new[] { "ID", "firstName" });
 }
 
 
@@ -59,28 +59,31 @@ Change History:
             <div id="gridContent" style="font-family: Arial; padding: 10px;"> 
                  
                      @grid.GetHtml(tableStyle: "webgrid-table",
-                     headerStyle: "webgrid-header",
-                     footerStyle: "webgrid-footer",
-                     alternatingRowStyle: "webgrid-alternating-row",
-                     selectedRowStyle: "webgrid-selected-row",
-                     rowStyle: "webgrid-row-style",
+                                    headerStyle: "webgrid-header",                                   
+                                    footerStyle: "webgrid-footer",
+                                    alternatingRowStyle: "webgrid-alternating-row",
+                                    selectedRowStyle: "webgrid-selected-row",
+                                    rowStyle: "webgrid-row-style",
 
 
                     columns: grid.Columns(
-    
-                         grid.Column(columnName: "firstName", header: "First Name", style: "col1Width"),
+
+                         grid.Column(columnName: "staffID", header: "Employee ID", style: "col1Width"),
+                         grid.Column(columnName: "firstName", header: "First Name", style: "col2Width"),
                          grid.Column(columnName: "lastName", header: "Last Name", style: "col2Width"),
-                         grid.Column("Time Sheets", style: "id", format: (item) => item.GetSelectLink(item.Id.ToString()))
+                         grid.Column("Select", style: "col2Width", format: (item) => item.GetSelectLink("Select"))
 
             ))
 
     <h2>Your Selected Row</h2>
          @if (grid.HasSelection)
-        {
+         {
              var staff = (eciWEB2016.Models.Staff)grid.Rows[grid.SelectedIndex].Value;
-                  <p><b> Employee Name:</b> @staff.firstName </p>
-                  <p><b> Employee Designation:</b> @staff.lastName </p>
-                                          }
+                  <p><b> Position:</b> @staff.staffType </p>
+                  <p><b> First Name:</b> @staff.firstName </p>
+                  <p><b> Last Name:</b> @staff.lastName </p>
+                  <p><b> Employee ID:</b> @staff.staffID.ToString() </p>
+         }
 
             <table class="2">
                 <thead>
