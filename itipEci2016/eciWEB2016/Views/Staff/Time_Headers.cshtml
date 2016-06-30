@@ -56,19 +56,40 @@ Change History:
         </li>
         
         <div class="scroll">
-            @grid.GetHtml(columns: grid.Columns(
+            <div id="gridContent" style="font-family: Arial; padding: 10px;"> 
+                 
+                     @grid.GetHtml(tableStyle: "webgrid-table",
+                     headerStyle: "webgrid-header",
+                     footerStyle: "webgrid-footer",
+                     alternatingRowStyle: "webgrid-alternating-row",
+                     selectedRowStyle: "webgrid-selected-row",
+                     rowStyle: "webgrid-row-style",
 
-                    grid.Column(columnName: "firstName", header: "First Name"),
-                    grid.Column(columnName: "lastName", header: "Last Name")
+
+                    columns: grid.Columns(
+    
+                         grid.Column(columnName: "firstName", header: "First Name", style: "col1Width"),
+                         grid.Column(columnName: "lastName", header: "Last Name", style: "col2Width"),
+                         grid.Column("Time Sheets", style: "id", format: (item) => item.GetSelectLink(item.Id.ToString()))
+
             ))
+
+    <h2>Your Selected Row</h2>
+         @if (grid.HasSelection)
+        {
+             var staff = (eciWEB2016.Models.Staff)grid.Rows[grid.SelectedIndex].Value;
+                  <p><b> Employee Name:</b> @staff.firstName </p>
+                  <p><b> Employee Designation:</b> @staff.lastName </p>
+                                          }
+
             <table class="2">
                 <thead>
                     <ul>
                         <li class="inline1">
-                            Staff ID
+                            @*Staff ID*@
                         </li>
                         <li class="inline2">
-                            Week Ending
+                            @*Week Ending*@
                         </li>
                     </ul>
                     <li>

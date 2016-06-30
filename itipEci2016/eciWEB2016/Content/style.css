@@ -302,3 +302,52 @@ div.scroll1 {
 		justify-content: flex-start;
 		margin-top: 1em;
 	}
+
+
+    /*web grid*/
+
+    .webgrid-table {  
+        font-family: Arial,Helvetica,sans-serif;  
+        font-size: 14px;  
+        font-weight: normal;  
+        width: 650px;  
+       display: table;  
+       border-collapse: collapse;  
+       border: solid #C5C5C5 2px;  
+        background-color: white;  
+    }  
+   .webgrid-table td, th {  
+        border: 1px solid #C5C5C5;  
+        padding: 3px 7px 2px; 
+        font-style: oblique; 
+    }  
+   .webgrid-header, .webgrid-header a {  
+        background-color: #0094ff;  
+        color:#ffffff;  
+       text-align: left;  
+        text-decoration: none; 
+       
+    }  
+    .webgrid-footer {  
+   }  
+    .webgrid-row-style {  
+        padding: 3px 7px 2px;
+        width: 50px; 
+       
+    }  
+   .webgrid-alternating-row {  
+       background-color:azure;  
+       padding: 3px 7px 2px;  
+   }  
+    
+    .col1Width {
+        width: 200px;
+        
+    }
+    .col2Width {
+        width: 200px;
+        font-style: italic;
+    }
+    .id {
+        width: 300px;
+    }
