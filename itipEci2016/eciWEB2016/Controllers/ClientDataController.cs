@@ -41,7 +41,9 @@ namespace eciWEB2016.Controllers.DataControllers
                            select new Client()
                            {
                                firstName = drRow.Field<string>("firstName"),
-                               lastName = drRow.Field<string>("lastName")
+                               lastName = drRow.Field<string>("lastName"),
+                               clientID = drRow.Field<int>("clientID"),
+                               altID = drRow.Field<string>("altID")
                            }).ToList();
 
             return clients;

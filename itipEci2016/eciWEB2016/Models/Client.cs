@@ -18,6 +18,7 @@ namespace eciWEB2016.Models
     public class Client
     {
         public int clientID { get; set; }
+        public string altID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string middleInitial { get; set; }

@@ -6,7 +6,7 @@ Author:
 Date: 
 	6.21.16
 Change History:
-	
+	06-30-2016 -- jmg -- Generated altID.
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_AllClients]
 
@@ -23,7 +23,10 @@ AS
 				insauth.insuranceAuthorizationType,
 				--insauth.authorizedFrom,
 				--insauth.authorizedTo,
-				comprf.communicationPreferences
+				comprf.communicationPreferences,
+				SUBSTRING(clnt.lastName, 1, 4) +
+				SUBSTRING (clnt.firstName, 1, 4) +
+				CONVERT (VARCHAR(15), clnt.clientID) AS altID
 
 			FROM Clients clnt
 			LEFT JOIN Race rce
