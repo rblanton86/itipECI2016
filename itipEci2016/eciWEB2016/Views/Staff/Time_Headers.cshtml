@@ -32,7 +32,7 @@ Change History:
         </li>
         <script type="text/javascript">
 
-            $(document).ready(function () {
+            @*$(document).ready(function () {
 
                 $("#staffListID").change(function () {
 
@@ -64,6 +64,22 @@ Change History:
                         alert(xhr.responseText);
                     });
                 });
+            });*@
+
+            $(document).ready(function () {
+                @*$.get('@Url.Action("Staff_Time_Headers")', function (data) {
+                    $('#gridContainer').replaceWith(data);
+                });*@
+                
+                $("#staffListID").change(function () {
+
+                    var staffID = $("#staffListID").val();
+
+                    $.get('@Url.Action("Staff_Time_Headers")', function (data) {
+                        alert(data);
+                        $('#gridContent').replaceWith(data);
+                    });
+                });
             });
         </script>
     </header>
@@ -85,10 +101,8 @@ Change History:
             Time Headers For This Staff Member
         </li>
         
-        <div class="scroll">
-            <div id="gridContent" style="font-family: Arial; padding: 10px;"> 
-                @Html.Partial("TimeSheet_Grid_Partial")
-            </div>
+        <div id="gridContainer" class="scroll">
+            @Html.Partial("TimeSheet_Grid_Partial")
         </div>
     </div>
 

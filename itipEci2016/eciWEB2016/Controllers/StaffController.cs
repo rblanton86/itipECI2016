@@ -41,10 +41,6 @@ namespace eciWEB2016.Controllers
         {
             try
             {
-                //var facility = buildingsVM.GetFacilityDetails(regionId, facilityId);
-                //facility.Buildings = buildingsVM.GetFacilityBuildings(regionId, facilityId) as List<BuildingModel>;
-                //return PartialView("_Buildings", facility.Buildings);
-
                 List<Staff> staffList;
                 StaffDataController dataController = new StaffDataController();
 
@@ -59,6 +55,7 @@ namespace eciWEB2016.Controllers
             }
 
         }
+
         public ActionResult Time_Headers()
         {
             Staff staff = new Staff();
