@@ -87,8 +87,10 @@ namespace eciWEB2016.Controllers.DataControllers
             var staffMember = (from drRow in ds.Tables[0].AsEnumerable()
                                  select new Staff()
                               {
-                                    staffID = drRow.Field<int>("staffID")
-                              }).ToList();
+                                     firstName = drRow.Field<string>("firstName"),
+                                     lastName = drRow.Field<string>("lastName"),
+                                     staffID = drRow.Field<int>("staffID").ToString()
+                                 }).ToList();
 
             return staffMember;
         }

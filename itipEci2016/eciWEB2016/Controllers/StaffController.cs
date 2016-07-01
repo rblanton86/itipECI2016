@@ -36,25 +36,35 @@ namespace eciWEB2016.Controllers
             return View();
         }
 
+        
+        public ActionResult Staff_Time_Headers(string staffID)
+        {
+            try
+            {
+                //var facility = buildingsVM.GetFacilityDetails(regionId, facilityId);
+                //facility.Buildings = buildingsVM.GetFacilityBuildings(regionId, facilityId) as List<BuildingModel>;
+                //return PartialView("_Buildings", facility.Buildings);
+
+                List<Staff> staffList;
+                StaffDataController dataController = new StaffDataController();
+
+                staffList = dataController.GetAllStaff();
+
+                return PartialView("TimeSheet_Grid_Partial", staffList);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ok = false, message = ex.Message });
+            }
+
+        }
         public ActionResult Time_Headers()
         {
             Staff staff = new Staff();
             ViewBag.staffList = staff.GetStaffList();
          
             return View();
-        }
-
-        [HttpGet]
-        public ActionResult Staff_Dropdown()
-        {
-            return View(new StaffDropDownList());
-        }
-
-        [HttpPost]
-        public ActionResult Staff_Dropdown(StaffDropDownList ddlListPostData)
-        {
-            //mydropdownlist ddlList = new mydropdownlist() { istateid = ddlListPostData.istateid, icityid = ddlListPostData.icityid, iareaid = ddlListPostData.iareaid };
-            return View(ddlListPostData);
         }
 
         public ActionResult Time_Sheet_Input()
