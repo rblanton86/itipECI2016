@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Configuration;
+using System.Web.Mvc;
 using System.Configuration;
 using System.Data;
 using System.Data.Common;
@@ -48,16 +49,48 @@ namespace eciWEB2016.Controllers.DataControllers
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
             var staff = (from drRow in ds.Tables[0].AsEnumerable()
-                           select new Staff()
-                           {
-                               firstName = drRow.Field<string>("firstName"),
-                               lastName = drRow.Field<string>("lastName"),
-                               staffID = drRow.Field<int>("staffID")
+                         select new Staff()
+                         {
+                             firstName = drRow.Field<string>("firstName"),
+                             lastName = drRow.Field<string>("lastName"),
+                             staffID = drRow.Field<int>("staffID").ToString()
                            }).ToList();
 
             return staff;
+        }
 
+        public SelectList GetStaffDropDown()
+        {
+            DbCommand dbCommand = db.GetStoredProcCommand("get_AllStaff");
 
+            DataSet ds = db.ExecuteDataSet(dbCommand);
+
+            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+                              select new SelectListItem()
+                              {
+                                  Text = drRow.Field<string>("firstName") + " " + drRow.Field<string>("lastName"),
+                                  Value = drRow.Field<int>("staffID").ToString()
+                              }).ToList();
+
+            return new SelectList(selectList, "Value", "Text");
+        }
+
+        public List<Staff> GetStaffMember(int staffID)
+        {
+            DbCommand dbCommand = db.GetStoredProcCommand("get_StaffByID");
+             db.AddInParameter(dbCommand, "@staffID", DbType.Int32, staffID);
+
+            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+
+            DataSet ds = db.ExecuteDataSet(dbCommand);
+
+            var staffMember = (from drRow in ds.Tables[0].AsEnumerable()
+                                 select new Staff()
+                              {
+                                    staffID = drRow.Field<int>("staffID")
+                              }).ToList();
+
+            return staffMember;
         }
     }
 }

@@ -35,16 +35,28 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
+
         public ActionResult Time_Headers()
         {
-            List<Staff> staff = new List<Staff>();
-            StaffDataController dataController = new StaffDataController();
-
-            staff = dataController.GetAllStaff();
-
+            Staff staff = new Staff();
+            ViewBag.staffList = staff.GetStaffList();
          
-            return View(staff);
+            return View();
         }
+
+        [HttpGet]
+        public ActionResult Staff_Dropdown()
+        {
+            return View(new StaffDropDownList());
+        }
+
+        [HttpPost]
+        public ActionResult Staff_Dropdown(StaffDropDownList ddlListPostData)
+        {
+            //mydropdownlist ddlList = new mydropdownlist() { istateid = ddlListPostData.istateid, icityid = ddlListPostData.icityid, iareaid = ddlListPostData.iareaid };
+            return View(ddlListPostData);
+        }
+
         public ActionResult Time_Sheet_Input()
         {
             return View();
@@ -69,7 +81,7 @@ namespace eciWEB2016.Controllers
             try
             {
                 // TODO: Add insert logic here
-
+                
 
 
                 return RedirectToAction("Index");

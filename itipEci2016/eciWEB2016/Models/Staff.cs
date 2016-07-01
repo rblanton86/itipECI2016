@@ -10,15 +10,20 @@ Change History:
 ************************************************************************************************************/
 
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
+using System.ComponentModel.DataAnnotations;
+using eciWEB2016.Controllers.DataControllers;
 
 namespace eciWEB2016.Models
 {
     public class Staff
     {
-        public int staffID { get; set; }
+        [Required]
+        public virtual string staffID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
         public int phone { get; set; }
@@ -31,5 +36,15 @@ namespace eciWEB2016.Models
         public string memberType { get; set; }
         public string staffType { get; set; }
         public int staffTypeID { get; set; }
+
+        public SelectList GetStaffList()
+        {
+            SelectList staffList;
+            StaffDataController dataController = new StaffDataController();
+
+            staffList = dataController.GetStaffDropDown();
+
+            return new SelectList(staffList, "Value", "Text", staffID);
+        }
     }
 }

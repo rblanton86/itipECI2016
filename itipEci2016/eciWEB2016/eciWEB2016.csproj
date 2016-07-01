@@ -295,7 +295,9 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Class\" />
     <Folder Include="Views\ClientData\" />
+    <Folder Include="Views\eciDropDownList\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
