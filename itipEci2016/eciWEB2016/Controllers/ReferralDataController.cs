@@ -17,37 +17,32 @@ using eciWEB2016.Models;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
-    public class ClientDataController
+    public class ReferralDataController
     {
         public static SqlDatabase db;
 
-        public ClientDataController()
+        public ReferralDataController()
         {
-            if(db == null)
+            if (db == null)
             {
                 db = new SqlDatabase(WebConfigurationManager.ConnectionStrings["eciConnectionString"].ToString());
             }
         }
 
-        public List<Client> GetAllClients()
+        public List<Referral> GetAllReferralSources()
         {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
-
-            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+            DbCommand dbCommand = db.GetStoredProcCommand("get_ReferralSource");
 
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var clients = (from drRow in ds.Tables[0].AsEnumerable()
-                           select new Client()
+            var referralSource = (from drRow in ds.Tables[0].AsEnumerable()
+                           select new Referral()
                            {
-                               firstName = drRow.Field<string>("firstName"),
-                               lastName = drRow.Field<string>("lastName"),
-                               clientID = drRow.Field<int>("clientID"),
-                               altID = drRow.Field<string>("altID")
+                               referralSource = drRow.Field<string>("referralSource"),
+                               referralSourceType = drRow.Field<string>("referralSourceType")
                            }).ToList();
 
-            return clients;
-
+            return referralSource;
         }
     }
 }

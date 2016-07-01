@@ -210,6 +210,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ReferralController.cs" />
+    <Compile Include="Controllers\ReferralDataController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\StaffDataController.cs" />
     <Compile Include="Global.asax.cs">
@@ -298,6 +299,7 @@
     <Folder Include="Class\" />
     <Folder Include="Views\ClientData\" />
     <Folder Include="Views\eciDropDownList\" />
+    <Folder Include="Views\ReferralData\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

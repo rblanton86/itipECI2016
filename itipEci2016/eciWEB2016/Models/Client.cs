@@ -10,6 +10,7 @@ Change History:
 ************************************************************************************************************/
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Web;
 
@@ -22,7 +23,8 @@ namespace eciWEB2016.Models
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string middleInitial { get; set; }
-        public int dob { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime dob { get; set; }
         public int ssn { get; set; }
         public string race { get; set; }
         public string ethnicity { get; set; }

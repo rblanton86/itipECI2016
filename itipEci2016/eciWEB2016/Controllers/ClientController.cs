@@ -5,6 +5,7 @@ using System.Web;
 using System.Web.Mvc;
 using eciWEB2016.Models;
 using eciWEB2016.Controllers.DataControllers;
+using System.Data;
 
 namespace eciWEB2016.Controllers
 {
@@ -31,7 +32,7 @@ namespace eciWEB2016.Controllers
                     Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
                     Value = list[i].clientID.ToString()
                 }
-                    
+
                 );
             }
 
@@ -52,6 +53,7 @@ namespace eciWEB2016.Controllers
         // GET: Client/Create
         public ActionResult Create()
         {
+
             return View();
         }
 
