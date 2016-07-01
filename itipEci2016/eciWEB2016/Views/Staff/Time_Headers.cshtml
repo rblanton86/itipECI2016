@@ -10,21 +10,16 @@ Change History:
 *********************************************************************************************************-->
 @using eciWEB2016.Controllers.DataControllers
 @using eciWEB2016.Controllers
+@using staffController = eciWEB2016.Controllers.StaffController
 @model eciWEB2016.Models.Staff
 @{
     ViewBag.Title = "Time_Headers";
-    var grid = new WebGrid(source: Model, canSort: false, columnNames: new[] { "staffID", "firstName" });
+    //var grid = new WebGrid(source: Model, canSort: false, columnNames: new[] { "staffID", "firstName" });
+   
 }
 
 
-
-<!DOCTYPE html>
-<html>
-<head>
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
-    <title></title>
-</head>
-<body>
+<link rel="stylesheet" href="~/Content/style.css" />
     <header>
         <h1>All Staff Time Headers</h1>
         <ul class="right">
@@ -33,8 +28,44 @@ Change History:
         </ul>
         <li>
             @Html.Label("Select Staff:", new { @class = "select" })
-            @Html.DropDownList("staffID", (SelectList)ViewBag.staffList, "-- Select Staff --")
+            @Html.DropDownList("staffListID", (SelectList)ViewBag.staffList, "-- Select Staff --")
         </li>
+        <script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#staffListID").change(function () {
+
+                    var staffID = $("#staffListID").val();          
+
+                    $.ajax({
+                        type: "GET",
+                        url: '@Url.Action("Staff_Time_Headers")',
+                        //data: { staffID: staffID },
+                        dataType: 'html',
+                        contentType: 'application/html; charset=utf-8',
+                        //success: function (returndata) {
+                        //    alert(returndata);
+                        //    if (!returndata.ok) {
+
+                        //        window.alert(' error : ' + returndata.message);
+                        //    } else {
+                        //        //$('#tabs').tabs({ disabled: [] });
+                        //        $('#gridContent').html(returndata);
+                        //    }
+                        //}
+                    })
+                    .success(function (result) {
+                        //alert(result);
+                        result = '<p>new text</p>';
+                        $('#gridContent').html(result);
+                    })
+                    .error(function (xhr, status) {
+                        alert(xhr.responseText);
+                    });
+                });
+            });
+        </script>
     </header>
     <nav class="head">
         <label>Staff ID:</label>
@@ -56,58 +87,11 @@ Change History:
         
         <div class="scroll">
             <div id="gridContent" style="font-family: Arial; padding: 10px;"> 
-                 
-                     @grid.GetHtml(tableStyle: "gTable",
-                    //headerStyle: "webgrid-header",                                   
-                    //footerStyle: "webgrid-footer",
-                    //alternatingRowStyle: "webgrid-alternating-row",
-                    //selectedRowStyle: "webgrid-selected-row",
-                    //rowStyle: "webgrid-row-style",
-
-
-                    columns: grid.Columns(
-
-                         grid.Column(columnName: "staffID", header: "Employee ID" ),
-                         grid.Column(columnName: "firstName", header: "First Name" ),
-                         grid.Column(columnName: "lastName", header: "Last Name"),
-                         grid.Column("Select", format: (item) => item.GetSelectLink("Select"))
-
-            ))
-
-    <h2>Your Selected Row</h2>
-         @if (grid.HasSelection)
-         {
-             var staff = (eciWEB2016.Models.Staff)grid.Rows[grid.SelectedIndex].Value;
-                  <p><b> Position:</b> @staff.staffType </p>
-                  <p><b> First Name:</b> @staff.firstName </p>
-                  <p><b> Last Name:</b> @staff.lastName </p>
-                  <p><b> Employee ID:</b> @staff.staffID.ToString() </p>
-         }
-
-            <table class="2">
-                <thead>
-                    <ul>
-                        <li class="inline1">
-                            @*Staff ID*@
-                        </li>
-                        <li class="inline2">
-                            @*Week Ending*@
-                        </li>
-                    </ul>
-                    <li>
-                        <button onclick="location.href = '@Url.Action("Time_Sheets", "Staff")' ">
-                            Time Sheets
-                        </button>
-                    </li>
-                </thead>
-                <tbody>
-                    <tr></tr>
-                </tbody>
-            </table>
+                @Html.Partial("TimeSheet_Grid_Partial")
+            </div>
         </div>
     </div>
-</body>
-</html>
+
 
 
 

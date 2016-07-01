@@ -1,0 +1,52 @@
+﻿
+@{
+
+    @*if (Model != null && Model.Count > 0)
+    {
+
+            var grid = new WebGrid(source: Model, rowsPerPage: 100, ajaxUpdateContainerId: "gridContent", defaultSort: "staffID");
+
+            grid.Pager(WebGridPagerModes.All);
+
+            grid.GetHtml(tableStyle: "gTable",
+            headerStyle: "webgrid-header",
+            footerStyle: "webgrid-footer",
+            alternatingRowStyle: "webgrid-alternating-row",
+            selectedRowStyle: "webgrid-selected-row",
+            rowStyle: "webgrid-row-style",
+
+
+            columns: grid.Columns(
+
+            grid.Column(columnName: "staffID", header: "Employee ID"),
+            grid.Column(columnName: "firstName", header: "First Name"),
+            grid.Column(columnName: "lastName", header: "Last Name"),
+            grid.Column("Select", format: (item) => item.GetSelectLink("Select"))
+
+            ));
+       
+    }
+    else
+    {
+        @:There are no buildings at this facility.
+    }
+
+    //< h2 > Your Selected Row</ h2 >
+    //            if (grid.HasSelection)
+    //        {
+    //            var staff = (eciWEB2016.Models.Staff)grid.Rows[grid.SelectedIndex].Value;
+    //        < p >< b > Position:</ b > @staff.staffType </ p >
+
+
+    //                < p >< b > First Name:</ b > @staff.firstName </ p >
+
+
+    //                    < p >< b > Last Name:</ b > @staff.lastName </ p >
+
+
+    //                        < p >< b > Employee ID:</ b > @staff.staffID.ToString() </ p >*@
+
+
+    <p>some text</p>
+
+} 

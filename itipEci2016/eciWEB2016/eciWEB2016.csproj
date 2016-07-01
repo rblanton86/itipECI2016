@@ -293,6 +293,7 @@
     <Content Include="Views\Staff\Time_Headers.cshtml" />
     <Content Include="Views\Staff\Time_Sheet_Service_Code.cshtml" />
     <Content Include="Views\Staff\Time_Sheets.cshtml" />
+    <Content Include="Views\Staff\TimeSheet_Grid_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
