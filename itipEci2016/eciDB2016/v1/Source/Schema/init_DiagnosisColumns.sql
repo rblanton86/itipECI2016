@@ -11,6 +11,7 @@ Change History:
 			diagnosisCode VARCHAR(15),
 			diagnosis VARCHAR(100),
 	06-30-2016 -- jmg -- Added diagnosisFrom and diagnosisTo columns, which were missing.
+			Corrected if statement
 ************************************************************************************************************/
 
 -- Declares table variable for diagnosis table
@@ -26,7 +27,7 @@ SELECT @diagnosis = (
 SELECT @diagnosis
 
 -- Checks if table exists, create table if it doesn't.
-IF @diagnosis = 0
+IF ISNULL(@diagnosis,0) = 0
 	BEGIN
 		CREATE TABLE Diagnosis (
 			diagnosisID INT IDENTITY(1,1) PRIMARY KEY,
@@ -121,5 +122,15 @@ ELSE
 		ELSE
 			BEGIN
 				PRINT 'icd_10_Code Column does not exist.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @diagnosis AND name = 'diagnosisTypeID')
+			BEGIN		
+				ALTER TABLE Diagnosis
+					DROP COLUMN diagnosisTypeID
+			END
+		ELSE
+			BEGIN
+				PRINT 'diagnosisTypeID Column does not exist, unable to remove.'
 			END
 	END

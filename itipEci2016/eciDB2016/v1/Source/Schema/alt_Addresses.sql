@@ -6,7 +6,7 @@ Author:
 Date: 
 	06-22-2016
 Change History:
-		
+	06-30-2016 -- jmg: Corrected if statement
 ************************************************************************************************************/
 
 -- Declares table variable for addresses table
@@ -22,7 +22,7 @@ SELECT @addresses = (
 SELECT @addresses
 
 -- Checks if table exists, create table if it doesn't.
-IF @addresses = 0
+IF ISNULL(@addresses, 0) = 0
 	BEGIN
 		CREATE TABLE Addresses (
 			addressesID INT IDENTITY(1,1) PRIMARY KEY (addressesID) NOT NULL,

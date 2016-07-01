@@ -24,7 +24,7 @@ SELECT @linkcr
 
 -- Checks if table exists and adds if it doesn't.
 
-IF @linkcr = 0
+IF ISNULL(@linkcr,0) = 0
 	BEGIN
 		CREATE TABLE lnkClientReferralSource (
 			clientsID INT FOREIGN KEY REFERENCES Clients(clientsID),
