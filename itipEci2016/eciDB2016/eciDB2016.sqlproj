@@ -216,14 +216,20 @@
     <None Include="v1\Release\Sprint3\Schema\init_TimeDetailTable.sql" />
     <None Include="v1\Release\Sprint3\Schema\init_TimeHeaderTable.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_TimeHeader.sql" />
-    <Build Include="v1\Release\Sprint3\Schema\alt_Clients.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_AllClients.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_ClientByAltID.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_ClientByID.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_Clients.sql" />
+    <Build Include="v1\Release\Sprint3\Stored_Procedures\upd_Clients.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_Addresses.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_FamilyMember.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_InsuranceAuthorization.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_LnkClientPhysician.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_LnkClientReferralSource.sql" />
     <Build Include="v1\Release\Sprint3\Schema\alt_Staff.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_TimeDetail.sql" />
+    <Build Include="v1\Release\Sprint3\Stored_Procedures\get_TimeDetail.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\ins_StaffMember.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\upd_Staff.sql" />
-    <Build Include="v1\Release\Sprint3\Stored_Procedures\get_TimeDetail.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_TimeDetail.sql" />
   </ItemGroup>
 </Project>

@@ -9,7 +9,7 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[upd_Addresses]
-	@addressID int,
+	@addressesID int,
 	@addressTypeID int,
 	@address1 varchar(20),
 	@address2 varchar(20),
