@@ -65,13 +65,24 @@ namespace eciWEB2016.Controllers.DataControllers
             db.AddInParameter(dbCommand, "@commentsID", DbType.Int32, thisClient.commentsID);
             db.AddInParameter(dbCommand, "@insuranceAuthID", DbType.Int32, thisClient.insuranceAuthID);
             db.AddInParameter(dbCommand, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
-            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
-            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
-            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
-            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
-            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
+            db.AddInParameter(dbCommand, "@firstName", DbType.String, thisClient.firstName);
+            db.AddInParameter(dbCommand, "@lastName", DbType.String, thisClient.lastName);
+            db.AddInParameter(dbCommand, "@dob", DbType.Date, thisClient.dob);
+            db.AddInParameter(dbCommand, "@ssn", DbType.Int32, thisClient.ssn);
+            db.AddInParameter(dbCommand, "@referralSource", DbType.String, thisClient.referralSource);
 
             db.ExecuteNonQuery(dbCommand);
+
+            dbCommand = db.GetStoredProcCommand("upd_Addresses");
+
+            db.AddInParameter(dbCommand, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
+            db.AddInParameter(dbCommand, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressTypeID);
+            db.AddInParameter(dbCommand, "@address1", DbType.String, thisClient.clientAddress.address1);
+            db.AddInParameter(dbCommand, "@address2", DbType.String, thisClient.clientAddress.address2);
+            db.AddInParameter(dbCommand, "@city", DbType.String, thisClient.clientAddress.city);
+            db.AddInParameter(dbCommand, "@st", DbType.String, thisClient.clientAddress.state);
+            db.AddInParameter(dbCommand, "@zip", DbType.Int32, thisClient.clientAddress.zip);
+
             return true;
         }
     }

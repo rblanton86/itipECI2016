@@ -6,7 +6,7 @@ Author:
 Date: 
 	07-05-2016
 Change History:
-	
+	07-05-2016 -- jmg -- added middleInitial column.
 ************************************************************************************************************/
 
 -- Declares table variable for Clients.
@@ -38,6 +38,7 @@ IF ISNULL(@clients,0) = 0
 			communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationPreferencesID),
 			sexID INT FOREIGN KEY REFERENCES Sex(sexID),
 			firstName VARCHAR(25),
+			middleInitial VARCHAR(1),
 			lastName VARCHAR(25),
 			dob DATE,
 			ssn INT,
@@ -72,5 +73,16 @@ ELSE
 				ALTER TABLE Clients
 					ADD deleted BIT
 				PRINT 'Added deleted column on Clients table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'middleInitial')
+			BEGIN
+				PRINT 'Unneeded, middleInitial column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Clients
+					ADD middleInitial VARCHAR(1)
+				PRINT 'Added middleInitial column on Clients table.'
 			END
 	END
