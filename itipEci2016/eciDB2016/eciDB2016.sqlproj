@@ -220,5 +220,10 @@
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_AllClients.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_ClientByAltID.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\get_ClientByID.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_Staff.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_TimeDetail.sql" />
+    <Build Include="v1\Release\Sprint3\Stored_Procedures\ins_StaffMember.sql" />
+    <Build Include="v1\Release\Sprint3\Stored_Procedures\upd_Staff.sql" />
+    <Build Include="v1\Release\Sprint3\Stored_Procedures\get_TimeDetail.sql" />
   </ItemGroup>
 </Project>

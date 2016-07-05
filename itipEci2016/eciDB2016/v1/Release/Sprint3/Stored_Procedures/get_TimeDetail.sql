@@ -1,44 +1,23 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to insert first & last name into Staff Table
+Description: Stored Procedure to pull information from the Time Detail Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	7.05.2016
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_StaffMember]
-	@staffTypeID int,
-	@addressesID int,
-	@additionalContactInfoID int,
-	@firstName varchar(20),
-	@lastName varchar(20),
-	@staffAltID int,
-	@deleted bit,
-	@handicapped bit
+CREATE PROCEDURE [dbo].[get_TimeDetail]
+	@timeHeaderID int
 	
 AS
 	BEGIN
 		BEGIN TRY
-		
-		INSERT Staff (staffTypeID, 
-						addressesID, 
-						additionalContactInfoID, 
-						firstName, 
-						lastName, 
-						staffAltID,
-						deleted,
-						handicapped)
 
-		VALUES (@staffTypeID, 
-				@addressesID, 
-				@additionalContactInfoID, 
-				@firstName, 
-				@lastName, 
-				@staffAltID,
-				@deleted,
-				@handicapped)
+			SELECT *
+			FROM TimeDetail
+			WHERE timeHeaderID = @timeHeaderID
 
 		END TRY
 		BEGIN CATCH
@@ -55,3 +34,5 @@ AS
 
 		END CATCH
 	END
+
+
