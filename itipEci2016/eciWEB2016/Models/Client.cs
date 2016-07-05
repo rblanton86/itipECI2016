@@ -27,7 +27,9 @@ namespace eciWEB2016.Models
         public DateTime dob { get; set; }
         public int ssn { get; set; }
         public string race { get; set; }
+        public int raceID { get; set; }
         public string ethnicity { get; set; }
+        public int ethnicityID { get; set; }
         public string sex { get; set; }
         public Address clientAddress { get; set; }
         public string additionalContactInfo { get; set; }

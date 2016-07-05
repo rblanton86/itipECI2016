@@ -56,6 +56,20 @@ namespace eciWEB2016.Controllers.DataControllers
 
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
             db.AddInParameter(dbCommand, "@clientsID", DbType.Int32, thisClient.clientID);
+            db.AddInParameter(dbCommand, "@raceID", DbType.Int32, thisClient.raceID);
+            db.AddInParameter(dbCommand, "@ethnicityID", DbType.Int32, thisClient.ethnicityID);
+            db.AddInParameter(dbCommand, "@clientStatusID", DbType.Int32, thisClient.clientStatusID);
+            db.AddInParameter(dbCommand, "@diagnosisID", DbType.Int32, thisClient.diagnosisID);
+            db.AddInParameter(dbCommand, "@primaryLanguageID", DbType.Int32, thisClient.primaryLanguageID);
+            db.AddInParameter(dbCommand, "@schoolInfoID", DbType.Int32, thisClient.schoolInfoID);
+            db.AddInParameter(dbCommand, "@commentsID", DbType.Int32, thisClient.commentsID);
+            db.AddInParameter(dbCommand, "@insuranceAuthID", DbType.Int32, thisClient.insuranceAuthID);
+            db.AddInParameter(dbCommand, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
+            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
+            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
+            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
+            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
+            db.AddInParameter(dbCommand, "@placeholder", DbType.Int32, thisClient.placeholder);
 
             db.ExecuteNonQuery(dbCommand);
             return true;
