@@ -16,11 +16,13 @@ AS
 		BEGIN TRY
 
 			SELECT th.*,
-					stf.first
+					stf.staffAltID
 
-			FROM 
+			FROM TimeHeader th
+			LEFT JOIN Staff stf ON
+				th.staffID = stf.staffID
 
-			WHERE staffID = @staffID
+			WHERE stf.staffID = @staffID
 
 		END TRY
 		BEGIN CATCH
