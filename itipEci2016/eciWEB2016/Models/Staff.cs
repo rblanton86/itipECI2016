@@ -26,6 +26,8 @@ namespace eciWEB2016.Models
         public virtual string staffID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        public string staffAltID { get; set; }
+        public bool deleted { get; set; }
         public int phone { get; set; }
         public string addressesID { get; set; }
         public string address1 { get; set; }
