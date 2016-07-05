@@ -2,21 +2,21 @@
 {
     <input list = clientIDName />
 
-    <listbox id = clientIDName>
+    <datalist id = clientIDName>
         @foreach(var item in SelectList) {
-        <listitem value="@item.Value">@item.Text</listitem>
+        <option value="@item.Value">@item.Text</option>
         }
-    </listbox>
+    </datalist>
 }
 
 @helper idList(string altIDName, IEnumerable<System.Web.Mvc.SelectListItem> SelectList)
 {
-    <input list=altIDName />
+    <input list=altIDName>
 
-    <listbox id= altIDName>
+    <datalist id= altIDName>
         @foreach (var item in SelectList)
         {
-            <listitem value="@item.Value">@item.Text</listitem>
+            <option value="@item.Value">@item.Text</option>
         }
-    </listbox>
+    </datalist>
 }

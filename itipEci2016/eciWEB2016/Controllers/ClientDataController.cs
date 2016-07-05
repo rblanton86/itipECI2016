@@ -49,5 +49,16 @@ namespace eciWEB2016.Controllers.DataControllers
             return clients;
 
         }
+
+        public bool UpdateClient(Client thisClient)
+        {
+            DbCommand dbCommand = db.GetStoredProcCommand("upd_Clients");
+
+            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+            db.AddInParameter(dbCommand, "@clientsID", DbType.Int32, thisClient.clientID);
+
+            db.ExecuteNonQuery(dbCommand);
+            return true;
+        }
     }
 }
