@@ -21,6 +21,7 @@ namespace eciWEB2016.Models
         public int clientID { get; set; }
         public string altID { get; set; }
         public int raceID { get; set; }
+        public int sexID { get; set; }
         public int ethnicityID { get; set; }
         public int clientStatusID { get; set; }
         public int diagnosisID { get; set; }

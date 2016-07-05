@@ -83,6 +83,10 @@ namespace eciWEB2016.Controllers.DataControllers
             db.AddInParameter(dbCommand, "@st", DbType.String, thisClient.clientAddress.state);
             db.AddInParameter(dbCommand, "@zip", DbType.Int32, thisClient.clientAddress.zip);
 
+            db.ExecuteNonQuery(dbCommand);
+
+            dbCommand = db.GetStoredProcCommand("upd_FamilyMember");
+
             return true;
         }
     }

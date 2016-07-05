@@ -31,9 +31,7 @@ namespace eciWEB2016.Controllers
                 {
                     Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
                     Value = list[i].clientID.ToString()
-                }
-
-                );
+                });
             }
 
             return View(clientList);
