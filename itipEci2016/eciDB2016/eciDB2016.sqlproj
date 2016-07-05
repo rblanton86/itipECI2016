@@ -78,6 +78,8 @@
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
     <None Include="v1\Source\Schema\init_TimeHeaderTable.sql" />
     <None Include="v1\Source\Schema\init_TimeDetailTable.sql" />
+    <None Include="v1\Source\Schema\alt_Comments.sql" />
+    <None Include="v1\Source\Schema\alt_Diagnosis.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -231,5 +233,9 @@
     <Build Include="v1\Release\Sprint3\Stored_Procedures\ins_StaffMember.sql" />
     <Build Include="v1\Release\Sprint3\Stored_Procedures\upd_Staff.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_TimeDetail.sql" />
+    <Build Include="v1\Source\Schema\alt_AdditionalContactInfo.sql" />
+    <Build Include="v1\Release\Sprint3\Schema\alt_AdditionalContactInfo.sql" />
+    <None Include="v1\Release\Sprint3\Schema\alt_Comments.sql" />
+    <None Include="v1\Release\Sprint3\Schema\alt_Diagnosis.sql" />
   </ItemGroup>
 </Project>
