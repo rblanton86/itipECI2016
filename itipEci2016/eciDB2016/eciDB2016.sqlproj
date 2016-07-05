@@ -74,6 +74,8 @@
     <None Include="v1\Docs\ColumnList.txt" />
     <None Include="v1\Docs\clients map.pdf" />
     <None Include="v1\Docs\UnknownClientTableLists.txt" />
+    <None Include="v1\Source\Schema\init_TimeHeaderTable.sql" />
+    <None Include="v1\Source\Schema\init_TimeDetailTable.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -143,5 +145,6 @@
     <Build Include="v1\Release\Sprint2\Stored_Procedures\upd_Race.sql" />
     <Build Include="v1\Release\Sprint2\Stored_Procedures\upd_ReferralSource.sql" />
     <Build Include="v1\Release\Sprint2\Stored_Procedures\upd_Sex.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_TimeHeader.sql" />
   </ItemGroup>
 </Project>
