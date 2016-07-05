@@ -1,4 +1,4 @@
-﻿@model  List<eciWEB2016.Models.Staff>
+﻿@model  List<eciWEB2016.Models.TimeHeaderModel>
 <div id="gridContent" style="font-family: Arial; padding: 10px;"> 
     @{
         var grid = new WebGrid(ajaxUpdateContainerId: "gridContent");
@@ -10,8 +10,8 @@
         }
         else
         {
-            List<eciWEB2016.Models.Staff> staffList = new List<eciWEB2016.Models.Staff>();
-            grid = new WebGrid(source: staffList, rowsPerPage: 10, ajaxUpdateContainerId: "gridContent", defaultSort: "staffID");
+            List<eciWEB2016.Models.TimeHeaderModel> headerList = new List<eciWEB2016.Models.TimeHeaderModel>();
+            grid = new WebGrid(source: headerList, rowsPerPage: 10, ajaxUpdateContainerId: "gridContent", defaultSort: "staffID");
             @:No Data to display
         }
 
@@ -24,9 +24,8 @@
     selectedRowStyle: "webgrid-selected-row",
     rowStyle: "webgrid-row-style",
     columns: grid.Columns(
-    grid.Column(columnName: "staffID", header: "Employee ID"),
-    grid.Column(columnName: "firstName", header: "First Name"),
-    grid.Column(columnName: "lastName", header: "Last Name"),
+    grid.Column(columnName: "staffID", header: "Staff Alt ID"),
+    grid.Column(columnName: "weekEnding", header: "Week Ending"),
     grid.Column("Select", format: (item) => item.GetSelectLink("Select"))
     ))
 </div>

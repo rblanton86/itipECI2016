@@ -38,8 +38,7 @@ Change History:
 
                     var staffID = $("#staffListID").val();
 
-                    $.get('@Url.Action("Staff_Time_Headers")', function (data) {
-                        alert(data);
+                    $.get('@Url.Action("TimeSheet_Grid_Partial")', function (data) {
                         $('#gridContent').replaceWith(data);
                     });
                 });

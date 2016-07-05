@@ -17,6 +17,25 @@ Change History:
 
 		SET @i += 2
 			
+			INSERT TimeHeader (staffID, weekEnding, deleted)
+			VALUES (@i, '10/04/02', 0)
+
+			INSERT TimeDetail (timeHeaderID,
+								clientID, 
+								actualTime, 
+								eciCode,
+								insuranceDesignation,
+								cptCode,
+								insuranceTime,
+								placeOfService,
+								tcm,
+								canceled,
+								updDate,
+								deleted)
+
+			VALUES (@i, @i, 1.2, 'eci', 'p', 'cpt' + CONVERT(VARCHAR(2), @i), 1.2, 'H', 'tcm2',  'sick', '10/04/2016', 0)
+
+			end
 			INSERT Clients (firstName, lastName)
 			VALUES ('First Name ' + CONVERT(VARCHAR(2), @i), 'Last Name ' + CONVERT(VARCHAR(2), @i))
 			
@@ -65,3 +84,4 @@ Change History:
 			VALUES ('ST. Paul # ' + CONVERT(VARCHAR(2), @x))
 
 	END
+
