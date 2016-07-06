@@ -85,7 +85,15 @@ namespace eciWEB2016.Controllers.DataControllers
 
             db.ExecuteNonQuery(dbCommand);
 
-            dbCommand = db.GetStoredProcCommand("upd_FamilyMember");
+            dbCommand = db.GetStoredProcCommand("upd_Family");
+
+            db.AddInParameter(dbCommand, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
+            db.AddInParameter(dbCommand, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
+            db.AddInParameter(dbCommand, "@firstName", DbType.String, thisClient.clientFamily.firstName);
+            db.AddInParameter(dbCommand, "@lastName", DbType.String, thisClient.clientFamily.lastName);
+            db.AddInParameter(dbCommand, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian); // TODO: Ask, is this needing to be parsed to bit prior to input?
+
+            db.ExecuteNonQuery(dbCommand);
 
             return true;
         }

@@ -49,5 +49,6 @@ namespace eciWEB2016.Models
         public int ECIReferredDate { get; set; }
         public bool referralFax { get; set; }
         public bool referralPhone { get; set; }
+        public Address referralSourceAddress { get; set; }
     }
 }

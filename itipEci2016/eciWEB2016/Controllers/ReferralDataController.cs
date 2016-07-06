@@ -44,5 +44,20 @@ namespace eciWEB2016.Controllers.DataControllers
 
             return referralSource;
         }
+
+        public bool UpdateReferralSource(Referral thisReferralSource)
+        {
+            DbCommand dbCommand = db.GetStoredProcCommand("upd_ReferralSource");
+
+            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+
+            db.AddInParameter(dbCommand, "@referralSourceID", DbType.Int32, thisReferralSource.referralSourceID);
+            db.AddInParameter(dbCommand, "@additionalContactInfoID", DbType.Int32, thisReferralSource.additionalContactInfoID);
+            db.AddInParameter(dbCommand, "@referralSourceTypeID", DbType.Int32, thisReferralSource.referralSourceTypeID);
+            db.AddInParameter(dbCommand, "@addressesID", DbType.Int32, thisReferralSource.referralSourceAddress.addressesID);
+            db.AddInParameter(dbCommand, "@referralSource", DbType.String, thisReferralSource.referralSource);
+
+            return true;
+        }
     }
 }
