@@ -214,6 +214,7 @@
     <Compile Include="Controllers\StaffController.cs" />
     <Compile Include="Controllers\StaffDataController.cs" />
     <Compile Include="Controllers\TimeSheetController.cs" />
+    <Compile Include="Controllers\TimeSheetDataController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using eciWEB2016.Models;
+using eciWEB2016.Controllers.DataControllers;
+using System.Data;
 
 namespace eciWEB2016.Controllers
 {
@@ -14,8 +17,24 @@ namespace eciWEB2016.Controllers
             return View();
         }
 
-        public ActionResult 
+          public ActionResult TimeSheet_Grid_Partial(string staffID)
+        {
+            try
+            {
+                List<TimeHeaderModel> headerList;
+                TimeSheetDataController dataController = new TimeSheetDataController();
 
+                headerList = dataController.GetTimeHeaders();
+
+                return PartialView("TimeSheet_Grid_Partial", headerList);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ok = false, message = ex.Message });
+            }
+
+        }
 
         // GET: TimeSheet/Details/5
         public ActionResult Details(int id)

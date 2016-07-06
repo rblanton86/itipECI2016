@@ -80,6 +80,9 @@
     <None Include="v1\Source\Schema\init_TimeDetailTable.sql" />
     <None Include="v1\Source\Schema\alt_Comments.sql" />
     <None Include="v1\Source\Schema\alt_Diagnosis.sql" />
+    <None Include="v1\Source\Schema\alt_Insurance.sql" />
+    <None Include="v1\Source\Schema\alt_Physician.sql" />
+    <None Include="v1\Source\Schema\alt_ReferralSource.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -237,5 +240,8 @@
     <Build Include="v1\Release\Sprint3\Schema\alt_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint3\Schema\alt_Comments.sql" />
     <None Include="v1\Release\Sprint3\Schema\alt_Diagnosis.sql" />
+    <None Include="v1\Release\Sprint3\Schema\alt_Insurance.sql" />
+    <None Include="v1\Release\Sprint3\Schema\alt_Physician.sql" />
+    <None Include="v1\Release\Sprint3\Schema\alt_ReferralSource.sql" />
   </ItemGroup>
 </Project>
