@@ -8,21 +8,18 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_TimeHeader]
-	@staffID int
+ALTER PROCEDURE [dbo].[get_TimeHeader]
+	
 	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT th.*,
-					stf.staffAltID
+			SELECT *
+					
+			FROM TimeHeader 
 
-			FROM TimeHeader th
-			LEFT JOIN Staff stf ON
-				th.staffID = stf.staffID
-
-			WHERE stf.staffID = @staffID
+			
 
 		END TRY
 		BEGIN CATCH

@@ -17,7 +17,7 @@ namespace eciWEB2016.Controllers
             return View();
         }
 
-          public ActionResult TimeSheet_Grid_Partial(string staffID)
+        public ActionResult TimeSheet_Grid_Partial(string staffID)
         {
             try
             {

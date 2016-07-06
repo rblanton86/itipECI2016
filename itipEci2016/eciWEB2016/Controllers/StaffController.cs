@@ -55,6 +55,24 @@ namespace eciWEB2016.Controllers
             }
 
         }
+        public ActionResult TimeSheet_Grid_Partial(string staffID)
+        {
+            try
+            {
+                List<TimeHeaderModel> headerList;
+                TimeSheetDataController dataController = new TimeSheetDataController();
+
+                headerList = dataController.GetTimeHeaders();
+
+                return PartialView("TimeSheet_Grid_Partial", headerList);
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ok = false, message = ex.Message });
+            }
+
+        }
 
         public ActionResult Time_Headers()
         {

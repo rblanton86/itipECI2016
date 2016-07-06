@@ -12,7 +12,7 @@ Change History:
 CREATE TABLE TimeHeader (
 	timeHeaderID int IDENTITY (1,1) PRIMARY KEY,
 	staffID int FOREIGN KEY REFERENCES Staff(staffID),
-	weekEnding Date,
+	weekEnding varchar(10),
 	deleted bit
 	)
 

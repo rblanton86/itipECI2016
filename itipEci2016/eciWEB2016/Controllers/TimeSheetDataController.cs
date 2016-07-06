@@ -32,7 +32,7 @@ namespace eciWEB2016.Controllers.DataControllers
         public List<TimeHeaderModel> GetTimeHeaders()
         {
             DbCommand dbCommand = db.GetStoredProcCommand("get_TimeHeader");
-
+            
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
             DataSet ds = db.ExecuteDataSet(dbCommand);
