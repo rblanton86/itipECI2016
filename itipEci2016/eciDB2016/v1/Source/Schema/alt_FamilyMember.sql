@@ -25,13 +25,29 @@ SELECT @fm = (
 	WHERE name = 'FamilyMember'
 )
 
+
+-- Declares and obtains the column id number for later query to assign foreign key name
+DECLARE @col INT = 0
+SELECT @col = (
+	SELECT column_id
+	FROM Sys.Columns AS c
+	JOIN Sys.Tables AS t
+	ON c.object_id = t.object_id
+	WHERE t.object_id = object_id('FamilyMember') AND c.name = 'AdditionalContactInfo'
+	)
+
 -- Assigns a foreign key name for use in later script which will drop the foreign key constraint
 SELECT @fkn = (
-    SELECT name
-    FROM sys.foreign_keys
-    WHERE referenced_object_id = object_id('AdditionalContactInfo') AND parent_object_id = object_id('FamilyMember')
-)
-
+	SELECT f.name
+	FROM sys.foreign_keys AS f
+	INNER JOIN
+		sys.foreign_key_columns AS k
+			ON f.object_id = k.constraint_object_id
+	INNER JOIN
+		sys.tables AS t
+			ON t.object_id = k.referenced_object_id
+	WHERE k.parent_object_id = object_id('FamilyMember') AND k.parent_column_id = @col
+	)
 
 SELECT @fm
 
@@ -71,10 +87,10 @@ ELSE
 				WHILE EXISTS(select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where constraint_catalog = @databaseName and table_name = 'FamilyMember')
 					BEGIN
 						SELECT @dtscript = (
-						  'ALTER TABLE FamiyMember' + 
-						  ' DROP CONSTRAINT ' + 
-						  @fkn
-						  )
+							'ALTER TABLE FamilyMember' + 
+							' DROP CONSTRAINT ' + 
+							@fkn
+							)
 						FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
 						WHERE constraint_catalog = @databaseName and table_name = 'FamilyMember'
 						exec sp_executesql @dtscript
