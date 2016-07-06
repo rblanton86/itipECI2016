@@ -50,6 +50,15 @@ namespace eciWEB2016.Controllers.DataControllers
 
         }
 
+        public Client GetClient(Client thisClient)
+        {
+            int clientID = thisClient.clientID;
+            DbCommand get_ClientByID = db.GetStoredProcCommand("get_ClientByID");
+            db.AddInParameter(get_ClientByID, "clientID", DbType.Int32, clientID);
+
+            return thisClient;
+        }
+
         public bool UpdateClient(Client thisClient)
         {
             DbCommand dbCommand = db.GetStoredProcCommand("upd_Clients");
@@ -91,7 +100,7 @@ namespace eciWEB2016.Controllers.DataControllers
             db.AddInParameter(dbCommand, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
             db.AddInParameter(dbCommand, "@firstName", DbType.String, thisClient.clientFamily.firstName);
             db.AddInParameter(dbCommand, "@lastName", DbType.String, thisClient.clientFamily.lastName);
-            db.AddInParameter(dbCommand, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian); // TODO: Ask, is this needing to be parsed to bit prior to input?
+            db.AddInParameter(dbCommand, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian);
 
             db.ExecuteNonQuery(dbCommand);
 

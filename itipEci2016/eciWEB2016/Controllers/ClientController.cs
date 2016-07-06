@@ -42,7 +42,6 @@ namespace eciWEB2016.Controllers
         {
             List<Client> clients = new List<Client>();
             ClientDataController dataController = new ClientDataController();
-
             clients = dataController.GetAllClients();
 
             return Json(new { clients }, JsonRequestBehavior.AllowGet);
@@ -113,6 +112,16 @@ namespace eciWEB2016.Controllers
             {
                 return View();
             }
+        }
+
+        public void RemoveClient()
+        {
+            Session.Remove("client");
+        }
+
+        public void RemoveClientList()
+        {
+            Session.Remove("clientList");
         }
     }
 }
