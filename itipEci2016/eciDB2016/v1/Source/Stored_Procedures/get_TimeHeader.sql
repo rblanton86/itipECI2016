@@ -9,7 +9,7 @@ Change History:
 	
 ************************************************************************************************************/
 ALTER PROCEDURE [dbo].[get_TimeHeader]
-	
+	@staffID int
 	
 AS
 	BEGIN
@@ -18,6 +18,9 @@ AS
 			SELECT *
 					
 			FROM TimeHeader 
+
+			WHERE staffID = @staffID
+
 
 			
 

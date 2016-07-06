@@ -16,7 +16,7 @@ Change History:
 @{
     ViewBag.Title = "Time_Headers";
     //var grid = new WebGrid(source: Model, canSort: false, columnNames: new[] { "staffID", "firstName" });
-   
+
 }
 
 
@@ -34,12 +34,13 @@ Change History:
         <script type="text/javascript">
             
             $(document).ready(function () {
-             
+            
                 $("#staffListID").change(function () {
-                    var staffID = $("#staffListID").val();            
-                    $.get('@Url.Action("TimeSheet_Grid_Partial")', function (data) {
-                        alert(data);
+                    var staffID = $("#staffListID").val();
+                    $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID : staffID }, function (data) {
                         $('#gridContent').replaceWith(data);
+                        $('.staffIDLabel').html(staffID);
+                        
                     });
                 });
             });
@@ -47,16 +48,14 @@ Change History:
     </header>
     <nav class="head">
         <label>Staff ID:</label>
-        <input type="text" size=5></input>
+        <label class="staffIDLabel"></label>
         <label>First Name:</label>
-        <input type="text"></input>
+        <label class="staffFirst"></label>
         <label>Last Name:</label>
-        <input type="text"></input>
-        <label>Staff Status</label>
-        <select>
-            <option>A</option>
-            <option>I</option>
-        </select>
+        <label class="staffLast"></label>
+        <label>Staff Status:</label>
+        <label class=""></label>
+
     </nav>
     <div class="main">
         <li class="left">

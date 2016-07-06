@@ -29,10 +29,10 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        public List<TimeHeaderModel> GetTimeHeaders()
+        public List<TimeHeaderModel> GetTimeHeaders(int staffID)
         {
             DbCommand dbCommand = db.GetStoredProcCommand("get_TimeHeader");
-            
+            db.AddInParameter(dbCommand, "staffID", DbType.Int32, staffID);
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
             DataSet ds = db.ExecuteDataSet(dbCommand);

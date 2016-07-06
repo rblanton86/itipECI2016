@@ -55,29 +55,21 @@ namespace eciWEB2016.Controllers
             }
 
         }
-        public ActionResult TimeSheet_Grid_Partial(string staffID)
+
+        public SelectList GetStaffList()
         {
-            try
-            {
-                List<TimeHeaderModel> headerList;
-                TimeSheetDataController dataController = new TimeSheetDataController();
+            SelectList staffList;
+            StaffDataController dataController = new StaffDataController();
 
-                headerList = dataController.GetTimeHeaders();
+            staffList = dataController.GetStaffDropDown();
 
-                return PartialView("TimeSheet_Grid_Partial", headerList);
-
-            }
-            catch (Exception ex)
-            {
-                return Json(new { ok = false, message = ex.Message });
-            }
-
+            return new SelectList(staffList, "Value", "Text", new Staff().staffID);
         }
 
         public ActionResult Time_Headers()
         {
             Staff staff = new Staff();
-            ViewBag.staffList = staff.GetStaffList();
+            ViewBag.staffList = GetStaffList();
          
             return View();
         }

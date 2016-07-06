@@ -17,14 +17,14 @@ namespace eciWEB2016.Controllers
             return View();
         }
 
-        public ActionResult TimeSheet_Grid_Partial(string staffID)
+        public ActionResult TimeSheet_Grid_Partial(int staffID)
         {
             try
             {
                 List<TimeHeaderModel> headerList;
                 TimeSheetDataController dataController = new TimeSheetDataController();
 
-                headerList = dataController.GetTimeHeaders();
+                headerList = dataController.GetTimeHeaders(staffID);
 
                 return PartialView("TimeSheet_Grid_Partial", headerList);
 
