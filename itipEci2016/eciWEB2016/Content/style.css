@@ -46,12 +46,17 @@ light grey rgb(216, 218, 217)
 		color: rgb(255, 255, 255);
 	}
 
+    div.subnav {
+		border: 2px solid black;
+		padding: 0px;
+        background-color: white;
+    }
+
 	div.column {
 		display: flex;
 		justify-content: space-between;
-		border: 2px solid black;
-		padding: 10px;
-        background-color: white;
+        padding: 10px 0px 0px 10px;
+        margin: 0px;
 	}
 
 	div.center {
@@ -146,18 +151,6 @@ light grey rgb(216, 218, 217)
 		font-size: 0.85em;
 		outline: none;
 	}
-
-	/*table.2 {
-
-		margin-top: .5em;
-	}*/
-
-	/*thead {
-
-		display: flex;
-		justify-content: space-between;
-
-	}*/
 
 	div.scroll {
 

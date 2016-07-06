@@ -42,12 +42,12 @@ namespace eciWEB2016.Controllers.DataControllers
                            {
                                firstName = drRow.Field<string>("firstName"),
                                lastName = drRow.Field<string>("lastName"),
+                               fullName = drRow.Field<string>("firstName") + " " + drRow.Field<string>("lastName"),
                                clientID = drRow.Field<int>("clientID"),
                                altID = drRow.Field<string>("altID")
                            }).ToList();
 
             return clients;
-
         }
 
         public Client GetClient(Client thisClient)
