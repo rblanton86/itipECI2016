@@ -7,8 +7,9 @@ Date:
 	6.21.16
 Change History:
 	07-05-2016 -- jmg -- Updated stored proc to new column names for compliance.
+	07-06-2016 -- jmg -- Corrected spelling error which caused exception on webApp run.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
+ALTER PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
@@ -19,10 +20,13 @@ AS
 				rce.race,
 				eth.ethnicity,
 				sts.clientStatus,
-				dx.icd10Code,
-				dx.icd9code,
 				plang.primaryLanguage,
 				sclinf.isd,
+				dx.diagnosisType,
+				dx.diagnosisCode,
+				dx.diagnosis,
+				dx.diagnosisFrom,
+				dx.diagnosisTo,
 				insauth.insuranceAuthorizationType,
 				insauth.authorized_From,
 				insauth.authorized_To,
@@ -43,7 +47,7 @@ AS
 				ON clnt.schoolInfoID = sclinf.schoolInfoID
 			LEFT JOIN InsuranceAuthorization insauth
 				ON clnt.insuranceAuthID = insauth.insuranceAuthID
-			LEFT JOIN CommuniciationPreferences comprf
+			LEFT JOIN CommunicationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 			WHERE clientID = @clientID
 

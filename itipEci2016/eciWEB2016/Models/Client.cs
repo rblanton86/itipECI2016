@@ -21,20 +21,10 @@ namespace eciWEB2016.Models
         [Required]
         public int clientID { get; set; }
         public string altID { get; set; }
-        public int raceID { get; set; }
-        public int sexID { get; set; }
-        public int ethnicityID { get; set; }
-        public int clientStatusID { get; set; }
-        public int diagnosisID { get; set; }
-        public int primaryLanguageID { get; set; }
-        public int schoolInfoID { get; set; }
-        public int commentsID { get; set; }
-        public int insuranceAuthID { get; set; }
-        public int communicationPreferencesID { get; set; }
         public string referralSource { get; set; }
         public string firstName { get; set; }
-        public string lastName { get; set; }
         public string middleInitial { get; set; }
+        public string lastName { get; set; }
         public string fullName { get; set; }
         [DataType(DataType.Date)]
         public DateTime dob { get; set; }

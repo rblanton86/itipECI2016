@@ -23,12 +23,12 @@
             <li>
                 @currentClient.clientID
                 <label>Alt ID:</label>
-                @BrowserHelpers.idList("AltID", Model)
+                @*@BrowserHelpers.idList("AltID", Model)*@
             </li>
             <li>
                 <label>Find Client:</label>
                 <div class="ui-widget">
-                    @Html.DropDownList("combobox", (SelectList)ViewBag.clientList,"--Select Client--")
+
                 </div>
                 @*@BrowserHelpers.DataList("Clients", Model)*@
                 <script type="text/javascript">

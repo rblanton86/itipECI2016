@@ -14,6 +14,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
+using System.Data.SqlClient;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -63,27 +64,46 @@ namespace eciWEB2016.Controllers.DataControllers
             // Assigns the clientID as a parameter to add in to the database command..
             db.AddInParameter(get_ClientByID, "clientID", DbType.Int32, thisClientID);
 
-            // Executes the database command, returns values as a DataSet.
-            DataSet clientDataSet = db.ExecuteDataSet(get_ClientByID);
+            //// Executes the database command, returns values as a DataSet.
+            using (get_ClientByID)
+            {
+                using(DbDataReader clientReader = get_ClientByID.ExecuteReader())
+                {
+                    int ordinal = clientReader.GetOrdinal("clientID");
+                    currentClient.clientID = clientReader.GetInt32(ordinal);
 
+                    ordinal = clientReader.GetOrdinal("firstName");
+                    currentClient.firstName = clientReader.GetString(ordinal);
 
-            // Loads clientData into an Enumerable list.
-            var thisClient = (from drRow in clientDataSet.Tables[0].AsEnumerable()
-                             select new Client()
-                             {
-                                 clientID = drRow.Field<int>("clientID"),
-                                 firstName = drRow.Field<string>("firstName"),
-                                 lastName = drRow.Field<string>("lastName"),
-                                 middleInitial = drRow.Field<string>("middleInitial"),
-                                 fullName = drRow.Field<string>("firstName" + "lastName"),
-                                 ssn = drRow.Field<int>("ssn"),
-                                 referralSource = drRow.Field<string>("referralSource"),
-                                 dob = drRow.Field<DateTime>("dob").Date,
-                                 altID = drRow.Field<string>("altID"),
-                                 deleted = drRow.Field<bool>("deleted")
-                             });
+                    ordinal = clientReader.GetOrdinal("lastName");
+                    currentClient.lastName = clientReader.GetString(ordinal);
 
-            // Returns the currentClient with data assigned.
+                    currentClient.fullName = currentClient.firstName + " " + currentClient.lastName;
+
+                    ordinal = clientReader.GetOrdinal("race");
+                    currentClient.race = clientReader.GetString(ordinal);
+
+                    ordinal = clientReader.GetOrdinal("ethnicity");
+                    currentClient.ethnicity = clientReader.GetString(ordinal);
+
+                    ordinal = clientReader.GetOrdinal("clientStatus");
+                    currentClient.clientStatus = clientReader.GetString(ordinal);
+
+                    ordinal = clientReader.GetOrdinal("sex");
+                    currentClient.sex = clientReader.GetString(ordinal);
+
+                    ordinal = clientReader.GetOrdinal("address1");
+                    currentClient.clientAddress.address1 = clientReader.GetString(ordinal);
+
+                    ordinal = clientReader.GetOrdinal("address2");
+                    currentClient.clientAddress.address2 = clientReader.GetString(ordinal);
+
+                    //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
+                    //TODO: Jen - Continue this.
+                    //TODO: Create unit tests to test this.
+                }
+            }
+
             return currentClient;
         }
 
