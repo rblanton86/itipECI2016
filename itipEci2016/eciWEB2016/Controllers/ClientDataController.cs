@@ -50,59 +50,87 @@ namespace eciWEB2016.Controllers.DataControllers
             return clients;
         }
 
-        public Client GetClient(Client thisClient)
+        public Client GetClient(int thisClientID)
         {
-            int clientID = thisClient.clientID;
-            DbCommand get_ClientByID = db.GetStoredProcCommand("get_ClientByID");
-            db.AddInParameter(get_ClientByID, "clientID", DbType.Int32, clientID);
+            thisClientID = 1;
 
-            return thisClient;
+            // Creates empty client to assign values.
+            Client currentClient = new Client();
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_ClientByID = db.GetStoredProcCommand("get_ClientByID");
+
+            // Assigns the clientID as a parameter to add in to the database command..
+            db.AddInParameter(get_ClientByID, "clientID", DbType.Int32, thisClientID);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet clientDataSet = db.ExecuteDataSet(get_ClientByID);
+
+
+            // Loads clientData into an Enumerable list.
+            var thisClient = (from drRow in clientDataSet.Tables[0].AsEnumerable()
+                             select new Client()
+                             {
+                                 clientID = drRow.Field<int>("clientID"),
+                                 firstName = drRow.Field<string>("firstName"),
+                                 lastName = drRow.Field<string>("lastName"),
+                                 middleInitial = drRow.Field<string>("middleInitial"),
+                                 fullName = drRow.Field<string>("firstName" + "lastName"),
+                                 ssn = drRow.Field<int>("ssn"),
+                                 referralSource = drRow.Field<string>("referralSource"),
+                                 dob = drRow.Field<DateTime>("dob").Date,
+                                 altID = drRow.Field<string>("altID"),
+                                 deleted = drRow.Field<bool>("deleted")
+                             });
+
+            // Returns the currentClient with data assigned.
+            return currentClient;
         }
 
         public bool UpdateClient(Client thisClient)
         {
-            DbCommand dbCommand = db.GetStoredProcCommand("upd_Clients");
+            DbCommand upd_Clients = db.GetStoredProcCommand("upd_Clients");
 
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
-            db.AddInParameter(dbCommand, "@clientsID", DbType.Int32, thisClient.clientID);
-            db.AddInParameter(dbCommand, "@raceID", DbType.Int32, thisClient.raceID);
-            db.AddInParameter(dbCommand, "@ethnicityID", DbType.Int32, thisClient.ethnicityID);
-            db.AddInParameter(dbCommand, "@clientStatusID", DbType.Int32, thisClient.clientStatusID);
-            db.AddInParameter(dbCommand, "@diagnosisID", DbType.Int32, thisClient.diagnosisID);
-            db.AddInParameter(dbCommand, "@primaryLanguageID", DbType.Int32, thisClient.primaryLanguageID);
-            db.AddInParameter(dbCommand, "@schoolInfoID", DbType.Int32, thisClient.schoolInfoID);
-            db.AddInParameter(dbCommand, "@commentsID", DbType.Int32, thisClient.commentsID);
-            db.AddInParameter(dbCommand, "@insuranceAuthID", DbType.Int32, thisClient.insuranceAuthID);
-            db.AddInParameter(dbCommand, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
-            db.AddInParameter(dbCommand, "@firstName", DbType.String, thisClient.firstName);
-            db.AddInParameter(dbCommand, "@lastName", DbType.String, thisClient.lastName);
-            db.AddInParameter(dbCommand, "@dob", DbType.Date, thisClient.dob);
-            db.AddInParameter(dbCommand, "@ssn", DbType.Int32, thisClient.ssn);
-            db.AddInParameter(dbCommand, "@referralSource", DbType.String, thisClient.referralSource);
+            db.AddInParameter(upd_Clients, "@clientsID", DbType.Int32, thisClient.clientID);
+            db.AddInParameter(upd_Clients, "@raceID", DbType.Int32, thisClient.raceID);
+            db.AddInParameter(upd_Clients, "@ethnicityID", DbType.Int32, thisClient.ethnicityID);
+            db.AddInParameter(upd_Clients, "@clientStatusID", DbType.Int32, thisClient.clientStatusID);
+            db.AddInParameter(upd_Clients, "@diagnosisID", DbType.Int32, thisClient.diagnosisID);
+            db.AddInParameter(upd_Clients, "@primaryLanguageID", DbType.Int32, thisClient.primaryLanguageID);
+            db.AddInParameter(upd_Clients, "@schoolInfoID", DbType.Int32, thisClient.schoolInfoID);
+            db.AddInParameter(upd_Clients, "@commentsID", DbType.Int32, thisClient.commentsID);
+            db.AddInParameter(upd_Clients, "@insuranceAuthID", DbType.Int32, thisClient.insuranceAuthID);
+            db.AddInParameter(upd_Clients, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
+            db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
+            db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
+            db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
+            db.AddInParameter(upd_Clients, "@ssn", DbType.Int32, thisClient.ssn);
+            db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource);
 
-            db.ExecuteNonQuery(dbCommand);
+            db.ExecuteNonQuery(upd_Clients);
 
-            dbCommand = db.GetStoredProcCommand("upd_Addresses");
+            DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
-            db.AddInParameter(dbCommand, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
-            db.AddInParameter(dbCommand, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressTypeID);
-            db.AddInParameter(dbCommand, "@address1", DbType.String, thisClient.clientAddress.address1);
-            db.AddInParameter(dbCommand, "@address2", DbType.String, thisClient.clientAddress.address2);
-            db.AddInParameter(dbCommand, "@city", DbType.String, thisClient.clientAddress.city);
-            db.AddInParameter(dbCommand, "@st", DbType.String, thisClient.clientAddress.state);
-            db.AddInParameter(dbCommand, "@zip", DbType.Int32, thisClient.clientAddress.zip);
+            db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
+            db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressTypeID);
+            db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisClient.clientAddress.address1);
+            db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisClient.clientAddress.address2);
+            db.AddInParameter(upd_Addresses, "@city", DbType.String, thisClient.clientAddress.city);
+            db.AddInParameter(upd_Addresses, "@st", DbType.String, thisClient.clientAddress.state);
+            db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisClient.clientAddress.zip);
 
-            db.ExecuteNonQuery(dbCommand);
+            db.ExecuteNonQuery(upd_Addresses);
 
-            dbCommand = db.GetStoredProcCommand("upd_Family");
+            DbCommand upd_Family = db.GetStoredProcCommand("upd_Family");
 
-            db.AddInParameter(dbCommand, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
-            db.AddInParameter(dbCommand, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
-            db.AddInParameter(dbCommand, "@firstName", DbType.String, thisClient.clientFamily.firstName);
-            db.AddInParameter(dbCommand, "@lastName", DbType.String, thisClient.clientFamily.lastName);
-            db.AddInParameter(dbCommand, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian);
+            db.AddInParameter(upd_Family, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
+            db.AddInParameter(upd_Family, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
+            db.AddInParameter(upd_Family, "@firstName", DbType.String, thisClient.clientFamily.firstName);
+            db.AddInParameter(upd_Family, "@lastName", DbType.String, thisClient.clientFamily.lastName);
+            db.AddInParameter(upd_Family, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian);
 
-            db.ExecuteNonQuery(dbCommand);
+            db.ExecuteNonQuery(upd_Family);
 
             return true;
         }
