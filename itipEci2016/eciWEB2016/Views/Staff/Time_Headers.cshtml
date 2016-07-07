@@ -19,6 +19,7 @@ Change History:
 
 }
 
+<asp:ScriptManager ID="ScriptManager2" EnablePageMethods="true" />
 
 <link rel="stylesheet" href="~/Content/style.css" />
     <header>
@@ -45,7 +46,17 @@ Change History:
                 });
             });
         </script>
-    </header>
+        <form id="form1">
+            <script type="text/javascript">
+                function CallingServerSideFunction() {
+                   var StaffMember = PageMethods.getStaffMember();
+                   var jsStaffMember = jQuery.parseJSON('StaffMember');
+                   var firstName = jsStaffMember.firstName;
+                   $('.staffFirst').html(firstName);
+                }
+            </script>
+        </form>
+</header>
     <nav class="head">
         <label>Staff ID:</label>
         <label class="staffIDLabel"></label>

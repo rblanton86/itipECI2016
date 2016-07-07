@@ -16,6 +16,7 @@ using System.Web.Mvc;
 using System.Data;
 using System.Data.Common;
 using System.Reflection;
+using Newtonsoft.Json;
 using eciWEB2016.Models;
 using eciWEB2016.Class;
 using eciWEB2016.Controllers.DataControllers;
@@ -64,36 +65,20 @@ namespace eciWEB2016.Controllers
         }
 
         [System.Web.Services.WebMethod]
-        public Staff getStaffMember(int staffID)
+        public string getStaffMember(string staffID)
         {
             Staff staffMember = new Staff();
             List<Staff> staffList = new List<Staff>();
-            // staffMember = Session.GetDataFromSession<Staff>(staffID);
 
             staffList = (List<Staff>)System.Web.HttpContext.Current.Session["staffList"];
 
-            staffMember = Session["staffList"] as Staff;
-
-            while (staffList != null)
-            {
-                for (int i = 0; i < staffList.Count; i++)
-                {
-                    staffMember = GetType().GetProperties();
-                }
-            }
-
-            int rank = 1;
-            foreach (var prop in GetType().GetProperties())
-            {
-                Staff sm = new Staff { firstName = prop.GetValue(Staff)};
-            }
-
-
-            ViewData["staffMember"] = 
+            staffMember = staffList.FirstOrDefault(p => p.staffID == staffID);
             
             System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
 
-            return staffMember;
+            string JsonStaff = JsonConvert.SerializeObject(staffMember);
+
+            return JsonStaff;
         }
         public ActionResult Staff_Time_Headers(string staffID)
         {
