@@ -40,7 +40,25 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        public List<Staff> GetAllStaff()
+        //public List<Staff> GetAllStaff()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllStaff");
+
+        //    // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
+
+        //    var staff = (from drRow in ds.Tables[0].AsEnumerable()
+        //                 select new Staff()
+        //                 {
+        //                     firstName = drRow.Field<string>("firstName"),
+        //                     lastName = drRow.Field<string>("lastName"),
+        //                     staffID = drRow.Field<int>("staffID").ToString()
+        //                 }).ToList();
+
+        //    return staff;
+        //}
+        public DataSet GetAllStaff()
         {
             DbCommand dbCommand = db.GetStoredProcCommand("get_AllStaff");
 
@@ -48,15 +66,7 @@ namespace eciWEB2016.Controllers.DataControllers
 
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var staff = (from drRow in ds.Tables[0].AsEnumerable()
-                         select new Staff()
-                         {
-                             firstName = drRow.Field<string>("firstName"),
-                             lastName = drRow.Field<string>("lastName"),
-                             staffID = drRow.Field<int>("staffID").ToString()
-                           }).ToList();
-
-            return staff;
+            return ds;
         }
 
         public SelectList GetStaffDropDown()

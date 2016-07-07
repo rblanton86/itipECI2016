@@ -204,6 +204,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
+    <Compile Include="Class\SessionExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
@@ -300,7 +301,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Class\" />
     <Folder Include="Views\ClientData\" />
     <Folder Include="Views\eciDropDownList\" />
     <Folder Include="Views\ReferralData\" />
