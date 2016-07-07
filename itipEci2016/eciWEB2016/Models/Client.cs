@@ -18,6 +18,7 @@ namespace eciWEB2016.Models
 {
     public class Client
     {
+        [Required]
         public int clientID { get; set; }
         public string altID { get; set; }
         public int raceID { get; set; }
@@ -55,5 +56,6 @@ namespace eciWEB2016.Models
         public Referral clientReferral { get; set; }
         public Family clientFamily { get; set; }
         public Staff clientStaff { get; set; }
+        public bool deleted { get; set; }
     }
 }

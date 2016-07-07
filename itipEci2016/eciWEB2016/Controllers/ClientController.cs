@@ -18,23 +18,26 @@ namespace eciWEB2016.Controllers
         /// <returns></returns>
         public ActionResult Client_Update()
         {
-            List<Client> list = new List<Client>();
+            int clientID = 1;
+            // Creates empty client to hold current client data.
+            Client currentClient = new Client();
+
+            // Accesses and stores datacontroller.
             ClientDataController dataController = new ClientDataController();
 
-            var clientList = new List<SelectListItem>();
+            // Passes client ID through data controller which pulls current client.
+            currentClient = dataController.GetClient(clientID);
 
-            list = dataController.GetAllClients();
+            //for (int i = 0; i < currentClient.Count; i++)
+            //{
+            //    clientList.Add(new SelectListItem
+            //    {
+            //        Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
+            //        Value = list[i].clientID.ToString()
+            //    });
+            //}
 
-            for (int i = 0; i < list.Count; i++)
-            {
-                clientList.Add(new SelectListItem
-                {
-                    Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
-                    Value = list[i].clientID.ToString()
-                });
-            }
-
-            return View(clientList);
+            return View(currentClient);
         }
 
         // GET: Client/Details/5
