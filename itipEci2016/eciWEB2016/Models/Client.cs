@@ -34,6 +34,7 @@ namespace eciWEB2016.Models
         public string firstName { get; set; }
         public string lastName { get; set; }
         public string middleInitial { get; set; }
+        public string fullName { get; set; }
         [DataType(DataType.Date)]
         public DateTime dob { get; set; }
         public int ssn { get; set; }

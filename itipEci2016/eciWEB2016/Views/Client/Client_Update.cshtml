@@ -16,40 +16,60 @@
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-<div class="column">
-    <ul>
-        <li>
-            <label>Alt ID:</label>
-            @BrowserHelpers.idList("AltID", Model)
-        </li>
-        <li>
-            <label>Find Client:</label>
-            @BrowserHelpers.DataList("Clients", Model)
-        </li>
-    </ul>
-    <ul class="flex">
-        <li>
-            <button type="button">Close if No Records</button>
-        </li>
-        <li>
-            <button type="button">Remove Filter</button>
-        </li>
-    </ul>
+
+<div class="subnav">
+    <div class="column">
+        <ul>
+            <li>
+                <label>Alt ID:</label>
+                @BrowserHelpers.idList("AltID", Model)
+            </li>
+            <li>
+                <label>Find Client:</label>
+                @BrowserHelpers.DataList("Clients", Model)
+                @*<select name="clientIDName">
+                    <option>Option1</option>
+                    <option>Option2</option>
+                </select>*@
+                <script type="text/javascript">
+                    $(document).ready(function () {
+                        $("#clientIDInput").bind('select', function () {
+                            alert("Selection made!");
+                            @*var staffID = $("#staffListID").val();
+                                $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
+                                $('#gridContent').replaceWith(data);
+                                $('.staffIDLabel').html(staffID);
+                            });*@
+                        });
+                    });
+                </script>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <button type="button">Close if No Records</button>
+            </li>
+            <li>
+                <button type="button">Remove Filter</button>
+            </li>
+        </ul>
+    </div>
 </div>
+
 <div class="main">
     <form>
         <ul class="flex">
             <li>
-                <label>Client ID:</label>
+                <label for="ClientID">Client ID:</label>
                 <input type="text" name="clientID">
             </li>
             <li>
-                <label>Full Name:</label>
-                <input type="text">
+                <label for="fullName">Full Name:</label>
+                <input type="text" name="fullName">
             </li>
             <li>
                 <label>Office:</label>
-                <select>
+                <select name="fullName">
                     <option>M</option>
                 </select>
             </li>
@@ -57,106 +77,104 @@
         <ul class="flex">
             <li>
                 <label>Last Name:</label>
-                <input type="text">
+                <input type="text" name="lastName">
             </li>
             <li>
                 <label>First Name:</label>
-                <input type="text">
+                <input type="text" name="firstName">
             </li>
             <li>
                 <label>MI:</label>
-                <input type="text" size="1">
+                <input type="text" size="1" name="middleInitial">
             </li>
             <li>
                 <label>Status:</label>
-                <select>
+                <select name="status">
                     <option>A</option>
                 </select>
             </li>
             <li>
                 <label>Months Old:</label>
-                <input type="text" size="3">
+                <input type="text" size="3" name="ageInMonths">
             </li>
             <li>
                 <label>DOB:</label>
-                <input type="date">
+                <input type="date" name="dob">
             </li>
             <li>
                 <label>Sex:</label>
-                <select>
+                <select name="sex">
                     <option>M</option>
                     <option>F</option>
                 </select>
             </li>
             <li>
                 <label>Ethnicity:</label>
-                <select>
+                <select name="ethnicity">
                     <option>Hispanic</option>
                     <option>Non-Hispanic</option>
                 </select>
             </li>
             <li>
                 <label>Race:</label>
-                <select>
+                <select name="race">
                     <option>E</option>
                 </select>
             </li>
             <li>
                 <label>SSN:</label>
-                <input type="text" size="9">
+                <input type="text" size="9" name="ssn">
             </li>
         </ul>
         <ul class="flex">
             <li>
                 <label>Address 1:</label>
-                <input type="text" size="60">
+                <input type="text" size="60" name="address1">
             </li>
             <li>
                 <label>ISD:</label>
-                <input list>
             </li>
             <li>
                 <label>Address 2:</label>
-                <input type="text" size="60">
+                <input type="text" size="60" name="address2">
             </li>
             <li>
                 <label>Language:</label>
-                <select>
+                <select name="language">
                     <option>E</option>
                 </select>
             </li>
             <li class="inline">
                 <label>City:</label>
-                <input type="text">
+                <input type="text" name="city">
             </li>
             <li class="inline">
                 <label>State:</label>
-                <input type="text" size="2">
+                <input type="text" size="2" name="state">
             </li>
             <li class="inline">
                 <label>Zip:</label>
-                <input list="zipCode" size="6">
-                <input type="text" size="4">
+                <input list="zipCode" size="6" name="zip5">
+                <input type="text" size="4" name="zip4">
             </li>
             <li class="inline">
                 <label>MAPSCO:</label>
-                <input type="text">
+                <input type="text" name="mapsco">
             </li>
             <li>
                 <label>Client Phone:</label>
-                <input type="text">
+                <input type="text" name="clientPhone">
             </li>
             <li>
                 <label>County:</label>
-                <input type="text">
+                <input type="text" name="clientCounty">
             </li>
             <li>
-                <label>Service Area Expection:</label>
-                <input type="checkbox">
+                <label>Service Area Exception:</label>
+                <input type="checkbox" value="ServiceAreaException" name="serviceAreaExeption">
             </li>
             <li>
                 <label>Case Manager:</label>
-                <input list>
             </li>
             <li>
                 <label>TKID's Case Number:</label>
@@ -168,50 +186,41 @@
             </li>
         </ul>
         <ul>
-            <span class="column">
-                <li>
-                    <label>ECI:</label>
-                    <select></select>
-                </li>
-                <li>
-                    <label>Accounting System ID:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <button type="button">Insurance Update</button>
-                </li>
-                <li>
-                    <button type="button">Cost Share and DRS</button>
-                </li>
-                <li>
-                    <button type="button">Credit Card Update</button>
-                </li>
-            </span>
+            <li>
+                <label>ECI:</label>
+                <select></select>
+            </li>
+            <li>
+                <label>Accounting System ID:</label>
+                <input type="text">
+            </li>
+            <li>
+                <button type="button">Insurance Update</button>
+            </li>
+            <li>
+                <button type="button">Cost Share and DRS</button>
+            </li>
+            <li>
+                <button type="button">Credit Card Update</button>
+            </li>
         </ul>
-        <span class="center">
-            <ul>
-                <li>
-                    <label>Diagnosis Type</label>
-                </li>
-                <li>
-                    <select>
-                        <option>Primary</option>
-                        <option>Alternate</option>
-                    </select>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Diagnosis Code</label>
-                </li>
-                <li>
-                    <input list>
-                </li>
-            </ul>
-        </span>
-        <span>
-            <h4>Physician Information:</h4>
-        </span>
+        <ul>
+            <li>
+                <label>Diagnosis Type</label>
+            </li>
+            <li>
+                <select>
+                    <option>Primary</option>
+                    <option>Alternate</option>
+                </select>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Diagnosis Code</label>
+            </li>
+        </ul>
+        <h4>Physician Information:</h4>
         <ul class="flex">
             <li>
                 <label>Last Name:</label>
@@ -310,263 +319,257 @@
                 <input type="CheckBox">
             </li>
         </ul>
-        <span>
-            <ul>
-                <li><h4>Guardian 1:</h4></li>
-                <li>
-                    <label>Last Name:</label>
-                    <input type="text" />
-                </li>
-                <li>
-                    <label>First Name:</label>
-                    <input type="text" />
-                </li>
-                <li>
-                    <label>Relationship:</label>
-                    <select>
-                        <option value="1">Mother</option>
-                        <option value="2">Father</option>
-                    </select>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Address 1:</label>
-                    <input type="text" size="50">
-                </li>
-                <li>
-                    <label>Address 2:</label>
-                    <input type="text" size="50">
-                </li>
-                <li>
-                    <label>City:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>State:</label>
-                    <select>
-                        <option value="1">AL</option>
-                        <option value="2">AK</option>
-                        <option value="3">AZ</option>
-                        <option value="4">AR</option>
-                        <option value="5">CA</option>
-                        <option value="6">CO</option>
-                        <option value="7">CT</option>
-                        <option value="8">DE</option>
-                        <option value="9">FL</option>
-                        <option value="10">GA</option>
-                        <option value="11">HI</option>
-                        <option value="12">ID</option>
-                        <option value="13">IL</option>
-                        <option value="14">IN</option>
-                        <option value="15">IA</option>
-                        <option value="16">KS</option>
-                        <option value="17">KY</option>
-                        <option value="18">LA</option>
-                        <option value="19">ME</option>
-                        <option value="20">MD</option>
-                        <option value="21">MA</option>
-                        <option value="22">MI</option>
-                        <option value="23">MN</option>
-                        <option value="24">MS</option>
-                        <option value="25">MO</option>
-                        <option value="26">MT</option>
-                    </select>
-                </li>
-                <li>
-                    <label>Zip:</label>
-                    <input list="zipCode" size="6">
-                    <input type="text" size="4">
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Home Phone:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>Work Phone:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>Cell Phone:</label>
-                    <input type="text">
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Email:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>Communication Preference:</label>
-                    <input list="communicationPreference">
-                </li>
-                <li>
-                    <label>Best to Call:</label>
-                    <input list="bestToCall">
-                </li>
-                <li>
-                    <label>Sex:</label>
-                    <select>
-                        <option value="1">M</option>
-                        <option value="1">F</option>
-                    </select>
-                </li>
-                <li>
-                    <label>Race:</label>
-                    <select></select>
-                </li>
-                <li>
-                    <label>Occupation:</label>
-                    <input type="Text" />
-                </li>
-                <li>
-                    <label>Employer:</label>
-                    <input type="Text" />
-                </li>
-            </ul>
-        </span>
-        <span>
-            <ul>
-                <li><h4>Guardian 2:</h4></li>
-                <li>
-                    <label>Last Name:</label>
-                    <input type="text" />
-                </li>
-                <li>
-                    <label>First Name:</label>
-                    <input type="text" />
-                </li>
-                <li>
-                    <label>Relationship:</label>
-                    <select>
-                        <option value="1">Mother</option>
-                        <option value="2">Father</option>
-                    </select>
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Address 1:</label>
-                    <input type="text" size="50">
-                </li>
-                <li>
-                    <label>Address 2:</label>
-                    <input type="text" size="50">
-                </li>
-                <li>
-                    <label>City:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>State:</label>
-                    <select>
-                        <option value="1">AL</option>
-                        <option value="2">AK</option>
-                        <option value="3">AZ</option>
-                        <option value="4">AR</option>
-                        <option value="5">CA</option>
-                        <option value="6">CO</option>
-                        <option value="7">CT</option>
-                        <option value="8">DE</option>
-                        <option value="9">FL</option>
-                        <option value="10">GA</option>
-                        <option value="11">HI</option>
-                        <option value="12">ID</option>
-                        <option value="13">IL</option>
-                        <option value="14">IN</option>
-                        <option value="15">IA</option>
-                        <option value="16">KS</option>
-                        <option value="17">KY</option>
-                        <option value="18">LA</option>
-                        <option value="19">ME</option>
-                        <option value="20">MD</option>
-                        <option value="21">MA</option>
-                        <option value="22">MI</option>
-                        <option value="23">MN</option>
-                        <option value="24">MS</option>
-                        <option value="25">MO</option>
-                        <option value="26">MT</option>
-                    </select>
-                </li>
-                <li>
-                    <label>Zip:</label>
-                    <input list="zipCode" size="6">
-                    <input type="text" size="4">
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Home Phone:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>Work Phone:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>Cell Phone:</label>
-                    <input type="text">
-                </li>
-            </ul>
-            <ul>
-                <li>
-                    <label>Email:</label>
-                    <input type="text">
-                </li>
-                <li>
-                    <label>Communication Preference:</label>
-                    <input list="communicationPreference">
-                </li>
-                <li>
-                    <label>Best to Call:</label>
-                    <input list="bestToCall">
-                </li>
-                <li>
-                    <label>Sex:</label>
-                    <select>
-                        <option value="1">M</option>
-                        <option value="1">F</option>
-                    </select>
-                </li>
-                <li>
-                    <label>Race:</label>
-                    <select></select>
-                </li>
-                <li>
-                    <label>Occupation:</label>
-                    <input type="Text" />
-                </li>
-                <li>
-                    <label>Employer:</label>
-                    <input type="Text" />
-                </li>
-            </ul>
-        </span>
-        <span>
-            <ul>
-                <li>
-                    Sibling Information:
-                </li>
-                <li>
-                    <table>
-                        <tr>
-                            <th>Name</td>
-                            <th>Birth Date</th>
-                        </tr>
-                        <tr>
-                            <td>Data</td>
-                            <td>data</td>
-                        </tr>
-                    </table>
-                </li>
-                <li>
-                    <label>Release Comments:</label>
-                    <textarea name="referralComments" rows="20" cols="20"></textarea>
-                </li>
-            </ul>
-        </span>
+        <ul>
+            <li><h4>Guardian 1:</h4></li>
+            <li>
+                <label>Last Name:</label>
+                <input type="text" />
+            </li>
+            <li>
+                <label>First Name:</label>
+                <input type="text" />
+            </li>
+            <li>
+                <label>Relationship:</label>
+                <select>
+                    <option value="1">Mother</option>
+                    <option value="2">Father</option>
+                </select>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Address 1:</label>
+                <input type="text" size="50">
+            </li>
+            <li>
+                <label>Address 2:</label>
+                <input type="text" size="50">
+            </li>
+            <li>
+                <label>City:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>State:</label>
+                <select>
+                    <option value="1">AL</option>
+                    <option value="2">AK</option>
+                    <option value="3">AZ</option>
+                    <option value="4">AR</option>
+                    <option value="5">CA</option>
+                    <option value="6">CO</option>
+                    <option value="7">CT</option>
+                    <option value="8">DE</option>
+                    <option value="9">FL</option>
+                    <option value="10">GA</option>
+                    <option value="11">HI</option>
+                    <option value="12">ID</option>
+                    <option value="13">IL</option>
+                    <option value="14">IN</option>
+                    <option value="15">IA</option>
+                    <option value="16">KS</option>
+                    <option value="17">KY</option>
+                    <option value="18">LA</option>
+                    <option value="19">ME</option>
+                    <option value="20">MD</option>
+                    <option value="21">MA</option>
+                    <option value="22">MI</option>
+                    <option value="23">MN</option>
+                    <option value="24">MS</option>
+                    <option value="25">MO</option>
+                    <option value="26">MT</option>
+                </select>
+            </li>
+            <li>
+                <label>Zip:</label>
+                <input list="zipCode" size="6">
+                <input type="text" size="4">
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Home Phone:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>Work Phone:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>Cell Phone:</label>
+                <input type="text">
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Email:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>Communication Preference:</label>
+                <input list="communicationPreference">
+            </li>
+            <li>
+                <label>Best to Call:</label>
+                <input list="bestToCall">
+            </li>
+            <li>
+                <label>Sex:</label>
+                <select>
+                    <option value="1">M</option>
+                    <option value="1">F</option>
+                </select>
+            </li>
+            <li>
+                <label>Race:</label>
+                <select></select>
+            </li>
+            <li>
+                <label>Occupation:</label>
+                <input type="Text" />
+            </li>
+            <li>
+                <label>Employer:</label>
+                <input type="Text" />
+            </li>
+        </ul>
+        <ul>
+            <li><h4>Guardian 2:</h4></li>
+            <li>
+                <label>Last Name:</label>
+                <input type="text" />
+            </li>
+            <li>
+                <label>First Name:</label>
+                <input type="text" />
+            </li>
+            <li>
+                <label>Relationship:</label>
+                <select>
+                    <option value="1">Mother</option>
+                    <option value="2">Father</option>
+                </select>
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Address 1:</label>
+                <input type="text" size="50">
+            </li>
+            <li>
+                <label>Address 2:</label>
+                <input type="text" size="50">
+            </li>
+            <li>
+                <label>City:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>State:</label>
+                <select>
+                    <option value="1">AL</option>
+                    <option value="2">AK</option>
+                    <option value="3">AZ</option>
+                    <option value="4">AR</option>
+                    <option value="5">CA</option>
+                    <option value="6">CO</option>
+                    <option value="7">CT</option>
+                    <option value="8">DE</option>
+                    <option value="9">FL</option>
+                    <option value="10">GA</option>
+                    <option value="11">HI</option>
+                    <option value="12">ID</option>
+                    <option value="13">IL</option>
+                    <option value="14">IN</option>
+                    <option value="15">IA</option>
+                    <option value="16">KS</option>
+                    <option value="17">KY</option>
+                    <option value="18">LA</option>
+                    <option value="19">ME</option>
+                    <option value="20">MD</option>
+                    <option value="21">MA</option>
+                    <option value="22">MI</option>
+                    <option value="23">MN</option>
+                    <option value="24">MS</option>
+                    <option value="25">MO</option>
+                    <option value="26">MT</option>
+                </select>
+            </li>
+            <li>
+                <label>Zip:</label>
+                <input list="zipCode" size="6">
+                <input type="text" size="4">
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Home Phone:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>Work Phone:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>Cell Phone:</label>
+                <input type="text">
+            </li>
+        </ul>
+        <ul>
+            <li>
+                <label>Email:</label>
+                <input type="text">
+            </li>
+            <li>
+                <label>Communication Preference:</label>
+                <input list="communicationPreference">
+            </li>
+            <li>
+                <label>Best to Call:</label>
+                <input list="bestToCall">
+            </li>
+            <li>
+                <label>Sex:</label>
+                <select>
+                    <option value="1">M</option>
+                    <option value="1">F</option>
+                </select>
+            </li>
+            <li>
+                <label>Race:</label>
+                <select></select>
+            </li>
+            <li>
+                <label>Occupation:</label>
+                <input type="Text" />
+            </li>
+            <li>
+                <label>Employer:</label>
+                <input type="Text" />
+            </li>
+        </ul>
+        <ul>
+            <li>
+                Sibling Information:
+            </li>
+            <li>
+                <table>
+                    <tr>
+                        <th>Name</th>
+                        <th>Birth Date</th>
+                    </tr>
+                    <tr>
+                        <td>Data</td>
+                        <td>data</td>
+                    </tr>
+                </table>
+            </li>
+            <li>
+                <label>Release Comments:</label>
+                <textarea name="referralComments" rows="20" cols="20"></textarea>
+            </li>
+        </ul>
         <ul>
             <li>
                 <label>Select Provider:</label>
@@ -579,7 +582,7 @@
             <li>
                 <table>
                     <tr>
-                        <th>Entry Date</td>
+                        <th>Entry Date</th>
                         <th>Provider First Name</th>
                         <th>Provider Last Name</th>
                         <th>Provider Company</th>
@@ -605,7 +608,7 @@
         <ul>
             <li>
                 <label>Referral Letter Sent:</label>
-                <input type="date"></input>
+                <input type="date" />
             </li>
         </ul>
     </form>

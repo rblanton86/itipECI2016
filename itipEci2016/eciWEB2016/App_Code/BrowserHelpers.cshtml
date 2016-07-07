@@ -1,8 +1,8 @@
 ﻿@helper DataList(string clientIDName, IEnumerable<System.Web.Mvc.SelectListItem> SelectList)
 {
-    <input list = clientIDName />
+    <input list="clientIDName" name="clientIDInput" />
 
-    <datalist id = clientIDName>
+    <datalist id="clientIDName" name="clientIDName">
         @foreach(var item in SelectList) {
         <option value="@item.Value">@item.Text</option>
         }
