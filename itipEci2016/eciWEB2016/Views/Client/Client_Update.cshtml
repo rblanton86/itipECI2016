@@ -26,7 +26,7 @@
             <li>
                 <label>Find Client:</label>
                 <div class="ui-widget">
-
+                @Html.DropDownList("clientList", (SelectList)ViewBag.clientList, "Select a client.")
                 </div>
                 <script type="text/javascript">
                     $(document).ready(function () {

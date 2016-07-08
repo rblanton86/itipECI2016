@@ -26,6 +26,9 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
+
+                Client client = new Client();
+                ViewBag.clients = GetClientList();
             }
             else
             {
@@ -35,6 +38,10 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
+
+
+                Client client = new Client();
+                ViewBag.clients = GetClientList();
             }
 
             return View();
@@ -52,13 +59,14 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Client/Details/5
-        public ActionResult GetClients()
+        public SelectList GetClientList()
         {
-            List<Client> clients = new List<Client>();
+            SelectList clientList;
             ClientDataController dataController = new ClientDataController();
-            clients = dataController.GetAllClients();
 
-            return Json(new { clients }, JsonRequestBehavior.AllowGet);
+            clientList = dataController.GetClientDropDown();
+
+            return new SelectList(clientList, "Value", "Text", new Client().clientID);
         }
 
         // GET: Client/Create

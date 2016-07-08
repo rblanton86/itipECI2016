@@ -15,6 +15,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
 using System.Data.SqlClient;
+using System.Web.Mvc;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -30,25 +31,37 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        public List<Client> GetAllClients()
+        public DataSet GetAllClients()
         {
+
+            // Readies stored proc from server.
             DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
 
-            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
-
+            // Executes stored proc to return values into a DataSet.
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
+            // Returns a dataset of all clients.
+            return ds;
+        }
+
+        public SelectList GetClientDropDown()
+        {
+            // Readies stored proc from server.
+            DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
+
+            // Executes stored proc to return values into a DataSet.
+            DataSet ds = db.ExecuteDataSet(dbCommand);
+
+            // Takes values from DataSet and places results in a SelectList.
             var clients = (from drRow in ds.Tables[0].AsEnumerable()
-                           select new Client()
+                           select new SelectListItem()
                            {
-                               firstName = drRow.Field<string>("firstName"),
-                               lastName = drRow.Field<string>("lastName"),
-                               fullName = drRow.Field<string>("firstName") + " " + drRow.Field<string>("lastName"),
-                               clientID = drRow.Field<int>("clientID"),
-                               altID = drRow.Field<string>("altID")
+                               Text = drRow.Field<string>("lastName") + ", " + drRow.Field<string>("firstName"),
+                               Value = drRow.Field<int>("clientID").ToString()
                            }).ToList();
 
-            return clients;
+            // Returns results as select list.
+            return new SelectList(clients, "Value", "Text");
         }
 
         public Client GetClient(int thisClientID)
