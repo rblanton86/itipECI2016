@@ -28,6 +28,7 @@ namespace eciWEB2016.Models
         public string fullName { get; set; }
         [DataType(DataType.Date)]
         public DateTime dob { get; set; }
+        public int ageInMonths { get; set; }
         public int ssn { get; set; }
         public string race { get; set; }
         public string ethnicity { get; set; }

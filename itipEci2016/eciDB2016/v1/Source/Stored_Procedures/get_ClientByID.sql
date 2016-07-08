@@ -9,7 +9,7 @@ Change History:
 	07-05-2016 -- jmg -- Updated stored proc to new column names for compliance.
 	07-06-2016 -- jmg -- Corrected spelling error which caused exception on webApp run.
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_ClientByID]
+CREATE PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
@@ -22,6 +22,7 @@ AS
 				sts.clientStatus,
 				plang.primaryLanguage,
 				sclinf.isd,
+				sex.sex,
 				dx.diagnosisType,
 				dx.diagnosisCode,
 				dx.diagnosis,
@@ -49,6 +50,8 @@ AS
 				ON clnt.insuranceAuthID = insauth.insuranceAuthID
 			LEFT JOIN CommunicationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
+			LEFT JOIN Sex sex
+				ON clnt.sexID = sex.sexID
 			WHERE clientID = @clientID
 
 		END TRY

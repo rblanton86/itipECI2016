@@ -18,26 +18,37 @@ namespace eciWEB2016.Controllers
         /// <returns></returns>
         public ActionResult Client_Update()
         {
-            int clientID = 1;
-            // Creates empty client to hold current client data.
+
+            if (Session["client"] != null)
+            {
+                // If there is already a client in session, returns client to session.
+                Client currentClient = (eciWEB2016.Models.Client)Session["client"];
+                ClientDataController dataController = new ClientDataController();
+                currentClient = dataController.GetClient(currentClient.clientID);
+                Session["client"] = currentClient;
+            }
+            else
+            {
+                // TODO: Replace the clientID int to something else to return a null client to the session, etc.
+                Client currentClient = new Client();
+                currentClient.clientID = 1;
+                ClientDataController dataController = new ClientDataController();
+                currentClient = dataController.GetClient(currentClient.clientID);
+                Session["client"] = currentClient;
+            }
+
+            return View();
+        }
+
+        public ActionResult GetClient(int clientID)
+        {
             Client currentClient = new Client();
-
-            // Accesses and stores datacontroller.
+            currentClient.clientID = clientID;
             ClientDataController dataController = new ClientDataController();
+            currentClient = dataController.GetClient(currentClient.clientID);
+            Session["client"] = currentClient;
 
-            // Passes client ID through data controller which pulls current client.
-            currentClient = dataController.GetClient(clientID);
-
-            //for (int i = 0; i < currentClient.Count; i++)
-            //{
-            //    clientList.Add(new SelectListItem
-            //    {
-            //        Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
-            //        Value = list[i].clientID.ToString()
-            //    });
-            //}
-
-            return View(currentClient);
+            return View();
         }
 
         // GET: Client/Details/5

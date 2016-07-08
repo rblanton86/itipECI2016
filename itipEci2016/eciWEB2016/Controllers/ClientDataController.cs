@@ -53,8 +53,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public Client GetClient(int thisClientID)
         {
-            thisClientID = 1;
-
             // Creates empty client to assign values.
             Client currentClient = new Client();
 
@@ -62,41 +60,56 @@ namespace eciWEB2016.Controllers.DataControllers
             DbCommand get_ClientByID = db.GetStoredProcCommand("get_ClientByID");
 
             // Assigns the clientID as a parameter to add in to the database command..
-            db.AddInParameter(get_ClientByID, "clientID", DbType.Int32, thisClientID);
+            var clientIDParameter = get_ClientByID.CreateParameter();
+            clientIDParameter.ParameterName = "@clientID";
+            clientIDParameter.Value = thisClientID;
+            get_ClientByID.Parameters.Add(clientIDParameter);
 
             //// Executes the database command, returns values as a DataSet.
             using (get_ClientByID)
             {
-                using(DbDataReader clientReader = get_ClientByID.ExecuteReader())
+                using(IDataReader clientReader = db.ExecuteReader(get_ClientByID))
                 {
-                    int ordinal = clientReader.GetOrdinal("clientID");
-                    currentClient.clientID = clientReader.GetInt32(ordinal);
+                    if (clientReader.Read())
+                    {
+                        int ordinal = clientReader.GetOrdinal("clientID");
+                        currentClient.clientID = clientReader.IsDBNull(ordinal) ? 0 : clientReader.GetInt32(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("firstName");
-                    currentClient.firstName = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("firstName");
+                        currentClient.firstName = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("lastName");
-                    currentClient.lastName = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("lastName");
+                        currentClient.lastName = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-                    currentClient.fullName = currentClient.firstName + " " + currentClient.lastName;
+                        currentClient.fullName = currentClient.firstName + " " + currentClient.lastName;
 
-                    ordinal = clientReader.GetOrdinal("race");
-                    currentClient.race = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("race");
+                        currentClient.race = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("ethnicity");
-                    currentClient.ethnicity = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("ethnicity");
+                        currentClient.ethnicity = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("clientStatus");
-                    currentClient.clientStatus = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("clientStatus");
+                        currentClient.clientStatus = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("sex");
-                    currentClient.sex = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("sex");
+                        currentClient.sex = clientReader.IsDBNull(ordinal) ? "F" : clientReader.GetString(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("address1");
-                    currentClient.clientAddress.address1 = clientReader.GetString(ordinal);
+                        ordinal = clientReader.GetOrdinal("dob");
+                        currentClient.dob = clientReader.IsDBNull(ordinal) ? DateTime.Now : clientReader.GetDateTime(ordinal);
 
-                    ordinal = clientReader.GetOrdinal("address2");
-                    currentClient.clientAddress.address2 = clientReader.GetString(ordinal);
+                        // Does the math to convert client's current age in months.
+                        DateTime now = DateTime.Now;
+                        TimeSpan timeSpan = now - currentClient.dob;
+                        double ts = timeSpan.TotalDays;
+                        double diff = (ts / 30);
+                        currentClient.ageInMonths = Convert.ToInt32(diff);
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
 
                     //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
                     //TODO: Jen - Continue this.
@@ -113,15 +126,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
             db.AddInParameter(upd_Clients, "@clientsID", DbType.Int32, thisClient.clientID);
-            db.AddInParameter(upd_Clients, "@raceID", DbType.Int32, thisClient.raceID);
-            db.AddInParameter(upd_Clients, "@ethnicityID", DbType.Int32, thisClient.ethnicityID);
-            db.AddInParameter(upd_Clients, "@clientStatusID", DbType.Int32, thisClient.clientStatusID);
-            db.AddInParameter(upd_Clients, "@diagnosisID", DbType.Int32, thisClient.diagnosisID);
-            db.AddInParameter(upd_Clients, "@primaryLanguageID", DbType.Int32, thisClient.primaryLanguageID);
-            db.AddInParameter(upd_Clients, "@schoolInfoID", DbType.Int32, thisClient.schoolInfoID);
-            db.AddInParameter(upd_Clients, "@commentsID", DbType.Int32, thisClient.commentsID);
-            db.AddInParameter(upd_Clients, "@insuranceAuthID", DbType.Int32, thisClient.insuranceAuthID);
-            db.AddInParameter(upd_Clients, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
             db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
             db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
             db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
