@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
 using eciWEB2016.Models;
 using eciWEB2016.Controllers.DataControllers;
 using System.Data;
@@ -18,7 +19,6 @@ namespace eciWEB2016.Controllers
         /// <returns></returns>
         public ActionResult Client_Update()
         {
-
             if (Session["client"] != null)
             {
                 // If there is already a client in session, returns client to session.
@@ -26,9 +26,6 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
-
-                Client client = new Client();
-                ViewBag.clients = GetClientList();
             }
             else
             {
@@ -38,10 +35,6 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
-
-
-                Client client = new Client();
-                ViewBag.clients = GetClientList();
             }
 
             return View();
@@ -59,14 +52,12 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Client/Details/5
-        public SelectList GetClientList()
+        [HttpGet]
+        [ActionName("GetClientAjax")]
+        public JsonResult GetClientList()
         {
-            SelectList clientList;
-            ClientDataController dataController = new ClientDataController();
-
-            clientList = dataController.GetClientDropDown();
-
-            return new SelectList(clientList, "Value", "Text", new Client().clientID);
+            // Takes select list of all clients, returns at Json object.
+            return Json(GetClientList(), JsonRequestBehavior.AllowGet);
         }
 
         // GET: Client/Create

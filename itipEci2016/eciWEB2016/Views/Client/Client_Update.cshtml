@@ -16,7 +16,6 @@
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-
 <div class="subnav">
     <div class="column">
         <ul>
@@ -25,21 +24,7 @@
             </li>
             <li>
                 <label>Find Client:</label>
-                <div class="ui-widget">
-                @Html.DropDownList("clientList", (SelectList)ViewBag.clientList, "Select a client.")
-                </div>
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $("#clientIDInput").bind('select', function () {
-                            
-                            @*var staffID = $("#staffListID").val();
-                                $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
-                                $('#gridContent').replaceWith(data);
-                                $('.staffIDLabel').html(staffID);
-                            });*@
-                        });
-                    });
-                </script>
+                <input type="text" id="clientSearch" placeholder="Search client list..." />
             </li>
         </ul>
         <ul>
@@ -52,7 +37,6 @@
         </ul>
     </div>
 </div>
-
 <div class="main">
     <form>
         <ul class="flex">
@@ -610,41 +594,66 @@
         </ul>
     </form>
 </div>
-<script>
-    $(function () {
-        var clientListSource = [
-          "ActionScript",
-          "AppleScript",
-          "Asp",
-          "BASIC",
-          "C",
-          "C++",
-          "Clojure",
-          "COBOL",
-          "ColdFusion",
-          "Erlang",
-          "Fortran",
-          "Groovy",
-          "Haskell",
-          "Java",
-          "JavaScript",
-          "Lisp",
-          "Perl",
-          "PHP",
-          "Python",
-          "Ruby",
-          "Scala",
-          "Scheme"
-        ]
-
-        $("#clientList").autocomplete({
-            source: clientListSource
+@section JavaScript
+{
+    <script>
+        // Selects the appropriate sex from the sex dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
         });
-    });
-</script>
-<script>
-    // Selects the appropriate sex from the sex dropdown table based on result of the current client in session.
-    $('document').ready(function () {
-        $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
-    });
-</script>
+    </script>
+    <script>
+        $(function() {
+            var availableTags = [
+              "ActionScript",
+              "AppleScript",
+              "Asp",
+              "BASIC",
+              "C",
+              "C++",
+              "Clojure",
+              "COBOL",
+              "ColdFusion",
+              "Erlang",
+              "Fortran",
+              "Groovy",
+              "Haskell",
+              "Java",
+              "JavaScript",
+              "Lisp",
+              "Perl",
+              "PHP",
+              "Python",
+              "Ruby",
+              "Scala",
+              "Scheme"
+            ];
+            $('#clientSearch').autocomplete({
+                source: availableTags
+
+
+                //source: function(request, response) {
+                //    $.ajax({
+                //        url: '/Client/GetClientList',
+                //        type: "GET",
+                //        dataType: "json",
+                //        data: {term: request.term},
+
+                //    })
+                //}
+            });
+        })
+    </script>
+    @*<script type="text/javascript">
+            $(function() {
+                $("#clientIDInput").bind('select', function () {
+
+                    var staffID = $("#staffListID").val();
+                        $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
+                        $('#gridContent').replaceWith(data);
+                        $('.staffIDLabel').html(staffID);
+                    });
+                });
+            });
+        </script>*@
+}

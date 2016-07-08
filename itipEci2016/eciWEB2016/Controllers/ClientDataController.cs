@@ -44,7 +44,7 @@ namespace eciWEB2016.Controllers.DataControllers
             return ds;
         }
 
-        public SelectList GetClientDropDown()
+        public SelectList GetClientList()
         {
             // Readies stored proc from server.
             DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
