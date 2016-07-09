@@ -603,57 +603,47 @@
         });
     </script>
     <script>
-        $(function() {
-            var availableTags = [
-              "ActionScript",
-              "AppleScript",
-              "Asp",
-              "BASIC",
-              "C",
-              "C++",
-              "Clojure",
-              "COBOL",
-              "ColdFusion",
-              "Erlang",
-              "Fortran",
-              "Groovy",
-              "Haskell",
-              "Java",
-              "JavaScript",
-              "Lisp",
-              "Perl",
-              "PHP",
-              "Python",
-              "Ruby",
-              "Scala",
-              "Scheme"
-            ];
+        $(function () {
+
+            var clientListData = [];
+
+            // Returns a list of clients which will be added to the combobox.
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: "GetAjaxClientList/Client",
+                dataType: "json",
+                success: function (data) {
+                    var result;
+                    $.each(data, function (index, value) {
+                        clientListData.push(
+                            {"label":
+                            value.lastName + ', ' + value.firstName,
+                            "value":
+                            value.lastName + ', ' + value.firstName,
+                            "clientId":
+                            value.clientID
+                            });
+                    });
+                }
+            });
+
+            // ClientList autocomplete jquery code.
             $('#clientSearch').autocomplete({
-                source: availableTags
+                // This is where the Ajax call goes to pull the client list.
+                source: clientListData,
 
-
-                //source: function(request, response) {
-                //    $.ajax({
-                //        url: '/Client/GetClientList',
-                //        type: "GET",
-                //        dataType: "json",
-                //        data: {term: request.term},
-
-                //    })
-                //}
+                // Calls the controller to store the new client in Session. Refreshes the page with new session info input.
+                change: function (event, ui) {
+                    var selectedClient = parseInt(ui.item.clientId);
+                    var url = '@Url.Action("GetAjaxClient", "Client")';
+                    $.post(url, {
+                        identifier: selectedClient
+                    }, function (result) {
+                        window.location.href = '@Url.Action("Client_Update", "Client")';
+                    });
+                }
             });
         })
     </script>
-    @*<script type="text/javascript">
-            $(function() {
-                $("#clientIDInput").bind('select', function () {
-
-                    var staffID = $("#staffListID").val();
-                        $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
-                        $('#gridContent').replaceWith(data);
-                        $('.staffIDLabel').html(staffID);
-                    });
-                });
-            });
-        </script>*@
 }

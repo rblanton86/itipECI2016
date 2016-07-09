@@ -44,7 +44,7 @@ namespace eciWEB2016.Controllers.DataControllers
             return ds;
         }
 
-        public SelectList GetClientList()
+        public List<Client> GetListClients()
         {
             // Readies stored proc from server.
             DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
@@ -54,14 +54,16 @@ namespace eciWEB2016.Controllers.DataControllers
 
             // Takes values from DataSet and places results in a SelectList.
             var clients = (from drRow in ds.Tables[0].AsEnumerable()
-                           select new SelectListItem()
+                           select new Client()
                            {
-                               Text = drRow.Field<string>("lastName") + ", " + drRow.Field<string>("firstName"),
-                               Value = drRow.Field<int>("clientID").ToString()
+                               firstName = drRow.Field<string>("firstName"),
+                               lastName = drRow.Field<string>("lastName"),
+                               fullName = drRow.Field<string>("firstName") + " " + drRow.Field<string>("lastName"),
+                               clientID = drRow.Field<int>("clientID"),
+                               altID = drRow.Field<string>("altID")
                            }).ToList();
 
-            // Returns results as select list.
-            return new SelectList(clients, "Value", "Text");
+            return clients;
         }
 
         public Client GetClient(int thisClientID)
