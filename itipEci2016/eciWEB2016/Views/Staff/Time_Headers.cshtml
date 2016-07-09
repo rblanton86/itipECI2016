@@ -41,19 +41,21 @@ Change History:
                     $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID : staffID }, function (data) {
                         $('#gridContent').replaceWith(data);
                         $('.staffIDLabel').html(staffID);
-                        
+                   
+                            var StaffMember = PageMethods.getStaffMember(staffID);
+                            var jsStaffMember = jQuery.parseJSON('StaffMember');
+                            var firstName = obj.jsStaffMember[0].firstName;
+                            $('.staffFirst').html(firstName);
+                            var lastName = obj.jsStaffMember[0].lastName;
+                            $('.staffLast').html(lastName);
+
                     });
                 });
             });
         </script>
         <form id="form1">
             <script type="text/javascript">
-                function CallingServerSideFunction() {
-                   var StaffMember = PageMethods.getStaffMember();
-                   var jsStaffMember = jQuery.parseJSON('StaffMember');
-                   var firstName = jsStaffMember.firstName;
-                   $('.staffFirst').html(firstName);
-                }
+                
             </script>
         </form>
 </header>
