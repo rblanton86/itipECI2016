@@ -3,9 +3,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Helpers;
 using eciWEB2016.Models;
 using eciWEB2016.Controllers.DataControllers;
 using System.Data;
+using System.Web.Script.Serialization;
+using System.Web.Services;
 
 namespace eciWEB2016.Controllers
 {
@@ -18,36 +21,65 @@ namespace eciWEB2016.Controllers
         /// <returns></returns>
         public ActionResult Client_Update()
         {
-            int clientID = 1;
-            // Creates empty client to hold current client data.
-            Client currentClient = new Client();
+            if (Session["client"] != null)
+            {
+                // If there is already a client in session, returns client to session.
+                Client currentClient = (Client)Session["client"];
+                ClientDataController dataController = new ClientDataController();
+                currentClient = dataController.GetClient(currentClient.clientID);
+                Session["client"] = currentClient;
+            }
+            else
+            {
+                // TODO: Replace the clientID int to something else to return a null client to the session, etc.
+                Client currentClient = new Client();
+                currentClient.clientID = 1;
+                ClientDataController dataController = new ClientDataController();
+                currentClient = dataController.GetClient(currentClient.clientID);
+                Session["client"] = currentClient;
+            }
 
-            // Accesses and stores datacontroller.
-            ClientDataController dataController = new ClientDataController();
+            return View();
+        }
 
-            // Passes client ID through data controller which pulls current client.
-            currentClient = dataController.GetClient(clientID);
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="identifier"></param>
+        /// <returns></returns>
+        [HttpPost]
+        [ActionName("GetAjaxClient")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetClient(string identifier)
+        {
+            if (Session["client"] != null)
+            {
+                int clientID;
+                int.TryParse(identifier, out clientID);
 
-            //for (int i = 0; i < currentClient.Count; i++)
-            //{
-            //    clientList.Add(new SelectListItem
-            //    {
-            //        Text = list[i].altID + " " + list[i].firstName + " " + list[i].lastName,
-            //        Value = list[i].clientID.ToString()
-            //    });
-            //}
-
-            return View(currentClient);
+                Client currentClient = new Client();
+                currentClient.clientID = clientID;
+                ClientDataController dataController = new ClientDataController();
+                currentClient = dataController.GetClient(currentClient.clientID);
+                Session["client"] = currentClient;
+                var redirectUrl = new UrlHelper(Request.RequestContext).Action("Client_Update", "Client");
+                return Json(new { Url = redirectUrl });
+            }
+            else
+                return View();
         }
 
         // GET: Client/Details/5
-        public ActionResult GetClients()
+        [HttpGet]
+        [ActionName("GetAjaxClientList")]
+        public JsonResult GetClientList()
         {
-            List<Client> clients = new List<Client>();
+            List<Client> clientList = new List<Client>();
             ClientDataController dataController = new ClientDataController();
-            clients = dataController.GetAllClients();
+            clientList = dataController.GetListClients();
 
-            return Json(new { clients }, JsonRequestBehavior.AllowGet);
+            // Takes select list of all clients, returns at Json object.
+            return Json(clientList, JsonRequestBehavior.AllowGet);
         }
 
         // GET: Client/Create

@@ -6,7 +6,7 @@ Author:
 Date: 
 	07-05-2016
 Change History:
-	
+	07-07-2016 -- jmg -- updated proc, ran alter, due to spelling error in stored proc.
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_ClientByAltID]
 	@altID VARCHAR(25)
@@ -19,8 +19,11 @@ AS
 				rce.race,
 				eth.ethnicity,
 				sts.clientStatus,
-				dx.icd10Code,
-				dx.icd9code,
+				dx.diagnosisCode,
+				dx.diagnosisType,
+				dx.diagnosis,
+				dx.diagnosisFrom,
+				dx.diagnosisTo,
 				plang.primaryLanguage,
 				sclinf.isd,
 				insauth.insuranceAuthorizationType,
@@ -43,7 +46,7 @@ AS
 				ON clnt.schoolInfoID = sclinf.schoolInfoID
 			LEFT JOIN InsuranceAuthorization insauth
 				ON clnt.insuranceAuthID = insauth.insuranceAuthID
-			LEFT JOIN CommuniciationPreferences comprf
+			LEFT JOIN CommunicationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 			WHERE altID = @altID
 

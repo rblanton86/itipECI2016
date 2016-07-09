@@ -14,6 +14,8 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
+using System.Data.SqlClient;
+using System.Web.Mvc;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -29,14 +31,28 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        public List<Client> GetAllClients()
+        public DataSet GetAllClients()
         {
+
+            // Readies stored proc from server.
             DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
 
-            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
-
+            // Executes stored proc to return values into a DataSet.
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
+            // Returns a dataset of all clients.
+            return ds;
+        }
+
+        public List<Client> GetListClients()
+        {
+            // Readies stored proc from server.
+            DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
+
+            // Executes stored proc to return values into a DataSet.
+            DataSet ds = db.ExecuteDataSet(dbCommand);
+
+            // Takes values from DataSet and places results in a SelectList.
             var clients = (from drRow in ds.Tables[0].AsEnumerable()
                            select new Client()
                            {
@@ -52,8 +68,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public Client GetClient(int thisClientID)
         {
-            thisClientID = 1;
-
             // Creates empty client to assign values.
             Client currentClient = new Client();
 
@@ -61,29 +75,63 @@ namespace eciWEB2016.Controllers.DataControllers
             DbCommand get_ClientByID = db.GetStoredProcCommand("get_ClientByID");
 
             // Assigns the clientID as a parameter to add in to the database command..
-            db.AddInParameter(get_ClientByID, "clientID", DbType.Int32, thisClientID);
+            var clientIDParameter = get_ClientByID.CreateParameter();
+            clientIDParameter.ParameterName = "@clientID";
+            clientIDParameter.Value = thisClientID;
+            get_ClientByID.Parameters.Add(clientIDParameter);
 
-            // Executes the database command, returns values as a DataSet.
-            DataSet clientDataSet = db.ExecuteDataSet(get_ClientByID);
+            //// Executes the database command, returns values as a DataSet.
+            using (get_ClientByID)
+            {
+                using(IDataReader clientReader = db.ExecuteReader(get_ClientByID))
+                {
+                    if (clientReader.Read())
+                    {
+                        int ordinal = clientReader.GetOrdinal("clientID");
+                        currentClient.clientID = clientReader.IsDBNull(ordinal) ? 0 : clientReader.GetInt32(ordinal);
 
+                        ordinal = clientReader.GetOrdinal("firstName");
+                        currentClient.firstName = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-            // Loads clientData into an Enumerable list.
-            var thisClient = (from drRow in clientDataSet.Tables[0].AsEnumerable()
-                             select new Client()
-                             {
-                                 clientID = drRow.Field<int>("clientID"),
-                                 firstName = drRow.Field<string>("firstName"),
-                                 lastName = drRow.Field<string>("lastName"),
-                                 middleInitial = drRow.Field<string>("middleInitial"),
-                                 fullName = drRow.Field<string>("firstName" + "lastName"),
-                                 ssn = drRow.Field<int>("ssn"),
-                                 referralSource = drRow.Field<string>("referralSource"),
-                                 dob = drRow.Field<DateTime>("dob").Date,
-                                 altID = drRow.Field<string>("altID"),
-                                 deleted = drRow.Field<bool>("deleted")
-                             });
+                        ordinal = clientReader.GetOrdinal("lastName");
+                        currentClient.lastName = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
-            // Returns the currentClient with data assigned.
+                        currentClient.fullName = currentClient.firstName + " " + currentClient.lastName;
+
+                        ordinal = clientReader.GetOrdinal("race");
+                        currentClient.race = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                        ordinal = clientReader.GetOrdinal("ethnicity");
+                        currentClient.ethnicity = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                        ordinal = clientReader.GetOrdinal("clientStatus");
+                        currentClient.clientStatus = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                        ordinal = clientReader.GetOrdinal("sex");
+                        currentClient.sex = clientReader.IsDBNull(ordinal) ? "F" : clientReader.GetString(ordinal);
+
+                        ordinal = clientReader.GetOrdinal("dob");
+                        currentClient.dob = clientReader.IsDBNull(ordinal) ? DateTime.Now : clientReader.GetDateTime(ordinal);
+
+                        // Does the math to convert client's current age in months.
+                        DateTime now = DateTime.Now;
+                        TimeSpan timeSpan = now - currentClient.dob;
+                        double ts = timeSpan.TotalDays;
+                        double diff = (ts / 30);
+                        currentClient.ageInMonths = Convert.ToInt32(diff);
+
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                    //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
+                    //TODO: Jen - Continue this.
+                    //TODO: Create unit tests to test this.
+                }
+            }
+
             return currentClient;
         }
 
@@ -93,15 +141,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
             db.AddInParameter(upd_Clients, "@clientsID", DbType.Int32, thisClient.clientID);
-            db.AddInParameter(upd_Clients, "@raceID", DbType.Int32, thisClient.raceID);
-            db.AddInParameter(upd_Clients, "@ethnicityID", DbType.Int32, thisClient.ethnicityID);
-            db.AddInParameter(upd_Clients, "@clientStatusID", DbType.Int32, thisClient.clientStatusID);
-            db.AddInParameter(upd_Clients, "@diagnosisID", DbType.Int32, thisClient.diagnosisID);
-            db.AddInParameter(upd_Clients, "@primaryLanguageID", DbType.Int32, thisClient.primaryLanguageID);
-            db.AddInParameter(upd_Clients, "@schoolInfoID", DbType.Int32, thisClient.schoolInfoID);
-            db.AddInParameter(upd_Clients, "@commentsID", DbType.Int32, thisClient.commentsID);
-            db.AddInParameter(upd_Clients, "@insuranceAuthID", DbType.Int32, thisClient.insuranceAuthID);
-            db.AddInParameter(upd_Clients, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
             db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
             db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
             db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);

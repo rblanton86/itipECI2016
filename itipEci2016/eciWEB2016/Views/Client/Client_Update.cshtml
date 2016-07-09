@@ -16,33 +16,15 @@
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-
 <div class="subnav">
     <div class="column">
         <ul>
             <li>
-                @currentClient.clientID
                 <label>Alt ID:</label>
-                @BrowserHelpers.idList("AltID", Model)
             </li>
             <li>
                 <label>Find Client:</label>
-                <div class="ui-widget">
-                    @Html.DropDownList("combobox", (SelectList)ViewBag.clientList,"--Select Client--")
-                </div>
-                @*@BrowserHelpers.DataList("Clients", Model)*@
-                <script type="text/javascript">
-                    $(document).ready(function () {
-                        $("#clientIDInput").bind('select', function () {
-                            
-                            @*var staffID = $("#staffListID").val();
-                                $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
-                                $('#gridContent').replaceWith(data);
-                                $('.staffIDLabel').html(staffID);
-                            });*@
-                        });
-                    });
-                </script>
+                <input type="text" id="clientSearch" placeholder="Search client list..." />
             </li>
         </ul>
         <ul>
@@ -55,17 +37,16 @@
         </ul>
     </div>
 </div>
-
 <div class="main">
     <form>
         <ul class="flex">
             <li>
-                <label for="ClientID">Client ID:</label>
-                <input type="text" name="clientID">
+                <label for="ClientID">Alt ID:</label>
+                <input type="text" name="clientID" value="@currentClient.altID">
             </li>
             <li>
                 <label for="fullName">Full Name:</label>
-                <input type="text" name="fullName">
+                <input type="text" id="clientList" name="fullName" value="@currentClient.fullName">
             </li>
             <li>
                 <label>Office:</label>
@@ -77,15 +58,15 @@
         <ul class="flex">
             <li>
                 <label>Last Name:</label>
-                <input type="text" name="lastName">
+                <input type="text" name="lastName" value="@currentClient.lastName">
             </li>
             <li>
                 <label>First Name:</label>
-                <input type="text" name="firstName">
+                <input type="text" name="firstName" value="@currentClient.firstName">
             </li>
             <li>
                 <label>MI:</label>
-                <input type="text" size="1" name="middleInitial">
+                <input type="text" size="1" name="middleInitial" value="@currentClient.middleInitial">
             </li>
             <li>
                 <label>Status:</label>
@@ -95,24 +76,24 @@
             </li>
             <li>
                 <label>Months Old:</label>
-                <input type="text" size="3" name="ageInMonths">
+                <input type="text" size="3" name="ageInMonths" value="@currentClient.ageInMonths">
             </li>
             <li>
                 <label>DOB:</label>
-                <input type="date" name="dob">
+                <input type="date" name="dob" value="@currentClient.dob.ToString("yyyy-MM-dd")">
             </li>
             <li>
                 <label>Sex:</label>
                 <select name="sex">
-                    <option>M</option>
-                    <option>F</option>
+                    <option value="M">M</option>
+                    <option value="F">F</option>
                 </select>
             </li>
             <li>
                 <label>Ethnicity:</label>
                 <select name="ethnicity">
-                    <option>Hispanic</option>
-                    <option>Non-Hispanic</option>
+                    <option value="Hispanic">Hispanic</option>
+                    <option value="Non-Hispanic">Non-Hispanic</option>
                 </select>
             </li>
             <li>
@@ -613,134 +594,56 @@
         </ul>
     </form>
 </div>
-<script>
-    (function ($) {
-        $.widget("ui.combobox", {
-            _create: function () {
-                var input,
-                  that = this,
-                  wasOpen = false,
-                  select = this.element.hide(),
-                  selected = select.children(":selected"),
-                  value = selected.val() ? selected.text() : "",
-                  wrapper = this.wrapper = $("<span>")
-                    .addClass("ui-combobox")
-                    .insertAfter(select);
+@section JavaScript
+{
+    <script>
+        // Selects the appropriate sex from the sex dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
+        });
+    </script>
+    <script>
+        $(function () {
 
-                function removeIfInvalid(element) {
-                    var value = $(element).val(),
-                      matcher = new RegExp("^" + $.ui.autocomplete.escapeRegex(value) + "$", "i"),
-                      valid = false;
-                    select.children("option").each(function () {
-                        if ($(this).text().match(matcher)) {
-                            this.selected = valid = true;
-                            return false;
-                        }
+            var clientListData = [];
+
+            // Returns a list of clients which will be added to the combobox.
+            $.ajax({
+                type: "GET",
+                contentType: "application/json; charset=utf-8",
+                url: "GetAjaxClientList/Client",
+                dataType: "json",
+                success: function (data) {
+                    var result;
+                    $.each(data, function (index, value) {
+                        clientListData.push(
+                            {"label":
+                            value.lastName + ', ' + value.firstName,
+                            "value":
+                            value.lastName + ', ' + value.firstName,
+                            "clientId":
+                            value.clientID
+                            });
                     });
-
-                    if (!valid) {
-                        // remove invalid value, as it didn't match anything
-                        $(element)
-                          .val("")
-                          .attr("title", value + " didn't match any item")
-                          .tooltip("open");
-                        select.val("");
-                        setTimeout(function () {
-                            input.tooltip("close").attr("title", "");
-                        }, 2500);
-                        input.data("ui-autocomplete").term = "";
-                    }
                 }
+            });
 
-                input = $("<input>")
-                  .appendTo(wrapper)
-                  .val(value)
-                  .attr("title", "")
-                  .addClass("ui-state-default ui-combobox-input")
-                  .autocomplete({
-                      delay: 0,
-                      minLength: 0,
-                      source: function (request, response) {
-                          var matcher = new RegExp($.ui.autocomplete.escapeRegex(request.term), "i");
-                          response(select.children("option").map(function () {
-                              var text = $(this).text();
-                              if (this.value && (!request.term || matcher.test(text)))
-                                  return {
-                                      label: text.replace(
-                                        new RegExp(
-                                          "(?![^&;]+;)(?!<[^<>]*)(" +
-                                          $.ui.autocomplete.escapeRegex(request.term) +
-                                          ")(?![^<>]*>)(?![^&;]+;)", "gi"
-                                        ), "<strong>$1</strong>"),
-                                      value: text,
-                                      option: this
-                                  };
-                          }));
-                      },
-                      select: function (event, ui) {
-                          ui.item.option.selected = true;
-                          that._trigger("selected", event, {
-                              item: ui.item.option
-                          });
-                      },
-                      change: function (event, ui) {
-                          if (!ui.item) {
-                              removeIfInvalid(this);
-                          }
-                      }
-                  })
-                  .addClass("ui-widget ui-widget-content ui-corner-left");
+            // ClientList autocomplete jquery code.
+            $('#clientSearch').autocomplete({
+                // This is where the Ajax call goes to pull the client list.
+                source: clientListData,
 
-                input.data("ui-autocomplete")._renderItem = function (ul, item) {
-                    return $("<li>")
-                      .append("<a>" + item.label + "</a>")
-                      .appendTo(ul);
-                };
-
-                $("<a>")
-                  .attr("tabIndex", -1)
-                  .attr("title", "Show All Items")
-                  .tooltip()
-                  .appendTo(wrapper)
-                  .button({
-                      icons: {
-                          primary: "ui-icon-triangle-1-s"
-                      },
-                      text: false
-                  })
-                  .removeClass("ui-corner-all")
-                  .addClass("ui-corner-right ui-combobox-toggle")
-                  .mousedown(function () {
-                      wasOpen = input.autocomplete("widget").is(":visible");
-                  })
-                  .click(function () {
-                      input.focus();
-
-                      // close if already visible
-                      if (wasOpen) {
-                          return;
-                      }
-
-                      // pass empty string as value to search for, displaying all results
-                      input.autocomplete("search", "");
-                  });
-
-                input.tooltip({
-                    tooltipClass: "ui-state-highlight"
-                });
-            },
-
-            _destroy: function () {
-                this.wrapper.remove();
-                this.element.show();
-            }
-        });
-    })(jQuery);
-
-    $(function () {
-        $("#combobox").combobox();
-        $("#toggle").click(function () {
-            $("#combobox").toggle();
-        });
-    });
-</script>
+                // Calls the controller to store the new client in Session. Refreshes the page with new session info input.
+                change: function (event, ui) {
+                    var selectedClient = parseInt(ui.item.clientId);
+                    var url = '@Url.Action("GetAjaxClient", "Client")';
+                    $.post(url, {
+                        identifier: selectedClient
+                    }, function (result) {
+                        window.location.href = '@Url.Action("Client_Update", "Client")';
+                    });
+                }
+            });
+        })
+    </script>
+}
