@@ -85,24 +85,40 @@ namespace eciWEB2016.Controllers.DataControllers
             return new SelectList(selectList, "Value", "Text");
         }
 
-        public List<Staff> GetStaffMember(int staffID)
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_StaffByID");
-             db.AddInParameter(dbCommand, "@staffID", DbType.Int32, staffID);
+        //public Staff getStaffMember(int currentStaffID)
+        //{
+        //    Staff thisStaffMember = new Staff();
 
-            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+        //    DbCommand getStaffMemberByID = db.GetStoredProcCommand("get_StaffByID");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    var param = getStaffMemberByID.CreateParameter();
+        //    param.ParameterName = "@staffID";
+        //    param.Value = currentStaffID;
+        //    getStaffMemberByID.Parameters.Add(param);
 
-            var staffMember = (from drRow in ds.Tables[0].AsEnumerable()
-                                 select new Staff()
-                              {
-                                     firstName = drRow.Field<string>("firstName"),
-                                     lastName = drRow.Field<string>("lastName"),
-                                     staffID = drRow.Field<int>("staffID").ToString()
-                                 }).ToList();
 
-            return staffMember;
-        }
+        //    return thisStaffMember;
+        //}
+
+
+        //public List<Staff> GetStaffMember(int staffID)
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_StaffByID");
+        //     db.AddInParameter(dbCommand, "@staffID", DbType.Int32, staffID);
+
+        //    // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
+
+        //    var staffMember = (from drRow in ds.Tables[0].AsEnumerable()
+        //                         select new Staff()
+        //                      {
+        //                             firstName = drRow.Field<string>("firstName"),
+        //                             lastName = drRow.Field<string>("lastName"),
+        //                             staffID = drRow.Field<int>("staffID").ToString()
+        //                         }).ToList();
+
+        //    return staffMember;
+        //}
     }
 }

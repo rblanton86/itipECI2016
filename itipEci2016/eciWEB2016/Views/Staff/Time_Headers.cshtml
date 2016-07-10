@@ -7,6 +7,7 @@ Date:
     6.27.16
 Change History:
     6.29.16 -tpc- Added Webgrid
+    7.10.2016 -tpc- Added functionality to display selected staff member
 *********************************************************************************************************-->
 @using eciWEB2016.Controllers.DataControllers
 @using eciWEB2016.Controllers
@@ -15,11 +16,8 @@ Change History:
 @model eciWEB2016.Models.Staff
 @{
     ViewBag.Title = "Time_Headers";
-    //var grid = new WebGrid(source: Model, canSort: false, columnNames: new[] { "staffID", "firstName" });
 
-}
-
-<asp:ScriptManager ID="ScriptManager2" EnablePageMethods="true" />
+} 
 
 <link rel="stylesheet" href="~/Content/style.css" />
     <header>
@@ -32,32 +30,6 @@ Change History:
             @Html.Label("Select Staff:", new { @class = "select" })
             @Html.DropDownList("staffListID", (SelectList)ViewBag.staffList, "-- Select Staff --")
         </li>
-        <script type="text/javascript">
-            
-            $(document).ready(function () {
-            
-                $("#staffListID").change(function () {
-                    var staffID = $("#staffListID").val();
-                    $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID : staffID }, function (data) {
-                        $('#gridContent').replaceWith(data);
-                        $('.staffIDLabel').html(staffID);
-                   
-                            var StaffMember = PageMethods.getStaffMember(staffID);
-                            var jsStaffMember = jQuery.parseJSON('StaffMember');
-                            var firstName = obj.jsStaffMember[0].firstName;
-                            $('.staffFirst').html(firstName);
-                            var lastName = obj.jsStaffMember[0].lastName;
-                            $('.staffLast').html(lastName);
-
-                    });
-                });
-            });
-        </script>
-        <form id="form1">
-            <script type="text/javascript">
-                
-            </script>
-        </form>
 </header>
     <nav class="head">
         <label>Staff ID:</label>
@@ -79,6 +51,29 @@ Change History:
             @Html.Partial("TimeSheet_Grid_Partial")
         </div>
     </div>
+
+<script type="text/javascript">
+
+            $(document).ready(function () {
+
+                $("#staffListID").change(function () {
+                    var staffID = $("#staffListID").val();
+                    $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID : staffID }, function (data) {
+                        $('#gridContent').replaceWith(data);
+                        //calls webmethod to get and store selected staff member in the session
+                        $.getJSON('@Url.Action("GetStaffMember", "Staff")', { staffID: staffID },
+                            function (data) {
+                                //displays staffmember properties as html
+                                $('.staffFirst').html(data.firstName);
+                                $('.staffLast').html(data.lastName);
+                                $('.staffIDLabel').html(data.staffID);
+                            }
+                        );
+
+                    });
+                });
+            });
+</script>
 
 
 

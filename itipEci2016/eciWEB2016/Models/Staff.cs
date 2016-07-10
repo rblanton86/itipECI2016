@@ -40,6 +40,9 @@ namespace eciWEB2016.Models
         public string staffType { get; set; }
         public int staffTypeID { get; set; }
 
-        
+        //TODO: add staff middle initital
+       //TODO: add staff dob 
+       //TODO: add staff ssn
+       //TODO: add staff home, cell, work...remove phone....probably aci table
     }
 }
