@@ -9,7 +9,7 @@ Change History:
 	07-05-2016 -- jmg -- Updated stored proc to new column names for compliance.
 	07-06-2016 -- jmg -- Corrected spelling error which caused exception on webApp run.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
+ALTER PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
