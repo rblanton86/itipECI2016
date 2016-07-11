@@ -6,11 +6,15 @@ Author:
 Date:
     6.23.16
 Change History:
-
+    7.10.2016 -tpc- Added functionality for retrieving data from session
 *********************************************************************************************************-->
+@using eciWEB2016.Controllers.DataControllers
+@using eciWEB2016.Controllers
+@using staffController = eciWEB2016.Controllers.StaffController
+@using TimeSheetController = eciWEB2016.Controllers.TimeSheetController
+@model eciWEB2016.Models.Staff
 
-<!DOCTYPE html>
-<html>
+
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
     <title></title>
@@ -25,16 +29,28 @@ Change History:
         <button> Delete Staff </button>
         <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
     </nav>
+    @{
+        eciWEB2016.Models.Staff currentStaffMember = new eciWEB2016.Models.Staff();
+        //pull staffmember from session and store in variable
+        if (Session["staffMember"] != null)
+        {
+            currentStaffMember = (eciWEB2016.Models.Staff)Session["staffMember"];
+        }
+        //pull staffList from session and store in variable
+        if (Session["staffList"] != null)
+        {
+            List<eciWEB2016.Models.Staff> currentStaffList = Session["staffList"] as List<eciWEB2016.Models.Staff>;
+    }
+    }
     <div class="center">
-        <label>SelectStaff Member                     </label><select>
-            <option value="1">Select                     </option>
-        </select>
+        @Html.Label("Select Staff:", new { @class = "select" })
+        @Html.DropDownList("staffListID", (SelectList)ViewBag.staffList, "-- Select Staff --")
     </div>
     <div class="main">
         <ul class="flex">
 
             <li>
-                <label>Staff ID:</label><Input type="text"></Input>
+                <label>Staff ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
                 <label>Status</label><select>
                     <option value="1">A</option>
                     <option value="2">I</option>
@@ -44,30 +60,30 @@ Change History:
                 </select>
             </li>
             <li>
-                <label>Staff Last Name:</label><input type="Text"></input>
-                <label>Staff First Name:</label><input type="Text"></input>
-                <label>Middle Initial:</label><input type="Text" size=1></input>
+                <label>Staff Last Name:</label><input type="Text" name="staffLast" value="@currentStaffMember.lastName">
+                <label>Staff First Name:</label><input type="Text" name="staffFirst" value="@currentStaffMember.firstName">
+                <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit">
             </li>
 
             <li>
-                <label>Date of Birth:</label><input type="Text"></input>
-                <label>SSN:</label><input type="Text" size=1></input>
+                <label>Date of Birth:</label><input type="Text" name="staffDOB">
+                <label>SSN:</label><input type="Text" size=1 name="staffSSN">
             </li>
         </ul>
         <ul>
             <span>
                 <li>
-                    <label>Address:</label><input type="Text"></input>
-                    <label>Zip:</label><input type="Text" size=3></input>
-                    <label>City:</label><input type="Text" size=8></input>
+                    <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.address1">
+                    <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.zip">
+                    <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.city">
                     <label>State:</label><select>
                         <option value="1">AL</option>
                     </select>
                 </li>
                 <li>
-                    <label>Home Phone:</label><input type="Text"></input>
-                    <label>Cell:</label><input type="Text"></input>
-                    <label>Work:</label><input type="Text"></input>
+                    <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="@currentStaffMember.phone">
+                    <label>Cell:</label><input type="Text" name="staffCell">
+                    <label>Work:</label><input type="Text" name="staffWork">
                 </li>
 
             </span>
@@ -97,39 +113,57 @@ Change History:
             </li>
 
             <li>
-                <label>Profl Licence #:</label><input type="Text" size=10></input>
-                <label>Reg/Certif #:</label><input type="Text" size=10></input>
-                <label>NPI #:</label><input type="Text" size=10></input>
+                <label>Profl Licence #:</label><input type="Text" size=10>
+                <label>Reg/Certif #:</label><input type="Text" size=10>
+                <label>NPI #:</label><input type="Text" size=10>
             </li>
             <li>
-                <label>Med Provider #:</label><input type="Text"></input>
-                <label>Taxonomy #:</label><input type="Text" size=10></input>
+                <label>Med Provider #:</label><input type="Text">
+                <label>Taxonomy #:</label><input type="Text" size=10>
             </li>
             <li>
-                <label>Tricare Provider #:</label><input type="Text"></input>
-                <label>BCBS Provider #:</label><input type="Text"></input>
+                <label>Tricare Provider #:</label><input type="Text">
+                <label>BCBS Provider #:</label><input type="Text">
             </li>
             <li>
-                <label>Auto Liability Expire:</label><input type="Text" size=10></input>
-                <label>Cert Expiration Date:</label><input type="Text" size=10></input>
+                <label>Auto Liability Expire:</label><input type="Text" size=10>
+                <label>Cert Expiration Date:</label><input type="Text" name="AutoExp" size=10>
             </li>
             <li>
-                <label>Prof Licence Expiration:</label><input type="Text"></input>
-                <label>Incl Time Entry?:</label><input type="checkbox"></input>
-                <label>Time Entry Mgmnt?:</label><input type="checkbox"></input>
+                <label>Prof Licence Expiration:</label><input type="Text">
+                <label>Incl Time Entry?:</label><input type="checkbox">
+                <label>Time Entry Mgmnt?:</label><input type="checkbox">
             </li>
             <li>
-                <label>Employment Date:</label><input type="Text" size=10></input>
-                <label>Termination Date:</label><input type="Text" size=10></input>
+                <label>Employment Date:</label><input type="Text" size=10>
+                <label>Termination Date:</label><input type="Text" size=10>
             </li>
             <li>
-                <label>Drivers Licence #:</label><input type="Text"></input>
+                <label>Drivers Licence #:</label><input type="Text">
             </li>
             <li>
-                <label>Comments:</label><input type="Text" size=50></input>
+                <label>Comments:</label><input type="Text" size=50>
             </li>
         </ul>
     </div>
 </body>
-</html>
+
+
+
+<script type="text/javascript">
+
+            $(document).ready(function () {
+                //for onchange of selectstaff dropdown
+                $("#staffListID").change(function () {
+                    var staffID = $("#staffListID").val();
+                   
+                    //puts the newly selected staff member in the session
+                        $.getJSON('@Url.Action("GetStaffMember", "Staff")', { id: staffID },
+                            function (data) {
+                                // $('[name=elementname]').html(data.firstName);
+                            }
+                        );
+                });
+            });
+</script>
 

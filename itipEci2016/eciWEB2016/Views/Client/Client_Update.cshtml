@@ -166,7 +166,7 @@
                 <input type="checkbox">
             </li>
         </ul>
-        <ul>
+        <ul class="flex">
             <li>
                 <label>ECI:</label>
                 <select></select>
@@ -175,6 +175,8 @@
                 <label>Accounting System ID:</label>
                 <input type="text">
             </li>
+            </ul>
+        <ul class="flex">
             <li>
                 <button type="button">Insurance Update</button>
             </li>
@@ -185,20 +187,24 @@
                 <button type="button">Credit Card Update</button>
             </li>
         </ul>
-        <ul>
+        <ul class="flex">
             <li>
-                <label>Diagnosis Type</label>
-            </li>
-            <li>
+                <label>Dx Type</label>
                 <select>
                     <option>Primary</option>
                     <option>Alternate</option>
                 </select>
             </li>
-        </ul>
-        <ul>
             <li>
-                <label>Diagnosis Code</label>
+                <label>Dx Code</label>
+                <input type="text" id="dxCodeList" name="dxCode" />
+            </li>
+            <li>
+                <label>Diagnosis</label>
+                <input type="text" id="dxDescription" name="dx" />
+            </li>
+            <li>
+                <button type="button">Add</button>
             </li>
         </ul>
         <h4>Physician Information:</h4>
