@@ -567,3 +567,13 @@
         </li>
     </ul>
 </form>
+
+@section JavaScript
+{
+    <script>
+        // Selects the appropriate sex from the sex dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
+        });
+    </script>
+}
