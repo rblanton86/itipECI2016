@@ -16,11 +16,7 @@ Change History:
 @model eciWEB2016.Models.Staff
 
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
-    <title></title>
-</head>
-<body>
+
     <header>
         <h1>Staff Update</h1>
     </header>
@@ -148,10 +144,11 @@ Change History:
             </li>
         </ul>
     </div>
-</body>
 
 
-<script type="text/javascript">
+@section Javascipt
+{
+<script>
 
             $(document).ready(function () {
                 //for onchange of selectstaff dropdown
@@ -167,4 +164,4 @@ Change History:
                 });
             });
 </script>
-
+}

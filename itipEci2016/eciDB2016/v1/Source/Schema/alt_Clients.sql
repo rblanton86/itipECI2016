@@ -85,4 +85,15 @@ ELSE
 					ADD middleInitial VARCHAR(1)
 				PRINT 'Added middleInitial column on Clients table.'
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name = 'sexID')
+		BEGIN
+			PRINT 'Unneeded, sexID column exists.'
+		END
+	ELSE
+		BEGIN
+			ALTER TABLE Clients
+				ADD sexID INT FOREIGN KEY REFERENCES Sex(sexID)
+			PRINT 'Added sexID column on Clients table.'
+		END
 	END
