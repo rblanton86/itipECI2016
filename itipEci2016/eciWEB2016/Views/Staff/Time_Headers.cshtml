@@ -51,12 +51,14 @@ Change History:
             @Html.Partial("TimeSheet_Grid_Partial")
         </div>
     </div>
-
-<script type="text/javascript">
+@section JavaScript 
+{
+<script>
 
             $(document).ready(function () {
 
                 $("#staffListID").change(function () {
+                 
                     var staffID = $("#staffListID").val();
                     $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID : staffID }, function (data) {
                         $('#gridContent').replaceWith(data);
@@ -68,12 +70,13 @@ Change History:
                                 $('.staffFirst').html(data.firstName);
                                 $('.staffLast').html(data.lastName);
                                 $('.staffIDLabel').html(data.staffID);
+                               
                             }
                         );
                 });
             });
 </script>
-
+    }
 
 
 

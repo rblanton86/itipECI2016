@@ -27,20 +27,7 @@ namespace eciWEB2016.Controllers
     public class StaffController : Controller
     {
         // GET: Staff
-        public ActionResult Staff_Update()
-        {
-            Staff staff = new Staff();
-            ViewBag.staffList = GetStaffList();
 
-            return View();
-        }
-
-        public ActionResult Add_Staff()
-        {
-            return View();
-        }
-
-        // GET: Staff/TimeSheets
         public ActionResult Time_Sheets()
         {
             return View();
@@ -49,7 +36,7 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
-        
+        //creates a list of staffmembers and stores in the session
         public List<Staff> StaffList()
         {
             DataSet dsStaff;
@@ -72,6 +59,7 @@ namespace eciWEB2016.Controllers
              return staff;
         }
 
+        //gets a single staffmember from session of stafflist and stores staffmember in session
         [System.Web.Services.WebMethod]
         public JsonResult GetStaffMember(int staffID)
         {
@@ -104,15 +92,16 @@ namespace eciWEB2016.Controllers
             }
         }
 
+        //used to fill webgrid with staff details
         public ActionResult Staff_Time_Headers(string staffID)
         {
             try
             {
                 List<Staff> staffList;
                 StaffDataController dataController = new StaffDataController();
-
+                //staffList() creates a list of all staff members and stores it to the session
                 staffList = StaffList();
-
+                
                 return PartialView("TimeSheet_Grid_Partial", staffList);
 
             }
@@ -122,7 +111,7 @@ namespace eciWEB2016.Controllers
             }
 
         }
-
+        //creates a list of staff members as a selectlist. Used for dropdown boxes
         public SelectList GetStaffList()
         {
             SelectList staffList;
@@ -132,7 +121,7 @@ namespace eciWEB2016.Controllers
 
             return new SelectList(staffList, "Value", "Text", new Staff().staffID);
         }
-
+        //returns time headers view and populates dropdown box
         public ActionResult Time_Headers()
         {
             Staff staff = new Staff();
@@ -153,18 +142,21 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Staff/Create
-        public ActionResult Create()
+        //returns Add_Staff View
+        public ActionResult Add_Staff()
         {
             return View();
         }
 
+
         // POST: Staff/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult CreateStaffMember(FormCollection collection)
         {
             try
             {
-                // TODO: Add insert logic here
+                Staff newStaff = new Staff();
+
                 
 
 
@@ -177,8 +169,13 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Staff/Edit/5
-        public ActionResult Edit(int id)
+
+        //returns staffUpdate page and populates dropdown 
+        public ActionResult Staff_Update()
         {
+            Staff staff = new Staff();
+            ViewBag.staffList = GetStaffList();
+
             return View();
         }
 
