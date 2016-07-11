@@ -83,6 +83,7 @@
     <None Include="v1\Source\Schema\alt_Insurance.sql" />
     <None Include="v1\Source\Schema\alt_Physician.sql" />
     <None Include="v1\Source\Schema\alt_ReferralSource.sql" />
+    <None Include="v1\Source\Schema\init_TypeTableData.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
