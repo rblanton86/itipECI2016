@@ -84,5 +84,16 @@ ELSE
 					ADD deleted bit 
 				PRINT 'Added deleted column on Staff Table.'
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name = 'staffSSN')
+			BEGIN
+				PRINT 'Unneeded: staffSSN already exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Staff
+					ADD staffSSN int 
+				PRINT 'Added staffSSN column on Staff Table.'
+			END
 	END
 

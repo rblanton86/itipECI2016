@@ -85,20 +85,55 @@ namespace eciWEB2016.Controllers.DataControllers
             return new SelectList(selectList, "Value", "Text");
         }
 
-        //public Staff getStaffMember(int currentStaffID)
-        //{
-        //    Staff thisStaffMember = new Staff();
+        public Staff getStaffMember(int currentStaffID)
+        {
+            Staff thisStaffMember = new Staff();
 
-        //    DbCommand getStaffMemberByID = db.GetStoredProcCommand("get_StaffByID");
+            DbCommand getStaffMemberByID = db.GetStoredProcCommand("get_StaffByID");
 
-        //    var param = getStaffMemberByID.CreateParameter();
-        //    param.ParameterName = "@staffID";
-        //    param.Value = currentStaffID;
-        //    getStaffMemberByID.Parameters.Add(param);
+            var param = getStaffMemberByID.CreateParameter();
+            param.ParameterName = "@staffID";
+            param.Value = currentStaffID;
+            getStaffMemberByID.Parameters.Add(param);
+
+            using (getStaffMemberByID)
+            {
+                using (IDataReader staffReader = db.ExecuteReader(getStaffMemberByID))
+                {
+                    if (staffReader.Read() == true)
+                    {
+                        int ordinal = staffReader.GetOrdinal("staffID");
+                        thisStaffMember.staffID = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
+
+                        ordinal = staffReader.GetOrdinal("firstName");
+                        thisStaffMember.firstName = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+                        ordinal = staffReader.GetOrdinal("lastName");
+                        thisStaffMember.lastName = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+                        thisStaffMember.fullName = thisStaffMember.firstName + " " + thisStaffMember.lastName;
+
+                        ordinal = staffReader.GetOrdinal("staffSSN");
+                        thisStaffMember.SSN = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
+
+                        //ordinal = staffReader.GetOrdinal("dob");
+                        //thisStaffMember.DOB = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
 
 
-        //    return thisStaffMember;
-        //}
+                    }
+                    else
+                    {
+                        return null;
+                    }
+
+                    //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
+                    //TODO: Jen - Continue this.
+                }
+            }
+
+            return thisStaffMember;
+        }
+
 
 
         //public List<Staff> GetStaffMember(int staffID)
