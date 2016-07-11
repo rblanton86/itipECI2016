@@ -62,11 +62,8 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
-                var redirectUrl = new UrlHelper(Request.RequestContext).Action("Client_Update", "Client");
-                return Json(new { Url = redirectUrl });
             }
-            else
-                return View();
+            return PartialView("Client_Partial");
         }
 
         // GET: Client/Details/5
