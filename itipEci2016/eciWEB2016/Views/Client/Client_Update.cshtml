@@ -8,14 +8,6 @@
     <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
     <button type="button"> View Services for this Client </button>
 </nav>
-@{
-    eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
-
-    if (Session["client"] != null)
-    {
-        currentClient = (eciWEB2016.Models.Client)Session["client"];
-    }
-}
 <div class="subnav">
     <div class="column">
         <ul>
@@ -37,17 +29,11 @@
         </ul>
     </div>
 </div>
-<div class="main" id="main">
+<div class="main" id="clientMain">
     @Html.Partial("Client_Partial")
 </div>
 @section JavaScript
 {
-    <script>
-        // Selects the appropriate sex from the sex dropdown table based on result of the current client in session.
-        $(function() {
-            $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
-        });
-    </script>
     <script>
         $(function () {
 
@@ -81,15 +67,12 @@
 
                 // Calls the controller to store the new client in Session. Refreshes the page with new session info input.
                 change: function (event, ui) {
-                    var selectedClient = parseInt(ui.item.clientId);
                     var url = '@Url.Action("GetAjaxClient", "Client")';
-                    $.post(url, {
-                        identifier: selectedClient
-                    },
-                    function (data){
-                        $('#main').html(data);
-                    }
-                    );
+                    $.post(
+                        url,
+                        { identifier: ui.item.clientId },
+                        function (data) { $('#clientMain').html(data); }
+                        );
                 }
             });
         })
