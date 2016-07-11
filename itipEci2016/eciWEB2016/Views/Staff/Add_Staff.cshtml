@@ -1,20 +1,13 @@
 ﻿<!--***********************************************************************************************************
-Description:   HTML of the staff update page
+Description:   HTML of the create staff page
 
 Author:
     Tyrell Powers-Crane
 Date:
-    6.23.16
+    7.11.16
 Change History:
-    7.10.2016 -tpc- Added functionality for retrieving data from session
-    7.11.2016 -tpc- Added functionality to display selected staff member's properties
-*********************************************************************************************************-->
-@using eciWEB2016.Controllers.DataControllers
-@using eciWEB2016.Controllers
-@using staffController = eciWEB2016.Controllers.StaffController
-@using TimeSheetController = eciWEB2016.Controllers.TimeSheetController
-@model eciWEB2016.Models.Staff
 
+*********************************************************************************************************-->
 
 <head>
     <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
@@ -22,37 +15,16 @@ Change History:
 </head>
 <body>
     <header>
-        <h1>Staff Update</h1>
+        <h1>Add Staff</h1>
     </header>
     <nav>
-        <button type="button" onclick="location.href='@Url.Action("Add_Staff", "Staff")'"> Add Staff </button>
-        <button> Change Data </button>
-        <button> Delete Staff </button>
         <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
     </nav>
-    @{
-        eciWEB2016.Models.Staff currentStaffMember = new eciWEB2016.Models.Staff();
-        //pull staffmember from session and store in variable
-        if (Session["staffMember"] != null)
-        {
-            currentStaffMember = (eciWEB2016.Models.Staff)Session["staffMember"];
-        }
-        //pull staffList from session and store in variable
-        if (Session["staffList"] != null)
-        {
-            List<eciWEB2016.Models.Staff> currentStaffList = Session["staffList"] as List<eciWEB2016.Models.Staff>;
-    }
-    }
-    <div class="center">
-        @*populates the select staff member dropdown*@
-        @Html.Label("Select Staff:", new { @class = "select" })
-        @Html.DropDownList("staffListID", (SelectList)ViewBag.staffList, "-- Select Staff --")
-    </div>
     <div class="main">
         <ul class="flex">
 
             <li>
-                <label>Staff ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
+                <label>Staff ID:</label><Input type="text" name="staffID" >
                 <label>Status</label><select>
                     <option value="1">A</option>
                     <option value="2">I</option>
@@ -62,28 +34,28 @@ Change History:
                 </select>
             </li>
             <li>
-                <label>Staff Last Name:</label><input type="Text" name="staffLast" value="@currentStaffMember.lastName">
-                <label>Staff First Name:</label><input type="Text" name="staffFirst" value="@currentStaffMember.firstName">
-                <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit" value="@currentStaffMember.middleInitial">
+                <label>Staff Last Name:</label><input type="Text" name="staffLast" >
+                <label>Staff First Name:</label><input type="Text" name="staffFirst" >
+                <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit">
             </li>
 
             <li>
-                <label>Date of Birth:</label><input type="Text" name="staffDOB" value="@currentStaffMember.DOB">
-                <label>SSN:</label><input type="Text" size=1 name="staffSSN" value="@currentStaffMember.SSN">
+                <label>Date of Birth:</label><input type="Text" name="staffDOB" >
+                <label>SSN:</label><input type="Text" size=1 name="staffSSN" >
             </li>
         </ul>
         <ul>
             <span>
                 <li>
-                    <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.address1">
-                    <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.zip">
-                    <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.city">
+                    <label>Address:</label><input type="Text" name="staffAddress" >
+                    <label>Zip:</label><input type="Text" size=3 name="staffZip" >
+                    <label>City:</label><input type="Text" size=8 name="staffCity" >
                     <label>State:</label><select>
                         <option value="1">AL</option>
                     </select>
                 </li>
                 <li>
-                    <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="@currentStaffMember.phone">
+                    <label>Home Phone:</label><input type="Text" name="StaffHomePhone" >
                     <label>Cell:</label><input type="Text" name="staffCell">
                     <label>Work:</label><input type="Text" name="staffWork">
                 </li>
@@ -146,25 +118,13 @@ Change History:
             <li>
                 <label>Comments:</label><input type="Text" size=50>
             </li>
+            <li>
+                <button>Submit</button>
+            </li>
         </ul>
     </div>
 </body>
 
 
-<script type="text/javascript">
 
-            $(document).ready(function () {
-                //for onchange of selectstaff dropdown
-                $("#staffListID").change(function () {
-                    var staffID = $("#staffListID").val();
-                   
-                    //puts the newly selected staff member in the session
-                        $.getJSON('@Url.Action("GetStaffMember", "Staff")', { staffID: staffID },
-                            function (data) {
-                                // $('[name=elementname]').html(data.firstName);
-                            }
-                        );
-                });
-            });
-</script>
 
