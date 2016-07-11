@@ -6,7 +6,7 @@ Author:
 Date: 
 	6.29.2016
 Change History:
-	
+	7.11.2016 -tpc- Added route for AddStaff View
 ************************************************************************************************************/
 using System;
 using System.Collections.Generic;
@@ -32,6 +32,11 @@ namespace eciWEB2016.Controllers
             Staff staff = new Staff();
             ViewBag.staffList = GetStaffList();
 
+            return View();
+        }
+
+        public ActionResult Add_Staff()
+        {
             return View();
         }
 
@@ -89,6 +94,7 @@ namespace eciWEB2016.Controllers
             }
             else
             {
+                //if staffList is null, fills staffList then fills staffMember both to session
                 StaffList();
                 staffList = (List<Staff>)System.Web.HttpContext.Current.Session["staffList"];
                 staffMember = staffList.FirstOrDefault(p => Convert.ToInt32(p.staffID) == staffID);
