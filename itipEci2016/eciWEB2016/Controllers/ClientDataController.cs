@@ -31,18 +31,19 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        public DataSet GetAllClients()
-        {
+        // TODO: Remove if we don't end up using anywhere.
+        //public DataSet GetAllClients()
+        //{
 
-            // Readies stored proc from server.
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
+        //    // Readies stored proc from server.
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
 
-            // Executes stored proc to return values into a DataSet.
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    // Executes stored proc to return values into a DataSet.
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            // Returns a dataset of all clients.
-            return ds;
-        }
+        //    // Returns a dataset of all clients.
+        //    return ds;
+        //}
 
         public List<Client> GetListClients()
         {
@@ -128,7 +129,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
                     //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
                     //TODO: Jen - Continue this.
-                    //TODO: Create unit tests to test this.
                 }
             }
 

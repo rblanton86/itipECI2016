@@ -15,7 +15,6 @@ E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\eciWEB2016.Te
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\eciWEB2016.Tests.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\eciWEB2016.Tests.pdb
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\eciWEB2016.dll
-E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\Microsoft.VisualStudio.QualityTools.UnitTestFramework.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\Microsoft.Web.Infrastructure.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\Newtonsoft.Json.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016.Tests\bin\Debug\System.Web.Helpers.dll
