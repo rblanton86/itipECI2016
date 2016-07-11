@@ -333,6 +333,7 @@
     <Content Include="Views\Staff\Time_Sheets.cshtml" />
     <Content Include="Views\Shared\TimeSheet_Grid_Partial.cshtml" />
     <Content Include="Views\Staff\Add_Staff.cshtml" />
+    <Content Include="Views\Shared\Client_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

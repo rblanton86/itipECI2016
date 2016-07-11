@@ -29,7 +29,7 @@ ELSE
 			VALUES (1, 'Email'), (2, 'Home Phone'), (3, 'Mobile Phone'), (4, 'Work Phone'), (5, 'Business Phone'), (6, 'Fax'), (7, 'Other')
 
 		-- Turns off identity insert, as can only be on on one table at a time.
-		SET IDENTITY_INSERT AdditionalContactInfoType ON
+		SET IDENTITY_INSERT AdditionalContactInfoType OFF
 
 		-- Notifies DBA of changes made and pulls up table for visual verification.
 		PRINT 'Additional Contact Info Types added'
@@ -47,9 +47,15 @@ ELSE
 		-- Deletes any previously made additions in order to reset table.
 		DELETE FROM AddressesType
 
+		-- Turns on identity insert.
+		-- SET IDENTITY_INSERT AddressesType ON
+
 		-- Adds base contact info types to database table.
 		INSERT INTO AddressesType (addressesType)
 			VALUES ('Street Address'), ('Mailing Address'), ('Business Address'), ('Other')
+
+		-- Turns off identity insert, as can only be on on one table at a time.
+		-- SET IDENTITY_INSERT AddressesType OFF
 
 		-- Notifies DBA of changes made and pulls up table for visual verification.
 		PRINT 'Additional Contact Info Types added'
