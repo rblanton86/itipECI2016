@@ -48,5 +48,6 @@ namespace eciWEB2016.Models
         public Family clientFamily { get; set; }
         public Staff clientStaff { get; set; }
         public bool deleted { get; set; }
+        public string office { get; set; }
     }
 }

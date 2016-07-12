@@ -18,7 +18,7 @@
         </li>
         <li>
             <label>Office:</label>
-            <select name="fullName">
+            <select name="office">
                 <option>M</option>
             </select>
         </li>
@@ -38,7 +38,7 @@
         </li>
         <li>
             <label>Status:</label>
-            <select name="status">
+            <select name="clientStatus">
                 <option>A</option>
             </select>
         </li>
@@ -99,7 +99,9 @@
         </li>
         <li class="inline">
             <label>State:</label>
-            <input type="text" size="2" name="state">
+            <select name="state">
+                <option>AK</option>
+            </select>
         </li>
         <li class="inline">
             <label>Zip:</label>
@@ -120,24 +122,25 @@
         </li>
         <li>
             <label>Service Area Exception:</label>
-            <input type="checkbox" value="ServiceAreaException" name="serviceAreaExeption">
+            <input type="checkbox" value="Service Area Exception" name="serviceAreaExeption">
         </li>
         <li>
             <label>Case Manager:</label>
+            <input type="text" value="Case Manager" name="caseManager" />
         </li>
         <li>
             <label>TKID's Case Number:</label>
-            <input type="text">
+            <input type="text" name="TKIDcaseNumber">
         </li>
         <li>
             <label>Consent to Release Information?</label>
-            <input type="checkbox">
+            <input type="checkbox" name="consentROI">
         </li>
     </ul>
     <ul class="flex">
         <li>
             <label>ECI:</label>
-            <select></select>
+            <select name="eci"></select>
         </li>
         <li>
             <label>Accounting System ID:</label>
@@ -575,5 +578,10 @@
         $(function() {
             $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
         });
+    </script>
+    <script>
+        $(function () {
+            $('select[name^="office" option[value="@currentClient.office"').attr("selected", "selected");
+        })
     </script>
 }
