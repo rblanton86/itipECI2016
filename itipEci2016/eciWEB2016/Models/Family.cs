@@ -14,11 +14,11 @@ namespace eciWEB2016.Models
         public DateTime dob { get; set; }
         public int sexID { get; set; }
         public int raceID { get; set; }
-        public Address familyAddress { get; set; }
         public bool isGuardian { get; set; }
         public int additionalContactInfoID { get; set; }
         public string additionalContactInfo { get; set; }
         public string occupation { get; set; }
         public string employer { get; set; }
+        public List<Address> familyAddress { get; set; }
     }
 }

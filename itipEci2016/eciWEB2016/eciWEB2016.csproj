@@ -228,6 +228,7 @@
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Insurance.cs" />
+    <Compile Include="Models\InsuranceAuthorization.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Referral.cs" />
     <Compile Include="Models\Staff.cs" />

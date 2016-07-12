@@ -74,30 +74,6 @@ CREATE TABLE DiagnosisType (
 	diagnosisType VARCHAR(25)
 	)
 
--- Creates DiagnosisCode table.
-CREATE TABLE DiagnosisCode (
-	diagnosisCodeID INT IDENTITY (1,1) PRIMARY KEY,
-	diagnosisCode VARCHAR(10),
-	diagnosisDescription VARCHAR(100)
-)
-
--- Creates DiagnosisType table
-CREATE TABLE DiagnosisType (
-	diagnosisTypeID INT IDENTITY (1,1) PRIMARY KEY,
-	diagnosisType VARCHAR(10)
-)
-
--- Creates Diagnosis table.
-CREATE TABLE Diagnosis (
-	diagnosisID INT IDENTITY(1,1) PRIMARY KEY(DiagnosisID),
-	diagnosisCodeID INT CONSTRAINT FK_diagnosis_diagnosisCode FOREIGN KEY REFERENCES DiagnosisCode(diagnosisCodeID),
-	diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
-	isPrimary BIT,
-	diagnosis_From DATE,
-	diagnosis_To DATE,
-	deleted BIT
-)
-
 --Creates Extra/comments table
 CREATE TABLE Comments (
 	commentsID INT IDENTITY (1,1) PRIMARY KEY (commentsID) NOT NULL,
@@ -206,7 +182,6 @@ CREATE TABLE Clients (
 	raceID INT FOREIGN KEY REFERENCES Race(raceID),
 	ethnicityID INT FOREIGN KEY REFERENCES Ethnicity(ethnicityID),
 	clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
-	diagnosisID INT FOREIGN KEY REFERENCES Diagnosis(diagnosisID),
 	primaryLanguageID INT FOREIGN KEY REFERENCES PrimaryLanguage(primaryLanguageID),
 	schoolInfoID INT FOREIGN KEY REFERENCES SchoolInformation(schoolInfoID),
 	commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
@@ -232,6 +207,31 @@ CREATE TABLE Clients (
 	accountingSystemID VARCHAR(25), -- TODO: Add to proc, TODO: What is this? Is this the right data type?
 	deleted BIT
 	)
+
+-- Creates DiagnosisCode table.
+CREATE TABLE DiagnosisCode (
+	diagnosisCodeID INT IDENTITY (1,1) PRIMARY KEY,
+	diagnosisCode VARCHAR(10),
+	diagnosisDescription VARCHAR(100)
+)
+
+-- Creates DiagnosisType table
+CREATE TABLE DiagnosisType (
+	diagnosisTypeID INT IDENTITY (1,1) PRIMARY KEY,
+	diagnosisType VARCHAR(10)
+)
+
+-- Creates Diagnosis table.
+CREATE TABLE Diagnosis (
+	diagnosisID INT IDENTITY(1,1) PRIMARY KEY(DiagnosisID),
+	clientID INT CONSTRAINT FK_diagnosis_client FOREIGN KEY REFERENCES Client(clientID),
+	diagnosisCodeID INT CONSTRAINT FK_diagnosis_diagnosisCode FOREIGN KEY REFERENCES DiagnosisCode(diagnosisCodeID),
+	diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
+	isPrimary BIT,
+	diagnosis_From DATE,
+	diagnosis_To DATE,
+	deleted BIT
+)
 
 -- linking tables
 CREATE TABLE LnkAddressesFamily (

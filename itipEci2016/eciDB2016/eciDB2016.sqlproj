@@ -90,6 +90,7 @@
     <None Include="v1\Source\Schema\init_Office.sql" />
     <None Include="v1\Source\Schema\init_DiagnosisType.sql" />
     <None Include="v1\Source\Schema\init_DiagnosisCode.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -282,5 +283,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint4\Schema\alt_Diagnosis.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_AllClients.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisByClientID.sql" />
   </ItemGroup>
 </Project>

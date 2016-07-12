@@ -34,6 +34,7 @@ IF ISNULL(@dx, 0) = 0
 		--Creates Diagnosis table if it doesn't exist.
 		CREATE TABLE Diagnosis (
 			diagnosisID INT IDENTITY(1,1) PRIMARY KEY(DiagnosisID),
+			clientID INT CONSTRAINT FK_diagnosis_client FOREIGN KEY REFERENCES Client(clientID),
 			diagnosisCodeID INT CONSTRAINT FK_diagnosis_diagnosisCode FOREIGN KEY REFERENCES DiagnosisCode(diagnosisCodeID),
 			diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
 			isPrimary BIT,
@@ -179,4 +180,26 @@ ELSE
 					ADD diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID)
 				PRINT 'Added diagnosisTypeID foreign key column on Diagnosis table'
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'clientID')
+			BEGIN
+				PRINT 'Did not add clientID column: already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Diagnosis
+					ADD clientID INT CONSTRAINT FK_diagnosis_client FOREIGN KEY REFERENCES Clients(clientID)
+				PRINT 'Added clientID foreign key column on Diagnosis table'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'isPrimary')
+			BEGIN
+				PRINT 'isPrimary Column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Diagnosis
+					ADD isPrimary BIT
+			END
+
 	END
