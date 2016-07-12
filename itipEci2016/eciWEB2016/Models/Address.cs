@@ -16,5 +16,6 @@ namespace eciWEB2016.Models
         public int zip { get; set; }
         public string county { get; set; }
         public string mapsco { get; set; }
+        public bool deleted { get; set; }
     }
 }

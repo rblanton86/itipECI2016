@@ -87,10 +87,6 @@
     <None Include="v1\Source\Schema\alt_Physician.sql" />
     <None Include="v1\Source\Schema\alt_ReferralSource.sql" />
     <None Include="v1\Source\Schema\init_TypeTableData.sql" />
-    <None Include="v1\Source\Schema\init_Office.sql" />
-    <None Include="v1\Source\Schema\init_DiagnosisType.sql" />
-    <None Include="v1\Source\Schema\init_DiagnosisCode.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -221,6 +217,7 @@
     <None Include="v1\Source\Schema\alt_Staff.sql" />
     <None Include="v1\Source\Schema\del_DiagnosisType.sql" />
     <None Include="v1\Source\Schema\init_Database.sql" />
+    <None Include="v1\Source\Schema\init_DiagnosisColumns.sql" />
     <None Include="v1\Source\Schema\init_DummyData.sql" />
     <None Include="v1\Source\Schema\init_LoggingTables.sql" />
     <None Include="v1\Source\Schema\init_Sex.sql" />
@@ -252,42 +249,25 @@
     <None Include="v1\Release\Sprint3\Schema\alt_ReferralSource.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\alt_Clients.sql" />
+    <None Include="v1\Release\Sprint3\Schema\ins_StaffDummyData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\init_Database.sql" />
+    <None Include="v1\Source\Schema\ins_StaffDummyData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\init_Office.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\init_TimeHeaderTable.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByAltID.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByID.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByName.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Stored_Procedures\upd_Clients.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\init_DiagnosisType.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\init_DiagnosisCode.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\alt_Diagnosis.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Stored_Procedures\get_AllClients.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisByClientID.sql" />
+    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByAltID.sql" />
+    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByID.sql" />
+    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByName.sql" />
+    <Build Include="v1\Release\Sprint4\Stored_Procedures\upd_Clients.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\alt_Clients.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\alt_Diagnosis.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\init_Database.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\init_DiagnosisCode.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\init_DiagnosisType.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\init_Office.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\init_TimeHeaderTable.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\upd_AdditionalContactInfo.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\ins_Addresses.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\ins_AdditonalContactInfo.sql" />
   </ItemGroup>
 </Project>

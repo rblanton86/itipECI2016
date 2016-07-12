@@ -33,10 +33,12 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
+
         public ActionResult Time_Sheet_Service_Code()
         {
             return View();
         }
+
         //creates a list of staffmembers and stores in the session
         public List<Staff> StaffList()
         {
@@ -59,6 +61,8 @@ namespace eciWEB2016.Controllers
 
              return staff;
         }
+
+
         [HttpPost]
         [ActionName("GetAjaxStaff")]
         [WebMethod(EnableSession = true)]
@@ -75,40 +79,6 @@ namespace eciWEB2016.Controllers
 
 
         }
-
-
-        ////gets a single staffmember from session of stafflist and stores staffmember in session
-        //[System.Web.Services.WebMethod]
-        //public JsonResult GetStaffMember(int staffID)
-        //{
-
-        //    Staff staffMember = new Staff();
-        //    List<Staff> staffList = new List<Staff>();
-
-        //    if (Session["staffList"] != null)
-        //    {
-
-        //        //pulls the staffList session and stores it in a new staffList List
-        //        staffList = (List<Staff>)System.Web.HttpContext.Current.Session["staffList"];
-        //        //selects from staffList the first list item with matching parameter staffID
-        //        staffMember = staffList.FirstOrDefault(p => p.staffID == staffID.ToString());
-        //        //stores the selected staffMember into the session
-        //        System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
-        //        //creates json string with defined Property names and dynamic property values    
-        //        //return Json(new { id = staffMember.staffID, firstName = staffMember.firstName, lastName = staffMember.lastName });
-        //        return Json(staffMember, JsonRequestBehavior.AllowGet);
-        //    }
-        //    else
-        //    {
-        //        //if staffList is null, fills staffList then fills staffMember both to session
-        //        StaffList();
-        //        staffList = (List<Staff>)System.Web.HttpContext.Current.Session["staffList"];
-        //        staffMember = staffList.FirstOrDefault(p => Convert.ToInt32(p.staffID) == staffID);
-        //        System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
-        //        // return Json(new { id = staffMember.staffID, firstName = staffMember.firstName, lastName = staffMember.lastName });
-        //        return Json(staffMember, JsonRequestBehavior.AllowGet);
-        //    }
-        //}
 
         //used to fill webgrid with staff details
         public ActionResult Staff_Time_Headers(string staffID)
@@ -129,6 +99,7 @@ namespace eciWEB2016.Controllers
             }
 
         }
+
         //creates a list of staff members as a selectlist. Used for dropdown boxes
         public SelectList GetStaffList()
         {
@@ -139,6 +110,7 @@ namespace eciWEB2016.Controllers
 
             return new SelectList(staffList, "Value", "Text", new Staff().staffID);
         }
+
         //returns time headers view and populates dropdown box
         public ActionResult Time_Headers()
         {
@@ -191,7 +163,14 @@ namespace eciWEB2016.Controllers
         //returns staffUpdate page and populates dropdown 
         public ActionResult Staff_Update()
         {
-         
+            if (Session["staffMember"] == null)
+            {
+                Staff blankStaff = new Staff();
+                Address blankAddress = new Address();
+                blankStaff.staffAddress = blankAddress;
+                Session["staffMember"] = blankStaff;
+            }
+
             ViewBag.staffList = GetStaffList();
 
             return View();

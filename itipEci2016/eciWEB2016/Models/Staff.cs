@@ -30,18 +30,14 @@ namespace eciWEB2016.Models
         public string fullName { get; set; }
         public string staffAltID { get; set; }
         public bool deleted { get; set; }
-        public int phone { get; set; }
-        public string addressesID { get; set; }
-        public string address1 { get; set; }
-        public string address2 { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string zip { get; set; }
+        public AdditionalContactInfoModel staffContact { get; set; }
+        public Address staffAddress { get; set; }
         public string memberType { get; set; }
         public string staffType { get; set; }
         public int staffTypeID { get; set; }
         public string DOB { get; set; }
         public int SSN { get; set; }
+        public bool handicapped { get; set; }
 
         
        //TODO: add staff home, cell, work...remove phone....probably aci table

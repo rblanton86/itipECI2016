@@ -25,19 +25,7 @@ Change History:
     <button> Delete Staff </button>
     <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
 </nav>
-@{
-    eciWEB2016.Models.Staff currentStaffMember = new eciWEB2016.Models.Staff();
-    //pull staffmember from session and store in variable
-    if (Session["staffMember"] != null)
-    {
-        currentStaffMember = (eciWEB2016.Models.Staff)Session["staffMember"];
-    }
-    //pull staffList from session and store in variable
-    if (Session["staffList"] != null)
-    {
-        List<eciWEB2016.Models.Staff> currentStaffList = Session["staffList"] as List<eciWEB2016.Models.Staff>;
-    }
-}
+
 <div class="center">
     @*populates the select staff member dropdown*@
     @Html.Label("Select Staff:", new { @class = "select" })
