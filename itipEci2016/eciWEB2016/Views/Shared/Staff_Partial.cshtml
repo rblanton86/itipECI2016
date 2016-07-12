@@ -5,7 +5,6 @@
     {
         currentStaffMember = (eciWEB2016.Models.Staff)Session["staffMember"];
     }
-
 }
 
 <ul class="flex">
@@ -34,9 +33,9 @@
 <ul>
     <span>
         <li>
-            <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.address1">
-            <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.zip">
-            <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.city">
+            <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.staffAddress.address1">
+            <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.staffAddress.address1">
+            <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.staffAddress.address1">
             <label>State:</label><select>
                 <option value="1">AL</option>
             </select>

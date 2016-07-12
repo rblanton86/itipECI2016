@@ -245,4 +245,10 @@
     <None Include="v1\Release\Sprint3\Schema\alt_Physician.sql" />
     <None Include="v1\Release\Sprint3\Schema\alt_ReferralSource.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint3\Schema\ins_StaffDummyData.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Schema\ins_StaffDummyData.sql" />
+  </ItemGroup>
 </Project>

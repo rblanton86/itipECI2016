@@ -31,12 +31,7 @@ namespace eciWEB2016.Models
         public string staffAltID { get; set; }
         public bool deleted { get; set; }
         public int phone { get; set; }
-        public string addressesID { get; set; }
-        public string address1 { get; set; }
-        public string address2 { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public string zip { get; set; }
+        public Address staffAddress { get; set; }
         public string memberType { get; set; }
         public string staffType { get; set; }
         public int staffTypeID { get; set; }

@@ -33,10 +33,12 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
+
         public ActionResult Time_Sheet_Service_Code()
         {
             return View();
         }
+
         //creates a list of staffmembers and stores in the session
         public List<Staff> StaffList()
         {
@@ -59,6 +61,8 @@ namespace eciWEB2016.Controllers
 
              return staff;
         }
+
+
         [HttpPost]
         [ActionName("GetAjaxStaff")]
         [WebMethod(EnableSession = true)]
@@ -129,6 +133,7 @@ namespace eciWEB2016.Controllers
             }
 
         }
+
         //creates a list of staff members as a selectlist. Used for dropdown boxes
         public SelectList GetStaffList()
         {
@@ -139,6 +144,7 @@ namespace eciWEB2016.Controllers
 
             return new SelectList(staffList, "Value", "Text", new Staff().staffID);
         }
+
         //returns time headers view and populates dropdown box
         public ActionResult Time_Headers()
         {
@@ -191,7 +197,14 @@ namespace eciWEB2016.Controllers
         //returns staffUpdate page and populates dropdown 
         public ActionResult Staff_Update()
         {
-         
+            if (Session["staffMember"] == null)
+            {
+                Staff blankStaff = new Staff();
+                Address blankAddress = new Address();
+                blankStaff.staffAddress = blankAddress;
+                Session["staffMember"] = blankStaff;
+            }
+
             ViewBag.staffList = GetStaffList();
 
             return View();

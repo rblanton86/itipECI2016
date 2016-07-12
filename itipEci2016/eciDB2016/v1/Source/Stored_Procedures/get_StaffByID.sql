@@ -24,7 +24,7 @@ AS
 				LEFT JOIN StaffType stafft ON
 					staff.staffTypeID = stafft.staffTypeID
 				LEFT JOIN Addresses addr ON
-					staff.addressesID = stafft.staffTypeID
+					staff.addressesID = addr.addressesID
 				LEFT JOIN AdditionalContactInfo aci ON
 					staff.additionalContactInfoID = aci.additionalContactInfoID
 
