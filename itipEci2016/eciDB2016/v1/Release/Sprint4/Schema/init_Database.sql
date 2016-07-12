@@ -8,6 +8,7 @@ Date:
 Change History:
 	06-20-2016: -- jmg -- Clarification, edits to tables.
 	07-11-2016: -- jmg -- Updates to add tables.
+	07-12-2016: -- jmg -- Added diagnosis tables.
 	TODO: Name constraints in case of later needed edits.
 ************************************************************************************************************/
 
@@ -73,11 +74,29 @@ CREATE TABLE DiagnosisType (
 	diagnosisType VARCHAR(25)
 	)
 
+-- Creates DiagnosisCode table.
+CREATE TABLE DiagnosisCode (
+	diagnosisCodeID INT IDENTITY (1,1) PRIMARY KEY,
+	diagnosisCode VARCHAR(10),
+	diagnosisDescription VARCHAR(100)
+)
+
+-- Creates DiagnosisType table
+CREATE TABLE DiagnosisType (
+	diagnosisTypeID INT IDENTITY (1,1) PRIMARY KEY,
+	diagnosisType VARCHAR(10)
+)
+
+-- Creates Diagnosis table.
 CREATE TABLE Diagnosis (
-	diagnosisID INT IDENTITY (1,1) PRIMARY KEY (diagnosisID) NOT NULL,
-	diagnosisTypeID INT FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
-	icd_10_Code VARCHAR(15) NOT NULL, 
-	)
+	diagnosisID INT IDENTITY(1,1) PRIMARY KEY(DiagnosisID),
+	diagnosisCodeID INT CONSTRAINT FK_diagnosis_diagnosisCode FOREIGN KEY REFERENCES DiagnosisCode(diagnosisCodeID),
+	diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID),
+	isPrimary BIT,
+	diagnosis_From DATE,
+	diagnosis_To DATE,
+	deleted BIT
+)
 
 --Creates Extra/comments table
 CREATE TABLE Comments (

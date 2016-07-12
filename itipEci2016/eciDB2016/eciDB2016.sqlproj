@@ -88,6 +88,8 @@
     <None Include="v1\Source\Schema\alt_ReferralSource.sql" />
     <None Include="v1\Source\Schema\init_TypeTableData.sql" />
     <None Include="v1\Source\Schema\init_Office.sql" />
+    <None Include="v1\Source\Schema\init_DiagnosisType.sql" />
+    <None Include="v1\Source\Schema\init_DiagnosisCode.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -218,7 +220,6 @@
     <None Include="v1\Source\Schema\alt_Staff.sql" />
     <None Include="v1\Source\Schema\del_DiagnosisType.sql" />
     <None Include="v1\Source\Schema\init_Database.sql" />
-    <None Include="v1\Source\Schema\init_DiagnosisColumns.sql" />
     <None Include="v1\Source\Schema\init_DummyData.sql" />
     <None Include="v1\Source\Schema\init_LoggingTables.sql" />
     <None Include="v1\Source\Schema\init_Sex.sql" />
@@ -272,5 +273,14 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_Clients.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Schema\init_DiagnosisType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Schema\init_DiagnosisCode.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Schema\alt_Diagnosis.sql" />
   </ItemGroup>
 </Project>

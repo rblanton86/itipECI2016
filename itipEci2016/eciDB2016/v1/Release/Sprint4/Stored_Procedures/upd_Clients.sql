@@ -69,7 +69,7 @@ AS
 					intakeDate = @intakeDate,
 					ifspDate = @ifspDate,
 					compSvcDate = @compSvcDate,
-					serviceAreaExeption = @serviceAreaExeption,
+					serviceAreaException = @serviceAreaExeption,
 					tkidsCaseNumber = @tkidsCaseNumber,
 					consentToRelease = @consentToRelease,
 					eci = @eci,

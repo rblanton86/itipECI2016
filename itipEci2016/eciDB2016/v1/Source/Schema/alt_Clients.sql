@@ -7,6 +7,7 @@ Date:
 	07-05-2016
 Change History:
 	07-05-2016 -- jmg -- added middleInitial column.
+	07-11-2016 -- jmg -- added additional columns on client table.
 ************************************************************************************************************/
 
 -- Declares table variable for Clients.

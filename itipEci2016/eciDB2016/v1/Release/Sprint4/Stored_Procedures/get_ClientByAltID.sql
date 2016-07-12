@@ -22,7 +22,7 @@ AS
 				plang.primaryLanguage,
 				sclinf.isd,
 				sex.sex,
-				office.office,
+				office.officeName,
 				addr.address1,
 				addr.address2,
 				addr.city,

@@ -31,20 +31,6 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        // TODO: Remove if we don't end up using anywhere.
-        //public DataSet GetAllClients()
-        //{
-
-        //    // Readies stored proc from server.
-        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllClients");
-
-        //    // Executes stored proc to return values into a DataSet.
-        //    DataSet ds = db.ExecuteDataSet(dbCommand);
-
-        //    // Returns a dataset of all clients.
-        //    return ds;
-        //}
-
         public List<Client> GetListClients()
         {
             // Readies stored proc from server.
@@ -54,12 +40,12 @@ namespace eciWEB2016.Controllers.DataControllers
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
             // Takes values from DataSet and places results in a SelectList.
+            // This select list is used for the search autocomplete boxes on the client_update page.
             var clients = (from drRow in ds.Tables[0].AsEnumerable()
                            select new Client()
                            {
                                firstName = drRow.Field<string>("firstName"),
                                lastName = drRow.Field<string>("lastName"),
-                               fullName = drRow.Field<string>("firstName") + " " + drRow.Field<string>("lastName"),
                                clientID = drRow.Field<int>("clientID"),
                                altID = drRow.Field<string>("altID")
                            }).ToList();
@@ -113,6 +99,11 @@ namespace eciWEB2016.Controllers.DataControllers
 
                         ordinal = clientReader.GetOrdinal("dob");
                         currentClient.dob = clientReader.IsDBNull(ordinal) ? DateTime.Now : clientReader.GetDateTime(ordinal);
+
+                        ordinal = clientReader.GetOrdinal("officeName");
+                        currentClient.office = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+
 
                         // Does the math to convert client's current age in months.
                         DateTime now = DateTime.Now;

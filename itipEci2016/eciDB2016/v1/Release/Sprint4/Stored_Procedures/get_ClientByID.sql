@@ -10,7 +10,7 @@ Change History:
 	07-06-2016: -- jmg -- Corrected spelling error which caused exception on webApp run.
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_ClientByID]
+CREATE PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
@@ -24,7 +24,7 @@ AS
 				plang.primaryLanguage,
 				sclinf.isd,
 				sex.sex,
-				office.office,
+				office.officeName,
 				addr.address1,
 				addr.address2,
 				addr.city,
