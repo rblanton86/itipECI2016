@@ -6,7 +6,7 @@ Author:
 Date: 
 	6.29.2016
 Change History:
-	
+	7.12.2016 -tpc- Added Update and Insert Methods
 ************************************************************************************************************/
 using System;
 using System.Collections.Generic;
@@ -40,24 +40,6 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        //public List<Staff> GetAllStaff()
-        //{
-        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllStaff");
-
-        //    // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
-
-        //    DataSet ds = db.ExecuteDataSet(dbCommand);
-
-        //    var staff = (from drRow in ds.Tables[0].AsEnumerable()
-        //                 select new Staff()
-        //                 {
-        //                     firstName = drRow.Field<string>("firstName"),
-        //                     lastName = drRow.Field<string>("lastName"),
-        //                     staffID = drRow.Field<int>("staffID").ToString()
-        //                 }).ToList();
-
-        //    return staff;
-        //}
         public DataSet GetAllStaff()
         {
             DbCommand dbCommand = db.GetStoredProcCommand("get_AllStaff");
@@ -85,6 +67,7 @@ namespace eciWEB2016.Controllers.DataControllers
             return new SelectList(selectList, "Value", "Text");
         }
 
+        //get a staff member from the database based on ID
         public Staff getStaffMember(int currentStaffID)
         {
             Staff thisStaffMember = new Staff();
@@ -132,35 +115,115 @@ namespace eciWEB2016.Controllers.DataControllers
                     {
                         return null;
                     }
-
-                    //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
-                    //TODO: Jen - Continue this.
                 }
             }
 
             return thisStaffMember;
         }
 
+        //update Staff Member
 
+        public bool staffUpdate(Staff thisStaff)
+        {
+            try
+            {
 
-        //public List<Staff> GetStaffMember(int staffID)
-        //{
-        //    DbCommand dbCommand = db.GetStoredProcCommand("get_StaffByID");
-        //     db.AddInParameter(dbCommand, "@staffID", DbType.Int32, staffID);
+                //Update Staff
+                DbCommand upd_Staff = db.GetStoredProcCommand("upd_Staff");
 
-        //    // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+                // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
-        //    DataSet ds = db.ExecuteDataSet(dbCommand);
+                db.AddInParameter(upd_Staff, "@staffID", DbType.Int32, thisStaff.staffID);
+                db.AddInParameter(upd_Staff, "@firstName", DbType.String, thisStaff.firstName);
+                db.AddInParameter(upd_Staff, "@lastName", DbType.String, thisStaff.lastName);
+                db.AddInParameter(upd_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
+                db.AddInParameter(upd_Staff, "@staffAltID", DbType.String, thisStaff.staffAltID);
+                db.AddInParameter(upd_Staff, "@deleted", DbType.Boolean, thisStaff.deleted);
+                db.AddInParameter(upd_Staff, "@staffSSN", DbType.String, thisStaff.firstName);
 
-        //    var staffMember = (from drRow in ds.Tables[0].AsEnumerable()
-        //                         select new Staff()
-        //                      {
-        //                             firstName = drRow.Field<string>("firstName"),
-        //                             lastName = drRow.Field<string>("lastName"),
-        //                             staffID = drRow.Field<int>("staffID").ToString()
-        //                         }).ToList();
+                db.ExecuteNonQuery(upd_Staff);
 
-        //    return staffMember;
-        //}
+                //update Staff's Addresses
+                DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
+
+                db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisStaff.staffAddress.addressesID);
+                db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisStaff.staffAddress.addressTypeID);
+                db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisStaff.staffAddress.address1);
+                db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisStaff.staffAddress.address2);
+                db.AddInParameter(upd_Addresses, "@city", DbType.String, thisStaff.staffAddress.city);
+                db.AddInParameter(upd_Addresses, "@st", DbType.String, thisStaff.staffAddress.state);
+                db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisStaff.staffAddress.zip);
+                db.AddInParameter(upd_Addresses, "@deleted", DbType.Boolean, thisStaff.staffAddress.deleted);
+
+                db.ExecuteNonQuery(upd_Addresses);
+
+                //update Staff's Additional Contact Info
+                DbCommand upd_AdditionalContactInfo = db.GetStoredProcCommand("upd_AdditionalContactInfo");
+
+                db.AddInParameter(upd_AdditionalContactInfo, "@additionalContactInfo", DbType.String, thisStaff.staffContact.additionalContactInfo);
+                db.AddInParameter(upd_AdditionalContactInfo, "@additionalContactInfoTypeID", DbType.Int32, thisStaff.staffContact.additionalContactInfoTypeID);
+                db.AddInParameter(upd_AdditionalContactInfo, "@deleted", DbType.Boolean, thisStaff.staffContact.deleted);
+
+                db.ExecuteNonQuery(upd_AdditionalContactInfo);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public bool InsertStaff(Staff thisStaff)
+        {
+            try
+            {
+                DbCommand ins_Staff = db.GetStoredProcCommand("ins_StaffMember");
+
+                // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+
+                db.AddInParameter(ins_Staff, "@staffTypeID", DbType.Int32, thisStaff.staffTypeID);
+                db.AddInParameter(ins_Staff, "@addressesID", DbType.Int32, thisStaff.staffAddress.addressesID);
+                db.AddInParameter(ins_Staff, "@additionalContactInfoID", DbType.Int32, thisStaff.staffContact.additionalContactInfoID);
+                db.AddInParameter(ins_Staff, "@firstName", DbType.String, thisStaff.firstName);
+                db.AddInParameter(ins_Staff, "@lastName", DbType.String, thisStaff.lastName);
+                db.AddInParameter(ins_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
+                db.AddInParameter(ins_Staff, "@staffAltID", DbType.String, thisStaff.staffAltID);
+                db.AddInParameter(ins_Staff, "@deleted", DbType.Boolean, thisStaff.deleted);
+                db.AddInParameter(ins_Staff, "@staffSSN", DbType.String, thisStaff.SSN);
+
+                db.ExecuteNonQuery(ins_Staff);
+
+                //insert Staff's Addresses
+                DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
+
+                db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisStaff.staffAddress.addressTypeID);
+                db.AddInParameter(ins_Addresses, "@address1", DbType.String, thisStaff.staffAddress.address1);
+                db.AddInParameter(ins_Addresses, "@address2", DbType.String, thisStaff.staffAddress.address2);
+                db.AddInParameter(ins_Addresses, "@city", DbType.String, thisStaff.staffAddress.city);
+                db.AddInParameter(ins_Addresses, "@st", DbType.String, thisStaff.staffAddress.state);
+                db.AddInParameter(ins_Addresses, "@zip", DbType.Int32, thisStaff.staffAddress.zip);
+                db.AddInParameter(ins_Addresses, "@deleted", DbType.Boolean, thisStaff.staffAddress.deleted);
+
+                db.ExecuteNonQuery(ins_Addresses);
+
+                //insert Staff's Additional Contact Info
+                DbCommand ins_AdditionalContactInfo = db.GetStoredProcCommand("ins_AdditionalContactInfo");
+
+                db.AddInParameter(ins_AdditionalContactInfo, "@memberTypeID", DbType.Int32, thisStaff.staffContact.memberTypeID);
+                db.AddInParameter(ins_AdditionalContactInfo, "@additionalContactInfo", DbType.String, thisStaff.staffContact.additionalContactInfo);
+                db.AddInParameter(ins_AdditionalContactInfo, "@additionalContactInfoTypeID", DbType.Int32, thisStaff.staffContact.additionalContactInfoTypeID);
+                db.AddInParameter(ins_AdditionalContactInfo, "@deleted", DbType.Boolean, thisStaff.staffContact.deleted);
+
+                db.ExecuteNonQuery(ins_AdditionalContactInfo);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        
     }
 }

@@ -16,9 +16,8 @@ namespace eciWEB2016.Models
         public int raceID { get; set; }
         public Address familyAddress { get; set; }
         public bool isGuardian { get; set; }
-        public int additionalContactInfoID { get; set; }
-        public string additionalContactInfo { get; set; }
         public string occupation { get; set; }
         public string employer { get; set; }
+        public List<AdditionalContactInfoModel> familyContact { get; set; }
     }
 }

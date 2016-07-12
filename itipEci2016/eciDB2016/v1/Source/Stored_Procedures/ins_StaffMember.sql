@@ -16,7 +16,8 @@ CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@lastName varchar(20),
 	@staffAltID int,
 	@deleted bit,
-	@handicapped bit
+	@handicapped bit,
+	@staffSSN int
 	
 AS
 	BEGIN

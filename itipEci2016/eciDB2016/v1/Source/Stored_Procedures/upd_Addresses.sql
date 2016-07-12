@@ -8,14 +8,15 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[upd_Addresses]
+ALTER PROCEDURE [dbo].[upd_Addresses]
 	@addressesID int,
 	@addressTypeID int,
 	@address1 varchar(20),
 	@address2 varchar(20),
 	@city varchar(15),
 	@st varchar(10),
-	@zip int
+	@zip int,
+	@deleted bit
 
 AS
 	BEGIN
@@ -28,9 +29,10 @@ AS
 				address2 = @address2,
 				city = @city,
 				st = @st,
-				zip = @zip
+				zip = @zip,
+				deleted = @deleted
 
-			WHERE addressesID = @addressID
+			WHERE addressesID = @addressesID
 
 		END TRY
 		BEGIN CATCH
