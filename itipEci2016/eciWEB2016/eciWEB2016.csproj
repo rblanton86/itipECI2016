@@ -221,8 +221,10 @@
     </Compile>
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\Address.cs" />
+    <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\ContactInfoModel.cs" />
     <Compile Include="Models\Client.cs" />
+    <Compile Include="Models\Diagnosis.cs" />
     <Compile Include="Models\Family.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Insurance.cs" />
