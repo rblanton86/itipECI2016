@@ -8,6 +8,7 @@ Date:
 Change History:
 		06-30-2016 -- jmg: Corrected if statement
 		07-05-2016 -- jmg: Added deleted column.
+		07-12-2016 -- jmg: Added race, occupation, employer columns. Also added DOB column for family member: sibling type.
 ************************************************************************************************************/
 	
 -- Declares table variable for aci table
@@ -56,12 +57,16 @@ IF ISNULL(@fm, 0) = 0
 	BEGIN
 		CREATE TABLE FamilyMember (
 			familyMemberID INT IDENTITY (1,1) PRIMARY KEY,
-			familyMemberTypeID INT FOREIGN KEY REFERENCES FamilyMemberType(familyMemberTypeID),
-			additionalContactInfoID INT FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
+			familyMemberTypeID INT CONSTRAINT FK_family_memberType FOREIGN KEY REFERENCES FamilyMemberType(familyMemberTypeID),
+			additionalContactInfoID INT CONSTRAINT FK_family_contactInfo FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
+			raceID INT CONSTRAINT FK_family_race FOREIGN KEY REFERENCES Race(raceID),
 			sexID INT FOREIGN KEY REFERENCES Sex(sexID),
 			firstName VARCHAR(25),
 			lastName VARCHAR(25),
 			isGuardian BIT,
+			occupation VARCHAR(25),
+			employer VARCHAR(25),
+			dob DATE,
 			deleted BIT
 		)
 	END
@@ -123,5 +128,49 @@ ELSE
 				ALTER TABLE FamilyMember
 					ADD deleted BIT
 				PRINT 'Added deleted column on FamilyMember table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'raceID')
+			BEGIN
+				PRINT 'Unneeded, raceID column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE FamilyMember
+					ADD raceID INT CONSTRAINT FK_family_race FOREIGN KEY REFERENCES Race(raceID)
+				PRINT 'RaceID column added to FamilyMember table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'occupation')
+			BEGIN
+				PRINT 'Unneeded, occupation column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE FamilyMember
+					ADD occupation VARCHAR(25)
+				PRINT 'RaceID column added to FamilyMember table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'employer')
+			BEGIN
+				PRINT 'Unneeded, employer column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE FamilyMember
+					ADD employer VARCHAR(25)
+				PRINT 'RaceID column added to FamilyMember table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'dob')
+			BEGIN
+				PRINT 'Unneeded, dob column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE FamilyMember
+					ADD dob DATE
+				PRINT 'RaceID column added to FamilyMember table.'
 			END
 	END

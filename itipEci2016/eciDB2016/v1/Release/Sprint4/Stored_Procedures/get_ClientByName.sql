@@ -7,8 +7,9 @@ Date:
 	6.22.16
 Change History:
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
+	TODO: Continue edits on the select portion of this stored proc.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByName]
+ALTER PROCEDURE [dbo].[get_ClientByName]
 	@firstName varchar(25),
 	@lastName varchar(25)
 
@@ -19,8 +20,7 @@ AS
 			SELECT clnt.*,
 					rce.race,
 					eth.ethnicity,
-					sts.clientStatus,
-					dx.icd_10_Code
+					sts.clientStatus
 
 			FROM Clients clnt
 				LEFT JOIN Race rce

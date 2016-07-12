@@ -15,5 +15,3 @@ CREATE TABLE TimeHeader (
 	weekEnding varchar(10),
 	deleted bit
 	)
-
-
