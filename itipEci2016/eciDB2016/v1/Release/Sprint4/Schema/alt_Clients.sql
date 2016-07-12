@@ -8,6 +8,7 @@ Date:
 Change History:
 	07-05-2016 -- jmg -- added middleInitial column.
 	07-11-2016 -- jmg -- added additional columns on client table.
+	TODO: Alter script to remove diagnosisID column with dynamic foreign key constraint.
 ************************************************************************************************************/
 
 -- Declares table variable for Clients.
@@ -31,7 +32,6 @@ IF ISNULL(@clients,0) = 0
 			raceID INT FOREIGN KEY REFERENCES Race(raceID),
 			ethnicityID INT FOREIGN KEY REFERENCES Ethnicity(ethnicityID),
 			clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
-			diagnosisID INT FOREIGN KEY REFERENCES Diagnosis(diagnosisID),
 			primaryLanguageID INT FOREIGN KEY REFERENCES PrimaryLanguage(primaryLanguageID),
 			schoolInfoID INT FOREIGN KEY REFERENCES SchoolInformation(schoolInfoID),
 			commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
@@ -180,5 +180,18 @@ ELSE
 				ALTER TABLE Clients
 					ADD officeID INT FOREIGN KEY REFERENCES Office(officeID)
 				PRINT 'Added officeID column to Clients table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='diagnosisID')
+			BEGIN
+				ALTER TABLE Clients
+					DROP FK_diagnosisID
+				ALTER TABLE Clients
+					DROP COLUMN diagnosisID
+				PRINT 'Removed diagnosisID foreign key column.'
+			END
+		ELSE
+			BEGIN
+				PRINT 'Unneeded: diagnosisID column does not exist.'
 			END
 	END

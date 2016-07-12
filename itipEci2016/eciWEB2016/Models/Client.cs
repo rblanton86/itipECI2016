@@ -33,6 +33,7 @@ namespace eciWEB2016.Models
         public string race { get; set; }
         public string ethnicity { get; set; }
         public string sex { get; set; }
+        public string office { get; set; }
         public Address clientAddress { get; set; }
         public string additionalContactInfo { get; set; }
         public int additioalContactInfoType { get; set; }
@@ -44,12 +45,12 @@ namespace eciWEB2016.Models
         public string ECI { get; set; }
         public int accountingSystemID { get; set; }
         public List<Insurance> clientInsurance { get; set; }
+        public List<InsuranceAuthorization> clientInsAuths { get; set; }
         public List<Referral> clientReferral { get; set; }
         public List<Family> clientFamily { get; set; }
         public List<Staff> clientStaff { get; set; }
         public List<Diagnosis> clientDiagnosis { get; set; }
         public List<Comments> clientComments { get; set; }
         public bool deleted { get; set; }
-        public string office { get; set; }
     }
 }

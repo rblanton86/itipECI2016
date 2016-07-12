@@ -33,9 +33,8 @@ namespace eciWEB2016.Controllers
             {
                 // TODO: Replace the clientID int to something else to return a null client to the session, etc.
                 Client currentClient = new Client();
-                currentClient.clientID = 1;
-                ClientDataController dataController = new ClientDataController();
-                currentClient = dataController.GetClient(currentClient.clientID);
+                Address blankAddress = new Address();
+                currentClient.clientAddress = blankAddress;
                 Session["client"] = currentClient;
             }
 

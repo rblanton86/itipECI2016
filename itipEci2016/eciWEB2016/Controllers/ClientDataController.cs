@@ -67,7 +67,7 @@ namespace eciWEB2016.Controllers.DataControllers
             clientIDParameter.Value = thisClientID;
             get_ClientByID.Parameters.Add(clientIDParameter);
 
-            //// Executes the database command, returns values as a DataSet.
+            // Executes the database command, returns values as a DataSet.
             using (get_ClientByID)
             {
                 using(IDataReader clientReader = db.ExecuteReader(get_ClientByID))
@@ -76,6 +76,9 @@ namespace eciWEB2016.Controllers.DataControllers
                     {
                         int ordinal = clientReader.GetOrdinal("clientID");
                         currentClient.clientID = clientReader.IsDBNull(ordinal) ? 0 : clientReader.GetInt32(ordinal);
+
+                        ordinal = clientReader.GetOrdinal("altID");
+                        currentClient.altID = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
 
                         ordinal = clientReader.GetOrdinal("firstName");
                         currentClient.firstName = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
@@ -100,11 +103,6 @@ namespace eciWEB2016.Controllers.DataControllers
                         ordinal = clientReader.GetOrdinal("dob");
                         currentClient.dob = clientReader.IsDBNull(ordinal) ? DateTime.Now : clientReader.GetDateTime(ordinal);
 
-                        ordinal = clientReader.GetOrdinal("officeName");
-                        currentClient.office = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
-
-
-
                         // Does the math to convert client's current age in months.
                         DateTime now = DateTime.Now;
                         TimeSpan timeSpan = now - currentClient.dob;
@@ -112,6 +110,32 @@ namespace eciWEB2016.Controllers.DataControllers
                         double diff = (ts / 30);
                         currentClient.ageInMonths = Convert.ToInt32(diff);
 
+                        ordinal = clientReader.GetOrdinal("officeName");
+                        currentClient.office = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                        // Creates blank Client Address. Each client has only one address.
+                        Address clientAddr = new Address();
+
+                            ordinal = clientReader.GetOrdinal("address1");
+                            clientAddr.address1 = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                            ordinal = clientReader.GetOrdinal("address2");
+                            clientAddr.address2 = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                            ordinal = clientReader.GetOrdinal("city");
+                            clientAddr.city = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                            ordinal = clientReader.GetOrdinal("st");
+                            clientAddr.state = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                            ordinal = clientReader.GetOrdinal("zip");
+                            clientAddr.zip = clientReader.IsDBNull(ordinal) ? 0 : clientReader.GetInt32(ordinal);
+
+                            ordinal = clientReader.GetOrdinal("mapsco");
+                            clientAddr.mapsco = clientReader.IsDBNull(ordinal) ? " " : clientReader.GetString(ordinal);
+
+                        // Assigns obtained address into current client.
+                        currentClient.clientAddress = clientAddr;
                     }
                     else
                     {
@@ -123,7 +147,28 @@ namespace eciWEB2016.Controllers.DataControllers
                 }
             }
 
-            return currentClient;
+            // Accesses stored proc on SQL server.
+            DbCommand get_DiagnosisByClientID = db.GetStoredProcCommand("get_DiagnosisByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command..
+            var diagnosisByClientIDParameter = get_DiagnosisByClientID.CreateParameter();
+            diagnosisByClientIDParameter.ParameterName = "@clientID";
+            diagnosisByClientIDParameter.Value = thisClientID;
+            get_DiagnosisByClientID.Parameters.Add(diagnosisByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            using (get_DiagnosisByClientID)
+            {
+                using (IDataReader clientReader = db.ExecuteReader(get_DiagnosisByClientID))
+                {
+                    if (clientReader.Read())
+                    {
+                        // TODO: Add logic.
+                    }
+                }
+            }
+
+                        return currentClient;
         }
 
         public bool UpdateClient(Client thisClient)
@@ -154,11 +199,11 @@ namespace eciWEB2016.Controllers.DataControllers
 
             DbCommand upd_Family = db.GetStoredProcCommand("upd_Family");
 
-            db.AddInParameter(upd_Family, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
-            db.AddInParameter(upd_Family, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
-            db.AddInParameter(upd_Family, "@firstName", DbType.String, thisClient.clientFamily.firstName);
-            db.AddInParameter(upd_Family, "@lastName", DbType.String, thisClient.clientFamily.lastName);
-            db.AddInParameter(upd_Family, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian);
+            //db.AddInParameter(upd_Family, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
+            //db.AddInParameter(upd_Family, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
+            //db.AddInParameter(upd_Family, "@firstName", DbType.String, thisClient.clientFamily.firstName);
+            //db.AddInParameter(upd_Family, "@lastName", DbType.String, thisClient.clientFamily.lastName);
+            //db.AddInParameter(upd_Family, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian);
 
             db.ExecuteNonQuery(upd_Family);
 
