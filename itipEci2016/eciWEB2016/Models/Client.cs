@@ -43,10 +43,12 @@ namespace eciWEB2016.Models
         public bool consentRelease { get; set; }
         public string ECI { get; set; }
         public int accountingSystemID { get; set; }
-        public Insurance clientInsruance { get; set; }
-        public Referral clientReferral { get; set; }
-        public Family clientFamily { get; set; }
-        public Staff clientStaff { get; set; }
+        public List<Insurance> clientInsurance { get; set; }
+        public List<Referral> clientReferral { get; set; }
+        public List<Family> clientFamily { get; set; }
+        public List<Staff> clientStaff { get; set; }
+        public List<Diagnosis> clientDiagnosis { get; set; }
+        public List<Comments> clientComments { get; set; }
         public bool deleted { get; set; }
     }
 }

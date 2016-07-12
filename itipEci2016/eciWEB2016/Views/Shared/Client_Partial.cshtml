@@ -38,7 +38,7 @@
         </li>
         <li>
             <label>Status:</label>
-            <select name="status">
+            <select name="clientStatus">
                 <option>A</option>
             </select>
         </li>
@@ -72,20 +72,21 @@
         </li>
         <li>
             <label>SSN:</label>
-            <input type="text" size="9" name="ssn">
+            <input type="text" size="9" name="ssn" value="@currentClient.ssn" />
         </li>
     </ul>
     <ul class="flex">
         <li>
             <label>Address 1:</label>
-            <input type="text" size="60" name="address1">
+            <input type="text" size="60" name="clientAddress1" value="@currentClient.clientAddress.address1" />
         </li>
         <li>
             <label>ISD:</label>
+            <input type="text" size="10" name="clientISD" value="@currentClient.ISD" />
         </li>
         <li>
             <label>Address 2:</label>
-            <input type="text" size="60" name="address2">
+            <input type="text" size="60" name="clientaddress2" value="@currentClient.clientAddress.address2" />
         </li>
         <li>
             <label>Language:</label>
@@ -95,53 +96,113 @@
         </li>
         <li class="inline">
             <label>City:</label>
-            <input type="text" name="city">
+            <input type="text" name="city" value="@currentClient.clientAddress.city">
         </li>
         <li class="inline">
             <label>State:</label>
-            <input type="text" size="2" name="state">
+            <input list="clientState" />
+            <datalist id="clientState" name="state">
+                <option stateCode="AL">Alabama</option>
+                <option stateCode="AK">Alaska</option>
+                <option stateCode="AZ">Arizona</option>
+                <option stateCode="AR">Arkansas</option>
+                <option stateCode="CA">California</option>
+                <option stateCode="CO">Colorado</option>
+                <option stateCode="CT">Connecticut</option>
+                <option stateCode="DE">Delaware</option>
+                <option stateCode="DC">District Of Columbia</option>
+                <option stateCode="FL">Florida</option>
+                <option stateCode="GA">Georgia</option>
+                <option stateCode="HI">Hawaii</option>
+                <option stateCode="ID">Idaho</option>
+                <option stateCode="IL">Illinois</option>
+                <option stateCode="IN">Indiana</option>
+                <option stateCode="IA">Iowa</option>
+                <option stateCode="KS">Kansas</option>
+                <option stateCode="KY">Kentucky</option>
+                <option stateCode="LA">Louisiana</option>
+                <option stateCode="ME">Maine</option>
+                <option stateCode="MD">Maryland</option>
+                <option stateCode="MA">Massachusetts</option>
+                <option stateCode="MI">Michigan</option>
+                <option stateCode="MN">Minnesota</option>
+                <option stateCode="MS">Mississippi</option>
+                <option stateCode="MO">Missouri</option>
+                <option stateCode="MT">Montana</option>
+                <option stateCode="NE">Nebraska</option>
+                <option stateCode="NV">Nevada</option>
+                <option stateCode="NH">New Hampshire</option>
+                <option stateCode="NJ">New Jersey</option>
+                <option stateCode="NM">New Mexico</option>
+                <option stateCode="NY">New York</option>
+                <option stateCode="NC">North Carolina</option>
+                <option stateCode="ND">North Dakota</option>
+                <option stateCode="OH">Ohio</option>
+                <option stateCode="OK">Oklahoma</option>
+                <option stateCode="OR">Oregon</option>
+                <option stateCode="PA">Pennsylvania</option>
+                <option stateCode="RI">Rhode Island</option>
+                <option stateCode="SC">South Carolina</option>
+                <option stateCode="SD">South Dakota</option>
+                <option stateCode="TN">Tennessee</option>
+                <option stateCode="TX">Texas</option>
+                <option stateCode="UT">Utah</option>
+                <option stateCode="VT">Vermont</option>
+                <option stateCode="VA">Virginia</option>
+                <option stateCode="WA">Washington</option>
+                <option stateCode="WV">West Virginia</option>
+                <option stateCode="WI">Wisconsin</option>
+                <option stateCode="WY">Wyoming</option>
+                <option stateCode="AS">American Samoa</option>
+                <option stateCode="GU">Guam</option>
+                <option stateCode="MP">Northern Mariana Islands</option>
+                <option stateCode="PR">Puerto Rico</option>
+                <option stateCode="UM">United States Minor Outlying Islands</option>
+                <option stateCode="VI">Virgin Islands</option>
+            </datalist>
         </li>
         <li class="inline">
             <label>Zip:</label>
-            <input list="zipCode" size="6" name="zip5">
-            <input type="text" size="4" name="zip4">
+            <input list="zipCode" name="clientZip" value="@currentClient.clientAddress.zip" />
         </li>
         <li class="inline">
             <label>MAPSCO:</label>
-            <input type="text" name="mapsco">
+            <input type="text" name="mapsco" value="@currentClient.clientAddress.mapsco" />
         </li>
         <li>
             <label>Client Phone:</label>
-            <input type="text" name="clientPhone">
+            <input type="text" name="clientPhone" value="@currentClient.additionalContactInfo" />
         </li>
         <li>
             <label>County:</label>
-            <input type="text" name="clientCounty">
+            <input type="text" name="clientCounty" value="@currentClient.clientAddress.county" />
         </li>
         <li>
-            <label>Service Area Exception:</label>
+            <label>Service Area Exception:</label> @*TODO: Checkboxes??*@
             <input type="checkbox" value="ServiceAreaException" name="serviceAreaExeption">
         </li>
         <li>
             <label>Case Manager:</label>
+            @*TODO: Staff section? How to relate to this data?*@
         </li>
         <li>
             <label>TKID's Case Number:</label>
-            <input type="text">
+            <input type="text" name="TKIDScaseNumber" value="@currentClient.TKIDcaseNumber">
         </li>
         <li>
-            <label>Consent to Release Information?</label>
+            <label>Consent to Release Information?</label> @*TODO: How to checkbox?!*@
             <input type="checkbox">
         </li>
     </ul>
     <ul class="flex">
         <li>
-            <label>ECI:</label>
-            <select></select>
+            <label>ECI:</label> @*TODO: What are my options for this?*@
+            <select name="eci">
+            </select>
         </li>
         <li>
             <label>Accounting System ID:</label>
-            <input type="text">
+            <input type="text" value="@currentClient.accountingSystemID" />
         </li>
     </ul>
     <ul class="flex">
@@ -207,34 +268,66 @@
         </li>
         <li>
             <label>State:</label>
-            <select>
-                <option value="1">AL</option>
-                <option value="2">AK</option>
-                <option value="3">AZ</option>
-                <option value="4">AR</option>
-                <option value="5">CA</option>
-                <option value="6">CO</option>
-                <option value="7">CT</option>
-                <option value="8">DE</option>
-                <option value="9">FL</option>
-                <option value="10">GA</option>
-                <option value="11">HI</option>
-                <option value="12">ID</option>
-                <option value="13">IL</option>
-                <option value="14">IN</option>
-                <option value="15">IA</option>
-                <option value="16">KS</option>
-                <option value="17">KY</option>
-                <option value="18">LA</option>
-                <option value="19">ME</option>
-                <option value="20">MD</option>
-                <option value="21">MA</option>
-                <option value="22">MI</option>
-                <option value="23">MN</option>
-                <option value="24">MS</option>
-                <option value="25">MO</option>
-                <option value="26">MT</option>
-            </select>
+            <input list="states" />
+            <datalist id="states" name="state">
+                <option stateCode="AL">Alabama</option>
+                <option stateCode="AK">Alaska</option>
+                <option stateCode="AZ">Arizona</option>
+                <option stateCode="AR">Arkansas</option>
+                <option stateCode="CA">California</option>
+                <option stateCode="CO">Colorado</option>
+                <option stateCode="CT">Connecticut</option>
+                <option stateCode="DE">Delaware</option>
+                <option stateCode="DC">District Of Columbia</option>
+                <option stateCode="FL">Florida</option>
+                <option stateCode="GA">Georgia</option>
+                <option stateCode="HI">Hawaii</option>
+                <option stateCode="ID">Idaho</option>
+                <option stateCode="IL">Illinois</option>
+                <option stateCode="IN">Indiana</option>
+                <option stateCode="IA">Iowa</option>
+                <option stateCode="KS">Kansas</option>
+                <option stateCode="KY">Kentucky</option>
+                <option stateCode="LA">Louisiana</option>
+                <option stateCode="ME">Maine</option>
+                <option stateCode="MD">Maryland</option>
+                <option stateCode="MA">Massachusetts</option>
+                <option stateCode="MI">Michigan</option>
+                <option stateCode="MN">Minnesota</option>
+                <option stateCode="MS">Mississippi</option>
+                <option stateCode="MO">Missouri</option>
+                <option stateCode="MT">Montana</option>
+                <option stateCode="NE">Nebraska</option>
+                <option stateCode="NV">Nevada</option>
+                <option stateCode="NH">New Hampshire</option>
+                <option stateCode="NJ">New Jersey</option>
+                <option stateCode="NM">New Mexico</option>
+                <option stateCode="NY">New York</option>
+                <option stateCode="NC">North Carolina</option>
+                <option stateCode="ND">North Dakota</option>
+                <option stateCode="OH">Ohio</option>
+                <option stateCode="OK">Oklahoma</option>
+                <option stateCode="OR">Oregon</option>
+                <option stateCode="PA">Pennsylvania</option>
+                <option stateCode="RI">Rhode Island</option>
+                <option stateCode="SC">South Carolina</option>
+                <option stateCode="SD">South Dakota</option>
+                <option stateCode="TN">Tennessee</option>
+                <option stateCode="TX">Texas</option>
+                <option stateCode="UT">Utah</option>
+                <option stateCode="VT">Vermont</option>
+                <option stateCode="VA">Virginia</option>
+                <option stateCode="WA">Washington</option>
+                <option stateCode="WV">West Virginia</option>
+                <option stateCode="WI">Wisconsin</option>
+                <option stateCode="WY">Wyoming</option>
+                <option stateCode="AS">American Samoa</option>
+                <option stateCode="GU">Guam</option>
+                <option stateCode="MP">Northern Mariana Islands</option>
+                <option stateCode="PR">Puerto Rico</option>
+                <option stateCode="UM">United States Minor Outlying Islands</option>
+                <option stateCode="VI">Virgin Islands</option>
+            </datalist>
         </li>
         <li>
             <label>Zip:</label>
@@ -307,34 +400,66 @@
         </li>
         <li>
             <label>State:</label>
-            <select>
-                <option value="1">AL</option>
-                <option value="2">AK</option>
-                <option value="3">AZ</option>
-                <option value="4">AR</option>
-                <option value="5">CA</option>
-                <option value="6">CO</option>
-                <option value="7">CT</option>
-                <option value="8">DE</option>
-                <option value="9">FL</option>
-                <option value="10">GA</option>
-                <option value="11">HI</option>
-                <option value="12">ID</option>
-                <option value="13">IL</option>
-                <option value="14">IN</option>
-                <option value="15">IA</option>
-                <option value="16">KS</option>
-                <option value="17">KY</option>
-                <option value="18">LA</option>
-                <option value="19">ME</option>
-                <option value="20">MD</option>
-                <option value="21">MA</option>
-                <option value="22">MI</option>
-                <option value="23">MN</option>
-                <option value="24">MS</option>
-                <option value="25">MO</option>
-                <option value="26">MT</option>
-            </select>
+            <input list="states" />
+            <datalist id="states" name="state">
+                <option stateCode="AL">Alabama</option>
+                <option stateCode="AK">Alaska</option>
+                <option stateCode="AZ">Arizona</option>
+                <option stateCode="AR">Arkansas</option>
+                <option stateCode="CA">California</option>
+                <option stateCode="CO">Colorado</option>
+                <option stateCode="CT">Connecticut</option>
+                <option stateCode="DE">Delaware</option>
+                <option stateCode="DC">District Of Columbia</option>
+                <option stateCode="FL">Florida</option>
+                <option stateCode="GA">Georgia</option>
+                <option stateCode="HI">Hawaii</option>
+                <option stateCode="ID">Idaho</option>
+                <option stateCode="IL">Illinois</option>
+                <option stateCode="IN">Indiana</option>
+                <option stateCode="IA">Iowa</option>
+                <option stateCode="KS">Kansas</option>
+                <option stateCode="KY">Kentucky</option>
+                <option stateCode="LA">Louisiana</option>
+                <option stateCode="ME">Maine</option>
+                <option stateCode="MD">Maryland</option>
+                <option stateCode="MA">Massachusetts</option>
+                <option stateCode="MI">Michigan</option>
+                <option stateCode="MN">Minnesota</option>
+                <option stateCode="MS">Mississippi</option>
+                <option stateCode="MO">Missouri</option>
+                <option stateCode="MT">Montana</option>
+                <option stateCode="NE">Nebraska</option>
+                <option stateCode="NV">Nevada</option>
+                <option stateCode="NH">New Hampshire</option>
+                <option stateCode="NJ">New Jersey</option>
+                <option stateCode="NM">New Mexico</option>
+                <option stateCode="NY">New York</option>
+                <option stateCode="NC">North Carolina</option>
+                <option stateCode="ND">North Dakota</option>
+                <option stateCode="OH">Ohio</option>
+                <option stateCode="OK">Oklahoma</option>
+                <option stateCode="OR">Oregon</option>
+                <option stateCode="PA">Pennsylvania</option>
+                <option stateCode="RI">Rhode Island</option>
+                <option stateCode="SC">South Carolina</option>
+                <option stateCode="SD">South Dakota</option>
+                <option stateCode="TN">Tennessee</option>
+                <option stateCode="TX">Texas</option>
+                <option stateCode="UT">Utah</option>
+                <option stateCode="VT">Vermont</option>
+                <option stateCode="VA">Virginia</option>
+                <option stateCode="WA">Washington</option>
+                <option stateCode="WV">West Virginia</option>
+                <option stateCode="WI">Wisconsin</option>
+                <option stateCode="WY">Wyoming</option>
+                <option stateCode="AS">American Samoa</option>
+                <option stateCode="GU">Guam</option>
+                <option stateCode="MP">Northern Mariana Islands</option>
+                <option stateCode="PR">Puerto Rico</option>
+                <option stateCode="UM">United States Minor Outlying Islands</option>
+                <option stateCode="VI">Virgin Islands</option>
+            </datalist>
         </li>
         <li>
             <label>Zip:</label>
@@ -366,7 +491,7 @@
             <input list="communicationPreference">
         </li>
         <li>
-            <label>Best to Call:</label>
+            <label>Best to Call:</label> @*TODO: should this be on the family table as a bit or on the contact info as something else?*@
             <input list="bestToCall">
         </li>
         <li>
@@ -377,15 +502,15 @@
             </select>
         </li>
         <li>
-            <label>Race:</label>
+            <label>Race:</label>@*TODO: add to family table*@
             <select></select>
         </li>
         <li>
-            <label>Occupation:</label>
+            <label>Occupation:</label> @*TODO: add to Family table*@
             <input type="Text" />
         </li>
         <li>
-            <label>Employer:</label>
+            <label>Employer:</label>@*TODO: add to Family table*@
             <input type="Text" />
         </li>
     </ul>
@@ -422,34 +547,66 @@
         </li>
         <li>
             <label>State:</label>
-            <select>
-                <option value="1">AL</option>
-                <option value="2">AK</option>
-                <option value="3">AZ</option>
-                <option value="4">AR</option>
-                <option value="5">CA</option>
-                <option value="6">CO</option>
-                <option value="7">CT</option>
-                <option value="8">DE</option>
-                <option value="9">FL</option>
-                <option value="10">GA</option>
-                <option value="11">HI</option>
-                <option value="12">ID</option>
-                <option value="13">IL</option>
-                <option value="14">IN</option>
-                <option value="15">IA</option>
-                <option value="16">KS</option>
-                <option value="17">KY</option>
-                <option value="18">LA</option>
-                <option value="19">ME</option>
-                <option value="20">MD</option>
-                <option value="21">MA</option>
-                <option value="22">MI</option>
-                <option value="23">MN</option>
-                <option value="24">MS</option>
-                <option value="25">MO</option>
-                <option value="26">MT</option>
-            </select>
+            <input list="states" />
+            <datalist id="states" name="state">
+                <option stateCode="AL">Alabama</option>
+                <option stateCode="AK">Alaska</option>
+                <option stateCode="AZ">Arizona</option>
+                <option stateCode="AR">Arkansas</option>
+                <option stateCode="CA">California</option>
+                <option stateCode="CO">Colorado</option>
+                <option stateCode="CT">Connecticut</option>
+                <option stateCode="DE">Delaware</option>
+                <option stateCode="DC">District Of Columbia</option>
+                <option stateCode="FL">Florida</option>
+                <option stateCode="GA">Georgia</option>
+                <option stateCode="HI">Hawaii</option>
+                <option stateCode="ID">Idaho</option>
+                <option stateCode="IL">Illinois</option>
+                <option stateCode="IN">Indiana</option>
+                <option stateCode="IA">Iowa</option>
+                <option stateCode="KS">Kansas</option>
+                <option stateCode="KY">Kentucky</option>
+                <option stateCode="LA">Louisiana</option>
+                <option stateCode="ME">Maine</option>
+                <option stateCode="MD">Maryland</option>
+                <option stateCode="MA">Massachusetts</option>
+                <option stateCode="MI">Michigan</option>
+                <option stateCode="MN">Minnesota</option>
+                <option stateCode="MS">Mississippi</option>
+                <option stateCode="MO">Missouri</option>
+                <option stateCode="MT">Montana</option>
+                <option stateCode="NE">Nebraska</option>
+                <option stateCode="NV">Nevada</option>
+                <option stateCode="NH">New Hampshire</option>
+                <option stateCode="NJ">New Jersey</option>
+                <option stateCode="NM">New Mexico</option>
+                <option stateCode="NY">New York</option>
+                <option stateCode="NC">North Carolina</option>
+                <option stateCode="ND">North Dakota</option>
+                <option stateCode="OH">Ohio</option>
+                <option stateCode="OK">Oklahoma</option>
+                <option stateCode="OR">Oregon</option>
+                <option stateCode="PA">Pennsylvania</option>
+                <option stateCode="RI">Rhode Island</option>
+                <option stateCode="SC">South Carolina</option>
+                <option stateCode="SD">South Dakota</option>
+                <option stateCode="TN">Tennessee</option>
+                <option stateCode="TX">Texas</option>
+                <option stateCode="UT">Utah</option>
+                <option stateCode="VT">Vermont</option>
+                <option stateCode="VA">Virginia</option>
+                <option stateCode="WA">Washington</option>
+                <option stateCode="WV">West Virginia</option>
+                <option stateCode="WI">Wisconsin</option>
+                <option stateCode="WY">Wyoming</option>
+                <option stateCode="AS">American Samoa</option>
+                <option stateCode="GU">Guam</option>
+                <option stateCode="MP">Northern Mariana Islands</option>
+                <option stateCode="PR">Puerto Rico</option>
+                <option stateCode="UM">United States Minor Outlying Islands</option>
+                <option stateCode="VI">Virgin Islands</option>
+            </datalist>
         </li>
         <li>
             <label>Zip:</label>
@@ -571,9 +728,45 @@
 @section JavaScript
 {
     <script>
+        // Selects the appropriate client status from the clientStatus table based on result of the current client in session.
+        $(function () {
+            $('select[name^="clientStatus" option[value="@currentClient.clientStatus"]').attr("selected", "selected");
+        });
+    </script>
+    <script>
         // Selects the appropriate sex from the sex dropdown table based on result of the current client in session.
         $(function() {
             $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
         });
+    </script>
+    <script>
+        // Selects the appropriate ethnicity from the ethnicity dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[name^="ethnicity"] option[value="@currentClient.ethnicity"]').attr("selected", "selected");
+        });
+    </script>
+    <script>
+        // Selects the appropriate race from the race dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[name^="race"] option[value="@currentClient.race"]').attr("selected", "selected");
+        });
+    </script>
+    <script>
+        // Selects the appropriate language from the language dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[name^="language"] option[value="@currentClient.language"]').attr("selected", "selected");
+        });
+    </script>
+    <script>
+        // Selects the appropriate state from the state dropdown table based on result of the current client in session.
+        $(function() {
+            $('select[id^="clientState"] option[value="@currentClient.clientAddress.state"]').attr("selected", "selected");
+        });
+    </script>
+    <script>
+            // Selects the appropriate eci from the eci dropdown table based on result of the current client in session.
+            $(function() {
+                $('select[name^="eci"] option[value="@currentClient.ECI"]').attr("selected", "selected");
+            });
     </script>
 }

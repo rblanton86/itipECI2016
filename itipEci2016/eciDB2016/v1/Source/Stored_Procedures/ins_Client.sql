@@ -6,23 +6,38 @@ Author:
 Date: 
 	6.21.16
 Change History:
-	
+	07-11-2016: -- jmg -- Added sexID, officeID, addressesID, altID, intakeDate, ifspDate, compSvcDate,
+			serviceAreaException, tkidsCaseNumber, consentToRelease, eci, and accountingSystemID columns.
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[ins_Client]
-	@raceID int,
-	@ethnicityID int,
-	@clientStatusID int,
-	@diagnosisID int,
-	@primaryLanguageID int,
-	@schoolInfoID int,
-	@commentsID int,
-	@insuranceAuthID int,
-	@communicationPreferencesID int,
-	@firstName varchar(20),
-	@lastName varchar(20),
-	@dob varchar(15),
-	@ssn int,
-	@referralSource varchar(25)
+	@clientsID INT,
+	@raceID INT,
+	@ethnicityID INT,
+	@clientStatusID INT,
+	@diagnosisID INT,
+	@primaryLanguageID INT,
+	@schoolInfoID INT,
+	@commentsID INT,
+	@insuranceAuthID INT,
+	@communicationPreferencesID INT,
+	@sexID INT,
+	@officeID INT,
+	@addressesID INT,
+	@altID VARCHAR(25),
+	@firstName VARCHAR(20),
+	@middleInitial VARCHAR(1),
+	@lastName VARCHAR(20),
+	@dob DATE,
+	@ssn INT,
+	@referralSource VARCHAR(25),
+	@intakeDate DATETIME,
+	@ifspDate DATE,
+	@compSvcDate DATE,
+	@serviceAreaExeption BIT,
+	@tkidsCaseNumber INT,
+	@consentToRelease BIT,
+	@eci VARCHAR(25),
+	@accountingSystemID VARCHAR(25)
 	
 AS
 	BEGIN
@@ -37,11 +52,22 @@ AS
 							commentsID,
 							insuranceAuthID,
 							communicationPreferencesID,
+							sexID,
+							officeID,
 							firstName,
+							middleInitial,
 							lastName,
 							dob,
 							ssn,
-							referralSource)
+							referralSource,
+							intakeDate,
+							ifspDate,
+							compSvcDate,
+							serviceAreaException,
+							tkidsCaseNumber,
+							consentToRelease,
+							eci,
+							acountingSystemID)
 
 			VALUES (@raceID,
 					@ethnicityID,
@@ -51,12 +77,26 @@ AS
 					@schoolInfoID,
 					@commentsID,
 					@insuranceAuthID,
-					@commentsID,
-					@firstName, 
-					@lastName, 
-					@dob, 
-					@ssn, 
-					@referralSource)
+					@communicationPreferencesID,
+					@sexID,
+					@officeID,
+					@addressesID,
+					@altID,
+					@firstName,
+					@middleInitial,
+					@lastName,
+					@dob,
+					@ssn,
+					@referralSource,
+					@intakeDate,
+					@ifspDate,
+					@compSvcDate,
+					@serviceAreaExeption,
+					@tkidsCaseNumber,
+					@consentToRelease,
+					@eci,
+					@accountingSystemID 
+					)
 
 		END TRY
 		BEGIN CATCH
