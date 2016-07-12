@@ -100,12 +100,23 @@ namespace eciWEB2016.Controllers.DataControllers
                         thisStaffMember.SSN = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
 
                         ordinal = staffReader.GetOrdinal("address1");
+                        ordinal = staffReader.GetOrdinal("city");
+                        ordinal = staffReader.GetOrdinal("state");
+                        ordinal = staffReader.GetOrdinal("zip");
                         Address staffAddres = new Address();
                         staffAddres.address1 = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+                        staffAddres.city = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+                        staffAddres.state = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+                        staffAddres.zip = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
                         thisStaffMember.staffAddress = staffAddres;
 
                         ordinal = staffReader.GetOrdinal("staffAltID");
                         thisStaffMember.staffAltID = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+                        ordinal = staffReader.GetOrdinal("additionalContactInfo");
+                        AdditionalContactInfoModel staffContact = new AdditionalContactInfoModel();
+                        staffContact.additionalContactInfo = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+                        
                         //ordinal = staffReader.GetOrdinal("dob");
                         //thisStaffMember.DOB = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
 
