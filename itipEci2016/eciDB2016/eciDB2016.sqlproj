@@ -255,17 +255,17 @@
     <None Include="v1\Source\Schema\ins_StaffDummyData.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByAltID.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByID.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByName.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\upd_Clients.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\alt_Clients.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\alt_Diagnosis.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\init_Database.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\init_DiagnosisCode.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\init_DiagnosisType.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\init_Office.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\init_TimeHeaderTable.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByAltID.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByID.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientByName.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\upd_Clients.sql" />
+    <None Include="v1\Release\Sprint4\Schema\alt_Clients.sql" />
+    <None Include="v1\Release\Sprint4\Schema\alt_Diagnosis.sql" />
+    <None Include="v1\Release\Sprint4\Schema\init_Database.sql" />
+    <None Include="v1\Release\Sprint4\Schema\init_DiagnosisCode.sql" />
+    <None Include="v1\Release\Sprint4\Schema\init_DiagnosisType.sql" />
+    <None Include="v1\Release\Sprint4\Schema\init_Office.sql" />
+    <None Include="v1\Release\Sprint4\Schema\init_TimeHeaderTable.sql" />
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint3\Stored_Procedures\ins_Addresses.sql" />
     <None Include="v1\Release\Sprint3\Stored_Procedures\ins_AdditonalContactInfo.sql" />
