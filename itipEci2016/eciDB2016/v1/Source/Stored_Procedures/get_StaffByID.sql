@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffByID]
+alter PROCEDURE [dbo].[get_StaffByID]
 	@staffID int
 	
 AS
@@ -17,15 +17,15 @@ AS
 
 		SELECT staff.*, 
 				stafft.staffType, 
-				addr.addresses1, addr.address2, addr.st, addr.city, addr.zip, 
-				aci.aditionalContactInfo
+				addr.address1, addr.address2, addr.st, addr.city, addr.zip, 
+				aci.additionalContactInfo
 
 			FROM Staff staff 
 				LEFT JOIN StaffType stafft ON
 					staff.staffTypeID = stafft.staffTypeID
 				LEFT JOIN Addresses addr ON
 					staff.addressesID = stafft.staffTypeID
-				LEFT JOIN AditionalContactInfo ON
+				LEFT JOIN AdditionalContactInfo aci ON
 					staff.additionalContactInfoID = aci.additionalContactInfoID
 
 			WHERE staffID = @staffID;

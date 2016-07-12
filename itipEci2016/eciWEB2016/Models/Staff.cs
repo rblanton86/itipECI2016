@@ -23,10 +23,10 @@ namespace eciWEB2016.Models
     public class Staff
     {
         [Required]
-        public virtual string staffID { get; set; }
+        public int staffID { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
-        public char middleInitial { get; set; }
+        public string middleInitial { get; set; }
         public string fullName { get; set; }
         public string staffAltID { get; set; }
         public bool deleted { get; set; }

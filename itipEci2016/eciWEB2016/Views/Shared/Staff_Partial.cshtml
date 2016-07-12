@@ -1,0 +1,108 @@
+﻿@{
+    eciWEB2016.Models.Staff currentStaffMember = new eciWEB2016.Models.Staff();
+    //pull staffmember from session and store in variable
+    if (Session["staffMember"] != null)
+    {
+        currentStaffMember = (eciWEB2016.Models.Staff)Session["staffMember"];
+    }
+
+}
+
+<ul class="flex">
+
+    <li>
+        <label>Staff ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
+        <label>Status</label><select>
+            <option value="1">A</option>
+            <option value="2">I</option>
+        </select>
+        <label>Office</label><select>
+            <option value="1">Some Option</option>
+        </select>
+    </li>
+    <li>
+        <label>Staff Last Name:</label><input type="Text" name="staffLast" value="@currentStaffMember.lastName">
+        <label>Staff First Name:</label><input type="Text" name="staffFirst" value="@currentStaffMember.firstName">
+        <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit" value="@currentStaffMember.middleInitial">
+    </li>
+
+    <li>
+        <label>Date of Birth:</label><input type="Text" name="staffDOB" value="@currentStaffMember.DOB">
+        <label>SSN:</label><input type="Text" size=1 name="staffSSN" value="@currentStaffMember.SSN">
+    </li>
+</ul>
+<ul>
+    <span>
+        <li>
+            <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.address1">
+            <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.zip">
+            <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.city">
+            <label>State:</label><select>
+                <option value="1">AL</option>
+            </select>
+        </li>
+        <li>
+            <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="@currentStaffMember.phone">
+            <label>Cell:</label><input type="Text" name="staffCell">
+            <label>Work:</label><input type="Text" name="staffWork">
+        </li>
+
+    </span>
+    <li>
+        <label>Sex:</label><select>
+            <option value="1">M</option>
+            <option value="2">F</option>
+        </select>
+        <label>Race:</label><select></select>
+        <label>Handicapped:</label><select>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+    </li>
+    <li>
+        <label>Full Time:</label><select>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+        <label>Full Time Equivalant:</label><select>
+            <option value="1">Some Option</option>
+        </select>
+        <label>100% ECI?:</label><select>
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+    </li>
+
+    <li>
+        <label>Profl Licence #:</label><input type="Text" size=10>
+        <label>Reg/Certif #:</label><input type="Text" size=10>
+        <label>NPI #:</label><input type="Text" size=10>
+    </li>
+    <li>
+        <label>Med Provider #:</label><input type="Text">
+        <label>Taxonomy #:</label><input type="Text" size=10>
+    </li>
+    <li>
+        <label>Tricare Provider #:</label><input type="Text">
+        <label>BCBS Provider #:</label><input type="Text">
+    </li>
+    <li>
+        <label>Auto Liability Expire:</label><input type="Text" size=10>
+        <label>Cert Expiration Date:</label><input type="Text" name="AutoExp" size=10>
+    </li>
+    <li>
+        <label>Prof Licence Expiration:</label><input type="Text">
+        <label>Incl Time Entry?:</label><input type="checkbox">
+        <label>Time Entry Mgmnt?:</label><input type="checkbox">
+    </li>
+    <li>
+        <label>Employment Date:</label><input type="Text" size=10>
+        <label>Termination Date:</label><input type="Text" size=10>
+    </li>
+    <li>
+        <label>Drivers Licence #:</label><input type="Text">
+    </li>
+    <li>
+        <label>Comments:</label><input type="Text" size=50>
+    </li>
+</ul>
