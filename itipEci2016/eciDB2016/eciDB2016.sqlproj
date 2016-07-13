@@ -208,7 +208,6 @@
     <None Include="v1\Source\Schema\alt_Staff.sql" />
     <None Include="v1\Source\Schema\del_DiagnosisType.sql" />
     <None Include="v1\Source\Schema\init_Database.sql" />
-    <None Include="v1\Source\Schema\init_DiagnosisColumns.sql" />
     <None Include="v1\Source\Schema\init_DummyData.sql" />
     <None Include="v1\Source\Schema\init_LoggingTables.sql" />
     <None Include="v1\Source\Schema\init_Sex.sql" />
