@@ -8,10 +8,6 @@ Date:
 Change History:
 	6.22.16 - tpc - Added Column 'Handicapped'
 ************************************************************************************************************/
-		--TODO: ADD STAFF MIDDLE INITIAL COLUMN
-		--TODO: ADD STAFF dob COLUMN
-		--TODO: add staff ssn column
-		--TODO: add staff cell, home, work...remove phone....probalby aci table
 
 
 DECLARE @Staff int = 0

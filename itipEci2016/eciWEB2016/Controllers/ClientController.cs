@@ -19,7 +19,7 @@ namespace eciWEB2016.Controllers
         {
             if (Session["client"] == null)
             {
-                // TODO: Replace the clientID int to something else to return a null client to the session, etc.
+                // Creates a blank client for the inital view.
                 Client currentClient = new Client();
 
                 // Generates blank address data for blank Client.

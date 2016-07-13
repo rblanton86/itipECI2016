@@ -9,7 +9,6 @@ Change History:
 	06-20-2016: -- jmg -- Clarification, edits to tables.
 	07-11-2016: -- jmg -- Updates to add tables.
 	07-12-2016: -- jmg -- Added diagnosis tables.
-	TODO: Name constraints in case of later needed edits.
 ************************************************************************************************************/
 
 CREATE TABLE Race (
@@ -188,8 +187,8 @@ CREATE TABLE Clients (
 	insuranceAuthID INT FOREIGN KEY REFERENCES InsuranceAuthorization(insuranceAuthID),
 	communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationPreferencesID),
 	sexID INT FOREIGN KEY REFERENCES Sex(sexID),
-	officeID INT FOREIGN KEY REFERENCES Office(officeID), -- TODO: Add to proc.
-	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID), -- TODO: Add to proc
+	officeID INT FOREIGN KEY REFERENCES Office(officeID),
+	addressesID INT FOREIGN KEY REFERENCES Addresses(addressesID),
 	altID VARCHAR(25),
 	firstName VARCHAR(25),
 	middleInitial VARCHAR(1),
@@ -200,11 +199,11 @@ CREATE TABLE Clients (
 	intakeDate DATETIME,
 	ifspDate DATE,
 	compSvcDate DATE,
-	serviceAreaException BIT, --	TODO: Add to proc
-	tkidsCaseNumber INT, -- TODO: Add to proc, TODO: determine if this is an into or varchar.
-	consentToRelease BIT, -- TODO: Add to proc
-	eci VARCHAR(25), -- TODO: Add to proc, TODO: What is this? Is this the right data type?
-	accountingSystemID VARCHAR(25), -- TODO: Add to proc, TODO: What is this? Is this the right data type?
+	serviceAreaException BIT,
+	tkidsCaseNumber INT,
+	consentToRelease BIT,
+	eci VARCHAR(25),
+	accountingSystemID VARCHAR(25),
 	deleted BIT
 	)
 

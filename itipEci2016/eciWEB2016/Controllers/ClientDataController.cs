@@ -16,6 +16,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using eciWEB2016.Models;
 using System.Data.SqlClient;
 using System.Web.Mvc;
+using System.Globalization;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -139,7 +140,10 @@ namespace eciWEB2016.Controllers.DataControllers
                     }
                     else
                     {
-                        return null;
+                        
+
+                        int ordinal = clientReader.GetOrdinal("clientID");
+                        currentClient.clientID = clientReader.IsDBNull(ordinal) ? 0 : clientReader.GetInt32(ordinal);
                     }
                 }
             }
@@ -147,25 +151,110 @@ namespace eciWEB2016.Controllers.DataControllers
             // Accesses stored proc on SQL server.
             DbCommand get_DiagnosisByClientID = db.GetStoredProcCommand("get_DiagnosisByClientID");
 
-            // Assigns the clientID as a parameter to add in to the database command..
+            // Assigns the clientID as a parameter to add in to the database command.
             var diagnosisByClientIDParameter = get_DiagnosisByClientID.CreateParameter();
             diagnosisByClientIDParameter.ParameterName = "@clientID";
             diagnosisByClientIDParameter.Value = thisClientID;
             get_DiagnosisByClientID.Parameters.Add(diagnosisByClientIDParameter);
 
             // Executes the database command, returns values as a DataSet.
-            using (get_DiagnosisByClientID)
-            {
-                using (IDataReader clientReader = db.ExecuteReader(get_DiagnosisByClientID))
-                {
-                    if (clientReader.Read())
-                    {
-                        // TODO: Add logic.
-                    }
-                }
-            }
+            DataSet dds = db.ExecuteDataSet(get_DiagnosisByClientID);
 
-                        return currentClient;
+            // TODO: Jen - Finish all fields.
+            List<Diagnosis> DiagnosisList = (from drRow in dds.Tables[0].AsEnumerable()
+                                          select new Diagnosis()
+                                          {
+                                              isPrimary = drRow.Field<bool>("isPrimary"),
+                                              diagnosisCode = drRow.Field<string>("diagnosisCode"),
+                                              diagnosisDescription = drRow.Field<string>("diagnosis"),
+                                              diagnosisType = drRow.Field<string>("diagnosisType"),
+                                              diagnosisFrom = Convert.ToDateTime(drRow.Field<DateTime?>("diagnosis_From")),
+                                              diagnosisTo = Convert.ToDateTime(drRow.Field<DateTime?>("diagnosis_To"))
+
+                                          }).ToList();
+
+            // Inserts the created list of diagnoses into the client.
+            currentClient.clientDiagnosis = DiagnosisList;
+
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_FamilyByClientID = db.GetStoredProcCommand("get_FamilyByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var familyByClientIDParameter = get_FamilyByClientID.CreateParameter();
+            familyByClientIDParameter.ParameterName = "@clientID";
+            familyByClientIDParameter.Value = thisClientID;
+            get_FamilyByClientID.Parameters.Add(familyByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet fds = db.ExecuteDataSet(get_FamilyByClientID);
+
+
+            // TODO: Jen - Go to dbsolution and insert linking table values for LnkClientFamily so that you can return sample data here.
+            // TODO: Jen - Go to dbsolution and insert linking table values for LnkFamilyAddresses so that you can return address data here.
+            // TODO: Jen - Finish all fields.
+            List<Family> FamilyList = (from drRow in fds.Tables[0].AsEnumerable()
+                                             select new Family()
+                                             {
+
+
+                                             }).ToList();
+
+            // Inserts the created list of family into the client.
+            currentClient.clientFamily = FamilyList;
+
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_PhysicianByClientID = db.GetStoredProcCommand("get_PhysicianByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var physicianByClientIDParameter = get_PhysicianByClientID.CreateParameter();
+            physicianByClientIDParameter.ParameterName = "@clientID";
+            physicianByClientIDParameter.Value = thisClientID;
+            get_PhysicianByClientID.Parameters.Add(physicianByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet pds = db.ExecuteDataSet(get_PhysicianByClientID);
+
+            // TODO: Create Physician model, add List<Physician> to Client Model.
+            // TODO: Create physician by ClientID stored procedure.
+            // TODO: Jen - Finish all fields.
+            List<Physician> PhysicianList = (from drRow in fds.Tables[0].AsEnumerable()
+                                       select new Physician()
+                                       {
+
+
+                                       }).ToList();
+
+            // Inserts the created list of physicians into the client.
+            currentClient.clientPhysician = PhysicianList;
+
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_StaffByClientID = db.GetStoredProcCommand("get_StaffByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var staffByClientIDParameter = get_StaffByClientID.CreateParameter();
+            staffByClientIDParameter.ParameterName = "@clientID";
+            staffByClientIDParameter.Value = thisClientID;
+            get_StaffByClientID.Parameters.Add(staffByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet sds = db.ExecuteDataSet(get_StaffByClientID);
+
+            // TODO: Jen - Finish all fields.
+            List<Staff> StaffList = (from drRow in fds.Tables[0].AsEnumerable()
+                                             select new Staff()
+                                             {
+
+
+                                             }).ToList();
+
+            // TODO: Create staff by ClientID stored procedure.
+            // Inserts the created list of staff into the client.
+            currentClient.clientStaff = StaffList;
+
+            return currentClient;
         }
 
         public bool UpdateClient(Client thisClient)
