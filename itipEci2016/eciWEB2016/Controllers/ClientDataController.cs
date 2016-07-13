@@ -141,9 +141,6 @@ namespace eciWEB2016.Controllers.DataControllers
                     {
                         return null;
                     }
-
-                    //TODO: Jen - Go to sql and wrap null values to return a string with empty spaces.
-                    //TODO: Jen - Continue this.
                 }
             }
 
@@ -198,6 +195,8 @@ namespace eciWEB2016.Controllers.DataControllers
             db.ExecuteNonQuery(upd_Addresses);
 
             DbCommand upd_Family = db.GetStoredProcCommand("upd_Family");
+
+            // TODO: Jen, find out what error is causing this and fix it.
 
             //db.AddInParameter(upd_Family, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
             //db.AddInParameter(upd_Family, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);

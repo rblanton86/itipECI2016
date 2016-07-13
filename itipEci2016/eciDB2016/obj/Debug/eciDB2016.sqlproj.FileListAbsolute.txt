@@ -21,3 +21,12 @@ E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.pdb
 E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.dacpac
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.dll
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\bin\Debug\eciDB2016.pdb
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\Model.xml
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\refactor.xml
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\postdeploy.sql
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\predeploy.sql
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.dll
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb

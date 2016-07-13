@@ -15,37 +15,32 @@ namespace eciWEB2016.Controllers
     public class ClientController : Controller
     {
         // GET: Client
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <returns></returns>
         public ActionResult Client_Update()
         {
-            if (Session["client"] != null)
-            {
-                // If there is already a client in session, returns client to session.
-                Client currentClient = (Client)Session["client"];
-                ClientDataController dataController = new ClientDataController();
-                currentClient = dataController.GetClient(currentClient.clientID);
-                Session["client"] = currentClient;
-            }
-            else
+            if (Session["client"] == null)
             {
                 // TODO: Replace the clientID int to something else to return a null client to the session, etc.
                 Client currentClient = new Client();
-                Address blankAddress = new Address();
+
+                // Generates blank address data for blank Client.
+                Address blankAddress = new Address()
+                {
+                    address1 = " ",
+                    address2 = " ",
+                    city = " ",
+                    state = "TX",
+                    zip = 0,
+                    mapsco = "A1",
+                    county = " "
+                };
                 currentClient.clientAddress = blankAddress;
+
                 Session["client"] = currentClient;
             }
 
             return View();
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="identifier"></param>
-        /// <returns></returns>
         [HttpPost]
         [ActionName("GetAjaxClient")]
         [WebMethod(EnableSession = true)]
@@ -143,16 +138,6 @@ namespace eciWEB2016.Controllers
             {
                 return View();
             }
-        }
-
-        public void RemoveClient()
-        {
-            Session.Remove("client");
-        }
-
-        public void RemoveClientList()
-        {
-            Session.Remove("clientList");
         }
     }
 }

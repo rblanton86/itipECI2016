@@ -1,4 +1,11 @@
-<header>
+@{
+    eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
+
+    if (Session["client"] != null)
+    {
+        currentClient = (eciWEB2016.Models.Client)Session["client"];
+    }
+}<header>
     <h1>Client Update</h1>
 </header>
 <nav>

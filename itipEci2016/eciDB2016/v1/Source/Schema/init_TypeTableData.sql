@@ -9,58 +9,36 @@ Change History:
 	TODO: Complete this data entry.
 ****************************************************************************/
 
--- Checks where type rows already exists.
-IF EXISTS (SELECT additionalContactInfoType FROM AdditionalContactInfoType WHERE additionalContactInfoType LIKE 'Email' AND additionalContactInfoTypeID LIKE 1)
-	BEGIN
-		-- Notifies DBA if no additions are made. Pulls up whole table for visual verification.
-		PRINT 'No changes made to AdditionalContactInfoType table, types already present.'
-		SELECT * FROM AdditionalContactInfoType
-	END
-ELSE
-	BEGIN
-		-- Deletes any previously made additions in order to reset table.
-		DELETE FROM AdditionalContactInfoType
+DELETE FROM AdditionalContactInfoType
+DECLARE @v VARCHAR(MAX)
+SELECT @v =
+'SET IDENTITY_INSERT AdditionalContactInfoType ON;
+INSERT INTO AdditionalContactInfoType (additionalContactInfoTypeID, additionalContactInfoType)
+	VALUES (1, ''Email''), (2, ''Home Phone''), (3, ''Mobile Phone''), (4, ''Work Phone''), (5, ''Business Phone''), (6, ''Fax''), (7, ''Other'');
+SET IDENTITY_INSERT AdditionalContactInfoType OFF;'
+EXEC(@v)
+PRINT 'Additional Contact Info Types added'
+SELECT * FROM AdditionalContactInfoType
 
-		-- Turns on identity insert.
-		SET IDENTITY_INSERT AdditionalContactInfoType ON
 
-		-- Adds base contact info types to database table.
-		INSERT INTO AdditionalContactInfoType (additionalContactInfoTypeID, additionalContactInfoType)
-			VALUES (1, 'Email'), (2, 'Home Phone'), (3, 'Mobile Phone'), (4, 'Work Phone'), (5, 'Business Phone'), (6, 'Fax'), (7, 'Other')
 
-		-- Turns off identity insert, as can only be on on one table at a time.
-		SET IDENTITY_INSERT AdditionalContactInfoType OFF
 
-		-- Notifies DBA of changes made and pulls up table for visual verification.
-		PRINT 'Additional Contact Info Types added'
-		SELECT * FROM AdditionalContactInfoType
-	END
+-- Deletes any previously made additions in order to reset table.
+DELETE FROM AddressesType
 
-IF EXISTS (SELECT addressesType FROM AddressesType WHERE addressesType LIKE 'Home' AND addressesTypeID LIKE 1)
-	BEGIN
-		-- Notifies DBA that no changes were made and selects table for DBA's visual verification.
-		PRINT 'No changes made to Address Type table, types already present.'
-		SELECT * FROM AddressesType
-	END
-ELSE
-	BEGIN
-		-- Deletes any previously made additions in order to reset table.
-		DELETE FROM AddressesType
+-- Turns on identity insert.
+-- SET IDENTITY_INSERT AddressesType ON
 
-		-- Turns on identity insert.
-		-- SET IDENTITY_INSERT AddressesType ON
+-- Adds base contact info types to database table.
+INSERT INTO AddressesType (addressesType)
+	VALUES ('Street Address'), ('Mailing Address'), ('Business Address'), ('Other')
 
-		-- Adds base contact info types to database table.
-		INSERT INTO AddressesType (addressesType)
-			VALUES ('Street Address'), ('Mailing Address'), ('Business Address'), ('Other')
+-- Turns off identity insert, as can only be on on one table at a time.
+-- SET IDENTITY_INSERT AddressesType OFF
 
-		-- Turns off identity insert, as can only be on on one table at a time.
-		-- SET IDENTITY_INSERT AddressesType OFF
-
-		-- Notifies DBA of changes made and pulls up table for visual verification.
-		PRINT 'Additional Contact Info Types added'
-		SELECT * FROM AddressesType
-	END
+-- Notifies DBA of changes made and pulls up table for visual verification.
+PRINT 'Additional Contact Info Types added'
+SELECT * FROM AddressesType
 
 IF EXISTS (SELECT ethnicity FROM Ethnicity WHERE ethnicity LIKE 'Hispanic' AND ethnicityID LIKE 1)
 	BEGIN

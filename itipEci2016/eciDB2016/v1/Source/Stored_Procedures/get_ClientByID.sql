@@ -54,7 +54,7 @@ AS
 					ON clnt.officeID = office.officeID
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
-			WHERE clientID = @clientID
+			WHERE clnt.clientID = @clientID
 
 		END TRY
 		BEGIN CATCH

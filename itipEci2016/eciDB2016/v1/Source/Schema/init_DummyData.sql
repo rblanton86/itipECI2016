@@ -9,8 +9,35 @@ Change History:
 	06-22-2017 - jmg and tpc - Updated script to new file due to connection error and edited script to force results.
 ************************************************************************************************************/
 
-	DECLARE @x int = 1
-	DECLARE @i int = 0
+DELETE FROM Diagnosis
+DELETE FROM Clients
+DELETE FROM Addresses
+DELETE FROM FamilyMember
+DELETE FROM Staff
+
+DECLARE @i INT = 0
+
+WHILE @i <= 10
+	BEGIN
+		SET IDENTITY_INSERT ON
+
+		INSERT Clients (
+			clientID,
+			clientStatusID,
+			raceID,
+			ethnicityID,
+			sexID,
+			firstName,
+			lastName,
+			ssn,
+			dob,
+			intakeDate,
+			ifspDate,
+			compSvcDate,
+			altID,
+			deleted,
+
+	END
 
 	WHILE @i <= 10 AND @x <= 10
 	BEGIN
