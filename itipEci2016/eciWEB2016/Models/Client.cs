@@ -51,6 +51,7 @@ namespace eciWEB2016.Models
         public List<Staff> clientStaff { get; set; }
         public List<Diagnosis> clientDiagnosis { get; set; }
         public List<Comments> clientComments { get; set; }
+        public List<Physician> clientPhysicians { get; set; }
         public bool deleted { get; set; }
     }
 }

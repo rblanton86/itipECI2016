@@ -8,7 +8,7 @@ namespace eciWEB2016.Models
     public class Address
     {
         public int addressesID { get; set; }
-        public int addressTypeID { get; set; }
+        public string addressType { get; set; }
         public string address1 { get; set; }
         public string address2 { get; set; }
         public string city { get; set; }

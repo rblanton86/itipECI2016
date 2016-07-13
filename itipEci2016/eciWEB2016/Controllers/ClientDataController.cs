@@ -1,22 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using System.Web.Configuration;
-using System.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Text;
-using System.Xml;
-
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
-using System.Data.SqlClient;
-using System.Web.Mvc;
-using System.Globalization;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -196,7 +186,17 @@ namespace eciWEB2016.Controllers.DataControllers
             List<Family> FamilyList = (from drRow in fds.Tables[0].AsEnumerable()
                                              select new Family()
                                              {
-
+                                                 familyMemberID = drRow.Field<int>("familyMemberID"),
+                                                 firstName = drRow.Field<string>(""),
+                                                 lastName = drRow.Field<string>(""),
+                                                 familyMemberType = drRow.Field<string>(""),
+                                                 dob = Convert.ToDateTime(drRow.Field<DateTime?>("")),
+                                                 sex = drRow.Field<string>(""),
+                                                 race = drRow.Field<string>(""),
+                                                 isGuardian = drRow.Field<bool>(""),
+                                                 occupation = drRow.Field<string>(""),
+                                                 employer = drRow.Field<string>(""),
+                                                 familyAddrs = GetAddrByFamilyID(drRow.Field<int>("familyMemberID"))
 
                                              }).ToList();
 
@@ -216,8 +216,8 @@ namespace eciWEB2016.Controllers.DataControllers
             // Executes the database command, returns values as a DataSet.
             DataSet pds = db.ExecuteDataSet(get_PhysicianByClientID);
 
-            // TODO: Create Physician model, add List<Physician> to Client Model.
-            // TODO: Create physician by ClientID stored procedure.
+
+            // TODO: Create get_PhysicianByClientID stored procedure.
             // TODO: Jen - Finish all fields.
             List<Physician> PhysicianList = (from drRow in fds.Tables[0].AsEnumerable()
                                        select new Physician()
@@ -227,7 +227,7 @@ namespace eciWEB2016.Controllers.DataControllers
                                        }).ToList();
 
             // Inserts the created list of physicians into the client.
-            currentClient.clientPhysician = PhysicianList;
+            currentClient.clientPhysicians = PhysicianList;
 
 
             // Accesses stored proc on SQL server.
@@ -250,11 +250,154 @@ namespace eciWEB2016.Controllers.DataControllers
 
                                              }).ToList();
 
-            // TODO: Create staff by ClientID stored procedure.
+            // TODO: Create get_StaffByClientID stored procedure.
             // Inserts the created list of staff into the client.
             currentClient.clientStaff = StaffList;
 
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_InsuranceByClientID = db.GetStoredProcCommand("get_InsuranceByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var insuranceByClientIDParameter = get_InsuranceByClientID.CreateParameter();
+            insuranceByClientIDParameter.ParameterName = "@clientID";
+            insuranceByClientIDParameter.Value = thisClientID;
+            get_InsuranceByClientID.Parameters.Add(insuranceByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet ids = db.ExecuteDataSet(get_InsuranceByClientID);
+
+            // TODO: Jen - Finish all fields.
+            List<Insurance> InsuranceList = (from drRow in fds.Tables[0].AsEnumerable()
+                                     select new Insurance()
+                                     {
+
+
+                                     }).ToList();
+
+            // TODO: Create get_InsuranceByClientID stored procedure.
+            // Inserts the created list of insurance into the client.
+            currentClient.clientInsurance = InsuranceList;
+
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_InsAuthByClientID = db.GetStoredProcCommand("get_InsAuthByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var insAuthByClientIDParameter = get_InsAuthByClientID.CreateParameter();
+            insAuthByClientIDParameter.ParameterName = "@clientID";
+            insAuthByClientIDParameter.Value = thisClientID;
+            get_InsAuthByClientID.Parameters.Add(insAuthByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet iads = db.ExecuteDataSet(get_InsAuthByClientID);
+
+            // TODO: Jen - Finish all fields.
+            List<InsuranceAuthorization> InsAuthList = (from drRow in fds.Tables[0].AsEnumerable()
+                                             select new InsuranceAuthorization()
+                                             {
+
+
+                                             }).ToList();
+
+            // TODO: Create get_InsAuthByClientID stored procedure.
+            // Inserts the created list of insAuth into the client.
+            currentClient.clientInsAuths = InsAuthList;
+
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_ReferralByClientID = db.GetStoredProcCommand("get_ReferralByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var referralByClientIDParameter = get_ReferralByClientID.CreateParameter();
+            referralByClientIDParameter.ParameterName = "@clientID";
+            referralByClientIDParameter.Value = thisClientID;
+            get_ReferralByClientID.Parameters.Add(referralByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet rds = db.ExecuteDataSet(get_ReferralByClientID);
+
+            // TODO: Jen - Finish all fields.
+            List<Referral> ReferralList = (from drRow in fds.Tables[0].AsEnumerable()
+                                                        select new Referral()
+                                                        {
+
+
+                                                        }).ToList();
+
+            // TODO: Create get_ReferralByClientID stored procedure.
+            // Inserts the created list of referral into the client.
+            currentClient.clientReferral = ReferralList;
+
+
+            // TODO: Create get_InsAuthByClientID stored procedure.
+            // Inserts the created list of insAuth into the client.
+            currentClient.clientInsAuths = InsAuthList;
+
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_CommentsByClientID = db.GetStoredProcCommand("get_CommentsByClientID");
+
+            // Assigns the clientID as a parameter to add in to the database command.
+            var commentsByClientIDParameter = get_CommentsByClientID.CreateParameter();
+            commentsByClientIDParameter.ParameterName = "@clientID";
+            commentsByClientIDParameter.Value = thisClientID;
+            get_CommentsByClientID.Parameters.Add(commentsByClientIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet cds = db.ExecuteDataSet(get_CommentsByClientID);
+
+            // TODO: Jen - Finish all fields.
+            List<Comments> CommentsList = (from drRow in fds.Tables[0].AsEnumerable()
+                                           select new Comments()
+                                           {
+
+
+                                           }).ToList();
+
+            // TODO: Create get_CommentsByClientID stored procedure.
+            // Inserts the created list of comments into the client.
+            currentClient.clientComments = CommentsList;
+
             return currentClient;
+        }
+
+        public List<Address> GetAddrByFamilyID(int familyMemberID)
+        {
+            List<Address> familyMemberAddr = new List<Address>();
+
+            // Accesses stored proc on SQL server.
+            DbCommand get_AddrByFamilyMemberID = db.GetStoredProcCommand("get_AddrByFamilyMemberID");
+
+            // TODO: Add stored procedure.
+            // Assigns the clientID as a parameter to add in to the database command.
+            var addrByFamilyMemberIDParameter = get_AddrByFamilyMemberID.CreateParameter();
+            addrByFamilyMemberIDParameter.ParameterName = "@fmID";
+            addrByFamilyMemberIDParameter.Value = familyMemberID;
+            get_AddrByFamilyMemberID.Parameters.Add(addrByFamilyMemberIDParameter);
+
+            // Executes the database command, returns values as a DataSet.
+            DataSet fbads = db.ExecuteDataSet(get_AddrByFamilyMemberID);
+
+            // TODO: Jen - Finish all fields.
+            List<Address> AddressList = (from drRow in fbads.Tables[0].AsEnumerable()
+                                             select new Address()
+                                             {
+                                                 addressType = drRow.Field<string>(""),
+                                                 address1 = drRow.Field<string>(""),
+                                                 address2 = drRow.Field<string>(""),
+                                                 city = drRow.Field<string>(""),
+                                                 state = drRow.Field<string>(""),
+                                                 zip = drRow.Field<int>(""),
+                                                 county = drRow.Field<string>(""),
+                                                 mapsco = drRow.Field<string>("")
+
+                                             }).ToList();
+
+            // Inserts the created list of diagnoses into the client.
+            familyMemberAddr = AddressList;
+
+            return familyMemberAddr;
         }
 
         public bool UpdateClient(Client thisClient)
