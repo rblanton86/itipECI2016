@@ -30,12 +30,21 @@ namespace eciWEB2016.Models
         public string fullName { get; set; }
         public string staffAltID { get; set; }
         public bool deleted { get; set; }
-        public List<AdditionalContactInfoModel> staffContact { get; set; }
+        public int additionalContactInfoID { get; set; }
+        public string additionalContactInfo { get; set; }
+        public int addressesID { get; set; }
+        public string address1 { get; set; }
+        public string address2 { get; set; }
+        public string city { get; set; }
+        public string state { get; set; }
+        public int zip { get; set; }
+        public bool addrDeleted { get; set; }
         public Address staffAddress { get; set; }
+        public AdditionalContactInfoModel staffContact { get; set; }
         public string memberType { get; set; }
         public string staffType { get; set; }
         public int staffTypeID { get; set; }
-        public string DOB { get; set; }
+        public DateTime DOB { get; set; }
         public int SSN { get; set; }
         public bool handicapped { get; set; }
 

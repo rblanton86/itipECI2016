@@ -8,21 +8,20 @@ Date:
 Change History:
 
 *********************************************************************************************************-->
+@model eciWEB2016.Models.Staff
 
-<head>
-    <link rel="stylesheet" type="text/css" href="~/Content/style.css" />
-    <title></title>
-</head>
-<body>
+
     <header>
         <h1>Add Staff</h1>
     </header>
     <nav>
         <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
     </nav>
+@using (Ajax.BeginForm("CreateStaffMember", "Staff", new AjaxOptions { UpdateTargetId = "target" }))
+{
     <div class="main">
-        <ul class="flex">
-
+        <div id="target"></div>
+        <ul class="flex">          
             <li>
                 <label>Staff ID:</label><Input type="text" name="staffID" >
                 <label>Status</label><select>
@@ -34,30 +33,41 @@ Change History:
                 </select>
             </li>
             <li>
-                <label>Staff Last Name:</label><input type="Text" name="staffLast" >
-                <label>Staff First Name:</label><input type="Text" name="staffFirst" >
-                <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit">
+                <label>Last Name: </label>
+                @Html.TextBoxFor(Staff => Staff.firstName)  
+                @Html.ValidationMessage("Name")
+                <label> First Name: </label>              
+                @Html.TextBoxFor(Staff => Staff.lastName)
+                <label> Middle Initial: </label>
+                @Html.TextBoxFor(Staff => Staff.middleInitial, new { style = "width:2em" })
             </li>
-
             <li>
-                <label>Date of Birth:</label><input type="Text" name="staffDOB" >
-                <label>SSN:</label><input type="Text" size=1 name="staffSSN" >
+                <label>Date of Birth:</label>
+                @Html.TextBoxFor(Staff => Staff.DOB)
+                <label>SSN:</label>
+                @Html.TextBoxFor(Staff => Staff.SSN)
             </li>
         </ul>
         <ul>
             <span>
                 <li>
-                    <label>Address:</label><input type="Text" name="staffAddress" >
-                    <label>Zip:</label><input type="Text" size=3 name="staffZip" >
-                    <label>City:</label><input type="Text" size=8 name="staffCity" >
+                    <label>Address:</label>
+                    @Html.TextBoxFor(Staff => Staff.staffAddress.address1)
+                    <label>Zip:</label>
+                    @Html.TextBoxFor(Staff => Staff.staffAddress.zip)
+                    <label>City:</label>
+                    @Html.TextBoxFor(Staff => Staff.staffAddress)
                     <label>State:</label><select>
                         <option value="1">AL</option>
                     </select>
                 </li>
                 <li>
-                    <label>Home Phone:</label><input type="Text" name="StaffHomePhone" >
-                    <label>Cell:</label><input type="Text" name="staffCell">
-                    <label>Work:</label><input type="Text" name="staffWork">
+                    <label>Member Type:</label>
+                    @Html.TextBoxFor(Staff => Staff.staffTypeID)
+                    <label>Address ID:</label>
+                    @Html.TextBoxFor(Staff => Staff.addressesID)
+                    <label>Additional Contact Info ID:</label>
+                    @Html.TextBoxFor(Staff => Staff.additionalContactInfoID)
                 </li>
 
             </span>
@@ -119,12 +129,11 @@ Change History:
                 <label>Comments:</label><input type="Text" size=50>
             </li>
             <li>
-                <button>Submit</button>
+                <button type="submit">Submit</button>
             </li>
         </ul>
     </div>
-</body>
-
+}
 
 
 

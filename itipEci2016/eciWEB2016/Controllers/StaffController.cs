@@ -62,6 +62,37 @@ namespace eciWEB2016.Controllers
              return staff;
         }
 
+        [System.Web.Services.WebMethod]
+        public JsonResult GetStaffMemberFromSession(int staffID)
+        {
+
+            Staff staffMember = new Staff();
+            List<Staff> staffList = new List<Staff>();
+
+            if (Session["staffList"] != null)
+            {
+
+                //pulls the staffList session and stores it in a new staffList List
+                staffList = (List<Staff>)System.Web.HttpContext.Current.Session["staffList"];
+                //selects from staffList the first list item with matching parameter staffID
+                staffMember = staffList.FirstOrDefault(p => p.staffID == staffID);
+                //stores the selected staffMember into the session
+                System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
+                //creates json string with defined Property names and dynamic property values    
+                //return Json(new { id = staffMember.staffID, firstName = staffMember.firstName, lastName = staffMember.lastName });
+                return Json(staffMember, JsonRequestBehavior.AllowGet);
+            }
+            else
+            {
+                StaffList();
+                staffList = (List<Staff>)System.Web.HttpContext.Current.Session["staffList"];
+                staffMember = staffList.FirstOrDefault(p => Convert.ToInt32(p.staffID) == staffID);
+                System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
+                // return Json(new { id = staffMember.staffID, firstName = staffMember.firstName, lastName = staffMember.lastName });
+                return Json(staffMember, JsonRequestBehavior.AllowGet);
+            }
+        }
+
 
         [HttpPost]
         [ActionName("GetAjaxStaff")]
@@ -76,8 +107,6 @@ namespace eciWEB2016.Controllers
             System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
 
             return PartialView("Staff_Partial");
-
-
         }
 
         //used to fill webgrid with staff details
@@ -135,27 +164,34 @@ namespace eciWEB2016.Controllers
         //returns Add_Staff View
         public ActionResult Add_Staff()
         {
-            return View();
+            Staff blankStaff = new Staff();
+
+            return View(blankStaff);
         }
-
-
         // POST: Staff/Create
         [HttpPost]
-        public ActionResult CreateStaffMember(FormCollection collection)
+        public ActionResult CreateStaffMember(Staff model)
         {
-            try
-            {
+            //if (ModelState.IsValid)
+
+            //{
                 Staff newStaff = new Staff();
+                bool success;
 
-                
+                StaffDataController dataController = new StaffDataController();
 
+                 success= dataController.InsertStaff(model);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+                return Content(success.ToString());
+
+            //}
+
+            //else
+
+            //{
+            //    return View() ;
+            //}
+
         }
 
         // GET: Staff/Edit/5

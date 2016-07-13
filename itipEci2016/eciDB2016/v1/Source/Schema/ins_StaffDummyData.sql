@@ -16,6 +16,7 @@ Change History:
 
 		SET @i += 1
 			
+			
 			INSERT Staff (firstName, lastName, handicapped, 
 							staffAltID, deleted, staffSSN, 
 							addressesID, additionalContactInfoID)

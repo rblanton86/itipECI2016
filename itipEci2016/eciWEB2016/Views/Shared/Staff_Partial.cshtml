@@ -1,4 +1,5 @@
-﻿@{
+﻿
+@{
     eciWEB2016.Models.Staff currentStaffMember = new eciWEB2016.Models.Staff();
     //pull staffmember from session and store in variable
     if (Session["staffMember"] != null)
@@ -20,13 +21,14 @@
         </select>
     </li>
     <li>
+        
         <label>Staff Last Name:</label><input type="Text" name="staffLast" value="@currentStaffMember.lastName">
         <label>Staff First Name:</label><input type="Text" name="staffFirst" value="@currentStaffMember.firstName">
         <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit" value="@currentStaffMember.middleInitial">
     </li>
 
     <li>
-        <label>Date of Birth:</label><input type="Text" name="staffDOB" value="@currentStaffMember.DOB">
+        <label>Date of Birth:</label><input type="Text" name="staffDOB" value="@currentStaffMember.DOB.ToString("yyyy-MM-dd")">
         <label>SSN:</label><input type="Text" size=1 name="staffSSN" value="@currentStaffMember.SSN">
     </li>
 </ul>
@@ -34,14 +36,14 @@
     <span>
         <li>
             <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.staffAddress.address1">
-            <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.staffAddress.address1">
-            <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.staffAddress.address1">
+            <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.staffAddress.zip">
+            <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.staffAddress.city">
             <label>State:</label><select>
                 <option value="1">AL</option>
             </select>
         </li>
         <li>
-            <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="@currentStaffMember.phone">
+            <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="">
             <label>Cell:</label><input type="Text" name="staffCell">
             <label>Work:</label><input type="Text" name="staffWork">
         </li>

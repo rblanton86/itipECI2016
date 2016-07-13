@@ -87,6 +87,7 @@
     <None Include="v1\Source\Schema\alt_Physician.sql" />
     <None Include="v1\Source\Schema\alt_ReferralSource.sql" />
     <None Include="v1\Source\Schema\init_TypeTableData.sql" />
+    <None Include="v1\Source\Schema\alt_StaffType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -269,5 +270,14 @@
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint3\Stored_Procedures\ins_Addresses.sql" />
     <None Include="v1\Release\Sprint3\Stored_Procedures\ins_AdditonalContactInfo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Schema\alt_Staff.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Schema\Copy of alt_Staff.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Stored_Procedures\ins_StaffMember.sql" />
   </ItemGroup>
 </Project>

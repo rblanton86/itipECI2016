@@ -58,13 +58,12 @@ Change History:
             $(document).ready(function () {
 
                 $("#staffListID").change(function () {
-                 
                     var staffID = $("#staffListID").val();
-                    $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID : staffID }, function (data) {
+                    $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
                         $('#gridContent').replaceWith(data);
                     });
                         //calls webmethod to get and store selected staff member in the session
-                        $.getJSON('@Url.Action("GetStaffMember", "Staff")', { staffID: staffID },
+                        $.getJSON('@Url.Action("GetStaffMemberFromSession", "Staff")', { staffID: staffID },
                             function (data) {
                                 //displays staffmember properties as html
                                 $('.staffFirst').html(data.firstName);
