@@ -18,7 +18,7 @@ AS
 		SELECT staff.*, 
 				stafft.staffType, 
 				ISNULL (addr.address1, ' '),
-				addr.address2, addr.st, addr.city, addr.zip, 
+				addr.*, 
 				aci.additionalContactInfo
 
 			FROM Staff staff 

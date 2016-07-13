@@ -35,9 +35,12 @@ namespace eciWEB2016.Models
         public int addressesID { get; set; }
         public string address1 { get; set; }
         public string address2 { get; set; }
+        public string addressType { get; set; }
         public string city { get; set; }
         public string state { get; set; }
         public int zip { get; set; }
+        public string county { get; set; }
+        public string mapsco { get; set; }
         public bool addrDeleted { get; set; }
         public Address staffAddress { get; set; }
         public AdditionalContactInfoModel staffContact { get; set; }

@@ -8,10 +8,6 @@ Date:
 Change History:
 	6.22.16 - tpc - Added Column 'Handicapped'
 ************************************************************************************************************/
-		--TODO: ADD STAFF MIDDLE INITIAL COLUMN
-		--TODO: ADD STAFF dob COLUMN
-		--TODO: add staff ssn column
-		--TODO: add staff cell, home, work...remove phone....probalby aci table
 
 
 DECLARE @Staff int = 0
@@ -36,7 +32,9 @@ IF ISNULL(@Staff, 0) = 0
 			lastName VARCHAR(25),
 			staffAltID varchar(25),
 			deleted bit,
-			handicapped bit
+			handicapped bit,
+			ssn int,
+			dob DATE
 			)
 
 	END
@@ -85,25 +83,25 @@ ELSE
 				PRINT 'Added deleted column on Staff Table.'
 			END
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name = 'staffSSN')
-			BEGIN
+		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name = 'ssn')
+			BEGIN					
 				PRINT 'Unneeded: staffSSN already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE Staff
-					ADD staffSSN int 
+					ADD ssn INT
 				PRINT 'Added staffSSN column on Staff Table.'
 			END
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name = 'staffDOB')
+		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name = 'dob')
 			BEGIN
 				PRINT 'Unneeded: staffDOB already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE Staff
-					ADD staffDOB date 
+					ADD dob DATE 
 				PRINT 'Added staffDOB column on Staff Table.'
 			END
 	END

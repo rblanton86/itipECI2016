@@ -25,6 +25,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
+using eciWEB2016.Class;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -67,80 +68,109 @@ namespace eciWEB2016.Controllers.DataControllers
             return new SelectList(selectList, "Value", "Text");
         }
 
-        //get a staff member from the database based on ID
-        public Staff getStaffMember(int currentStaffID)
+        public Staff GetStaffMember(int staffID)
         {
-            Staff thisStaffMember = new Staff();
+            DbCommand dbCommand = db.GetStoredProcCommand("get_StaffByID");
+            db.AddInParameter(dbCommand, "staffID", DbType.Int32, staffID);
+            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
-            DbCommand getStaffMemberByID = db.GetStoredProcCommand("get_StaffByID");
+            DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var param = getStaffMemberByID.CreateParameter();
-            param.ParameterName = "@staffID";
-            param.Value = currentStaffID;
-            getStaffMemberByID.Parameters.Add(param);
+            DataRow dr = ds.Tables[0].Rows[0];
 
-            using (getStaffMemberByID)
+            Staff currentStaff = new Staff()
             {
-                using (IDataReader staffReader = db.ExecuteReader(getStaffMemberByID))
-                {
-                    if (staffReader.Read() == true)
-                    {
-                        int ordinal = staffReader.GetOrdinal("staffID");
-                        thisStaffMember.staffID = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
 
-                        ordinal = staffReader.GetOrdinal("firstName");
-                        thisStaffMember.firstName = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+              staffID = dr.Field<int>("staffID"),
+              firstName = dr.Field<string>("firstName"),
+              lastName = dr.Field<string>("lastName"),
+              fullName = dr.Field<string>("firstName") + " " + dr.Field<string>("lastName"),
+              SSN = dr.Field<int>("ssn"),
+              DOB = dr.IsNull("dob") ? new DateTime(1900,1,1) : dr.Field<DateTime>("dob")
 
-                        ordinal = staffReader.GetOrdinal("lastName");
-                        thisStaffMember.lastName = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+            };
 
-                        thisStaffMember.fullName = thisStaffMember.firstName + " " + thisStaffMember.lastName;
+            Addresses addr = new Addresses();
 
-                        ordinal = staffReader.GetOrdinal("staffSSN");
-                        thisStaffMember.SSN = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
+            currentStaff.staffAddress = addr.GetAddressByDataSet(ds);
 
-                                                                 
-                        Address staffAddres = new Address();
-
-                        ordinal = staffReader.GetOrdinal("address1");
-                        staffAddres.address1 = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
-                       
-                        ordinal = staffReader.GetOrdinal("city");
-                        staffAddres.city = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
-
-                        ordinal = staffReader.GetOrdinal("st");
-                        staffAddres.state = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
-
-                        ordinal = staffReader.GetOrdinal("zip");
-                        staffAddres.zip = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
-                     
-                        ordinal = staffReader.GetOrdinal("staffAltID");
-                        thisStaffMember.staffAltID = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
-
-                        thisStaffMember.staffAddress = staffAddres;
-
-                        AdditionalContactInfoModel staffContact = new AdditionalContactInfoModel();
-
-                        ordinal = staffReader.GetOrdinal("additionalContactInfo");
-                        staffContact.additionalContactInfo = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
-
-                        thisStaffMember.staffContact = staffContact;
-
-                        ordinal = staffReader.GetOrdinal("staffDOB");
-                        thisStaffMember.DOB = staffReader.IsDBNull(ordinal) ? DateTime.Now : staffReader.GetDateTime(ordinal);
-
-                    }
-                    else
-                    {
-                        return null;
-                    }
-                }
-            }
-
-            return thisStaffMember;
+            return currentStaff;
         }
 
-        //update Staff Member
+        //get a staff member from the database based on ID
+        //public Staff getStaffMember(int currentStaffID)
+        //{
+        //    Staff thisStaffMember = new Staff();
+
+            //    DbCommand getStaffMemberByID = db.GetStoredProcCommand("get_StaffByID");
+
+            //    var param = getStaffMemberByID.CreateParameter();
+            //    param.ParameterName = "@staffID";
+            //    param.Value = currentStaffID;
+            //    getStaffMemberByID.Parameters.Add(param);
+
+            //    using (getStaffMemberByID)
+            //    {
+            //        using (IDataReader staffReader = db.ExecuteReader(getStaffMemberByID))
+            //        {
+            //            if (staffReader.Read() == true)
+            //            {
+            //                int ordinal = staffReader.GetOrdinal("staffID");
+            //                thisStaffMember.staffID = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
+
+            //                ordinal = staffReader.GetOrdinal("firstName");
+            //                thisStaffMember.firstName = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                ordinal = staffReader.GetOrdinal("lastName");
+            //                thisStaffMember.lastName = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                thisStaffMember.fullName = thisStaffMember.firstName + " " + thisStaffMember.lastName;
+
+            //                ordinal = staffReader.GetOrdinal("staffSSN");
+            //                thisStaffMember.SSN = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
+
+
+            //                Address staffAddres = new Address();
+
+            //                ordinal = staffReader.GetOrdinal("address1");
+            //                staffAddres.address1 = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                ordinal = staffReader.GetOrdinal("city");
+            //                staffAddres.city = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                ordinal = staffReader.GetOrdinal("st");
+            //                staffAddres.state = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                ordinal = staffReader.GetOrdinal("zip");
+            //                staffAddres.zip = staffReader.IsDBNull(ordinal) ? 0 : staffReader.GetInt32(ordinal);
+
+            //                ordinal = staffReader.GetOrdinal("staffAltID");
+            //                thisStaffMember.staffAltID = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                thisStaffMember.staffAddress = staffAddres;
+
+            //                AdditionalContactInfoModel staffContact = new AdditionalContactInfoModel();
+
+            //                ordinal = staffReader.GetOrdinal("additionalContactInfo");
+            //                staffContact.additionalContactInfo = staffReader.IsDBNull(ordinal) ? " " : staffReader.GetString(ordinal);
+
+            //                thisStaffMember.staffContact = staffContact;
+
+            //                ordinal = staffReader.GetOrdinal("staffDOB");
+            //                thisStaffMember.DOB = staffReader.IsDBNull(ordinal) ? DateTime.Now : staffReader.GetDateTime(ordinal);
+
+            //            }
+            //            else
+            //            {
+            //                return null;
+            //            }
+            //        }
+            //    }
+
+            //    return thisStaffMember;
+            //}
+
+            //update Staff Member
 
         public bool staffUpdate(Staff thisStaff)
         {
@@ -152,7 +182,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
                 // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
-                db.AddInParameter(upd_Staff, "@staffID", DbType.Int32, thisStaff.staffID);
                 db.AddInParameter(upd_Staff, "@firstName", DbType.String, thisStaff.firstName);
                 db.AddInParameter(upd_Staff, "@lastName", DbType.String, thisStaff.lastName);
                 db.AddInParameter(upd_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
@@ -166,7 +195,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
                 db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisStaff.staffAddress.addressesID);
-                db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisStaff.staffAddress.addressTypeID);
+                db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisStaff.staffAddress.addressType);
                 db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisStaff.staffAddress.address1);
                 db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisStaff.staffAddress.address2);
                 db.AddInParameter(upd_Addresses, "@city", DbType.String, thisStaff.staffAddress.city);

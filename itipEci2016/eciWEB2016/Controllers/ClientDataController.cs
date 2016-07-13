@@ -417,7 +417,7 @@ namespace eciWEB2016.Controllers.DataControllers
             DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
             db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
-            db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressTypeID);
+            db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressType);
             db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisClient.clientAddress.address1);
             db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisClient.clientAddress.address2);
             db.AddInParameter(upd_Addresses, "@city", DbType.String, thisClient.clientAddress.city);

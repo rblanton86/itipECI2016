@@ -73,6 +73,7 @@
     <Folder Include="v1\Release\Sprint4" />
     <Folder Include="v1\Release\Sprint4\Schema" />
     <Folder Include="v1\Release\Sprint4\Stored_Procedures" />
+    <Folder Include="v1\Source\Unused" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Docs\eci.table.Client.pdf" />
@@ -157,17 +158,6 @@
     <None Include="v1\Release\Sprint2\Stored_Procedures\upd_ReferralSource.sql" />
     <None Include="v1\Release\Sprint2\Stored_Procedures\upd_Sex.sql" />
     <None Include="v1\Source\Stored_Procedures\get_TimeHeader.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_AdditionalContactInfo.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Addresses.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Clients.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Comments.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Ethnicity.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_FamilyMember.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Physician.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Race.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_ReferralSource.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Sex.sql" />
-    <None Include="v1\Source\Stored_Procedures\del_Staff.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AdditionalContactInfo.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AdditionalContactInfoType.sql" />
     <None Include="v1\Source\Stored_Procedures\get_Addresses.sql" />
@@ -279,5 +269,41 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint4\Stored_Procedures\ins_StaffMember.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_AdditionalContactInfo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Addresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Clients.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Comments.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Ethnicity.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_FamilyMember.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Physician.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Race.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_ReferralSource.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Sex.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Unused\del_Staff.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint4\Stored_Procedures\ins_Client.sql" />
   </ItemGroup>
 </Project>

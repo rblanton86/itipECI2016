@@ -83,7 +83,8 @@ IF ISNULL(@clients,0) = 0
 			consentToRelease BIT,
 			eci VARCHAR(25),
 			accountingSystemID VARCHAR(25),
-			deleted BIT
+			deleted BIT,
+			updDate DATETIME
 		)
 	END
 ELSE
@@ -199,6 +200,22 @@ ELSE
 				PRINT 'Added accountingSystemID column to Clients table.'
 			END
 
+		
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE Clients ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Clients
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to Clients table.'
+			END
+
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='officeID')
 			BEGIN
 				PRINT 'Did not add officeID column: already exists.'
@@ -235,4 +252,5 @@ ELSE
 			BEGIN
 				PRINT 'Did not drop diagnosisID column: no longer exists.'
 			END
+
 	END

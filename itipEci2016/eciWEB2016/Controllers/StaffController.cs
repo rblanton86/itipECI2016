@@ -61,7 +61,7 @@ namespace eciWEB2016.Controllers
 
              return staff;
         }
-
+        //used to get staff member from session. Used in webgrid partial
         [System.Web.Services.WebMethod]
         public JsonResult GetStaffMemberFromSession(int staffID)
         {
@@ -93,7 +93,7 @@ namespace eciWEB2016.Controllers
             }
         }
 
-
+        //used to get staff member, put in db, then display staff info on partial page
         [HttpPost]
         [ActionName("GetAjaxStaff")]
         [WebMethod(EnableSession = true)]
@@ -102,7 +102,7 @@ namespace eciWEB2016.Controllers
             Staff staffMember = new Staff();
 
             StaffDataController dataController = new StaffDataController();
-            staffMember = dataController.getStaffMember(staffID);
+            staffMember = dataController.GetStaffMember(staffID);
             // staffMember = dataController.getStaffMember(Convert.ToInt32(staffMember.staffID));
             System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
 
@@ -172,25 +172,16 @@ namespace eciWEB2016.Controllers
         [HttpPost]
         public ActionResult CreateStaffMember(Staff model)
         {
-            //if (ModelState.IsValid)
-
-            //{
                 Staff newStaff = new Staff();
                 bool success;
 
                 StaffDataController dataController = new StaffDataController();
 
-                 success= dataController.InsertStaff(model);
+                success = dataController.InsertStaff(model);
+                
+                
 
-                return Content(success.ToString());
-
-            //}
-
-            //else
-
-            //{
-            //    return View() ;
-            //}
+                return Content(success.ToString());           
 
         }
 
@@ -199,14 +190,21 @@ namespace eciWEB2016.Controllers
         //returns staffUpdate page and populates dropdown 
         public ActionResult Staff_Update()
         {
+            Staff blankStaff = new Staff();
+            Address blankAddress = new Address();
+
             if (Session["staffMember"] == null)
-            {
-                Staff blankStaff = new Staff();
-                Address blankAddress = new Address();
+            {               
                 blankStaff.staffAddress = blankAddress;
                 Session["staffMember"] = blankStaff;
             }
-
+            else
+            {
+                
+                blankStaff = (Staff)Session["staffMember"];
+                blankStaff.staffAddress = blankAddress;
+                Session["staffMember"] = blankStaff;
+            }
             ViewBag.staffList = GetStaffList();
 
             return View();
