@@ -1,9 +1,9 @@
 ﻿@*/****************************************************************************
-Description: Client_Update partial view.
+Description: Client_Update family webgrid partial view.
 
 Author: Jennifer M. Graves
 
-Date: 07-11-2016
+Date: 07-12-2016
 
 Change History:
 
@@ -17,220 +17,8 @@ Change History:
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-<ul class="flex">
-    <li>
-        <label for="ClientID">Alt ID:</label>
-        <input type="text" name="clientID" value="@currentClient.altID">
-    </li>
-    <li>
-        <label for="fullName">Full Name:</label>
-        <input type="text" id="clientList" name="fullName" value="@currentClient.fullName">
-    </li>
-    <li>
-        <label>Office:</label>
-        <select name="office">
-            <option>M</option>
-        </select>
-    </li>
-</ul>
-<ul class="flex">
-    <li>
-        <label>Last Name:</label>
-        <input type="text" name="lastName" value="@currentClient.lastName">
-    </li>
-    <li>
-        <label>First Name:</label>
-        <input type="text" name="firstName" value="@currentClient.firstName">
-    </li>
-    <li>
-        <label>MI:</label>
-        <input type="text" size="1" name="middleInitial" value="@currentClient.middleInitial">
-    </li>
-    <li>
-        <label>Status:</label>
-        <select name="clientStatus">
-            <option>A</option>
-        </select>
-    </li>
-    <li>
-        <label>Months Old:</label>
-        <input type="text" size="3" name="ageInMonths" value="@currentClient.ageInMonths">
-    </li>
-    <li>
-        <label>DOB:</label>
-        <input type="date" name="dob" value="@currentClient.dob.ToString("yyyy-MM-dd")">
-    </li>
-    <li>
-        <label>Sex:</label>
-        <select name="sex">
-            <option value="M">M</option>
-            <option value="F">F</option>
-        </select>
-    </li>
-    <li>
-        <label>Ethnicity:</label>
-        <select name="ethnicity">
-            <option value="Hispanic">Hispanic</option>
-            <option value="Non-Hispanic">Non-Hispanic</option>
-        </select>
-    </li>
-    <li>
-        <label>Race:</label>
-        <select name="race">
-            <option>E</option>
-        </select>
-    </li>
-    <li>
-        <label>SSN:</label>
-        <input type="text" size="9" name="ssn" value="@currentClient.ssn" />
-    </li>
-</ul>
-<ul class="flex">
-    <li>
-        <label>Address 1:</label>
-        <input type="text" size="60" name="clientAddress1" value="@currentClient.clientAddress.address1" />
-    </li>
-    <li>
-        <label>ISD:</label>
-        <input type="text" size="10" name="clientISD" value="@currentClient.ISD" />
-    </li>
-    <li>
-        <label>Address 2:</label>
-        <input type="text" size="60" name="clientaddress2" value="@currentClient.clientAddress.address2" />
-    </li>
-    <li>
-        <label>Language:</label>
-        <select name="language">
-            <option>E</option>
-        </select>
-    </li>
-    <li class="inline">
-        <label>City:</label>
-        <input type="text" name="city" value="@currentClient.clientAddress.city">
-    </li>
-    <li class="inline">
-        <label>State:</label>
-        <input list="clientState" />
-        <datalist id="clientState" name="state">
-            <option stateCode="AL">Alabama</option>
-            <option stateCode="AK">Alaska</option>
-            <option stateCode="AZ">Arizona</option>
-            <option stateCode="AR">Arkansas</option>
-            <option stateCode="CA">California</option>
-            <option stateCode="CO">Colorado</option>
-            <option stateCode="CT">Connecticut</option>
-            <option stateCode="DE">Delaware</option>
-            <option stateCode="DC">District Of Columbia</option>
-            <option stateCode="FL">Florida</option>
-            <option stateCode="GA">Georgia</option>
-            <option stateCode="HI">Hawaii</option>
-            <option stateCode="ID">Idaho</option>
-            <option stateCode="IL">Illinois</option>
-            <option stateCode="IN">Indiana</option>
-            <option stateCode="IA">Iowa</option>
-            <option stateCode="KS">Kansas</option>
-            <option stateCode="KY">Kentucky</option>
-            <option stateCode="LA">Louisiana</option>
-            <option stateCode="ME">Maine</option>
-            <option stateCode="MD">Maryland</option>
-            <option stateCode="MA">Massachusetts</option>
-            <option stateCode="MI">Michigan</option>
-            <option stateCode="MN">Minnesota</option>
-            <option stateCode="MS">Mississippi</option>
-            <option stateCode="MO">Missouri</option>
-            <option stateCode="MT">Montana</option>
-            <option stateCode="NE">Nebraska</option>
-            <option stateCode="NV">Nevada</option>
-            <option stateCode="NH">New Hampshire</option>
-            <option stateCode="NJ">New Jersey</option>
-            <option stateCode="NM">New Mexico</option>
-            <option stateCode="NY">New York</option>
-            <option stateCode="NC">North Carolina</option>
-            <option stateCode="ND">North Dakota</option>
-            <option stateCode="OH">Ohio</option>
-            <option stateCode="OK">Oklahoma</option>
-            <option stateCode="OR">Oregon</option>
-            <option stateCode="PA">Pennsylvania</option>
-            <option stateCode="RI">Rhode Island</option>
-            <option stateCode="SC">South Carolina</option>
-            <option stateCode="SD">South Dakota</option>
-            <option stateCode="TN">Tennessee</option>
-            <option stateCode="TX">Texas</option>
-            <option stateCode="UT">Utah</option>
-            <option stateCode="VT">Vermont</option>
-            <option stateCode="VA">Virginia</option>
-            <option stateCode="WA">Washington</option>
-            <option stateCode="WV">West Virginia</option>
-            <option stateCode="WI">Wisconsin</option>
-            <option stateCode="WY">Wyoming</option>
-            <option stateCode="AS">American Samoa</option>
-            <option stateCode="GU">Guam</option>
-            <option stateCode="MP">Northern Mariana Islands</option>
-            <option stateCode="PR">Puerto Rico</option>
-            <option stateCode="UM">United States Minor Outlying Islands</option>
-            <option stateCode="VI">Virgin Islands</option>
-        </datalist>
-    </li>
-    <li class="inline">
-        <label>Zip:</label>
-        <input list="zipCode" name="clientZip" value="@currentClient.clientAddress.zip" />
-    </li>
-    <li class="inline">
-        <label>MAPSCO:</label>
-        <input type="text" name="mapsco" value="@currentClient.clientAddress.mapsco" />
-    </li>
-    <li>
-        <label>Client Phone:</label>
-        <input type="text" name="clientPhone" value="@currentClient.additionalContactInfo" />
-    </li>
-    <li>
-        <label>County:</label>
-        <input type="text" name="clientCounty" value="@currentClient.clientAddress.county" />
-    </li>
-    <li>
-        <label>Service Area Exception:</label>
-        <input type="checkbox" value="ServiceAreaException" name="serviceAreaExeption">
-    </li>
-    <li>
-        <label>Case Manager:</label>
-
-    </li>
-    <li>
-        <label>TKID's Case Number:</label>
-        <input type="text" name="TKIDScaseNumber" value="@currentClient.TKIDcaseNumber">
-    </li>
-    <li>
-        <label>Consent to Release Information?</label>
-        <input type="checkbox">
-    </li>
-</ul>
-<ul class="flex">
-    <li>
-        <label>ECI:</label>
-        <select name="eci">
-        </select>
-    </li>
-    <li>
-        <label>Accounting System ID:</label>
-        <input type="text" value="@currentClient.accountingSystemID" />
-    </li>
-</ul>
-<ul class="flex">
-    <li>
-        <button type="button">Insurance Update</button>
-    </li>
-    <li>
-        <button type="button">Cost Share and DRS</button>
-    </li>
-    <li>
-        <button type="button">Credit Card Update</button>
-    </li>
-</ul>
-<div id="diagnosisGridContainer">
-    @Html.Partial("Client_DiagnosisGrid_Partial")
-</div>
-<h4>Physician Information:</h4>
-<ul class="flex">
+<ul>
+    <li><h4>Guardian 1:</h4></li>
     <li>
         <label>Last Name:</label>
         <input type="text" />
@@ -240,21 +28,22 @@ Change History:
         <input type="text" />
     </li>
     <li>
-        <label>Type:</label>
-        <input type="text" />
+        <label>Relationship:</label>
+        <select>
+            <option value="1">Mother</option>
+            <option value="2">Father</option>
+        </select>
     </li>
 </ul>
 <ul>
     <li>
         <label>Address 1:</label>
-        <input type="text" size="60">
+        <input type="text" size="50">
     </li>
     <li>
         <label>Address 2:</label>
-        <input type="text" size="60"><br />
+        <input type="text" size="50">
     </li>
-</ul>
-<ul class="flex">
     <li>
         <label>City:</label>
         <input type="text">
@@ -328,94 +117,218 @@ Change History:
         <input type="text" size="4">
     </li>
 </ul>
-<ul class="flex">
+<ul>
     <li>
         <label>Home Phone:</label>
-        <input type="Text">
+        <input type="text">
     </li>
     <li>
-        <label>Fax:</label>
-        <input type="Text">
+        <label>Work Phone:</label>
+        <input type="text">
     </li>
     <li>
-        <label>Physician ID:</label>
-        <input type="Text">
-    </li>
-    <li>
-        <label>Physician NPI:</label>
-        <input type="Text">
+        <label>Cell Phone:</label>
+        <input type="text">
     </li>
 </ul>
 <ul>
     <li>
-        <label>Medical Recieved:</label>
-        <input type="CheckBox">
+        <label>Email:</label>
+        <input type="text">
     </li>
     <li>
-        <label>Date Recieved:</label>
-        <input type="date">
+        <label>Communication Preference:</label>
+        <input list="communicationPreference">
     </li>
     <li>
-        <label>Immunizations Recieved:</label>
-        <input type="CheckBox">
+        <label>Best to Call:</label>
+        <input list="bestToCall">
+    </li>
+    <li>
+        <label>Sex:</label>
+        <select>
+            <option value="1">M</option>
+            <option value="1">F</option>
+        </select>
+    </li>
+    <li>
+        <label>Race:</label>
+        <select></select>
+    </li>
+    <li>
+        <label>Occupation:</label>
+        <input type="Text" />
+    </li>
+    <li>
+        <label>Employer:</label>
+        <input type="Text" />
     </li>
 </ul>
-<div id="familyGridContainer">
-    @Html.Partial("Client_FamilyGrid_Partial")
-    @Html.TextBoxFor()
-</div>
-<div id="physicianGridContainer">
-    @Html.Partial("Client_PhysicianGrid_Partial")
-</div>
-
-@section JavaScript
-{
-    <script>
-            // Selects the appropriate client status from the office property based on result of the current client in session.
-            $(function () {
-                $('select[name^="office" option[value="@currentClient.office"]').attr("selected", "selected");
-            });
-    </script>
-    <script>
-        // Selects the appropriate client status from the clientStatus property based on result of the current client in session.
-        $(function () {
-            $('select[name^="clientStatus" option[value="@currentClient.clientStatus"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate sex from the sex dropdown property based on result of the current client in session.
-        $(function() {
-            $('select[name^="sex"] option[value="@currentClient.sex"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate ethnicity from the ethnicity dropdown property based on result of the current client in session.
-        $(function() {
-            $('select[name^="ethnicity"] option[value="@currentClient.ethnicity"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate race from the race dropdown property based on result of the current client in session.
-        $(function() {
-            $('select[name^="race"] option[value="@currentClient.race"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate language from the language dropdown property based on result of the current client in session.
-        $(function() {
-            $('select[name^="language"] option[value="@currentClient.language"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate state from the state dropdown property based on result of the current client in session.
-        $(function() {
-            $('select[id^="clientState"] option[value="@currentClient.clientAddress.state"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-            // Selects the appropriate eci from the eci dropdown property based on result of the current client in session.
-            $(function() {
-                $('select[name^="eci"] option[value="@currentClient.ECI"]').attr("selected", "selected");
-            });
-    </script>
-}
+<ul>
+    <li><h4>Guardian 2:</h4></li>
+    <li>
+        <label>Last Name:</label>
+        <input type="text" />
+    </li>
+    <li>
+        <label>First Name:</label>
+        <input type="text" />
+    </li>
+    <li>
+        <label>Relationship:</label>
+        <select>
+            <option value="1">Mother</option>
+            <option value="2">Father</option>
+        </select>
+    </li>
+</ul>
+<ul>
+    <li>
+        <label>Address 1:</label>
+        <input type="text" size="50">
+    </li>
+    <li>
+        <label>Address 2:</label>
+        <input type="text" size="50">
+    </li>
+    <li>
+        <label>City:</label>
+        <input type="text">
+    </li>
+    <li>
+        <label>State:</label>
+        <input list="states" />
+        <datalist id="states" name="state">
+            <option stateCode="AL">Alabama</option>
+            <option stateCode="AK">Alaska</option>
+            <option stateCode="AZ">Arizona</option>
+            <option stateCode="AR">Arkansas</option>
+            <option stateCode="CA">California</option>
+            <option stateCode="CO">Colorado</option>
+            <option stateCode="CT">Connecticut</option>
+            <option stateCode="DE">Delaware</option>
+            <option stateCode="DC">District Of Columbia</option>
+            <option stateCode="FL">Florida</option>
+            <option stateCode="GA">Georgia</option>
+            <option stateCode="HI">Hawaii</option>
+            <option stateCode="ID">Idaho</option>
+            <option stateCode="IL">Illinois</option>
+            <option stateCode="IN">Indiana</option>
+            <option stateCode="IA">Iowa</option>
+            <option stateCode="KS">Kansas</option>
+            <option stateCode="KY">Kentucky</option>
+            <option stateCode="LA">Louisiana</option>
+            <option stateCode="ME">Maine</option>
+            <option stateCode="MD">Maryland</option>
+            <option stateCode="MA">Massachusetts</option>
+            <option stateCode="MI">Michigan</option>
+            <option stateCode="MN">Minnesota</option>
+            <option stateCode="MS">Mississippi</option>
+            <option stateCode="MO">Missouri</option>
+            <option stateCode="MT">Montana</option>
+            <option stateCode="NE">Nebraska</option>
+            <option stateCode="NV">Nevada</option>
+            <option stateCode="NH">New Hampshire</option>
+            <option stateCode="NJ">New Jersey</option>
+            <option stateCode="NM">New Mexico</option>
+            <option stateCode="NY">New York</option>
+            <option stateCode="NC">North Carolina</option>
+            <option stateCode="ND">North Dakota</option>
+            <option stateCode="OH">Ohio</option>
+            <option stateCode="OK">Oklahoma</option>
+            <option stateCode="OR">Oregon</option>
+            <option stateCode="PA">Pennsylvania</option>
+            <option stateCode="RI">Rhode Island</option>
+            <option stateCode="SC">South Carolina</option>
+            <option stateCode="SD">South Dakota</option>
+            <option stateCode="TN">Tennessee</option>
+            <option stateCode="TX">Texas</option>
+            <option stateCode="UT">Utah</option>
+            <option stateCode="VT">Vermont</option>
+            <option stateCode="VA">Virginia</option>
+            <option stateCode="WA">Washington</option>
+            <option stateCode="WV">West Virginia</option>
+            <option stateCode="WI">Wisconsin</option>
+            <option stateCode="WY">Wyoming</option>
+            <option stateCode="AS">American Samoa</option>
+            <option stateCode="GU">Guam</option>
+            <option stateCode="MP">Northern Mariana Islands</option>
+            <option stateCode="PR">Puerto Rico</option>
+            <option stateCode="UM">United States Minor Outlying Islands</option>
+            <option stateCode="VI">Virgin Islands</option>
+        </datalist>
+    </li>
+    <li>
+        <label>Zip:</label>
+        <input list="zipCode" size="6">
+        <input type="text" size="4">
+    </li>
+</ul>
+<ul>
+    <li>
+        <label>Home Phone:</label>
+        <input type="text">
+    </li>
+    <li>
+        <label>Work Phone:</label>
+        <input type="text">
+    </li>
+    <li>
+        <label>Cell Phone:</label>
+        <input type="text">
+    </li>
+</ul>
+<ul>
+    <li>
+        <label>Email:</label>
+        <input type="text">
+    </li>
+    <li>
+        <label>Communication Preference:</label>
+        <input list="communicationPreference">
+    </li>
+    <li>
+        <label>Best to Call:</label>
+        <input list="bestToCall">
+    </li>
+    <li>
+        <label>Sex:</label>
+        <select>
+            <option value="1">M</option>
+            <option value="1">F</option>
+        </select>
+    </li>
+    <li>
+        <label>Race:</label>
+        <select></select>
+    </li>
+    <li>
+        <label>Occupation:</label>
+        <input type="Text" />
+    </li>
+    <li>
+        <label>Employer:</label>
+        <input type="Text" />
+    </li>
+</ul>
+<ul>
+    <li>
+        Sibling Information:
+    </li>
+    <li>
+        <table>
+            <tr>
+                <th>Name</th>
+                <th>Birth Date</th>
+            </tr>
+            <tr>
+                <td>Data</td>
+                <td>data</td>
+            </tr>
+        </table>
+    </li>
+    <li>
+        <label>Release Comments:</label>
+        <textarea name="familyReleaseComments" rows="20" cols="20"></textarea>
+    </li>
+</ul>

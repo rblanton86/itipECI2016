@@ -1,17 +1,15 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from Clients table
+Description: Stored Procedure to pull information from Clients table based on AltID.
 	 
 Author: 
-	Tyrell Powers-Crane 
+	Jennifer M. Graves
 Date: 
-	6.21.16
+	07-05-2016
 Change History:
-	07-05-2016: -- jmg -- Updated stored proc to new column names for compliance.
-	07-06-2016: -- jmg -- Corrected spelling error which caused exception on webApp run.
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
-	@clientID int
+CREATE PROCEDURE [dbo].[get_ClientByAltID]
+	@altID VARCHAR(25)
 
 AS
 	BEGIN
@@ -31,6 +29,9 @@ AS
 				addr.st,
 				addr.zip,
 				addr.mapsco,
+				insauth.insuranceAuthorizationType,
+				insauth.authorized_From,
+				insauth.authorized_To,
 				comprf.communicationPreferences
 
 			FROM Clients clnt
@@ -40,13 +41,15 @@ AS
 					ON clnt.ethnicityID = eth.ethnicityID
 				LEFT JOIN ClientStatus sts
 					ON clnt.clientStatusID = sts.clientStatusID
+				LEFT JOIN Diagnosis dx
+					ON clnt.diagnosisID = dx.diagnosisID
 				LEFT JOIN PrimaryLanguage plang
 					ON clnt.primaryLanguageID = plang.primaryLanguageID
 				LEFT JOIN SchoolInformation sclinf
 					ON clnt.schoolInfoID = sclinf.schoolInfoID
 				LEFT JOIN InsuranceAuthorization insauth
 					ON clnt.insuranceAuthID = insauth.insuranceAuthID
-				LEFT JOIN CommunicationPreferences comprf
+				LEFT JOIN CommuniciationPreferences comprf
 					ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 				LEFT JOIN Sex sex
 					ON clnt.sexID = sex.sexID
@@ -54,7 +57,7 @@ AS
 					ON clnt.officeID = office.officeID
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
-			WHERE clnt.clientID = @clientID
+			WHERE altID = @altID
 
 		END TRY
 		BEGIN CATCH

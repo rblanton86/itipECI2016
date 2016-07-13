@@ -231,6 +231,7 @@
     <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\InsuranceAuthorization.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Physician.cs" />
     <Compile Include="Models\Referral.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TimeSheetModels.cs" />
@@ -341,6 +342,9 @@
     <Content Include="Views\Staff\Add_Staff.cshtml" />
     <Content Include="Views\Shared\Client_Partial.cshtml" />
     <Content Include="Views\Shared\Staff_Partial.cshtml" />
+    <Content Include="Views\Shared\Client_FamilyGrid_Partial.cshtml" />
+    <Content Include="Views\Shared\Client_PhysicianGrid_Partial.cshtml" />
+    <Content Include="Views\Shared\Client_DiagnosisGrid_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

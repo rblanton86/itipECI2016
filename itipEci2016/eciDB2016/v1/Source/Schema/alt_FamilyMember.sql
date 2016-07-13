@@ -9,6 +9,7 @@ Change History:
 		06-30-2016 -- jmg: Corrected if statement
 		07-05-2016 -- jmg: Added deleted column.
 		07-12-2016 -- jmg: Added race, occupation, employer columns. Also added DOB column for family member: sibling type.
+			Edited script so foreign key dropped appropriately.
 ************************************************************************************************************/
 	
 -- Declares table variable for aci table
@@ -89,7 +90,7 @@ ELSE
 				DECLARE @some NVARCHAR(100) = 'UPDATE FamilyMember SET additionalContactInfoID = additionalContactInfo'
 				EXEC sp_executesql @some
 				
-				WHILE EXISTS(select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where constraint_catalog = @databaseName and table_name = 'FamilyMember')
+				WHILE EXISTS(select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where constraint_name = @fkn)
 					BEGIN
 						SELECT @dtscript = (
 							'ALTER TABLE FamilyMember' + 
@@ -149,7 +150,7 @@ ELSE
 			BEGIN
 				ALTER TABLE FamilyMember
 					ADD occupation VARCHAR(25)
-				PRINT 'RaceID column added to FamilyMember table.'
+				PRINT 'Occupation column added to FamilyMember table.'
 			END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'employer')
@@ -160,7 +161,7 @@ ELSE
 			BEGIN
 				ALTER TABLE FamilyMember
 					ADD employer VARCHAR(25)
-				PRINT 'RaceID column added to FamilyMember table.'
+				PRINT 'Employer column added to FamilyMember table.'
 			END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'dob')
@@ -171,6 +172,6 @@ ELSE
 			BEGIN
 				ALTER TABLE FamilyMember
 					ADD dob DATE
-				PRINT 'RaceID column added to FamilyMember table.'
+				PRINT 'DOB column added to FamilyMember table.'
 			END
 	END

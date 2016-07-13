@@ -1,37 +1,26 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull information from Clients table
+Description: Stored Procedure to pull client information from Clients table by name
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.21.16
+	6.22.16
 Change History:
-	07-05-2016: -- jmg -- Updated stored proc to new column names for compliance.
-	07-06-2016: -- jmg -- Corrected spelling error which caused exception on webApp run.
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
-	@clientID int
+CREATE PROCEDURE [dbo].[get_ClientByName]
+	@firstName varchar(25),
+	@lastName varchar(25)
 
 AS
 	BEGIN
 		BEGIN TRY
 
 			SELECT clnt.*,
-				rce.race,
-				eth.ethnicity,
-				sts.clientStatus,
-				plang.primaryLanguage,
-				sclinf.isd,
-				sex.sex,
-				office.officeName,
-				addr.address1,
-				addr.address2,
-				addr.city,
-				addr.st,
-				addr.zip,
-				addr.mapsco,
-				comprf.communicationPreferences
+					rce.race,
+					eth.ethnicity,
+					sts.clientStatus,
+					dx.icd_10_Code
 
 			FROM Clients clnt
 				LEFT JOIN Race rce
@@ -40,6 +29,8 @@ AS
 					ON clnt.ethnicityID = eth.ethnicityID
 				LEFT JOIN ClientStatus sts
 					ON clnt.clientStatusID = sts.clientStatusID
+				LEFT JOIN Diagnosis dx
+					ON clnt.diagnosisID = dx.diagnosisID
 				LEFT JOIN PrimaryLanguage plang
 					ON clnt.primaryLanguageID = plang.primaryLanguageID
 				LEFT JOIN SchoolInformation sclinf
@@ -54,7 +45,7 @@ AS
 					ON clnt.officeID = office.officeID
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
-			WHERE clnt.clientID = @clientID
+			WHERE (firstName = @firstName) AND (lastName = @lastName)
 
 		END TRY
 		BEGIN CATCH

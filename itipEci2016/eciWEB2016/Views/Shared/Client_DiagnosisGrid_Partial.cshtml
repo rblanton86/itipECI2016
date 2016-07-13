@@ -1,0 +1,38 @@
+﻿@*/****************************************************************************
+Description: Client_Update diagnosis webgrid partial view.
+
+Author: Jennifer M. Graves
+
+Date: 07-12-2016
+
+Change History:
+
+****************************************************************************/*@
+@{
+    eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
+
+    if (Session["client"] != null)
+    {
+        currentClient = (eciWEB2016.Models.Client)Session["client"];
+    }
+}
+<ul class="flex">
+    <li>
+        <label>Dx Type</label>
+        <select>
+            <option>Primary</option>
+            <option>Alternate</option>
+        </select>
+    </li>
+    <li>
+        <label>Dx Code</label>
+        <input type="text" id="dxCodeList" name="dxCode" />
+    </li>
+    <li>
+        <label>Diagnosis</label>
+        <input type="text" id="dxDescription" name="dx" />
+    </li>
+    <li>
+        <button type="button">Add</button>
+    </li>
+</ul>
