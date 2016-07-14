@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfo]
+ALTER PROCEDURE [dbo].[get_AdditionalContactInfo]
 	@additionalContactInfoID int
 	
 AS
@@ -24,7 +24,7 @@ AS
 					aci.memberTypeID = mbt.memberTypeID
 					LEFT JOIN AdditionalContactInfoType acit ON
 					acit.additionalContactInfoTypeID = aci.additionalContactInfoID
-			WHERE additionalContactInfoID = @additionalContactInfoID
+			WHERE additionalContactInfoID = @additionalContactInfoID AND deleted <> 1
 
 		END TRY
 		BEGIN CATCH

@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_FamilyMemberByName]
+ALTER PROCEDURE [dbo].[get_FamilyMemberByName]
 	@firstName varchar (25),
 	@lastName varchar (25)
 
@@ -25,7 +25,7 @@ AS
 					LEFT JOIN AdditionalContactInfo aci ON
 						fmb.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE (firstName = @firstName) AND (lastName = @lastName)
+			WHERE (firstName = @firstName) AND (lastName = @lastName) AND fmb.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

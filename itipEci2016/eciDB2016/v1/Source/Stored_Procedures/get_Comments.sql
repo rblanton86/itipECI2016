@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Comments]
+ALTER PROCEDURE [dbo].[get_Comments]
 	@commentsID int
 
 
@@ -18,7 +18,7 @@ AS
 
 			SELECT comments
 			FROM Comments
-			WHERE commentsID = @commentsID
+			WHERE commentsID = @commentsID AND deleted <> 1
 
 		END TRY
 		BEGIN CATCH

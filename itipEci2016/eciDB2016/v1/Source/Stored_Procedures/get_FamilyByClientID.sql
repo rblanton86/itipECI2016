@@ -4,7 +4,7 @@ Author: Jennifer M Graves
 Date: 07-13-2016
 Change History:
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_DiagnosisByClientID]
+CREATE PROCEDURE [dbo].[get_FamilyByClientID]
 	@clientID int
 
 AS
@@ -18,7 +18,8 @@ AS
 				ON fm.familyMemberID = lcf.familyID
 			LEFT JOIN FamilyMemberType fmt
 				ON fmt.familyMemberTypeID = fm.FamilyMemberTypeID
-		WHERE lcf.clientID = 1
+
+		WHERE lcf.clientID = @clientID AND fm.deleted <> 1
 
 	END TRY
 	BEGIN CATCH

@@ -1,29 +1,23 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that retrieves information from the Addresses Table
+Description: Stored Procedure to pull type information from MemberType
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	7.14.16
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_Addresses]
-	@addressesID int
-
+CREATE PROCEDURE [dbo].[get_MemberType]
+	@memberTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addr.*, 
-					addrt.addressesType
-
-				FROM Addresses addr
-					LEFT JOIN AddressesType addrt ON
-						addr.addressesTypeID = addrt.addressesTypeID
-
-			WHERE addressesID = @addressesID AND deleted <> 1
+			SELECT memberType
+			FROM MemberType
+			WHERE memberTypeID = @memberTypeID
 
 		END TRY
 		BEGIN CATCH
@@ -40,6 +34,5 @@ AS
 
 		END CATCH
 	END
-
 
 

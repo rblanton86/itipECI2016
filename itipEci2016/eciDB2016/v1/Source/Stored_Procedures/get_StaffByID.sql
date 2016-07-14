@@ -19,7 +19,7 @@ AS
 				stafft.staffType, 
 				ISNULL (addr.address1, ' '),
 				addr.*, 
-				aci.additionalContactInfo
+				ISNULL(aci.additionalContactInfo, ' ')
 
 			FROM Staff staff 
 				LEFT JOIN StaffType stafft ON
