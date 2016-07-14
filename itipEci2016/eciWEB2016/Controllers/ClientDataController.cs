@@ -4,10 +4,10 @@ using System.Linq;
 using System.Web.Configuration;
 using System.Data;
 using System.Data.Common;
-using System.Data.SqlClient;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
+using eciWEB2016.Class;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -74,7 +74,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 clientStatus = dr.Field<string>("clientStatus"),
                 sex = dr.Field<string>("sex"),
                 dob = dr.Field<DateTime>("dob"),
-                office = dr.Field<string>("office")
+                office = dr.Field<string>("officeName")
             };
 
             // Does the math to convert client's current age in months.
@@ -85,10 +85,10 @@ namespace eciWEB2016.Controllers.DataControllers
             currentClient.ageInMonths = Convert.ToInt32(diff);
 
             // Creates blank Client Address. Each client has only one address.
-            Address clientAddr = new Address();
+            Addresses clientAddr = new Addresses();
 
             // Assigns obtained address into current client.
-            currentClient.clientAddress = GetAddressByDataSet(ds);
+            currentClient.clientAddress = clientAddr.GetAddressByDataSet(ds);
 
             // Calls method to return client's diagnosis list.
             currentClient.clientDiagnosis = GetClientDiagnosis(thisClientID);
@@ -151,7 +151,7 @@ namespace eciWEB2016.Controllers.DataControllers
 
             // TODO: Jen - Finish all fields.
             List<Family> FamilyList = (from drRow in fds.Tables[0].AsEnumerable()
-                                       select new Family()
+                                       select new Family
                                        {
                                            familyMemberID = drRow.Field<int>("familyMemberID"),
                                            firstName = drRow.Field<string>(""),
@@ -162,8 +162,7 @@ namespace eciWEB2016.Controllers.DataControllers
                                            race = drRow.Field<string>(""),
                                            isGuardian = drRow.Field<bool>(""),
                                            occupation = drRow.Field<string>(""),
-                                           employer = drRow.Field<string>(""),
-                                           familyAddrs = GetAddressesByDataSet(fds)
+                                           employer = drRow.Field<string>("")
                                        }).ToList();
 
             return FamilyList;

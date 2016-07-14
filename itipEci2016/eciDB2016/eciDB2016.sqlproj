@@ -308,24 +308,24 @@
     <None Include="v1\Source\Schema\init_Office.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_FamilyByClientID.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\init_TypeTableData.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\get_AllClients.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\get_ClientByAltID.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\get_ClientByID.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\get_DiagnosisByClientID.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\get_StaffByID.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\ins_AdditonalContactInfo.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\ins_Addresses.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\ins_StaffMember.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\upd_AdditionalContactInfo.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\upd_Addresses.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\upd_Staff.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\ins_Client.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\get_ClientByName.sql" />
-    <Build Include="v1\Release\Sprint4\Schema\upd_Clients.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_AllClients.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisByClientID.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_FamilyByClientID.sql" />
+    <None Include="v1\Release\Sprint4\Schema\init_TypeTableData.sql" />
+    <None Include="v1\Release\Sprint4\Schema\get_AllClients.sql" />
+    <None Include="v1\Release\Sprint4\Schema\get_ClientByAltID.sql" />
+    <None Include="v1\Release\Sprint4\Schema\get_ClientByID.sql" />
+    <None Include="v1\Release\Sprint4\Schema\get_DiagnosisByClientID.sql" />
+    <None Include="v1\Release\Sprint4\Schema\get_StaffByID.sql" />
+    <None Include="v1\Release\Sprint4\Schema\ins_AdditonalContactInfo.sql" />
+    <None Include="v1\Release\Sprint4\Schema\ins_Addresses.sql" />
+    <None Include="v1\Release\Sprint4\Schema\ins_StaffMember.sql" />
+    <None Include="v1\Release\Sprint4\Schema\upd_AdditionalContactInfo.sql" />
+    <None Include="v1\Release\Sprint4\Schema\upd_Addresses.sql" />
+    <None Include="v1\Release\Sprint4\Schema\upd_Staff.sql" />
+    <None Include="v1\Release\Sprint4\Schema\ins_Client.sql" />
+    <None Include="v1\Release\Sprint4\Schema\get_ClientByName.sql" />
+    <None Include="v1\Release\Sprint4\Schema\upd_Clients.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_AllClients.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisByClientID.sql" />
   </ItemGroup>
 </Project>

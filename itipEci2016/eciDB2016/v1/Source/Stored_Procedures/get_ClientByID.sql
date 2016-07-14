@@ -6,9 +6,10 @@ Author:
 Date: 
 	6.21.16
 Change History:
-	07-05-2016: -- jmg -- Updated stored proc to new column names for compliance.
-	07-06-2016: -- jmg -- Corrected spelling error which caused exception on webApp run.
-	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
+	07-05-2016: JMG - Updated stored proc to new column names for compliance.
+	07-06-2016: JMG - Corrected spelling error which caused exception on webApp run.
+	07-11-2016: JMG - Update to stored procedure to include additionally added information.
+	07-13-2016: JMG - Updated to wrap selects in ISNULL.
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
@@ -18,20 +19,20 @@ AS
 		BEGIN TRY
 
 			SELECT clnt.*,
-				rce.race,
-				eth.ethnicity,
-				sts.clientStatus,
-				plang.primaryLanguage,
-				sclinf.isd,
-				sex.sex,
-				office.officeName,
-				addr.address1,
-				addr.address2,
-				addr.city,
-				addr.st,
-				addr.zip,
-				addr.mapsco,
-				comprf.communicationPreferences
+				ISNULL(rce.race, '') AS race,
+				ISNULL(eth.ethnicity, '') AS ethnicity,
+				ISNULL(sts.clientStatus, '') AS clientStatus,
+				ISNULL(plang.primaryLanguage, '') AS primaryLanguage,
+				ISNULL(sclinf.isd, '') AS isd,
+				ISNULL(sex.sex, '') AS sex,
+				ISNULL(office.officeName, '') AS officeName,
+				ISNULL(addr.address1, '') AS address1,
+				ISNULL(addr.address2, '') AS address2,
+				ISNULL(addr.city, '') AS city,
+				ISNULL(addr.st, '') AS st,
+				ISNULL(addr.zip, 0) AS zip,
+				ISNULL(addr.mapsco, '') AS mapsco,
+				ISNULL(comprf.communicationPreferences, '') AS communicationPreferences
 
 			FROM Clients clnt
 				LEFT JOIN Race rce
@@ -54,7 +55,7 @@ AS
 					ON clnt.officeID = office.officeID
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
-			WHERE clnt.clientID = @clientID
+			WHERE clnt.clientID = 4023
 
 		END TRY
 		BEGIN CATCH
