@@ -17,37 +17,47 @@ ALTER PROCEDURE [dbo].[ins_StaffMember]
 	@staffAltID int,
 	@deleted bit,
 	@handicapped bit,
-	@staffSSN int,
+	@ssn int,
+	@dob date,
 	@success bit OUTPUT
 	
 AS
 	BEGIN
 		BEGIN TRY
 		
-		IF EXISTS (SELECT * FROM StaffMember WHERE (ssn <> @staffSSN) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
+		IF EXISTS (SELECT * FROM StaffMember WHERE (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
 			BEGIN
 
 				SET @success = 1
 
-		INSERT Staff (staffTypeID, 
-						addressesID, 
-						additionalContactInfoID, 
-						firstName, 
-						lastName, 
-						staffAltID,
-						deleted,
-						handicapped,
-						ssn)
+				INSERT Staff (staffTypeID, 
+								addressesID, 
+								additionalContactInfoID, 
+								firstName, 
+								lastName, 
+								staffAltID,
+								deleted,
+								handicapped,
+								ssn,
+								dob)
 
-		VALUES (@staffTypeID, 
-				@addressesID, 
-				@additionalContactInfoID, 
-				@firstName, 
-				@lastName, 
-				@staffAltID,
-				@deleted,
-				@handicapped,
-				@staffSSN)
+				VALUES (@staffTypeID, 
+						@addressesID, 
+						@additionalContactInfoID, 
+						@firstName, 
+						@lastName, 
+						@staffAltID,
+						@deleted,
+						@handicapped,
+						@ssn,
+						@dob)
+			END
+		ELSE
+			BEGIN
+				SET @success = 0
+			END
+
+			RETURN @success
 
 		END TRY
 		BEGIN CATCH

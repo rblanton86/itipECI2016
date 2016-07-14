@@ -61,6 +61,7 @@ namespace eciWEB2016.Controllers
 
              return staff;
         }
+
         //used to get staff member from session. Used in webgrid partial
         [System.Web.Services.WebMethod]
         public JsonResult GetStaffMemberFromSession(int staffID)
