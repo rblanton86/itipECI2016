@@ -182,6 +182,7 @@ namespace eciWEB2016.Controllers.DataControllers
 
                 // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
+                db.AddInParameter(upd_Staff, "@staffID", DbType.String, thisStaff.staffID);
                 db.AddInParameter(upd_Staff, "@firstName", DbType.String, thisStaff.firstName);
                 db.AddInParameter(upd_Staff, "@lastName", DbType.String, thisStaff.lastName);
                 db.AddInParameter(upd_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
