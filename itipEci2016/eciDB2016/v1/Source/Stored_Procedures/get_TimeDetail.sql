@@ -8,16 +8,29 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_TimeDetail]
+ALTER PROCEDURE [dbo].[get_TimeDetail]
 	@timeHeaderID int
 	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT *
+			SELECT timeDetailID,
+					timeHeaderID,
+					clientID,
+					ISNULL(actualTime, 0),
+					ISNULL(eciCode, ' '),
+					ISNULL(insuranceDesignation, ' '),
+					ISNULL(cptCode, ' '),
+					ISNULL(insuranceTime, 0),
+					ISNULL(placeOfService, ' '),
+					ISNULL(tcm, ' '),
+					ISNULL(canceled, ' '),
+					updDate,
+					deleted
+
 			FROM TimeDetail
-			WHERE timeHeaderID = @timeHeaderID
+			WHERE timeHeaderID = @timeHeaderID AND deleted <> 1
 
 		END TRY
 		BEGIN CATCH

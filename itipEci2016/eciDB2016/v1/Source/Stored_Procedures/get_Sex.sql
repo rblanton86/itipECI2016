@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Sex]
+alter PROCEDURE [dbo].[get_Sex]
 	@sexID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT sex
+			SELECT ISNULL(sex, ' ')
 			FROM Sex
 			WHERE sexID = @sexID
 

@@ -9,7 +9,7 @@ Change History:
 	
 ************************************************************************************************************/
 
-CREATE PROCEDURE [dbo].[get_Race]
+alter PROCEDURE [dbo].[get_Race]
 	@raceID int
 
 	AS
@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[get_Race]
 BEGIN
 		BEGIN TRY
 		
-			SELECT race
+			SELECT ISNULL(race, ' ')
 			FROM Race
 			WHERE raceID = @raceID	
 

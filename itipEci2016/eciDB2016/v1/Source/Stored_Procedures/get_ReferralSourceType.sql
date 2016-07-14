@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_referralSourceType]
+alter PROCEDURE [dbo].[get_referralSourceType]
 	@referralSourceTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT referralSourceType, referralNotificationType
+			SELECT ISNULL(referralSourceType, ' '), ISNULL(referralNotificationType, ' ')
 			FROM ReferralSourceType
 			WHERE referralSourceTypeID = @referralSourceTypeID
 

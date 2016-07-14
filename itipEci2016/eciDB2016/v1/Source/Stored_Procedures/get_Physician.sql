@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Physician]
+ALTER PROCEDURE [dbo].[get_Physician]
 	@firstName varchar(25),
 	@lastName varchar(25)
 
@@ -17,6 +17,7 @@ AS
 		BEGIN TRY
 
 			SELECT phy.*,
+					
 					addr.address1, addr.address2, addr.st, addr.city, addr.zip,
 					aci.additionalContactInfo
 
@@ -25,6 +26,8 @@ AS
 				phy.addressesID = addr.addressesID
 			LEFT JOIN AdditionalContactInfo aci ON
 				phy.additionalContactInfoID = aci.additionalContactInfoID
+
+			WHERE  phy.deleted <> 1
 				
 
 		END TRY

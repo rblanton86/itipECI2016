@@ -15,11 +15,14 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT *
+			SELECT timeHeaderID, 
+					staffID,
+					ISNULL(weekEnding, ' '),
+					deleted
 					
 			FROM TimeHeader 
 
-			WHERE staffID = @staffID
+			WHERE staffID = @staffID AND deleted <> 1
 
 
 			
