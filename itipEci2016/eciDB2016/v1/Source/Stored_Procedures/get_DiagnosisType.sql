@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_DiagnosisType]
+ALTER PROCEDURE [dbo].[get_DiagnosisType]
 	@diagnosisTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT diagnosisType
+			SELECT ISNULL(diagnosisType, ' ')
 			FROM DiagnosisType
 			WHERE diagnosisTypeID = @diagnosisTypeID
 

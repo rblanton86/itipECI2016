@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Ethnicity]
+ALTER PROCEDURE [dbo].[get_Ethnicity]
 	@ethnicityID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ethnicity
+			SELECT ISNULL(ethnicity, ' ')
 			FROM Ethnicity
 			WHERE ethnicityID = @ethnicityID
 

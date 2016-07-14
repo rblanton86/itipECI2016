@@ -15,7 +15,19 @@ AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT staff.*, 
+		SELECT 
+				staff.staffID,
+				staff.staffTypeID,
+				staff.addressesID,
+				staff.additionalContactInfoID,
+				ISNULL(staff.firstName, ' '),
+				ISNULL(staff.lastName, ' '),
+				ISNULL(staff.handicapped, 0),
+				ISNULL(staff.staffAltID, ' '),
+				staff.sexID,
+				staff.deleted,
+				ISNULL(staff.ssn, 0),
+				ISNULL(staff.dob, ' '),
 				stafft.staffType, 
 				addr.addressesID,
 				ISNULL(addr.addressesTypeID, 1),

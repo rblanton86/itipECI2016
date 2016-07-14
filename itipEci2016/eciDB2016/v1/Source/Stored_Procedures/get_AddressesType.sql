@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AddressType]
+ALTER PROCEDURE [dbo].[get_AddressType]
 	@addressesTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addressesType
+			SELECT ISNULL(addressesType, ' ') AS addressesType
 			FROM AddressesType
 			WHERE addressesTypeID = @addressesTypeID
 

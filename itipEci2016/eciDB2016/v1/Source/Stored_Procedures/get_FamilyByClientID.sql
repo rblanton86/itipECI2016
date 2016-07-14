@@ -4,14 +4,26 @@ Author: Jennifer M Graves
 Date: 07-13-2016
 Change History:
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_FamilyByClientID]
+ALTER PROCEDURE [dbo].[get_FamilyByClientID]
 	@clientID int
 
 AS
 	BEGIN TRY
 
-		SELECT fm.*,
-			fmt.familyMemberType
+		SELECT 
+				fm.familyMemberID,
+				fm.familyMemberTypeID,
+				ISNULL(fm.firstName, ' '),
+				ISNULL(fm.lastName, ' '),
+				ISNULL(fm.isGuardian, 1),
+				fm.additionalContactInfoID,
+				fm.sexID,
+				fm.deleted,
+				fm.raceID,
+				ISNULL(fm.occupation, ' '),
+				ISNULL(fm.employer, ' '),
+				ISNULL(fm.dob, ' '),
+				ISNULL(fmt.familyMemberType, ' ')
 
 		FROM LnkClientFamily lcf
 			LEFT JOIN FamilyMember fm

@@ -17,7 +17,10 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT fmb.*, fmbt.familyMemberType, aci.additionalContactInfoID
+			SELECT fmb.*, 
+					
+					ISNULL(fmbt.familyMemberType, ' '),
+					ISNULL(aci.additionalContactInfoID, ' ')
 
 				FROM FamilyMember fmb
 					LEFT JOIN FamilyMemberType fmbt ON

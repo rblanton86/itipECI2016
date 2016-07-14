@@ -8,17 +8,19 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[get_CommentsByClientID]
+alter PROCEDURE [dbo].[get_CommentsByClientID]
 	@clientID INT
 
 AS
 BEGIN
 	BEGIN TRY
-		SELECT com.*
+		SELECT com.commentsID,
+				ISNULL(com.comments, ' ') AS comments,
+				com.deleted
 
 		FROM Comments com
 			LEFT JOIN Clients clnt
-				ON clnt.commentsID = com.commentsID
+				ON clnt.commentsID = com.commentsID AND com.deleted <> 1
 
 		WHERE clnt.clientID = @clientID
 	END TRY

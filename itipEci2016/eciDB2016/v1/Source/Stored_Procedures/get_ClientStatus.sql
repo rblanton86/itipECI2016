@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientStatus]
+alter PROCEDURE [dbo].[get_ClientStatus]
 	@clientStatusID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT clientStatus
+			SELECT ISNULL(clientStatus, ' ') AS clientStatus
 			FROM ClientStatus
 			WHERE clientStatusID = @clientStatusID
 

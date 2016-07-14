@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_MemberType]
+alter PROCEDURE [dbo].[get_MemberType]
 	@memberTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT memberType
+			SELECT ISNULL(memberType, ' ')
 			FROM MemberType
 			WHERE memberTypeID = @memberTypeID
 
