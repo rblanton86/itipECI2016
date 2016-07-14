@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
-Description: Creates stored procedure @procedure.
+Description: Creates stored procedure get_InsAuthByClientID.
         	
 Author: Jennifer M. Graves
         	
@@ -8,7 +8,7 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[@procedure]
+CREATE PROCEDURE [dbo].[get_InsAuthByClientID]
 	@clientID INT
 
 AS
@@ -18,7 +18,16 @@ BEGIN
 			com.*
 
 		FROM InsuranceAuthorization ia
-			LEFT JOIN 
+			LEFT JOIN Comments com
+				ON com.memberID = ia.insuranceAuthID
+			LEFT JOIN Insurance ins
+				ON ia.insuranceID = ins.insuranceID
+			LEFT JOIN LnkClientInsurance lnk
+				ON lnk.insuranceID = ins.insuranceID
+			LEFT JOIN Clients clnt
+				ON lnk.clientID = clnt.clientID
+			WHERE clnt.clientID = @clientID
+				AND com.memberTypeID = 7
 	END TRY
 	BEGIN CATCH
 

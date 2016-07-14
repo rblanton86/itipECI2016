@@ -93,11 +93,8 @@
     <None Include="v1\Source\Stored_Procedures\get_CommentsByClientID.sql" />
     <None Include="v1\Source\Stored_Procedures\get_InsAuthByClientID.sql" />
     <None Include="v1\Source\Stored_Procedures\get_InsuranceByClientID.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_StaffbyClientID.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_StaffByClientID_1.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_StaffByClientID.sql" />
     <None Include="v1\Source\Stored_Procedures\get_PhysicianByClientID.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_FamilyByClientID_1.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID_1.sql" />
     <None Include="v1\Source\Stored_Procedures\get_ReferralByClientID.sql" />
     <None Include="v1\Source\Schema\init_CommentsType.sql" />
   </ItemGroup>

@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
-Description: Creates stored procedure @procedure.
+Description: Creates stored procedure get_StaffByClientID.
         	
 Author: Jennifer M. Graves
         	
@@ -8,13 +8,21 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[@procedure]
+CREATE PROCEDURE [dbo].[get_StaffByClientID]
 	@clientID INT
 
 AS
 BEGIN
 	BEGIN TRY
-		
+		SELECT stf.*
+
+		FROM Staff stf
+			LEFT JOIN LnkClientStaff lnk
+				ON lnk.staffID = stf.staffID
+			LEFT JOIN Client clnt
+				ON lnk.clientID = lnk.clientID
+
+		WHERE clnt.clientID = @clientID
 	END TRY
 	BEGIN CATCH
 

@@ -29,7 +29,9 @@ SELECT @q =
 			(2, ''Family''),
 			(3, ''Staff''),
 			(4, ''Physician''),
-			(5, ''Referral Source'');
+			(5, ''Referral Source''),
+			(6, ''Insurance''),
+			(7, ''InsuranceType'');
 	SET IDENTITY_INSERT MemberType OFF;'
 EXEC(@q)
 PRINT 'MemberType table values added.'

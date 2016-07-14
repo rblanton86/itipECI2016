@@ -13,12 +13,9 @@ Change History:
 
 -- Declares table variable for Clients.
 DECLARE @clients INT = 0
-DECLARE @fkn NVARCHAR(50)
-DECLARE @fkn2 NVARCHAR(50)
-DECLARE @fkn3 NVARCHAR(50)
 DECLARE @databaseName NVARCHAR(50) -- Variable to hold your database's name
 DECLARE @dtscript NVARCHAR(255) -- Variable to hold the script, which we will build later, and which drops all constraints for the table you are dropping
-    
+
 SET @databaseName = 'eciDB2016'
 
 -- Assigns table ID to @clients variable.
@@ -38,6 +35,20 @@ SELECT @col = (
 	WHERE t.object_id = object_id('Clients') AND c.name = 'diagnosisID'
 	)
 
+-- Assigns a foreign key name for use in later script which will drop the foreign key constraint
+DECLARE @fkn NVARCHAR(50)
+SELECT @fkn = (
+	SELECT f.name
+	FROM sys.foreign_keys AS f
+	INNER JOIN
+		sys.foreign_key_columns AS k
+			ON f.object_id = k.constraint_object_id
+	INNER JOIN
+		sys.tables AS t
+			ON t.object_id = k.referenced_object_id
+	WHERE k.parent_object_id = object_id('Clients') AND k.parent_column_id = @col
+	)
+
 -- Declares and obtains the column id number for later query to assign foreign key name
 DECLARE @col2 INT = 0
 SELECT @col2 = (
@@ -46,6 +57,20 @@ SELECT @col2 = (
 	JOIN Sys.Tables AS t
 	ON c.object_id = t.object_id
 	WHERE t.object_id = object_id('Clients') AND c.name = 'insuranceAuthID'
+	)
+
+-- Assigns a foreign key name for use in later script which will drop the foreign key constraint
+DECLARE @fkn2 NVARCHAR(50)
+SELECT @fkn2 = (
+	SELECT f.name
+	FROM sys.foreign_keys AS f
+	INNER JOIN
+		sys.foreign_key_columns AS k
+			ON f.object_id = k.constraint_object_id
+	INNER JOIN
+		sys.tables AS t
+			ON t.object_id = k.referenced_object_id
+	WHERE k.parent_object_id = object_id('Clients') AND k.parent_column_id = @col2
 	)
 
 -- Declares and obtains the column id number for later query to assign foreign key name
@@ -59,32 +84,7 @@ SELECT @col3 = (
 	)
 
 -- Assigns a foreign key name for use in later script which will drop the foreign key constraint
-SELECT @fkn = (
-	SELECT f.name
-	FROM sys.foreign_keys AS f
-	INNER JOIN
-		sys.foreign_key_columns AS k
-			ON f.object_id = k.constraint_object_id
-	INNER JOIN
-		sys.tables AS t
-			ON t.object_id = k.referenced_object_id
-	WHERE k.parent_object_id = object_id('Clients') AND k.parent_column_id = @col
-	)
-
--- Assigns a foreign key name for use in later script which will drop the foreign key constraint
-SELECT @fkn2 = (
-	SELECT f.name
-	FROM sys.foreign_keys AS f
-	INNER JOIN
-		sys.foreign_key_columns AS k
-			ON f.object_id = k.constraint_object_id
-	INNER JOIN
-		sys.tables AS t
-			ON t.object_id = k.referenced_object_id
-	WHERE k.parent_object_id = object_id('Clients') AND k.parent_column_id = @col2
-	)
-
--- Assigns a foreign key name for use in later script which will drop the foreign key constraint
+DECLARE @fkn3 NVARCHAR(50)
 SELECT @fkn3 = (
 	SELECT f.name
 	FROM sys.foreign_keys AS f

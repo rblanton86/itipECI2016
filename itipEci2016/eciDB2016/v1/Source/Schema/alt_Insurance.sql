@@ -27,6 +27,7 @@ IF ISNULL(@ins, 0) = 0
 		--Creates Insurance table if it doesn't exist.
 		CREATE TABLE Insurance (
 			insuranceID INT IDENTITY(1,1) PRIMARY KEY(insuranceID),
+			clientID INT CONSTRAINT FK_Insurance_Client FOREIGN KEY REFERENCES Clients(clientID),
 			insuranceName VARCHAR(75),
 			insurancePolicyID VARCHAR(75),
 			medPreAuthNumber VARCHAR(100),
@@ -63,5 +64,17 @@ ELSE
 				ALTER TABLE Insurance
 					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @ins = OBJECT_ID AND name ='clientID')
+			BEGIN
+				-- Advises DBA no column added, as already exists.
+				PRINT 'Unneeded: clientID column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Insurance
+					ADD clientID INT CONSTRAINT FK_Insurance_Client FOREIGN KEY REFERENCES Clients(clientID)
+				PRINT 'Added clientID column to table.'
 			END
 	END
