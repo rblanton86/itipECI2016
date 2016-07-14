@@ -8,14 +8,14 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[get_CommentsByClientID]
+alter PROCEDURE [dbo].[get_CommentsByClientID]
 	@clientID INT
 
 AS
 BEGIN
 	BEGIN TRY
 		SELECT com.commentsID,
-				ISNULL(com.comments, ' '),
+				ISNULL(com.comments, ' ') AS comments,
 				com.deleted
 
 		FROM Comments com

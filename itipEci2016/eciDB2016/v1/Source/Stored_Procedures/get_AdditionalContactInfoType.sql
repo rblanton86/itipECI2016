@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(additionalContactInfoType, ' ')
+			SELECT ISNULL(additionalContactInfoType, ' ') AS additionalContactInfoType
 			FROM AdditionalContactInfoType
 			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
 

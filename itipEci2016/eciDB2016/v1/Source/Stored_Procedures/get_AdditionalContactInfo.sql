@@ -18,10 +18,10 @@ AS
 			SELECT aci.additionalContactInfoID,
 					aci.memberTypeID,
 					aci.additionalContactInfoTypeId,
-					ISNULL(aci.additionalContactInfo, ' '),
+					ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo,
 					aci.deleted,
-					ISNULL(mbt.memberType,' '), 
-					ISNULL(acit.additionalContactInfoType, ' ')
+					ISNULL(mbt.memberType,' ') AS memberType,
+					ISNULL(acit.additionalContactInfoType, ' ') AS additionalContactInfoType
 
 			FROM AdditionalContactInfo aci
 					LEFT JOIN MemberType mbt ON

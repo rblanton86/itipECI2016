@@ -18,14 +18,14 @@ AS
 
 			SELECT addr.addressesID,
 					addr.addressesTypeID,
-					ISNULL(addr.addressesTypeID, 1),
-					ISNULL (addr.address1, ' '),
-					ISNULL(addr.address2, ' '),
-					ISNULL(addr.city, ' '),
-					ISNULL(addr.st, ' '),
-					ISNULL(addr.zip, 0),
-					ISNULL(addr.mapsco, ' '),
-					ISNULL(addrt.addressesType, ' ')
+					ISNULL(addr.addressesTypeID, 1) AS addressesTypeID,
+					ISNULL (addr.address1, ' ') AS address1,
+					ISNULL(addr.address2, ' ') AS address2,
+					ISNULL(addr.city, ' ') AS city,
+					ISNULL(addr.st, ' ') AS st,
+					ISNULL(addr.zip, 0) AS zip,
+					ISNULL(addr.mapsco, ' ') AS mapsco,
+					ISNULL(addrt.addressesType, ' ') AS addressesType
 
 				FROM Addresses addr
 					LEFT JOIN AddressesType addrt ON

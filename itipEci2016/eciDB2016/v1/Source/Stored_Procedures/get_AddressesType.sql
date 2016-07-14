@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(addressesType, ' ')
+			SELECT ISNULL(addressesType, ' ') AS addressesType
 			FROM AddressesType
 			WHERE addressesTypeID = @addressesTypeID
 

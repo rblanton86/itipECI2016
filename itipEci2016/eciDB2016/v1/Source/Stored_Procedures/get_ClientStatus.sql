@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(clientStatus, ' ')
+			SELECT ISNULL(clientStatus, ' ') AS clientStatus
 			FROM ClientStatus
 			WHERE clientStatusID = @clientStatusID
 
