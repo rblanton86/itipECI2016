@@ -15,16 +15,20 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT aci.*, 
-					mbt.memberType, 
-					acit.additionalContactInfoType
+			SELECT aci.additionalContactInfoID,
+					aci.memberTypeID,
+					aci.additionalContactInfoTypeId,
+					ISNULL(aci.additionalContactInfo, ' '),
+					aci.deleted,
+					ISNULL(mbt.memberType,' '), 
+					ISNULL(acit.additionalContactInfoType, ' ')
 
 			FROM AdditionalContactInfo aci
 					LEFT JOIN MemberType mbt ON
 					aci.memberTypeID = mbt.memberTypeID
 					LEFT JOIN AdditionalContactInfoType acit ON
 					acit.additionalContactInfoTypeID = aci.additionalContactInfoID
-			WHERE additionalContactInfoID = @additionalContactInfoID AND deleted <> 1
+			WHERE additionalContactInfoID = @additionalContactInfoID AND aci.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT refs.*, 
+			SELECT 
 					refs.referralSourceID,
 					refs.additionalContactInfoID,
 					referralSourceTypeID,

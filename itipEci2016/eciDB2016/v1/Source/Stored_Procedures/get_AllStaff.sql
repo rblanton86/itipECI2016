@@ -14,9 +14,27 @@ AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT staff.*, 
+		SELECT staff.staffID,
+				staff.staffTypeID,
+				staff.addressesID,
+				staff.additionalContactInfoID,
+				ISNULL(staff.firstName, ' '),
+				ISNULL(staff.lastName, ' '),
+				ISNULL(staff.handicapped, 0),
+				ISNULL(staff.staffAltID, ' '),
+				staff.sexID,
+				staff.deleted,
+				ISNULL(staff.ssn, 0),
+				ISNULL(staff.dob, ' '),
 				stafft.staffType, 
-				addr.address1, addr.address2, addr.st, addr.city, addr.zip
+				addr.addressesID,
+				ISNULL(addr.addressesTypeID, 1),
+				ISNULL (addr.address1, ' '),
+				ISNULL(addr.address2, ' '),
+				ISNULL(addr.city, ' '),
+				ISNULL(addr.st, ' '),
+				ISNULL(addr.zip, 0),
+				ISNULL(addr.mapsco, ' ')
 			
 
 			FROM Staff staff 

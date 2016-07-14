@@ -16,8 +16,16 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT addr.*, 
-					addrt.addressesType
+			SELECT addr.addressesID,
+					addr.addressesTypeID,
+					ISNULL(addr.addressesTypeID, 1),
+					ISNULL (addr.address1, ' '),
+					ISNULL(addr.address2, ' '),
+					ISNULL(addr.city, ' '),
+					ISNULL(addr.st, ' '),
+					ISNULL(addr.zip, 0),
+					ISNULL(addr.mapsco, ' '),
+					ISNULL(addrt.addressesType, ' ')
 
 				FROM Addresses addr
 					LEFT JOIN AddressesType addrt ON

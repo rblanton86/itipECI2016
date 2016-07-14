@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT communicationPreferences
+			SELECT ISNULL(communicationPreferences, ' ')
 			FROM CommunicationPreferences
 			WHERE communicationPreferencesID = @communicationPreferencesID 
 

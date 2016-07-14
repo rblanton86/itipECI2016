@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
+ALTER PROCEDURE [dbo].[get_AdditionalContactInfoType]
 	@additionalContactInfoTypeID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT additionalContactInfoType
+			SELECT ISNULL(additionalContactInfoType, ' ')
 			FROM AdditionalContactInfoType
 			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
 

@@ -8,14 +8,33 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[get_AddressesByFamilyMemberID]
+create PROCEDURE [dbo].[get_AddressesByFamilyMemberID]
 	@familyMemberID INT
 
 AS
 BEGIN
 	BEGIN TRY
-		SELECT addr.*,
-			fm.*
+		SELECT addr.addressesID,
+					addr.addressesTypeID,
+					ISNULL(addr.addressesTypeID, 1),
+					ISNULL (addr.address1, ' '),
+					ISNULL(addr.address2, ' '),
+					ISNULL(addr.city, ' '),
+					ISNULL(addr.st, ' '),
+					ISNULL(addr.zip, 0),
+					ISNULL(addr.mapsco, ' '),
+					fm.familyMemberID,
+					fm.familyMemberTypeID,
+					ISNULL(fm.firstName, ' '),
+					ISNULL(fm.lastName, ' '),
+					ISNULL(fm.isGuardian, 1),
+					fm.additionalContactInfoID,
+					fm.sexID,
+					fm.deleted,
+					fm.raceID,
+					ISNULL(fm.occupation, ' '),
+					ISNULL(fm.employer, ' '),
+					ISNULL(fm.dob, ' ')
 
 		FROM Addresses addr
 			LEFT JOIN LnkAddressesFamily lnk

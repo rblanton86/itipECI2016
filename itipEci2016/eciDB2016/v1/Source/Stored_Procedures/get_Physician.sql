@@ -16,10 +16,20 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT phy.*,
-					
-					addr.address1, addr.address2, addr.st, addr.city, addr.zip,
-					aci.additionalContactInfo
+			SELECT 
+					phy.physicianID,
+					phy.addressesID,
+					phy.additionalContactInfoID,
+					ISNULL(title, ' '),
+					ISNULL(firstName, ' '),
+					ISNULL(lastName, ' '),
+					phy.deleted,
+					ISNULL(addr.address1, ' '),
+					ISNULL(addr.address2, ' '),
+					ISNULL(addr.st, ' '), 
+					ISNULL(addr.city, ' '),
+					ISNULL(addr.zip, 0),
+					ISNULL(aci.additionalContactInfo, ' ')
 
 			FROM Physician phy
 			LEFT JOIN Addresses addr ON

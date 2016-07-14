@@ -14,11 +14,13 @@ CREATE PROCEDURE [dbo].[get_CommentsByClientID]
 AS
 BEGIN
 	BEGIN TRY
-		SELECT com.*
+		SELECT com.commentsID,
+				ISNULL(com.comments, ' '),
+				com.deleted
 
 		FROM Comments com
 			LEFT JOIN Clients clnt
-				ON clnt.commentsID = com.commentsID
+				ON clnt.commentsID = com.commentsID AND com.deleted <> 1
 
 		WHERE clnt.clientID = @clientID
 	END TRY

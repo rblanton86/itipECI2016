@@ -16,7 +16,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT comments
+			SELECT ISNULL(comments, ' ')
 			FROM Comments
 			WHERE commentsID = @commentsID AND deleted <> 1
 

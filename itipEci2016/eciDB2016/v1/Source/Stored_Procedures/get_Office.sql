@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT officeName
+			SELECT ISNULL(officeName, ' ')
 			FROM Office
 			WHERE officeID = @officeID 
 

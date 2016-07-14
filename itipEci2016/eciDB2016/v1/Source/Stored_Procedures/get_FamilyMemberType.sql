@@ -15,7 +15,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT familyMemberType
+			SELECT ISNULL(familyMemberType, ' ')
 			FROM FamilyMemberType
 			WHERE familyMemberTypeID = @familyMemberTypeID 
 
