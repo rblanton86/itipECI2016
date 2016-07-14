@@ -14,6 +14,7 @@ Change History:
 -- Declares table variable for Clients.
 DECLARE @clients INT = 0
 DECLARE @fkn NVARCHAR(50)
+DECLARE @fkn2 NVARCHAR(50)
 DECLARE @databaseName NVARCHAR(50) -- Variable to hold your database's name
 DECLARE @dtscript NVARCHAR(255) -- Variable to hold the script, which we will build later, and which drops all constraints for the table you are dropping
     
@@ -36,6 +37,16 @@ SELECT @col = (
 	WHERE t.object_id = object_id('Clients') AND c.name = 'diagnosisID'
 	)
 
+-- Declares and obtains the column id number for later query to assign foreign key name
+DECLARE @col2 INT = 0
+SELECT @col2 = (
+	SELECT column_id
+	FROM Sys.Columns AS c
+	JOIN Sys.Tables AS t
+	ON c.object_id = t.object_id
+	WHERE t.object_id = object_id('Clients') AND c.name = 'insuranceAuthID'
+	)
+
 -- Assigns a foreign key name for use in later script which will drop the foreign key constraint
 SELECT @fkn = (
 	SELECT f.name
@@ -47,6 +58,19 @@ SELECT @fkn = (
 		sys.tables AS t
 			ON t.object_id = k.referenced_object_id
 	WHERE k.parent_object_id = object_id('Clients') AND k.parent_column_id = @col
+	)
+
+-- Assigns a foreign key name for use in later script which will drop the foreign key constraint
+SELECT @fkn2 = (
+	SELECT f.name
+	FROM sys.foreign_keys AS f
+	INNER JOIN
+		sys.foreign_key_columns AS k
+			ON f.object_id = k.constraint_object_id
+	INNER JOIN
+		sys.tables AS t
+			ON t.object_id = k.referenced_object_id
+	WHERE k.parent_object_id = object_id('Clients') AND k.parent_column_id = @col2
 	)
 
 SELECT @clients
@@ -63,7 +87,6 @@ IF ISNULL(@clients,0) = 0
 			primaryLanguageID INT FOREIGN KEY REFERENCES PrimaryLanguage(primaryLanguageID),
 			schoolInfoID INT FOREIGN KEY REFERENCES SchoolInformation(schoolInfoID),
 			commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
-			insuranceAuthID INT FOREIGN KEY REFERENCES InsuranceAuthorization(insuranceAuthID),
 			communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationPreferencesID),
 			sexID INT FOREIGN KEY REFERENCES Sex(sexID),
 			officeID INT FOREIGN KEY REFERENCES Office(officeID),
@@ -200,31 +223,31 @@ ELSE
 				PRINT 'Added accountingSystemID column to Clients table.'
 			END
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='diagnosisID')
-			BEGIN
+		--IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='diagnosisID')
+		--	BEGIN
 				
-				WHILE EXISTS(SELECT * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE constraint_name = @fkn)
-					BEGIN
-						SELECT @dtscript = (
-							'ALTER TABLE Clients' + 
-							' DROP CONSTRAINT ' + 
-							@fkn
-							)
-						FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
-						WHERE constraint_catalog = @databaseName and table_name = 'Clients'
-						exec sp_executesql @dtscript
-					END
+		--		WHILE EXISTS(SELECT * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE constraint_name = @fkn)
+		--			BEGIN
+		--				SELECT @dtscript = (
+		--					'ALTER TABLE Clients' + 
+		--					' DROP CONSTRAINT ' + 
+		--					@fkn
+		--					)
+		--				FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+		--				WHERE constraint_catalog = @databaseName and table_name = 'Clients'
+		--				exec sp_executesql @dtscript
+		--			END
 
-				ALTER TABLE Clients
-					DROP COLUMN diagnosisID
+		--		ALTER TABLE Clients
+		--			DROP COLUMN diagnosisID
 
-				PRINT 'Dropped diagnosisID column, no longer needed.'
+		--		PRINT 'Dropped diagnosisID column, no longer needed.'
 
-			END
-		ELSE
-			BEGIN
-				PRINT 'Did not drop diagnosisID column: no longer exists.'
-			END
+		--	END
+		--ELSE
+		--	BEGIN
+		--		PRINT 'Did not drop diagnosisID column: no longer exists.'
+		--	END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='updDate')
 			BEGIN
@@ -239,4 +262,29 @@ ELSE
 				PRINT 'Added updDate column to Clients table.'
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='insuranceAuthID')
+			BEGIN
+				
+				WHILE EXISTS(SELECT * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS WHERE constraint_name = @fkn2)
+					BEGIN
+						SELECT @dtscript = (
+							'ALTER TABLE Clients' + 
+							' DROP CONSTRAINT ' + 
+							@fkn2
+							)
+						FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+						WHERE constraint_catalog = @databaseName and table_name = 'Clients'
+						exec sp_executesql @dtscript
+					END
+
+				ALTER TABLE Clients
+					DROP COLUMN insuranceAuthID
+
+				PRINT 'Dropped insuranceAuthID column, no longer needed.'
+
+			END
+		ELSE
+			BEGIN
+				PRINT 'Did not drop insuranceAuthID column: no longer exists.'
+			END
 	END
