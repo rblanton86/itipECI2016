@@ -50,4 +50,18 @@ ELSE
 					ADD deleted BIT
 				PRINT 'Added deleted column on AdditionalContactInfo table.'
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @aci = OBJECT_ID AND name = 'updDate')
+			BEGIN
+				ALTER TABLE AdditionalContactInfo ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE AdditionalContactInfo
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to aci table.'
+			END
+
 	END

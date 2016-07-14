@@ -8,29 +8,44 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_Physician]
+ALTER PROCEDURE [dbo].[ins_Physician]
 	@addressesID int,
 	@additionalContactInfoID int,
 	@title varchar(10),
 	@firstName varchar (25),
-	@lastName varchar (25)
+	@lastName varchar (25),
+	@success bit OUTPUT
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT Physician (addressesID,
-								additionalContactInfoID,
-								title,
-								firstName,
-								lastName)
+			IF EXISTS (SELECT * FROM Physician WHERE (firstName <> @firstName AND lastName <> @lastName AND title <> @title))
+				BEGIN
 
-			VALUES (@addressesID,
-					@additionalContactInfoID,
-					@title,
-					@firstName,
-					@lastName)
+					SET @success = 1
+
+				INSERT Physician (addressesID,
+									additionalContactInfoID,
+									title,
+									firstName,
+									lastName)
+
+				VALUES (@addressesID,
+						@additionalContactInfoID,
+						@title,
+						@firstName,
+						@lastName)
+				END
 				
+			ELSE
+
+				BEGIN
+					SET @success = 0
+				END
+
+			RETURN @success
+
 		END TRY
 		BEGIN CATCH
 

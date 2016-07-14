@@ -17,12 +17,18 @@ ALTER PROCEDURE [dbo].[ins_StaffMember]
 	@staffAltID int,
 	@deleted bit,
 	@handicapped bit,
-	@staffSSN int
+	@staffSSN int,
+	@success bit OUTPUT
 	
 AS
 	BEGIN
 		BEGIN TRY
 		
+		IF EXISTS (SELECT * FROM StaffMember WHERE (ssn <> @staffSSN) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
+			BEGIN
+
+				SET @success = 1
+
 		INSERT Staff (staffTypeID, 
 						addressesID, 
 						additionalContactInfoID, 
@@ -31,7 +37,7 @@ AS
 						staffAltID,
 						deleted,
 						handicapped,
-						staffSSN)
+						ssn)
 
 		VALUES (@staffTypeID, 
 				@addressesID, 

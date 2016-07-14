@@ -8,29 +8,62 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_FamilyMember]
+ALTER PROCEDURE [dbo].[ins_FamilyMember]
 	@familyMemberTypeID int,
-	@additionalContactInfoID int,
 	@firstName varchar (25),
 	@lastName varchar (25),
-	@isGuardian bit
+	@isGuardian bit,
+	@additionalContactInfoID int,
+	@sexID int,
+	@deleted bit,
+	@raceID bit,
+	@occupation varchar(50),
+	@employer varchar(50),
+	@dob DATE,
+	@success bit OUTPUT
 
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT FamilyMember (familyMemberTypeID,
-									additionalContactInfoID,
-									firstName,
-									lastName,
-									isGuardian)
+			IF EXISTS (SELECT * FROM FamilyMember WHERE (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
+			BEGIN
+
+				SET @success = 1
+
+				INSERT FamilyMember (familyMemberTypeID,
+										additionalContactInfoID,
+										firstName,
+										lastName,
+										isGuardian,
+										sexID,
+										deleted,
+										raceID,
+										occupation,
+										employer,
+										dob
+										)
 									
-			VALUES (@familyMemberTypeID,
-					@additionalContactInfoID,
-					@firstName,
-					@lastName,
-					@isGuardian)	
+				VALUES (@familyMemberTypeID,
+						@additionalContactInfoID,
+						@firstName,
+						@lastName,
+						@isGuardian,
+						@sexID,
+						@deleted,
+						@raceID,
+						@occupation,
+						@employer,
+						@dob)
+				
+				END
+			ELSE
+				BEGIN
+					SET @success = 0 
+				END	
+
+			RETURN @success
 
 		END TRY
 		BEGIN CATCH

@@ -202,29 +202,17 @@ ELSE
 
 		
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='updDate')
+		
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='office')
 			BEGIN
-				ALTER TABLE Clients ADD CONSTRAINT
-				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
-				PRINT 'Altered updDate column: Added Constraint'
+				PRINT 'Did not add office column: already exists.'
 			END
 		ELSE
 			BEGIN
 				ALTER TABLE Clients
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
-				PRINT 'Added updDate column to Clients table.'
-			END
-
-
-		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='officeID')
-			BEGIN
-				PRINT 'Did not add officeID column: already exists.'
-			END
-		ELSE
-			BEGIN
-				ALTER TABLE Clients
-					ADD officeID INT FOREIGN KEY REFERENCES Office(officeID)
-				PRINT 'Added officeID column to Clients table.'
+					ADD office varchar(25)
+				PRINT 'Added office column to Clients table.'
 			END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='diagnosisID')
@@ -251,6 +239,19 @@ ELSE
 		ELSE
 			BEGIN
 				PRINT 'Did not drop diagnosisID column: no longer exists.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE Clients ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Clients
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to Clients table.'
 			END
 
 	END

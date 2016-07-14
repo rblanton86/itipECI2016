@@ -69,4 +69,17 @@ ELSE
 					ADD deleted BIT
 				PRINT 'Added deleted column on Clients table.'
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @insa = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE InsuranceAuthorization ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE InsuranceAuthorization
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to table.'
+			END
 	END

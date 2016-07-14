@@ -50,4 +50,17 @@ ELSE
 					ADD deleted BIT
 				PRINT 'Added deleted column on ReferralSource table.'
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @rs = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE ReferralSource ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE ReferralSource
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to table.'
+			END
 	END

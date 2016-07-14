@@ -14,14 +14,13 @@ ALTER PROCEDURE [dbo].[ins_Client]
 	@raceID INT,
 	@ethnicityID INT,
 	@clientStatusID INT,
-	@diagnosisID INT,
 	@primaryLanguageID INT,
 	@schoolInfoID INT,
 	@commentsID INT,
 	@insuranceAuthID INT,
 	@communicationPreferencesID INT,
 	@sexID INT,
-	@officeID INT,
+	@office INT,
 	@addressesID INT,
 	@altID VARCHAR(25),
 	@firstName VARCHAR(20),
@@ -44,9 +43,7 @@ AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT ssn, firstName, lastName, dob FROM Clients
-
-		IF (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob)  
+		IF EXISTS (SELECT * FROM Clients WHERE (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
 			BEGIN
 
 				SET @success = 1
@@ -55,15 +52,16 @@ AS
 								(raceID,
 								ethnicityID,
 								clientStatusID,
-								diagnosisID,
 								primaryLanguageID,
 								schoolInfoID,
 								commentsID,
 								insuranceAuthID,
 								communicationPreferencesID,
 								sexID,
-								officeID,
+								office,
+								addressesID,
 								firstName,
+								altID,
 								middleInitial,
 								lastName,
 								dob,
@@ -76,20 +74,19 @@ AS
 								tkidsCaseNumber,
 								consentToRelease,
 								eci,
-								acountingSystemID,
-								updDate)
+								accountingSystemID
+								)
 
 				VALUES (@raceID,
 						@ethnicityID,
 						@clientStatusID,
-						@diagnosisID,
 						@primaryLanguageID,
 						@schoolInfoID,
 						@commentsID,
 						@insuranceAuthID,
 						@communicationPreferencesID,
 						@sexID,
-						@officeID,
+						@office,
 						@addressesID,
 						@altID,
 						@firstName,
@@ -105,14 +102,15 @@ AS
 						@tkidsCaseNumber,
 						@consentToRelease,
 						@eci,
-						@accountingSystemID,
-						GETDATE() 
+						@accountingSystemID 
 						)
 				END
 			ELSE
 				BEGIN
 					SET @success = 0
 				END
+
+			RETURN @success
 
 		END TRY
 		BEGIN CATCH

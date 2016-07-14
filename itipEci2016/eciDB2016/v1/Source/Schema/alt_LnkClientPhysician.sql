@@ -88,7 +88,21 @@ IF ISNULL(@lnkclmd, 0) > 0
 					ADD deleted BIT
 				PRINT 'Added deleted column on LnkClientPhysician table.'
 			END
+		
+		IF EXISTS (SELECT * FROM sys.columns WHERE @lnkclmd = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE LnkClientPhysician ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE LnkClientPhysician
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to table.'
+			END
 	END
+
 -- If table exists, addes columns for LnkClientPhysicianType, LnkClientPhysicianCode and LnkClientPhysician.
 ELSE
 	BEGIN

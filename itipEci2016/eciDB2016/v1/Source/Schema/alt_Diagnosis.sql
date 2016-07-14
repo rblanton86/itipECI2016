@@ -159,27 +159,27 @@ ELSE
 				PRINT 'icd9Code Column does not exist.'
 			END
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'diagnosisCodeID')
-			BEGIN
-				PRINT 'Did not add diagnosisCodeID column: already exists'
-			END
-		ELSE
-			BEGIN
-				ALTER TABLE Diagnosis
-					ADD diagnosisCodeID INT CONSTRAINT FK_diagnosis_diagnosisCode FOREIGN KEY REFERENCES DiagnosisCode(diagnosisCodeID)
-				PRINT 'Added diagnosisCodeID foreign key column on Diagnosis table'
-			END
+		--IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'diagnosisCodeID')
+		--	BEGIN
+		--		PRINT 'Did not add diagnosisCodeID column: already exists'
+		--	END
+		--ELSE
+		--	BEGIN
+		--		ALTER TABLE Diagnosis
+		--			ADD diagnosisCodeID INT CONSTRAINT FK_diagnosis_diagnosisCode FOREIGN KEY REFERENCES DiagnosisCode(diagnosisCodeID)
+		--		PRINT 'Added diagnosisCodeID foreign key column on Diagnosis table'
+		--	END
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'diagnosisTypeID')
-			BEGIN
-				PRINT 'Did not add diagnosisTypeID column: already exists'
-			END
-		ELSE
-			BEGIN
-				ALTER TABLE Diagnosis
-					ADD diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID)
-				PRINT 'Added diagnosisTypeID foreign key column on Diagnosis table'
-			END
+		--IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'diagnosisTypeID')
+		--	BEGIN
+		--		PRINT 'Did not add diagnosisTypeID column: already exists'
+		--	END
+		--ELSE
+		--	BEGIN
+		--		ALTER TABLE Diagnosis
+		--			ADD diagnosisTypeID INT CONSTRAINT FK_diagnosis_diagnosisType FOREIGN KEY REFERENCES DiagnosisType(diagnosisTypeID)
+		--		PRINT 'Added diagnosisTypeID foreign key column on Diagnosis table'
+		--	END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE OBJECT_ID = @dx AND name = 'clientID')
 			BEGIN
@@ -202,4 +202,16 @@ ELSE
 					ADD isPrimary BIT
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @dx = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE Diagnosis ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Diagnosis
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to table.'
+			END
 	END

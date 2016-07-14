@@ -42,4 +42,17 @@ ELSE
 				ALTER TABLE SchoolInformation
 					ADD isd VARCHAR(25)
 			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @schoolInfo = OBJECT_ID AND name ='updDate')
+			BEGIN
+				ALTER TABLE SchoolInformation ADD CONSTRAINT
+				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				PRINT 'Altered updDate column: Added Constraint'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE SchoolInformation
+					ADD updDate DATETIME DEFAULT (GETDATE()) 
+				PRINT 'Added updDate column to table.'
+			END
 	END

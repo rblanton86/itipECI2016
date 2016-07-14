@@ -11,22 +11,39 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 using System.Web.Configuration;
 
-using eciWEB2016.Models;
 
 namespace eciWEB2016.Class
 {
     public class AddContactInfo
     {
-        public List<AdditionalContactInfoModel> GetAdditionalContactInfoModelesByDataSet(DataSet ds)
+
+        //gets contact info by a dataset
+        public AdditionalContactInfoModel GetAddContactInfoByDataSet(DataSet ds)
+        {
+            //datasets passed through only have one row so we access that row
+            DataRow dr = ds.Tables[0].Rows[0];
+            //then assign values from that row to a new Address model
+            AdditionalContactInfoModel thisAddContactInfo = new AdditionalContactInfoModel()
+            {
+                additionalContactInfo = dr.Field<string>("additionalContactInfo")
+            };
+
+            return thisAddContactInfo;
+        }
+
+        //gets a list of contact info by dataset 
+        public List<AdditionalContactInfoModel> GetAdditionalContactInfoByDataSet(DataSet ds)
         {
 
             // Stores a list of all addresses belonging to the family member.
             List<AdditionalContactInfoModel> AdditionalContactInfoModelList = (from drRow in ds.Tables[0].AsEnumerable()
-                                         select new AdditionalContactInfoModel()
-                                         {
-                                             additionalContactInfo = drRow.Field<string>("additionalContactInfo")
 
-                                         }).ToList();
+                select new AdditionalContactInfoModel()
+                {
+                    additionalContactInfo = drRow.Field<string>("additionalContactInfo")
+
+                }).ToList();
+
             return AdditionalContactInfoModelList;
         }
     }
