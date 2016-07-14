@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Office]
+ALTER PROCEDURE [dbo].[get_Office]
 	@officeID int
 
 AS
@@ -17,7 +17,7 @@ AS
 
 			SELECT officeName
 			FROM Office
-			WHERE officeID = @officeID
+			WHERE officeID = @officeID 
 
 		END TRY
 		BEGIN CATCH

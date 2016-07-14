@@ -8,14 +8,23 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ReferralSource]
+alter PROCEDURE [dbo].[get_ReferralSource]
 	@referralSourceID int
 	
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT refs.*, aci.additionalContactInfo, addr.addressesID
+			SELECT refs.*, 
+					refs.referralSourceID,
+					refs.additionalContactInfoID,
+					referralSourceTypeID,
+					refs.addressesID,
+					ISNULL(referralSource, ' '),
+					refs.deleted,
+					ISNULL(aci.additionalContactInfo, ' '),
+					ISNULL(addr.addressesID, 1)
+
 			FROM ReferralSource refs
 				LEFT JOIN AdditionalContactInfo aci ON
 					refs.additionalContactInfoID = aci.additionalContactInfoID
@@ -23,7 +32,8 @@ AS
 					refs.additionalContactInfoID = acit.additionalContactInfoTypeID
 				LEFT JOIN Addresses addr ON
 					refs.addressesID = addr.addressesID
-			WHERE referralSourceID = @referralSourceID
+
+			WHERE referralSourceID = @referralSourceID AND refs.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

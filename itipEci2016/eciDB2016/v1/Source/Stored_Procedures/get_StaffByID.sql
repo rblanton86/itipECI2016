@@ -17,8 +17,15 @@ AS
 
 		SELECT staff.*, 
 				stafft.staffType, 
+				addr.addressesID,
+				ISNULL(addr.addressesTypeID, 1),
 				ISNULL (addr.address1, ' '),
-				addr.*, 
+				ISNULL(addr.address2, ' '),
+				ISNULL(addr.city, ' '),
+				ISNULL(addr.st, ' '),
+				ISNULL(addr.zip, 0),
+				ISNULL(addr.mapsco, ' '),
+ 
 				ISNULL(aci.additionalContactInfo, ' ')
 
 			FROM Staff staff 
@@ -29,7 +36,7 @@ AS
 				LEFT JOIN AdditionalContactInfo aci ON
 					staff.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE staffID = @staffID;
+			WHERE staffID = @staffID AND Staff.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

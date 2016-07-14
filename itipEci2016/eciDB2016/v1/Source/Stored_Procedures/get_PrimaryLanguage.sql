@@ -8,14 +8,14 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_PrimaryLanguage]
+alter PROCEDURE [dbo].[get_PrimaryLanguage]
 	@primaryLanguageID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT primaryLanguage
+			SELECT ISNULL(primaryLanguage, ' ')
 			FROM PrimaryLanguage
 			WHERE primaryLanguageID = @primaryLanguageID
 
