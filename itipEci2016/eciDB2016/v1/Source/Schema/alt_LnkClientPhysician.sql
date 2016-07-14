@@ -98,7 +98,7 @@ IF ISNULL(@lnkclmd, 0) > 0
 		ELSE
 			BEGIN
 				ALTER TABLE LnkClientPhysician
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END
@@ -114,6 +114,7 @@ ELSE
 				medicalReceivedDate DATE,
 				immunizationReceived BIT,
 				immunizationReceivedDate DATE,
+				updDate DATETIME DEFAULT (GETDATE()),
 				deleted BIT
 			)
 

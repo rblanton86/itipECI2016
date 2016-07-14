@@ -6,7 +6,35 @@ Author: Jennifer M Graves
 Date: 07/12/2010
 
 Change History:
+	07-13-2016: JMG - Added MemberType values.
 ****************************************************************************/
+DELETE FROM DiagnosisType
+DECLARE @p VARCHAR(MAX)
+SELECT @p =
+	'SET IDENTITY_INSERT DiagnosisType ON;
+	INSERT INTO DiagnosisType(diagnosisTypeID, diagnosisType)
+		VALUES (1, ''ICD-10''),
+			(2, ''ICD-09'');
+	SET IDENTITY_INSERT DiagnosisType OFF;'
+EXEC(@p)
+PRINT 'DiagnosisType table values added.'
+SELECT * FROM DiagnosisType
+
+DELETE FROM MemberType
+DECLARE @q VARCHAR(MAX)
+SELECT @q =
+	'SET IDENTITY_INSERT MemberType ON;
+	INSERT INTO MemberType(memberTypeID, memberType)
+		VALUES (1, ''Client''),
+			(2, ''Family''),
+			(3, ''Staff''),
+			(4, ''Physician''),
+			(5, ''Referral Source'');
+	SET IDENTITY_INSERT MemberType OFF;'
+EXEC(@q)
+PRINT 'MemberType table values added.'
+SELECT * FROM MemberType
+
 DELETE FROM Sex
 DECLARE @r VARCHAR(MAX)
 SELECT @r =

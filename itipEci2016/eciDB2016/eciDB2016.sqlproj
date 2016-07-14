@@ -264,9 +264,6 @@
     <None Include="v1\Release\Sprint4\Schema\alt_Staff.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Release\Sprint4\Schema\Copy of alt_Staff.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="v1\Release\Sprint4\Stored_Procedures\ins_StaffMember.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -304,5 +301,31 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint4\Stored_Procedures\ins_Client.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Schema\init_DiagnosisCode.sql" />
+    <None Include="v1\Source\Schema\init_DiagnosisType.sql" />
+    <None Include="v1\Source\Schema\init_Office.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <Build Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_FamilyByClientID.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\init_TypeTableData.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\get_AllClients.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\get_ClientByAltID.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\get_ClientByID.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\get_DiagnosisByClientID.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\get_StaffByID.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\ins_AdditonalContactInfo.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\ins_Addresses.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\ins_StaffMember.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\upd_AdditionalContactInfo.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\upd_Addresses.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\upd_Staff.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\ins_Client.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\get_ClientByName.sql" />
+    <Build Include="v1\Release\Sprint4\Schema\upd_Clients.sql" />
+    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_AllClients.sql" />
+    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisByClientID.sql" />
   </ItemGroup>
 </Project>

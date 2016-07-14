@@ -33,6 +33,7 @@ IF ISNULL(@linkcr,0) = 0
 			commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
 			referralPastDueReason VARCHAR(255),
 			referralDate DATE,
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 
@@ -88,7 +89,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE lnkClientReferralSource
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

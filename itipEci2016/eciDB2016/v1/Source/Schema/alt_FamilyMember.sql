@@ -68,6 +68,7 @@ IF ISNULL(@fm, 0) = 0
 			occupation VARCHAR(25),
 			employer VARCHAR(25),
 			dob DATE,
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 	END
@@ -184,7 +185,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE FamilyMember
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

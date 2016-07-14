@@ -9,34 +9,55 @@ Change History:
 	06-22-2017 - jmg and tpc - Updated script to new file due to connection error and edited script to force results.
 ************************************************************************************************************/
 
-DELETE FROM Diagnosis
-DELETE FROM Clients
-DELETE FROM Addresses
-DELETE FROM FamilyMember
-DELETE FROM Staff
-
 DECLARE @i INT = 0
 
 WHILE @i <= 10
 	BEGIN
-		SET IDENTITY_INSERT ON
+		INSERT Clients (raceID,
+				ethnicityID,
+				clientStatusID,
+				primaryLanguageID,
+				sexID,
+				altID,
+				firstName,
+				middleInitial,
+				lastName,
+				dob,
+				ssn,
+				referralSource,
+				intakeDate,
+				ifspDate,
+				compSvcDate,
+				serviceAreaException,
+				tkidsCaseNumber,
+				consentToRelease,
+				eci,
+				accountingSystemID
+				)
 
-		INSERT Clients (
-			clientID,
-			clientStatusID,
-			raceID,
-			ethnicityID,
-			sexID,
-			firstName,
-			lastName,
-			ssn,
-			dob,
-			intakeDate,
-			ifspDate,
-			compSvcDate,
-			altID,
-			deleted,
+		VALUES (1,
+				2,
+				1,
+				1,
+				1,
+				'LASTFIRST' + CONVERT(VARCHAR(2), @i),
+				'First' + CONVERT(VARCHAR(2), @i),
+				'M',
+				'Last' + CONVERT(VARCHAR(2), @i),
+				'20160714',
+				@i + @i + @i + @i + @i + @i + @i + @i + @i,
+				'Referral Source' + CONVERT(VARCHAR(2), @i),
+				CURRENT_TIMESTAMP,
+				CURRENT_TIMESTAMP,
+				CURRENT_TIMESTAMP,
+				0,
+				@i + 0 + 0 + @i,
+				1,
+				'ECI ' + CONVERT(VARCHAR(2), @i),
+				'ABC' + CONVERT(VARCHAR(2), @i) 
+				)
 
+		SET @i +=1
 	END
 
 	WHILE @i <= 10 AND @x <= 10

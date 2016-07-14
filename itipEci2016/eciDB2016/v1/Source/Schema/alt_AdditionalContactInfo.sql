@@ -30,6 +30,7 @@ IF ISNULL(@aci, 0) = 0
 			memberTypeID INT NOT NULL CONSTRAINT FK_clients_members FOREIGN KEY REFERENCES MemberType(memberTypeID),
 			additionalContactInfoTypeID INT NOT NULL CONSTRAINT FK_clients_aciid FOREIGN KEY REFERENCES AdditionalContactInfoType(additionalContactInfoTypeID),
 			additionalContactInfo VARCHAR(255),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 

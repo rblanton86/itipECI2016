@@ -30,6 +30,7 @@ IF ISNULL(@rs, 0) = 0
 			additionalContactInfoID INT CONSTRAINT FK_referralSource_contactInfo FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 			referralSourceTypeID INT CONSTRAINT FK_referralSource_referralSourceType FOREIGN KEY REFERENCES ReferralSourceType(referralSourceTypeID),
 			addressesID INT CONSTRAINT FK_referralSource_addresses FOREIGN KEY REFERENCES Addresses(addressesID),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 
@@ -60,7 +61,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE ReferralSource
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

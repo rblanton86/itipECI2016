@@ -30,6 +30,7 @@ IF ISNULL(@ins, 0) = 0
 			insuranceName VARCHAR(75),
 			insurancePolicyID VARCHAR(75),
 			medPreAuthNumber VARCHAR(100),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 
@@ -60,7 +61,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE Insurance
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END
