@@ -32,6 +32,7 @@ IF ISNULL(@md, 0) = 0
 			title VARCHAR(10),
 			firstName VARCHAR(25),
 			lastName VARCHAR(25),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 
@@ -62,7 +63,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE Physician
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

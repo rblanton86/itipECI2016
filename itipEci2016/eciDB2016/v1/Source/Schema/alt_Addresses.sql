@@ -34,6 +34,7 @@ IF ISNULL(@addresses, 0) = 0
 			st NVARCHAR(2),
 			zip INT,
 			mapsco VARCHAR(25),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 	END

@@ -27,7 +27,8 @@ IF ISNULL(@aci, 0) = 0
 		--Creates additionalContactInfo table if it doesn't exist.
 		CREATE TABLE StaffType (
 			staffTypeID INT IDENTITY (1,1) PRIMARY KEY (staffTypeID),
-			staffType VARCHAR(25) NULL
+			staffType VARCHAR(25) NULL,
+			updDate DATETIME DEFAULT (GETDATE()) 
 			)
 		
 

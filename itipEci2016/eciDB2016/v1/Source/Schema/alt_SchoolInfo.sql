@@ -26,7 +26,8 @@ IF ISNULL(@schoolInfo, 0) = 0
 	BEGIN
 		CREATE TABLE SchoolInformation (
 			schoolInfoID INT IDENTITY (1,1) PRIMARY KEY,
-			isd VARCHAR(25)
+			isd VARCHAR(25),
+			updDate DATETIME DEFAULT (GETDATE())
 		)
 	END
 ELSE
@@ -52,7 +53,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE SchoolInformation
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

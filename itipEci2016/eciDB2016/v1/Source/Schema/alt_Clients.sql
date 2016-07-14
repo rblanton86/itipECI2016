@@ -83,8 +83,8 @@ IF ISNULL(@clients,0) = 0
 			consentToRelease BIT,
 			eci VARCHAR(25),
 			accountingSystemID VARCHAR(25),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT,
-			updDate DATETIME
 		)
 	END
 ELSE
@@ -198,21 +198,6 @@ ELSE
 				ALTER TABLE Clients
 					ADD accountingSystemID VARCHAR(25)
 				PRINT 'Added accountingSystemID column to Clients table.'
-			END
-
-		
-
-		
-
-		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='office')
-			BEGIN
-				PRINT 'Did not add office column: already exists.'
-			END
-		ELSE
-			BEGIN
-				ALTER TABLE Clients
-					ADD office varchar(25)
-				PRINT 'Added office column to Clients table.'
 			END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='diagnosisID')

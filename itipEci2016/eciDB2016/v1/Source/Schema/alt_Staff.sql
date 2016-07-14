@@ -34,7 +34,8 @@ IF ISNULL(@Staff, 0) = 0
 			deleted bit,
 			handicapped bit,
 			ssn int,
-			dob DATE
+			dob DATE,
+			updDate DATETIME DEFAULT (GETDATE())
 			)
 
 	END
@@ -114,7 +115,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE Staff
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

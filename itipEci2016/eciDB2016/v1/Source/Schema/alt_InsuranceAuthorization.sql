@@ -28,6 +28,7 @@ IF ISNULL(@insa,0) = 0
 			authorized_From DATE,
 			authorized_To DATE,
 			insuranceAuthorizationType VARCHAR(25),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 	END
@@ -79,7 +80,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE InsuranceAuthorization
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

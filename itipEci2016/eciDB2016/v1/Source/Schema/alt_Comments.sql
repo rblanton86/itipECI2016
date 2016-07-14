@@ -28,6 +28,7 @@ IF ISNULL(@comm, 0) = 0
 		CREATE TABLE Comments (
 			CommentsID INT IDENTITY(1,1) PRIMARY KEY(CommentsID),
 			Comments VARCHAR(255),
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 
@@ -58,7 +59,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE Comments
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END

@@ -40,6 +40,7 @@ IF ISNULL(@dx, 0) = 0
 			isPrimary BIT,
 			diagnosis_From DATE,
 			diagnosis_To DATE,
+			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
 
@@ -211,7 +212,7 @@ ELSE
 		ELSE
 			BEGIN
 				ALTER TABLE Diagnosis
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
+					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
 	END
