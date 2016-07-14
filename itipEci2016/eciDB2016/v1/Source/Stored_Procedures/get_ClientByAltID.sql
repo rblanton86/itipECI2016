@@ -8,7 +8,7 @@ Date:
 Change History:
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByAltID]
+ALTER PROCEDURE [dbo].[get_ClientByAltID]
 	@altID VARCHAR(25)
 
 AS
@@ -57,7 +57,8 @@ AS
 					ON clnt.officeID = office.officeID
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
-			WHERE altID = @altID
+
+			WHERE altID = @altID AND Clients.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllStaff]
+ALTER PROCEDURE [dbo].[get_AllStaff]
 	
 AS
 	BEGIN
@@ -25,7 +25,7 @@ AS
 				LEFT JOIN Addresses addr ON
 					staff.addressesID = stafft.staffTypeID
 				
-
+			WHERE Staff.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

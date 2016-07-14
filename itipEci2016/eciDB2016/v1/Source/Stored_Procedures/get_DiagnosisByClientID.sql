@@ -4,7 +4,7 @@ Author: Jennifer M Graves
 Date: 07-12-2016
 Change History:
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_DiagnosisByClientID]
+ALTER PROCEDURE [dbo].[get_DiagnosisByClientID]
 	@clientID int
 
 AS
@@ -19,7 +19,8 @@ AS
 				ON dxt.diagnosisTypeID = dx.diagnosisTypeID
 			LEFT JOIN DiagnosisCode dxc
 				ON dxc.diagnosisCodeID = dx.diagnosisCodeID
-		WHERE clientID = @clientID
+
+		WHERE clientID = @clientID AND deleted <> 1
 
 	END TRY
 	BEGIN CATCH
