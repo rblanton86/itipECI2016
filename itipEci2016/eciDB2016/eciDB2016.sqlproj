@@ -99,6 +99,7 @@
     <None Include="v1\Source\Stored_Procedures\get_FamilyByClientID_1.sql" />
     <None Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID_1.sql" />
     <None Include="v1\Source\Stored_Procedures\get_ReferralByClientID.sql" />
+    <None Include="v1\Source\Schema\init_CommentsType.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />

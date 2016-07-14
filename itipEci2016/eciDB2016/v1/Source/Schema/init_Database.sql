@@ -10,6 +10,7 @@ Change History:
 	07-11-2016: JMG - Updates to add tables.
 	07-12-2016: JMG - Added diagnosis tables.
 	07-13-2016: JMG - Added If/Exists statement and initial table values where needed.
+	07-14-2016: JMG - Added CommentsType table and updated Comments and Clients table values.
 ************************************************************************************************************/
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Race')
@@ -504,6 +505,41 @@ ELSE
 	END
 
 
+	IF EXISTS (SELECT * FROM sys.tables WHERE name = 'CommentsType')
+	BEGIN
+		-- Notifies DBA that table has already been created.
+		PRINT 'CommentsType table not added: already exists'
+	END
+ELSE
+	BEGIN
+		-- Creates table.
+		CREATE TABLE CommentsType (
+			commentsTypeID INT IDENTITY (1,1) PRIMARY KEY,
+			commentsType VARCHAR(50) NOT NULL
+		)
+
+		-- Notifies DBA of successful table creation.
+		PRINT 'CommentsType table initiated with default values.'
+
+		-- Check if identity column is at proper seed, reseeds if not proper.
+		IF (SELECT IDENT_CURRENT ('CommentsType')) = 0
+			BEGIN
+				PRINT 'Identity value not reseeded: set at correct identity value.'
+			END
+		ELSE
+			BEGIN
+				DBCC CHECKIDENT ('CommentsType', RESEED, 0)
+
+				PRINT 'Reseeding identity value.'
+
+				DBCC CHECKIDENT ('CommentsType')
+			END
+
+		-- Selects table for DBA view to ensure proper table creation.
+		SELECT * FROM CommentsType		
+	END
+
+
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Comments')
 	BEGIN
 		-- Notifies DBA that table has already been created.
@@ -513,11 +549,13 @@ ELSE
 	BEGIN
 		-- Creates table.
 		CREATE TABLE Comments (
-			CommentsID INT IDENTITY(1,1) PRIMARY KEY(CommentsID),
-			MemberTypeID INT CONSTRAINT FK_Comments_MemberType FOREIGN KEY REFERENCES MemberType(memberTypeID),
-			MemberID INT, -- Doesn't have a foreign key because it can be anything (Client, Family, Staff, Physician, etc.)
-			Comments VARCHAR(MAX),
-			updDate DATETIME DEFAULT (GETDATE()),
+			commentsID INT IDENTITY(1,1) PRIMARY KEY(CommentsID),
+			commentsTypeID INT CONSTRAINT FK_Comments_CommentsType FOREIGN KEY REFERENCES CommentsType(commentsTypeID), --chk
+			memberID INT, -- chk
+			memberTypeID INT CONSTRAINT FK_Comments_MemberType FOREIGN KEY REFERENCES MemberType(memberTypeID), --chk
+			comments VARCHAR(MAX), -- chk
+			updDate DATETIME DEFAULT (GETDATE()), --chk
+			valid_To DATE,
 			deleted BIT
 		)
 
@@ -1063,7 +1101,6 @@ ELSE
 			clientStatusID INT FOREIGN KEY REFERENCES ClientStatus(clientStatusID),
 			primaryLanguageID INT FOREIGN KEY REFERENCES PrimaryLanguage(primaryLanguageID),
 			schoolInfoID INT FOREIGN KEY REFERENCES SchoolInformation(schoolInfoID),
-			commentsID INT FOREIGN KEY REFERENCES Comments(commentsID),
 			communicationPreferencesID INT FOREIGN KEY REFERENCES CommunicationPreferences(communicationPreferencesID),
 			sexID INT FOREIGN KEY REFERENCES Sex(sexID),
 			officeID INT FOREIGN KEY REFERENCES Office(officeID),
@@ -1084,7 +1121,7 @@ ELSE
 			eci VARCHAR(25),
 			accountingSystemID VARCHAR(25),
 			updDate DATETIME DEFAULT (GETDATE()),
-			deleted BIT
+			deleted BIT,
 		)
 
 		-- Check if identity column is at proper seed, reseeds if not proper.
