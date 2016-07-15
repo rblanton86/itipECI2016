@@ -16,29 +16,29 @@ AS
 		BEGIN TRY
 
 		SELECT 
-				staff.staffID,
-				staff.staffTypeID,
-				staff.addressesID,
-				staff.additionalContactInfoID,
-				ISNULL(staff.firstName, ' '),
-				ISNULL(staff.lastName, ' '),
-				ISNULL(staff.handicapped, 0),
-				ISNULL(staff.staffAltID, ' '),
-				staff.sexID,
+				ISNULL(staff.staffID, 1) AS staffID,
+				ISNULL(staff.staffTypeID, 1) AS staffTypeID,
+				ISNULL(staff.addressesID, 1) AS addressesID,
+				ISNULL(staff.additionalContactInfoID, 1) AS additionalContactInfoID,
+				ISNULL(staff.firstName, ' ') AS firstName,
+				ISNULL(staff.lastName, ' ') AS lastName,
+				ISNULL(staff.handicapped, 0) AS handicapped,
+				ISNULL(staff.staffAltID, ' ') AS staffAltID,
+				ISNULL(staff.sexID, 1) AS sexID,
 				staff.deleted,
-				ISNULL(staff.ssn, 0),
-				ISNULL(staff.dob, ' '),
-				stafft.staffType, 
-				addr.addressesID,
-				ISNULL(addr.addressesTypeID, 1),
-				ISNULL (addr.address1, ' '),
-				ISNULL(addr.address2, ' '),
-				ISNULL(addr.city, ' '),
-				ISNULL(addr.st, ' '),
-				ISNULL(addr.zip, 0),
-				ISNULL(addr.mapsco, ' '),
+				ISNULL(staff.ssn, 0) AS ssn,
+				ISNULL(staff.dob, ' ') AS dob,
+				ISNULL(stafft.staffType, ' ') AS staffType, 
+				ISNULL(addr.addressesID, 1) AS addressesID,
+				ISNULL(addr.addressesTypeID, 1) AS addressesTypeID,
+				ISNULL(addr.address1, ' ') AS address1,
+				ISNULL(addr.address2, ' ') AS address2,
+				ISNULL(addr.city, ' ') AS city,
+				ISNULL(addr.st, ' ') AS st,
+				ISNULL(addr.zip, 0) AS zip,
+				ISNULL(addr.mapsco, ' ') AS mapsco,
  
-				ISNULL(aci.additionalContactInfo, ' ')
+				ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo
 
 			FROM Staff staff 
 				LEFT JOIN StaffType stafft ON
@@ -48,7 +48,7 @@ AS
 				LEFT JOIN AdditionalContactInfo aci ON
 					staff.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE staffID = @staffID AND Staff.deleted <> 1
+			WHERE (staffID = @staffID) AND (Staff.deleted <> 1)
 
 		END TRY
 		BEGIN CATCH

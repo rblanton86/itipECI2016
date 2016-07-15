@@ -19,13 +19,13 @@ CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@handicapped bit,
 	@ssn int,
 	@dob date,
-	@success bit OUTPUT
+	@success int OUTPUT
 	
 AS
 	BEGIN
 		BEGIN TRY
 		
-		IF EXISTS (SELECT * FROM StaffMember WHERE (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
+		IF EXISTS (SELECT * FROM Staff WHERE (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
 			BEGIN
 
 				SET @success = 1
@@ -63,8 +63,8 @@ AS
 		BEGIN CATCH
 
 			DECLARE @timeStamp DATETIME,
-				@errorMessage VARCHAR(250),
-				@errorProcedure VARCHAR(200)	
+				@errorMessage NVARCHAR(MAX),
+				@errorProcedure NVARCHAR(MAX)	
 
 			SELECT @timeStamp = GETDATE(),
 					@errorMessage = ERROR_MESSAGE(),

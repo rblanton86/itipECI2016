@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_Physician]
+ALTER PROCEDURE [dbo].[get_Physician]
 	@firstName varchar(25),
 	@lastName varchar(25)
 
@@ -37,7 +37,7 @@ AS
 			LEFT JOIN AdditionalContactInfo aci ON
 				phy.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE  (firstName = @firstName) AND (lastName = @lastName) AND phy.deleted <> 1 
+			WHERE phy.deleted <> 1 
 				
 
 		END TRY

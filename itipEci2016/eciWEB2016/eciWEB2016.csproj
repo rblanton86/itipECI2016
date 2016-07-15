@@ -212,6 +212,7 @@
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PhysicianDataController.cs" />
     <Compile Include="Controllers\ReferralController.cs" />
     <Compile Include="Controllers\ReferralDataController.cs" />
     <Compile Include="Controllers\StaffController.cs" />
