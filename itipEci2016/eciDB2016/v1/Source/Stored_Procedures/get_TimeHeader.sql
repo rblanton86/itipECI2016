@@ -17,7 +17,7 @@ AS
 
 			SELECT timeHeaderID, 
 					staffID,
-					ISNULL(weekEnding, ' '),
+					ISNULL(weekEnding, ' ') AS weekEnding,
 					deleted
 					
 			FROM TimeHeader 

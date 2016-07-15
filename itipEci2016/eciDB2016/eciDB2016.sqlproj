@@ -442,5 +442,6 @@
     <Build Include="v1\Source\Stored_Procedures\get_PrimaryLanguage.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_ReferralSourceType.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_StaffType.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AllPhysicians.sql" />
   </ItemGroup>
 </Project>

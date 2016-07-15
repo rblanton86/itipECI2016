@@ -11,6 +11,8 @@ Change History:
 CREATE TABLE ErrorLog (
 	errorLog int IDENTITY (1,1) PRIMARY KEY,
 	errorTime datetime,
-	errorMessage varchar (50),
-	errorProcedure varchar (25)
+	errorMessage NVARCHAR(MAX),
+	errorProcedure NVARCHAR(MAX)
 	)
+
+	

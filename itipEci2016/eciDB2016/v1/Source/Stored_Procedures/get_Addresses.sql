@@ -17,7 +17,6 @@ AS
 		BEGIN TRY
 
 			SELECT addr.addressesID,
-					addr.addressesTypeID,
 					ISNULL(addr.addressesTypeID, 1) AS addressesTypeID,
 					ISNULL (addr.address1, ' ') AS address1,
 					ISNULL(addr.address2, ' ') AS address2,

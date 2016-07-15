@@ -15,27 +15,57 @@ ALTER PROCEDURE [dbo].[ins_Addresses]
 	@city varchar(15),
 	@st varchar(10),
 	@zip int,
-	@deleted bit
+	@deleted bit,
+	@addressID INT OUTPUT
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			INSERT Addresses (addressesTypeID, 
-								address1, 
-								address2, 
-								city, 
-								st, 
-								zip,
-								deleted)
+			IF EXISTS (SELECT * FROM Addresses WHERE 
+						addressesTypeID <> @addressTypeID
+						AND address1 <> @address1
+						AND address2 <> @address2 
+						AND city <> @city 
+						AND st <> @st 
+						AND zip <> @zip
+						)
 
-			VALUES (@addressTypeID, 
-					@address1, 
-					@address2, 
-					@city, 
-					@st, 
-					@zip,
-					@deleted)
+			BEGIN
+
+				INSERT Addresses (addressesTypeID, 
+									address1, 
+									address2, 
+									city, 
+									st, 
+									zip,
+									deleted)
+
+				VALUES (@addressTypeID, 
+						@address1, 
+						@address2, 
+						@city, 
+						@st, 
+						@zip,
+						@deleted)
+
+				SET @addressID = (
+						SELECT addressesID FROM Addresses
+			
+						WHERE	addressesTypeID = @addressTypeID
+								AND address1 = @address1
+								AND address2 = @address2 
+								AND city = @city 
+								AND st = @st 
+								AND zip = @zip
+								)
+
+				RETURN @addressID 
+			END
+		ELSE
+			BEGIN
+				RETURN 0
+			END
 
 		END TRY
 		BEGIN CATCH
@@ -48,6 +78,7 @@ AS
 					@errorMessage = ERROR_MESSAGE(),
 					@errorProcedure = ERROR_PROCEDURE()
 			
+			RETURN 0
 			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
 
 		END CATCH

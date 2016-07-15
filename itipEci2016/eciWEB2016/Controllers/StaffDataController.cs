@@ -206,11 +206,11 @@ namespace eciWEB2016.Controllers.DataControllers
 
                 db.ExecuteNonQuery(upd_Addresses);
 
-                ////update Staff's Additional Contact Info
+                //update Staff's Additional Contact Info
                 //DbCommand upd_AdditionalContactInfo = db.GetStoredProcCommand("upd_AdditionalContactInfo");
 
                 //db.AddInParameter(upd_AdditionalContactInfo, "@additionalContactInfo", DbType.String, thisStaff.staffContact);
-                //db.AddInParameter(upd_AdditionalContactInfo, "@additionalContactInfoTypeID", DbType.Int32, thisStaff.staffContact);
+                //db.AddInParameter(upd_AdditionalContactInfo, "@additionalContactInfoTypeID", DbType.Int32, 1);
                 //db.AddInParameter(upd_AdditionalContactInfo, "@deleted", DbType.Boolean, thisStaff.staffContact);
 
                 //db.ExecuteNonQuery(upd_AdditionalContactInfo);
@@ -227,19 +227,10 @@ namespace eciWEB2016.Controllers.DataControllers
         {
             try
             {
-                DbCommand ins_Staff = db.GetStoredProcCommand("ins_StaffMember");
 
-                // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
-
-                db.AddInParameter(ins_Staff, "@staffTypeID", DbType.Int32, thisStaff.staffTypeID);
-                db.AddInParameter(ins_Staff, "@firstName", DbType.String, thisStaff.firstName);
-                db.AddInParameter(ins_Staff, "@lastName", DbType.String, thisStaff.lastName);
-                db.AddInParameter(ins_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
-                db.AddInParameter(ins_Staff, "@staffAltID", DbType.String, thisStaff.staffAltID);
-                db.AddInParameter(ins_Staff, "@deleted", DbType.Boolean, thisStaff.deleted);
-                db.AddInParameter(ins_Staff, "@staffSSN", DbType.String, thisStaff.SSN);
-
-                db.ExecuteNonQuery(ins_Staff);
+                string addressID;
+                int aciID;
+                string succesful;
 
                 //insert Staff's Addresses
                 DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
@@ -250,19 +241,46 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(ins_Addresses, "@city", DbType.String, thisStaff.city);
                 db.AddInParameter(ins_Addresses, "@st", DbType.String, thisStaff.state);
                 db.AddInParameter(ins_Addresses, "@zip", DbType.Int32, thisStaff.zip);
-                db.AddInParameter(ins_Addresses, "@deleted", DbType.Boolean, thisStaff.deleted);
+                db.AddInParameter(ins_Addresses, "@deleted", DbType.Boolean, false);
+                db.AddOutParameter(ins_Addresses, "@addressID", DbType.Int32, sizeof(Int32));
 
-                db.ExecuteNonQuery(ins_Addresses);
+                addressID = (string)(db.ExecuteScalar(ins_Addresses));
 
-                ////insert Staff's Additional Contact Info
-                //DbCommand ins_AdditionalContactInfo = db.GetStoredProcCommand("ins_AdditionalContactInfo");
 
-                //db.AddInParameter(ins_AdditionalContactInfo, "@memberTypeID", DbType.Int32, thisStaff.staffContact.memberTypeID);
-                //db.AddInParameter(ins_AdditionalContactInfo, "@additionalContactInfo", DbType.String, thisStaff.staffContact.additionalContactInfo);
-                //db.AddInParameter(ins_AdditionalContactInfo, "@additionalContactInfoTypeID", DbType.Int32, thisStaff.staffContact.additionalContactInfoTypeID);
-                //db.AddInParameter(ins_AdditionalContactInfo, "@deleted", DbType.Boolean, thisStaff.staffContact.deleted);
 
-                //db.ExecuteNonQuery(ins_AdditionalContactInfo);
+
+                //insert Staff's Additional Contact Info
+                DbCommand ins_AdditionalContactInfo = db.GetStoredProcCommand("ins_AdditionalContactInfo");
+
+                AdditionalContactInfoModel staffContact = new AdditionalContactInfoModel();
+
+                staffContact = thisStaff.staffContact;
+
+                db.AddInParameter(ins_AdditionalContactInfo, "@memberTypeID", DbType.Int32, 1);
+                db.AddInParameter(ins_AdditionalContactInfo, "@additionalContactInfo", DbType.String, staffContact.additionalContactInfo);
+                db.AddInParameter(ins_AdditionalContactInfo, "@additionalContactInfoTypeID", DbType.Int32, 1);
+                db.AddInParameter(ins_AdditionalContactInfo, "@deleted", DbType.Boolean, false);
+
+                aciID = Convert.ToInt32(db.ExecuteScalar(ins_AdditionalContactInfo).ToString());
+
+
+                //Inserts staff
+                DbCommand ins_Staff = db.GetStoredProcCommand("ins_StaffMember");
+
+                db.AddInParameter(ins_Staff, "@addressesID", DbType.Int32, Convert.ToInt32(addressID));
+                db.AddInParameter(ins_Staff, "@additionalContactInfoID", DbType.Int32, Convert.ToInt32(aciID));
+                db.AddInParameter(ins_Staff, "@staffTypeID", DbType.Int32, thisStaff.staffTypeID);
+                db.AddInParameter(ins_Staff, "@firstName", DbType.String, thisStaff.firstName);
+                db.AddInParameter(ins_Staff, "@lastName", DbType.String, thisStaff.lastName);
+                db.AddInParameter(ins_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
+                db.AddInParameter(ins_Staff, "@staffAltID", DbType.String, thisStaff.staffAltID);
+                db.AddInParameter(ins_Staff, "@deleted", DbType.Boolean, thisStaff.deleted);
+                db.AddInParameter(ins_Staff, "@ssn", DbType.String, thisStaff.SSN);
+                db.AddInParameter(ins_Staff, "@dob", DbType.String, thisStaff.DOB);
+                db.AddOutParameter(ins_Staff, "@success", DbType.Int32, sizeof(Int32));
+
+                succesful = (string)db.ExecuteScalar(ins_Staff);
+
 
                 return true;
             }

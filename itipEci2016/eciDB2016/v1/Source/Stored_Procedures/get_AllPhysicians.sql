@@ -37,7 +37,7 @@ AS
 			LEFT JOIN AdditionalContactInfo aci ON
 				phy.additionalContactInfoID = aci.additionalContactInfoID
 
-			WHERE  (firstName = @firstName) AND (lastName = @lastName) AND phy.deleted <> 1 
+			WHERE phy.deleted <> 1 
 				
 
 		END TRY

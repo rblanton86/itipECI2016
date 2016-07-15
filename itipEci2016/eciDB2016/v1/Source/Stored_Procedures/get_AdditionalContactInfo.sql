@@ -16,8 +16,8 @@ AS
 		BEGIN TRY
 
 			SELECT aci.additionalContactInfoID,
-					aci.memberTypeID,
-					aci.additionalContactInfoTypeId,
+					ISNULL(aci.memberTypeID, 1) AS memberTypeID,
+					ISNULL(aci.additionalContactInfoTypeID, 1) AS additionalContactInfoTypeID,
 					ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo,
 					aci.deleted,
 					ISNULL(mbt.memberType,' ') AS memberType,
