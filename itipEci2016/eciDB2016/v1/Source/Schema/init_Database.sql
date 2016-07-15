@@ -894,6 +894,7 @@ ELSE
 			additionalContactInfoID INT CONSTRAINT FK_referralSource_contactInfo FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 			referralSourceTypeID INT CONSTRAINT FK_referralSource_referralSourceType FOREIGN KEY REFERENCES ReferralSourceType(referralSourceTypeID),
 			addressesID INT CONSTRAINT FK_referralSource_addresses FOREIGN KEY REFERENCES Addresses(addressesID),
+			referralSource VARCHAR(50),
 			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)

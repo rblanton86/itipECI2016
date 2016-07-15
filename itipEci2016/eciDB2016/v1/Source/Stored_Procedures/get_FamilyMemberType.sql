@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_FamilyMemberType]
+CREATE PROCEDURE [dbo].[get_FamilyMemberType]
 	@familyMemberTypeID int
 
 AS

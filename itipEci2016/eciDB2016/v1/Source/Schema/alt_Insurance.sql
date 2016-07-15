@@ -6,7 +6,8 @@ Author: Jennifer M Graves
 Date: 07-05-2016
 
 Change History:
-		07-05-2016 -- jmg: Added deleted bit column to table.
+		07-05-2016: JMG - Added deleted bit column to table.
+		07-14-2016: JMG - Added clientID column to table for linking purposes.
 ****************************************************************************/
 
 -- Declares the table variable for Insurance
@@ -55,8 +56,8 @@ ELSE
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @ins = OBJECT_ID AND name ='updDate')
 			BEGIN
-				ALTER TABLE Insurance ADD CONSTRAINT
-				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+				--ALTER TABLE Insurance ADD CONSTRAINT
+				--DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
 				PRINT 'Altered updDate column: Added Constraint'
 			END
 		ELSE

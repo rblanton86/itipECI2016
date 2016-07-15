@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[upd_Addresses]
+CREATE PROCEDURE [dbo].[upd_Addresses]
 	@addressesID int,
 	@addressTypeID int,
 	@address1 varchar(20),

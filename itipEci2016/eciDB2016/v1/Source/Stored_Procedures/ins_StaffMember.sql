@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[ins_StaffMember]
+CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@staffTypeID int,
 	@addressesID int,
 	@additionalContactInfoID int,

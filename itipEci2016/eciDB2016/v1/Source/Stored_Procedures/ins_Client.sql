@@ -9,7 +9,7 @@ Change History:
 	07-11-2016: -- jmg -- Added sexID, officeID, addressesID, altID, intakeDate, ifspDate, compSvcDate,
 			serviceAreaException, tkidsCaseNumber, consentToRelease, eci, and accountingSystemID columns.
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[ins_Client]
+CREATE PROCEDURE [dbo].[ins_Client]
 	@clientsID INT,
 	@raceID INT,
 	@ethnicityID INT,
@@ -17,10 +17,9 @@ ALTER PROCEDURE [dbo].[ins_Client]
 	@primaryLanguageID INT,
 	@schoolInfoID INT,
 	@commentsID INT,
-	@insuranceAuthID INT,
 	@communicationPreferencesID INT,
 	@sexID INT,
-	@office INT,
+	@officeID INT,
 	@addressesID INT,
 	@altID VARCHAR(25),
 	@firstName VARCHAR(20),
@@ -55,7 +54,6 @@ AS
 								primaryLanguageID,
 								schoolInfoID,
 								commentsID,
-								insuranceAuthID,
 								communicationPreferencesID,
 								sexID,
 								officeID,
@@ -83,7 +81,6 @@ AS
 						@primaryLanguageID,
 						@schoolInfoID,
 						@commentsID,
-						@insuranceAuthID,
 						@communicationPreferencesID,
 						@sexID,
 						@officeID,

@@ -82,6 +82,8 @@ WHILE @i <= 10
 				)
 
 			SET @i +=1
+
+			COMMIT TRANSACTION
 	END
 
 	--WHILE @i <= 10 AND @x <= 10

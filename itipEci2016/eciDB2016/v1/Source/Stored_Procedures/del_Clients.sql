@@ -6,7 +6,7 @@ Author:
 Date: 
 	6.23.16
 Change History:
-	
+	07-14-2016: Updated to switch bit instead of deleting client.
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[del_ClientByID]
 	@clientID int
@@ -15,7 +15,10 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			DELETE FROM Clients
+			UPDATE Clients
+			SET
+				deleted = 1
+			
 			WHERE clientID = @clientID
 
 		END TRY

@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_Addresses]
+CREATE PROCEDURE [dbo].[get_Addresses]
 	@addressesID int
 
 

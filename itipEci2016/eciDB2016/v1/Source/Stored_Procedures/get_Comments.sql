@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_Comments]
+CREATE PROCEDURE [dbo].[get_Comments]
 	@commentsID int
 
 
