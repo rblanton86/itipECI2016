@@ -4,7 +4,7 @@ Author: Jennifer M Graves
 Date: 07-13-2016
 Change History:
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_FamilyByClientID]
+CREATE PROCEDURE [dbo].[get_FamilyByClientID]
 	@clientID int
 
 AS
@@ -13,17 +13,17 @@ AS
 		SELECT 
 				fm.familyMemberID,
 				fm.familyMemberTypeID,
-				ISNULL(fm.firstName, ' '),
-				ISNULL(fm.lastName, ' '),
-				ISNULL(fm.isGuardian, 1),
+				ISNULL(fm.firstName, ' ') AS firstName,
+				ISNULL(fm.lastName, ' ') AS lastName,
+				ISNULL(fm.isGuardian, 1) AS isGuardian,
 				fm.additionalContactInfoID,
 				fm.sexID,
 				fm.deleted,
 				fm.raceID,
-				ISNULL(fm.occupation, ' '),
-				ISNULL(fm.employer, ' '),
-				ISNULL(fm.dob, ' '),
-				ISNULL(fmt.familyMemberType, ' ')
+				ISNULL(fm.occupation, ' ') AS occupation,
+				ISNULL(fm.employer, ' ') AS employer,
+				ISNULL(fm.dob, '19000101') AS dob,
+				ISNULL(fmt.familyMemberType, ' ') AS familyMemberType
 
 		FROM LnkClientFamily lcf
 			LEFT JOIN FamilyMember fm
@@ -31,7 +31,7 @@ AS
 			LEFT JOIN FamilyMemberType fmt
 				ON fmt.familyMemberTypeID = fm.FamilyMemberTypeID
 
-		WHERE lcf.clientID = @clientID AND fm.deleted <> 1
+		WHERE lcf.clientID = 4026
 
 	END TRY
 	BEGIN CATCH

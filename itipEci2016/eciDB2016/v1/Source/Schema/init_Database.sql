@@ -10,7 +10,7 @@ Change History:
 	07-11-2016: JMG - Updates to add tables.
 	07-12-2016: JMG - Added diagnosis tables.
 	07-13-2016: JMG - Added If/Exists statement and initial table values where needed.
-	07-14-2016: JMG - Added CommentsType table and updated Comments and Clients table values.
+	07-14-2016: JMG - Added CommentsType table and updated Comments, Clients and InsuranceAuth table values.
 ************************************************************************************************************/
 
 IF EXISTS (SELECT * FROM sys.tables WHERE name = 'Race')
@@ -265,7 +265,9 @@ ELSE
 					(2, ''Family''),
 					(3, ''Staff''),
 					(4, ''Physician''),
-					(5, ''Referral Source'');
+					(5, ''Referral Source''),
+					(6, ''Insurance''),
+					(7, ''InsuranceAuth'');
 			SET IDENTITY_INSERT MemberType OFF;'
 		EXEC(@q)
 		
@@ -735,6 +737,7 @@ ELSE
 		-- Creates table.
 		CREATE TABLE Insurance (
 			insuranceID INT IDENTITY(1,1) PRIMARY KEY(insuranceID),
+			clientID INT CONSTRAINT FK_Insurance_Client FOREIGN KEY REFERENCES Clients(clientID),
 			insuranceName VARCHAR(75),
 			insurancePolicyID VARCHAR(75),
 			medPreAuthNumber VARCHAR(100),
@@ -1156,7 +1159,7 @@ ELSE
 		-- Creates table.
 		CREATE TABLE InsuranceAuthorization (
 			insuranceAuthID INT IDENTITY (1,1) PRIMARY KEY (insuranceAuthID),
-			clientID INT CONSTRAINT FK_InsAuth_Client FOREIGN KEY REFERENCES Clients(clientID),
+			insuranceID INT CONSTRAINT FK_InsAuth_Insurance FOREIGN KEY REFERENCES Insurance(insuranceID),
 			authorized_From DATE,
 			authorized_To DATE,
 			insuranceAuthorizationType VARCHAR(25),

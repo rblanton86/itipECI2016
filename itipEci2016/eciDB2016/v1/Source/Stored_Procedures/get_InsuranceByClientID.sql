@@ -1,5 +1,5 @@
 ﻿/****************************************************************************
-Description: Creates stored procedure @procedure.
+Description: Creates stored procedure get_InsuranceByClientID.
         	
 Author: Jennifer M. Graves
         	
@@ -8,13 +8,17 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[@procedure]
+CREATE PROCEDURE [dbo].[get_InsuranceByClientID]
 	@clientID INT
 
 AS
 BEGIN
 	BEGIN TRY
-		
+		SELECT ins.*
+
+		FROM Insurance ins
+
+		WHERE ins.clientID = @clientID
 	END TRY
 	BEGIN CATCH
 

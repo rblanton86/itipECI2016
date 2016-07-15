@@ -13,7 +13,29 @@ DECLARE @i INT = 0
 
 WHILE @i <= 10
 	BEGIN
-		INSERT Clients (raceID,
+		BEGIN TRANSACTION
+			
+			DECLARE @addressesID INT;
+
+			INSERT Addresses (addressesTypeID, 
+								address1, 
+								address2, 
+								city, 
+								st, 
+								zip,
+								deleted)
+
+			VALUES (1, 
+					'St. Paul ' + CONVERT(VARCHAR(2), @i),
+					'', 
+					'Dallas', 
+					'TX', 
+					76137,
+					0)
+
+			SELECT @addressesID = scope_identity();
+
+			INSERT Clients (raceID,
 				ethnicityID,
 				clientStatusID,
 				primaryLanguageID,
@@ -32,10 +54,11 @@ WHILE @i <= 10
 				tkidsCaseNumber,
 				consentToRelease,
 				eci,
-				accountingSystemID
+				accountingSystemID,
+				addressesID
 				)
 
-		VALUES (1,
+			VALUES (1,
 				2,
 				1,
 				1,
@@ -54,83 +77,83 @@ WHILE @i <= 10
 				@i + 0 + 0 + @i,
 				1,
 				1,
-				'ABC' + CONVERT(VARCHAR(2), @i) 
+				'ABC' + CONVERT(VARCHAR(2), @i),
+				@addressesID
 				)
 
-		SET @i +=1
+			SET @i +=1
 	END
 
-	WHILE @i <= 10 AND @x <= 10
-	BEGIN
+	--WHILE @i <= 10 AND @x <= 10
+	--BEGIN
 
-		SET @i += 2
+	--	SET @i += 2
 			
-			DELETE FROM TimeHeader
-			INSERT TimeHeader (staffID, weekEnding, deleted)
-			VALUES (@i, '10/04/02', 0)
+	--		DELETE FROM TimeHeader
+	--		INSERT TimeHeader (staffID, weekEnding, deleted)
+	--		VALUES (@i, '10/04/02', 0)
 
-			DELETE FROM TimeDetail
-			INSERT TimeDetail (timeHeaderID,
-								clientID, 
-								actualTime, 
-								eciCode,
-								insuranceDesignation,
-								cptCode,
-								insuranceTime,
-								placeOfService,
-								tcm,
-								canceled,
-								updDate,
-								deleted)
+	--		DELETE FROM TimeDetail
+	--		INSERT TimeDetail (timeHeaderID,
+	--							clientID, 
+	--							actualTime, 
+	--							eciCode,
+	--							insuranceDesignation,
+	--							cptCode,
+	--							insuranceTime,
+	--							placeOfService,
+	--							tcm,
+	--							canceled,
+	--							updDate,
+	--							deleted)
 
-			VALUES (@i, @i, 1.2, 'eci', 'p', 'cpt' + CONVERT(VARCHAR(2), @i), 1.2, 'H', 'tcm2',  'sick', '10/04/2016', 0)
+	--		VALUES (@i, @i, 1.2, 'eci', 'p', 'cpt' + CONVERT(VARCHAR(2), @i), 1.2, 'H', 'tcm2',  'sick', '10/04/2016', 0)
 
-			INSERT Clients (firstName, lastName, altID)
-			VALUES ('First Name ' + CONVERT(VARCHAR(2), @i), 'Last Name ' + CONVERT(VARCHAR(2), @i), 'LastFirst' + CONVERT(VARCHAR(2), @i))
+	--		INSERT Clients (firstName, lastName, altID)
+	--		VALUES ('First Name ' + CONVERT(VARCHAR(2), @i), 'Last Name ' + CONVERT(VARCHAR(2), @i), 'LastFirst' + CONVERT(VARCHAR(2), @i))
 			
-			INSERT FamilyMember (firstName, lastName, isGuardian)
-			SELECT 'Family FN ' + CONVERT(VARCHAR(2), @i), 'Family LN ' + CONVERT(VARCHAR(2), @i), 1
-			UNION
-			SELECT 'Family2 FN ' + CONVERT(VARCHAR(2), @i), 'Family2 LN ' + CONVERT(VARCHAR(2), @i), 1
+	--		INSERT FamilyMember (firstName, lastName, isGuardian)
+	--		SELECT 'Family FN ' + CONVERT(VARCHAR(2), @i), 'Family LN ' + CONVERT(VARCHAR(2), @i), 1
+	--		UNION
+	--		SELECT 'Family2 FN ' + CONVERT(VARCHAR(2), @i), 'Family2 LN ' + CONVERT(VARCHAR(2), @i), 1
 				
-			INSERT Addresses (address1)
-			VALUES (('Akard # ' + CONVERT(VARCHAR(2), @i)))
+	--		INSERT Addresses (address1)
+	--		VALUES (('Akard # ' + CONVERT(VARCHAR(2), @i)))
 			
-			INSERT Staff (firstName, lastName)
-			VALUES ('Staff FN ' + CONVERT(VARCHAR(2), @i), 'Staff LN ' + CONVERT(VARCHAR(2), @i))
+	--		INSERT Staff (firstName, lastName)
+	--		VALUES ('Staff FN ' + CONVERT(VARCHAR(2), @i), 'Staff LN ' + CONVERT(VARCHAR(2), @i))
 			
-			INSERT Physician (firstName, lastName)
-			VALUES ('Phys FN ' + CONVERT(VARCHAR(2), @i), 'Phys LN ' + CONVERT(VARCHAR(2), @i))
+	--		INSERT Physician (firstName, lastName)
+	--		VALUES ('Phys FN ' + CONVERT(VARCHAR(2), @i), 'Phys LN ' + CONVERT(VARCHAR(2), @i))
 
-			IF @i = 2 OR @i = 4 OR @i = 6
-				BEGIN
+	--		IF @i = 2 OR @i = 4 OR @i = 6
+	--			BEGIN
 
-					INSERT AdditionalContactInfo (additionalContactInfo)
-					VALUES (CONVERT(VARCHAR(2), @i) + '23-456-7890')
+	--				INSERT AdditionalContactInfo (additionalContactInfo)
+	--				VALUES (CONVERT(VARCHAR(2), @i) + '23-456-7890')
 
-					INSERT AdditionalContactInfoType (additionalContactInfoType)
-					VALUES ('Phone ' + CONVERT(VARCHAR(2), @i))
+	--				INSERT AdditionalContactInfoType (additionalContactInfoType)
+	--				VALUES ('Phone ' + CONVERT(VARCHAR(2), @i))
 
-				END
+	--			END
 
 				
 
-		SET @x += 2
+	--	SET @x += 2
 			
-			INSERT Clients (firstName, lastName)
-			VALUES ('First Name ' + CONVERT(VARCHAR(2), @x), 'Last Name ' + CONVERT(VARCHAR(2), @x))
+	--		INSERT Clients (firstName, lastName)
+	--		VALUES ('First Name ' + CONVERT(VARCHAR(2), @x), 'Last Name ' + CONVERT(VARCHAR(2), @x))
 
-			INSERT FamilyMember (firstName, lastName, isGuardian)
-			SELECT 'Family FN ' + CONVERT(VARCHAR(2), @x), 'Family LN ' + CONVERT(VARCHAR(2), @x), 1
-			UNION
-			SELECT 'Family2 FN ' + CONVERT(VARCHAR(2), @x), 'Family2 LN ' + CONVERT(VARCHAR(2), @x), 1
-			UNION
-			SELECT 'Family3 FN ' + CONVERT(VARCHAR(2), @x), 'Family3 LN ' + CONVERT(VARCHAR(2), @x), 1
-			UNION
-			SELECT 'Family4 FN ' + CONVERT(VARCHAR(2), @x), 'Family4 LN ' + CONVERT(VARCHAR(2), @x), 1
+	--		INSERT FamilyMember (firstName, lastName, isGuardian)
+	--		SELECT 'Family FN ' + CONVERT(VARCHAR(2), @x), 'Family LN ' + CONVERT(VARCHAR(2), @x), 1
+	--		UNION
+	--		SELECT 'Family2 FN ' + CONVERT(VARCHAR(2), @x), 'Family2 LN ' + CONVERT(VARCHAR(2), @x), 1
+	--		UNION
+	--		SELECT 'Family3 FN ' + CONVERT(VARCHAR(2), @x), 'Family3 LN ' + CONVERT(VARCHAR(2), @x), 1
+	--		UNION
+	--		SELECT 'Family4 FN ' + CONVERT(VARCHAR(2), @x), 'Family4 LN ' + CONVERT(VARCHAR(2), @x), 1
 
-			INSERT Addresses (address1)
-			VALUES ('ST. Paul # ' + CONVERT(VARCHAR(2), @x))
+	--		INSERT Addresses (address1)
+	--		VALUES ('ST. Paul # ' + CONVERT(VARCHAR(2), @x))
 
-	END
-
+	--END

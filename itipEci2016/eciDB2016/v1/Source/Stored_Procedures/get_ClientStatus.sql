@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-alter PROCEDURE [dbo].[get_ClientStatus]
+CREATE PROCEDURE [dbo].[get_ClientStatus]
 	@clientStatusID int
 
 AS

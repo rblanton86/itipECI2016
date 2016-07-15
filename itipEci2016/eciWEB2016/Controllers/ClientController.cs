@@ -82,18 +82,16 @@ namespace eciWEB2016.Controllers
 
         // POST: Client/Create
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult UpdateClient(Client model)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            Client newclient = new Client();
+            bool success;
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            ClientDataController dataController = new ClientDataController();
+
+            success = dataController.UpdateClient(model);
+
+            return Content(success.ToString());
         }
 
         // GET: Client/Edit/5

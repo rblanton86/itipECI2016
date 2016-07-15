@@ -8,7 +8,7 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-alter PROCEDURE [dbo].[get_CommentsByClientID]
+CREATE PROCEDURE [dbo].[get_CommentsByClientID]
 	@clientID INT
 
 AS
@@ -20,7 +20,7 @@ BEGIN
 
 		FROM Comments com
 			LEFT JOIN Clients clnt
-				ON clnt.commentsID = com.commentsID AND com.deleted <> 1
+				ON clnt.clientID = com.memberID AND com.deleted <> 1
 
 		WHERE clnt.clientID = @clientID
 	END TRY
