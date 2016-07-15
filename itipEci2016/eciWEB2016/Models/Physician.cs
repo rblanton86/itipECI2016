@@ -22,11 +22,12 @@ namespace eciWEB2016.Models
     public class Physician
     {
         [Required]
-        int physicianID { get; set; }
-        string title { get; set; }
-        string firstName { get; set; }
-        string lastName { get; set; }
-        List<Address> physicianAddrs { get; set; }
-        List<AdditionalContactInfoModel> physicianContacts { get; set; }
+        public int physicianID { get; set; }
+        public string title { get; set; }
+        public string firstName { get; set; }
+        public string lastName { get; set; }
+        public string fullName { get; set; }
+        public List<Address> physicianAddrs { get; set; }
+        public List<AdditionalContactInfoModel> physicianContacts { get; set; }
     }
 }

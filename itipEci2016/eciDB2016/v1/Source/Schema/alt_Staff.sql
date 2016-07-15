@@ -106,6 +106,18 @@ ELSE
 				PRINT 'Added staffDOB column on Staff Table.'
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name ='memberTypeID')
+			BEGIN
+				PRINT 'memberTypeID already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Staff
+					ADD memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID)
+				PRINT 'Added memberTypeID column to table.'
+			END
+
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name ='updDate')
 			BEGIN
 				ALTER TABLE Staff ADD CONSTRAINT
@@ -118,5 +130,7 @@ ELSE
 					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
 			END
+
+
 	END
 
