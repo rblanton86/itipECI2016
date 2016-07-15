@@ -19,7 +19,7 @@ BEGIN
 		FROM Staff stf
 			LEFT JOIN LnkClientStaff lnk
 				ON lnk.staffID = stf.staffID
-			LEFT JOIN Client clnt
+			LEFT JOIN Clients clnt
 				ON lnk.clientID = lnk.clientID
 
 		WHERE clnt.clientID = @clientID

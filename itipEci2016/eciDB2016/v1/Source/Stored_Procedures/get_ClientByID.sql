@@ -11,14 +11,14 @@ Change History:
 	07-11-2016: JMG - Update to stored procedure to include additionally added information.
 	07-13-2016: JMG - Updated to wrap selects in ISNULL.
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_ClientByID]
+CREATE PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(clnt.clientID, 0) AS clientID,
+			SELECT clnt.clientID,
 				ISNULL(clnt.firstName, '') AS firstName,
 				ISNULL(clnt.lastName, '') AS lastName,
 				ISNULL(clnt.ssn, 0) AS ssn,
@@ -84,7 +84,7 @@ AS
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
 
-			WHERE clnt.clientID = @clientID AND clnt.deleted <> 1
+			WHERE clnt.clientID = @clientID
 
 		END TRY
 		BEGIN CATCH

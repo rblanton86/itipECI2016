@@ -20,7 +20,18 @@ namespace eciWEB2016.Models
     {
         [Required]
         public int clientID { get; set; }
+        public int raceID { get; set; }
+        public int ethnicityID { get; set; }
+        public int clientStatusID { get; set; }
+        public int primaryLanguageID { get; set; }
+        public int schoolInfoID { get; set; }
+        public int communicationPreferencesID { get; set; }
+        public int sexID { get; set; }
+        public int officeID { get; set; }
         public string altID { get; set; }
+        public DateTime intakeDate { get; set; }
+        public DateTime ifspDate { get; set; }
+        public DateTime compSvcDate { get; set; }
         public string referralSource { get; set; }
         public string firstName { get; set; }
         public string middleInitial { get; set; }
@@ -30,19 +41,13 @@ namespace eciWEB2016.Models
         public DateTime dob { get; set; }
         public int ageInMonths { get; set; }
         public int ssn { get; set; }
-        public string race { get; set; }
-        public string ethnicity { get; set; }
-        public string sex { get; set; }
-        public string office { get; set; }
         public Address clientAddress { get; set; }
         public string additionalContactInfo { get; set; }
         public int additioalContactInfoType { get; set; }
-        public string clientStatus { get; set; }
-        public string language { get; set; }
-        public string ISD { get; set; }
         public int TKIDcaseNumber { get; set; }
         public bool consentRelease { get; set; }
-        public string ECI { get; set; }
+        public bool serviceAreaException { get; set; }
+        public bool ECI { get; set; }
         public int accountingSystemID { get; set; }
         public List<Insurance> clientInsurance { get; set; }
         public List<InsuranceAuthorization> clientInsAuths { get; set; }

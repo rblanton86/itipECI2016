@@ -419,25 +419,25 @@
     <None Include="v1\Source\Unused\ins_Race.sql" />
     <None Include="v1\Source\Unused\ins_Ethnicity.sql" />
     <None Include="v1\Source\Unused\ins_Sex.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_CommunicationPreferences.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_CommunicationPreferences.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisType.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_FamilyMemberType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_MemberType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_Office.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_PrimaryLanguage.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ReferralSourceType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_StaffType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientStatus.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_ClientStatus.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_CommunicationPreferences.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_DiagnosisType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_FamilyMemberType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_MemberType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_Office.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_PrimaryLanguage.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_ReferralSourceType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_StaffType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_FamilyMemberType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_MemberType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_Office.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_PrimaryLanguage.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ReferralSourceType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_StaffType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientStatus.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_ClientStatus.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_CommunicationPreferences.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_DiagnosisType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_FamilyMemberType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_MemberType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_Office.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_PrimaryLanguage.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_ReferralSourceType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_StaffType.sql" />
   </ItemGroup>
 </Project>

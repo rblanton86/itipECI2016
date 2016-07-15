@@ -69,12 +69,12 @@ namespace eciWEB2016.Controllers.DataControllers
                 firstName = dr.Field<string>("firstName"),
                 lastName = dr.Field<string>("lastName"),
                 fullName = dr.Field<string>("firstName")  + " " + dr.Field<string>("lastName"),
-                race = dr.Field<string>("race"),
-                ethnicity = dr.Field<string>("ethnicity"),
-                clientStatus = dr.Field<string>("clientStatus"),
-                sex = dr.Field<string>("sex"),
+                raceID = dr.Field<int>("raceID"),
+                ethnicityID = dr.Field<int>("ethnicityID"),
+                clientStatusID = dr.Field<int>("clientStatusID"),
+                sexID = dr.Field<int>("sexID"),
                 dob = dr.Field<DateTime>("dob"),
-                office = dr.Field<string>("officeName")
+                officeID = dr.Field<int>("officeID")
             };
 
             // Does the math to convert client's current age in months.
@@ -272,42 +272,115 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public bool UpdateClient(Client thisClient)
         {
-            DbCommand upd_Clients = db.GetStoredProcCommand("upd_Clients");
+            try
+            {
+                DbCommand upd_Clients = db.GetStoredProcCommand("upd_Clients");
 
-            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
-            db.AddInParameter(upd_Clients, "@clientsID", DbType.Int32, thisClient.clientID);
-            db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
-            db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
-            db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
-            db.AddInParameter(upd_Clients, "@ssn", DbType.Int32, thisClient.ssn);
-            db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource);
+                db.AddInParameter(upd_Clients, "@clientsID", DbType.Int32, thisClient.clientID);
+                db.AddInParameter(upd_Clients, "@raceID", DbType.Int32, thisClient.raceID);
+                db.AddInParameter(upd_Clients, "@ethnicityID", DbType.Int32, thisClient.ethnicityID);
+                db.AddInParameter(upd_Clients, "@clientStatusID", DbType.Int32, thisClient.clientStatusID);
+                db.AddInParameter(upd_Clients, "@primaryLanguageID", DbType.Int32, thisClient.primaryLanguageID);
+                db.AddInParameter(upd_Clients, "@schoolInfoID", DbType.Int32, thisClient.schoolInfoID);
+                db.AddInParameter(upd_Clients, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
+                db.AddInParameter(upd_Clients, "@sexID", DbType.Int32, thisClient.sexID);
+                db.AddInParameter(upd_Clients, "@officeID", DbType.Int32, thisClient.officeID);
+                db.AddInParameter(upd_Clients, "@altID", DbType.Int32, thisClient.altID);
+                db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
+                db.AddInParameter(upd_Clients, "@middleInitial", DbType.Int32, thisClient.middleInitial);
+                db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
+                db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
+                db.AddInParameter(upd_Clients, "@ssn", DbType.Int32, thisClient.ssn);
+                db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource);
+                db.AddInParameter(upd_Clients, "@intakeDate", DbType.Int32, thisClient.intakeDate);
+                db.AddInParameter(upd_Clients, "@ifspDate", DbType.Int32, thisClient.ifspDate);
+                db.AddInParameter(upd_Clients, "@compSvcDate", DbType.Int32, thisClient.compSvcDate);
+                db.AddInParameter(upd_Clients, "@serviceAreaException", DbType.Boolean, thisClient.serviceAreaException);
+                db.AddInParameter(upd_Clients, "@tkidsCaseNumber", DbType.Int32, thisClient.TKIDcaseNumber);
+                db.AddInParameter(upd_Clients, "@eci", DbType.Boolean, thisClient.ECI);
+                db.AddInParameter(upd_Clients, "@accountingSystemID", DbType.Int32, thisClient.accountingSystemID);
 
-            db.ExecuteNonQuery(upd_Clients);
+                db.ExecuteNonQuery(upd_Clients);
 
-            DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
+                thisClient = UpdateClientAddress(thisClient);
 
-            db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
-            db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisClient.clientAddress.address1);
-            db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisClient.clientAddress.address2);
-            db.AddInParameter(upd_Addresses, "@city", DbType.String, thisClient.clientAddress.city);
-            db.AddInParameter(upd_Addresses, "@st", DbType.String, thisClient.clientAddress.state);
-            db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisClient.clientAddress.zip);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
-            db.ExecuteNonQuery(upd_Addresses);
+        public Client UpdateClientAddress(Client thisClient)
+        {
+            try
+            {
+                DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
-            DbCommand upd_Family = db.GetStoredProcCommand("upd_Family");
+                db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
+                db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisClient.clientAddress.address1);
+                db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisClient.clientAddress.address2);
+                db.AddInParameter(upd_Addresses, "@city", DbType.String, thisClient.clientAddress.city);
+                db.AddInParameter(upd_Addresses, "@st", DbType.String, thisClient.clientAddress.state);
+                db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisClient.clientAddress.zip);
 
-            // TODO: Jen, find out what error is causing this and fix it.
+                db.ExecuteNonQuery(upd_Addresses);
 
-            //db.AddInParameter(upd_Family, "@familyMemberID", DbType.Int32, thisClient.clientFamily.familyMemberID);
-            //db.AddInParameter(upd_Family, "@familyMemberTypeID", DbType.Int32, thisClient.clientFamily.familyMemberTypeID);
-            //db.AddInParameter(upd_Family, "@firstName", DbType.String, thisClient.clientFamily.firstName);
-            //db.AddInParameter(upd_Family, "@lastName", DbType.String, thisClient.clientFamily.lastName);
-            //db.AddInParameter(upd_Family, "@isGuardian", DbType.Boolean, thisClient.clientFamily.isGuardian);
+                return thisClient;
+            }
+            catch
+            {
+                return thisClient;
+            }
+        }
 
-            db.ExecuteNonQuery(upd_Family);
+        public bool InsertClient(Client thisClient)
+        {
+            try
+            {
+                DbCommand ins_Client = db.GetStoredProcCommand("ins_Client");
 
-            return true;
+                db.AddInParameter(ins_Client, "@firstName", DbType.String, thisClient.firstName);
+                db.AddInParameter(ins_Client, "@lastName", DbType.String, thisClient.lastName);
+                db.AddInParameter(ins_Client, "@dob", DbType.Date, thisClient.dob);
+                db.AddInParameter(ins_Client, "@ssn", DbType.Int32, thisClient.ssn);
+                db.AddInParameter(ins_Client, "@referralSource", DbType.String, thisClient.referralSource);
+
+                db.ExecuteNonQuery(ins_Client);
+
+                thisClient = InsertClientAddress(thisClient);
+
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        public Client InsertClientAddress(Client thisClient)
+        {
+            try
+            {
+                DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
+
+                db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressType);
+                db.AddInParameter(ins_Addresses, "@address1", DbType.String, thisClient.clientAddress.address1);
+                db.AddInParameter(ins_Addresses, "@address2", DbType.String, thisClient.clientAddress.address2);
+                db.AddInParameter(ins_Addresses, "@city", DbType.String, thisClient.clientAddress.city);
+                db.AddInParameter(ins_Addresses, "@st", DbType.String, thisClient.clientAddress.state);
+                db.AddInParameter(ins_Addresses, "@zip", DbType.Int32, thisClient.clientAddress.zip);
+                db.AddInParameter(ins_Addresses, "@mapsco", DbType.String, thisClient.clientAddress.mapsco);
+
+                db.ExecuteNonQuery(ins_Addresses);
+
+                return thisClient;
+            }
+            catch
+            {
+                return thisClient;
+            }
         }
     }
 }

@@ -19,10 +19,10 @@ AS
 			FROM Physician phys
 				LEFT JOIN LnkClientPhysician lnk
 					ON lnk.physicianID = phys.physicianID
-				LEFT JOIN Client clnt
+				LEFT JOIN Clients clnt
 					ON lnk.clientID = lnk.clientID
 
-			WHERE clnt.clientID = @clientID
+			WHERE clnt.clientID = 4026
 		END TRY
 		BEGIN CATCH
 
