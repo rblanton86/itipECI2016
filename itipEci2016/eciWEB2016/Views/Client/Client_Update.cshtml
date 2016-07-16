@@ -11,8 +11,8 @@
 </header>
 <nav>
     <button type="button">Get Next Alt ID</button>
-    <button type="button">Add Client</button>
-    <button type="button">Delete Client</button>
+    <button type="button" onclick="location.href='@Url.Action("Referral", "Referral")'">Add Client</button>
+    <button type="button" onclick="location.href='@Url.Action("DeleteClient", "Client")'">Delete Client</button>
     <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
     <button type="button"> View Services for this Client </button>
 </nav>
@@ -124,6 +124,11 @@
                         );
                 }
             });
+        })
+    </script>
+    <script>
+        $(function () {
+            $(".datefield").datepicker();
         })
     </script>
 }

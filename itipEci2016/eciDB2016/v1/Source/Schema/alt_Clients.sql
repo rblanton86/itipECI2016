@@ -235,6 +235,18 @@ ELSE
 				PRINT 'Added eci column to Clients table.'
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='memberTypeID')
+			BEGIN
+				PRINT 'memberTypeID already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Clients
+					ADD memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID)
+				PRINT 'Added memberTypeID column to table.'
+			END
+
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='accountingSystemID')
 			BEGIN
 				PRINT 'Did not add accountingSystemID column: already exists.'

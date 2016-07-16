@@ -8,7 +8,7 @@ Date: 07-14-2016
 Change History:
         	
 ****************************************************************************/
-alter PROCEDURE [dbo].[get_AddressesByFamilyMemberID]
+CREATE PROCEDURE [dbo].[get_AddressesByFamilyMemberID]
 	@familyMemberID INT
 
 AS

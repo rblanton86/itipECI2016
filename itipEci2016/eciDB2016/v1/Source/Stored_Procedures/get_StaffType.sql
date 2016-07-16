@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_StaffType]
+CREATE PROCEDURE [dbo].[get_StaffType]
 	@staffTypeID int
 
 AS

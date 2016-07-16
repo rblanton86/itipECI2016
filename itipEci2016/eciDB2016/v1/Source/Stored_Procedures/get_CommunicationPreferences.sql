@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_CommunicationPreferences]
+CREATE PROCEDURE [dbo].[get_CommunicationPreferences]
 	@communicationPreferencesID int
 
 AS

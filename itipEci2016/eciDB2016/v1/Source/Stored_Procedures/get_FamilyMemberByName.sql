@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_FamilyMemberByName]
+CREATE PROCEDURE [dbo].[get_FamilyMemberByName]
 	@firstName varchar (25),
 	@lastName varchar (25)
 

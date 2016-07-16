@@ -280,21 +280,32 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Clients, "@communicationPreferencesID", DbType.Int32, thisClient.communicationPreferencesID);
                 db.AddInParameter(upd_Clients, "@sexID", DbType.Int32, thisClient.sexID);
                 db.AddInParameter(upd_Clients, "@officeID", DbType.Int32, thisClient.officeID);
-                db.AddInParameter(upd_Clients, "@altID", DbType.Int32, thisClient.altID);
+                db.AddInParameter(upd_Clients, "@altID", DbType.String, thisClient.altID);
                 db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
-                db.AddInParameter(upd_Clients, "@middleInitial", DbType.Int32, thisClient.middleInitial);
+                db.AddInParameter(upd_Clients, "@middleInitial", DbType.String, thisClient.middleInitial);
                 db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
-                db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
+                db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob == null ? (object)DBNull.Value : (object)thisClient.dob);
                 db.AddInParameter(upd_Clients, "@ssn", DbType.Int32, thisClient.ssn);
+<<<<<<< HEAD
                 db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource.referralSourceName);
                 db.AddInParameter(upd_Clients, "@intakeDate", DbType.Int32, thisClient.intakeDate);
                 db.AddInParameter(upd_Clients, "@ifspDate", DbType.Int32, thisClient.ifspDate);
                 db.AddInParameter(upd_Clients, "@compSvcDate", DbType.Int32, thisClient.compSvcDate);
+=======
+                db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource);
+                db.AddInParameter(upd_Clients, "@intakeDate", DbType.DateTime, thisClient.intakeDate == null ? (object)DBNull.Value : (object)thisClient.intakeDate);
+                db.AddInParameter(upd_Clients, "@ifspDate", DbType.Date, thisClient.ifspDate == null ? (object)DBNull.Value : (object)thisClient.ifspDate);
+                db.AddInParameter(upd_Clients, "@compSvcDate", DbType.Date, thisClient.compSvcDate == null ? (object)DBNull.Value : (object)thisClient.compSvcDate);
+>>>>>>> origin/master
                 db.AddInParameter(upd_Clients, "@serviceAreaException", DbType.Boolean, thisClient.serviceAreaException);
                 db.AddInParameter(upd_Clients, "@tkidsCaseNumber", DbType.Int32, thisClient.TKIDcaseNumber);
+                db.AddInParameter(upd_Clients, "@consentToRelease", DbType.Boolean, thisClient.consentRelease);
                 db.AddInParameter(upd_Clients, "@eci", DbType.Boolean, thisClient.ECI);
                 db.AddInParameter(upd_Clients, "@accountingSystemID", DbType.Int32, thisClient.accountingSystemID);
+<<<<<<< HEAD
 
+=======
+>>>>>>> origin/master
             try
             {
                 db.ExecuteNonQuery(upd_Clients);
@@ -311,8 +322,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public Client UpdateClientAddress(Client thisClient)
         {
-            try
-            {
                 DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
                 db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisClient.clientAddress.addressesID);
@@ -322,6 +331,8 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Addresses, "@st", DbType.String, thisClient.clientAddress.state);
                 db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisClient.clientAddress.zip);
 
+            try
+            {
                 db.ExecuteNonQuery(upd_Addresses);
 
                 return thisClient;
@@ -334,8 +345,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public bool InsertClient(Client thisClient)
         {
-            try
-            {
                 DbCommand ins_Client = db.GetStoredProcCommand("ins_Client");
 
                 db.AddInParameter(ins_Client, "@firstName", DbType.String, thisClient.firstName);
@@ -344,6 +353,8 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(ins_Client, "@ssn", DbType.Int32, thisClient.ssn);
                 db.AddInParameter(ins_Client, "@referralSource", DbType.String, thisClient.referralSource);
 
+            try
+            {
                 db.ExecuteNonQuery(ins_Client);
 
                 thisClient = InsertClientAddress(thisClient);
@@ -377,6 +388,26 @@ namespace eciWEB2016.Controllers.DataControllers
             catch
             {
                 return thisClient;
+            }
+        }
+
+        public bool DeleteClient(Client thisClient)
+        {
+            DbCommand del_ClientByID = db.GetStoredProcCommand("del_ClientByID");
+
+            db.AddInParameter(del_ClientByID, "@clientID", DbType.String, thisClient.clientID);
+
+            try
+            {
+                db.ExecuteNonQuery(del_ClientByID);
+
+                thisClient = InsertClientAddress(thisClient);
+
+                return true;
+            }
+            catch
+            {
+                return false;
             }
         }
     }

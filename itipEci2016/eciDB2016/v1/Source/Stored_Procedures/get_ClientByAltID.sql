@@ -8,31 +8,54 @@ Date:
 Change History:
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_ClientByAltID]
+CREATE PROCEDURE [dbo].[get_ClientByAltID]
 	@altID VARCHAR(25)
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT clnt.*,
-				rce.race,
-				eth.ethnicity,
-				sts.clientStatus,
-				plang.primaryLanguage,
-				sclinf.isd,
-				sex.sex,
-				office.officeName,
-				addr.address1,
-				addr.address2,
-				addr.city,
-				addr.st,
-				addr.zip,
-				addr.mapsco,
-				insauth.insuranceAuthorizationType,
-				insauth.authorized_From,
-				insauth.authorized_To,
-				comprf.communicationPreferences
+			SELECT clnt.clientID,
+				ISNULL(clnt.firstName, '') AS firstName,
+				ISNULL(clnt.lastName, '') AS lastName,
+				ISNULL(clnt.ssn, 0) AS ssn,
+				ISNULL(clnt.referralSource, '') AS referralSource,
+				ISNULL(clnt.intakeDate, '19010101') AS intakeDate,
+				ISNULL(clnt.ifspDate, '19000101') AS ifspDate,
+				ISNULL(clnt.compSvcDate, '19000101') AS compSvcDate,
+				ISNULL(clnt.dob, '19000101') AS dob,
+				ISNULL(clnt.altID, '') AS altID,
+				ISNULL(clnt.middleInitial, '') AS middleInitial,
+				ISNULL(clnt.serviceAreaException, 0) AS serviceAreaException,
+				ISNULL(clnt.deleted, 0) AS deleted,
+				ISNULL(clnt.tkidsCaseNumber, 0) AS tkidsCaseNumber,
+				ISNULL(clnt.consentToRelease, 1) AS consentToRelease,
+				ISNULL(clnt.eci, 1) AS eci,
+				ISNULL(clnt.accountingSystemID, '') AS accountingSystemID,
+				ISNULL(clnt.updDate, '19000101') AS updDate,
+				ISNULL(clnt.raceID, 1) AS raceID,
+				ISNULL(clnt.ethnicityID, 1) AS ethnicityID,
+				ISNULL(clnt.clientStatusID, 1) AS clientStatusID,
+				ISNULL(clnt.primaryLanguageID, 1) AS primaryLanguageID,
+				ISNULL(clnt.schoolInfoID, 1) AS schoolInfoID,
+				ISNULL(clnt.communicationPreferencesID, 1) AS communicationPreferencesID,
+				ISNULL(clnt.sexID, 1) AS sexID,
+				ISNULL(clnt.addressesID, 1) AS addressesID,
+				ISNULL(clnt.officeID, 1) AS officeID,
+				ISNULL(rce.race, '') AS race,
+				ISNULL(eth.ethnicity, '') AS ethnicity,
+				ISNULL(sts.clientStatus, '') AS clientStatus,
+				ISNULL(plang.primaryLanguage, '') AS primaryLanguage,
+				ISNULL(sclinf.isd, '') AS isd,
+				ISNULL(sex.sex, '') AS sex,
+				ISNULL(office.officeName, '') AS officeName,
+				ISNULL(addr.address1, '') AS address1,
+				ISNULL(addr.address2, '') AS address2,
+				ISNULL(addr.city, '') AS city,
+				ISNULL(addr.st, '') AS st,
+				ISNULL(addr.zip, 0) AS zip,
+				ISNULL(addr.mapsco, '') AS mapsco,
+				ISNULL(comprf.communicationPreferences, '') AS communicationPreferences
 
 			FROM Clients clnt
 				LEFT JOIN Race rce
@@ -41,15 +64,15 @@ AS
 					ON clnt.ethnicityID = eth.ethnicityID
 				LEFT JOIN ClientStatus sts
 					ON clnt.clientStatusID = sts.clientStatusID
-				LEFT JOIN Diagnosis dx
-					ON clnt.diagnosisID = dx.diagnosisID
 				LEFT JOIN PrimaryLanguage plang
 					ON clnt.primaryLanguageID = plang.primaryLanguageID
 				LEFT JOIN SchoolInformation sclinf
 					ON clnt.schoolInfoID = sclinf.schoolInfoID
+				LEFT JOIN Insurance ins
+					ON ins.clientID = clnt.clientID
 				LEFT JOIN InsuranceAuthorization insauth
-					ON clnt.insuranceAuthID = insauth.insuranceAuthID
-				LEFT JOIN CommuniciationPreferences comprf
+					ON ins.insuranceID = insauth.insuranceID
+				LEFT JOIN CommunicationPreferences comprf
 					ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
 				LEFT JOIN Sex sex
 					ON clnt.sexID = sex.sexID
@@ -58,7 +81,7 @@ AS
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
 
-			WHERE altID = @altID AND Clients.deleted <> 1
+			WHERE altID = @altID AND clnt.deleted <> 1
 
 		END TRY
 		BEGIN CATCH

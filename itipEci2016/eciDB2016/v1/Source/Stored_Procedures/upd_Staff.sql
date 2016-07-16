@@ -8,7 +8,7 @@ Date:
 Change History:
 	7.12.2016 -TPC- Added staff SSN parameter
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[upd_Staff]
+CREATE PROCEDURE [dbo].[upd_Staff]
 	@staffID int,
 	@staffTypeID int,
 	@addressesID int,
@@ -34,7 +34,7 @@ AS
 				staffAltID = @staffAltID,
 				deleted = @deleted,
 				handicapped= @handicapped,
-				staffSSN = @staffSSN
+				ssn = @staffSSN
 
 		WHERE staffID = @staffID 
 								

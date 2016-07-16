@@ -8,8 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-
-alter PROCEDURE [dbo].[get_Race]
+CREATE PROCEDURE [dbo].[get_Race]
 	@raceID int
 
 	AS

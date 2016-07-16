@@ -19,7 +19,7 @@ AS
 
 			FROM Clients clnt
 
-			WHERE deleted <> 1
+			WHERE deleted != 1
 
 		END TRY
 		BEGIN CATCH

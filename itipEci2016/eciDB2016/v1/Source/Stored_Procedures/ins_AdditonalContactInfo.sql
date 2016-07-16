@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[ins_AdditionalContactInfo]
+CREATE PROCEDURE [dbo].[ins_AdditionalContactInfo]
 	@memberTypeID int,
 	@additionalContactInfoTypeID int,
 	@additionalContactInfo varchar (25),

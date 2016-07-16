@@ -29,7 +29,16 @@ namespace eciWEB2016.Models
         public int sexID { get; set; }
         public int officeID { get; set; }
         public string altID { get; set; }
+<<<<<<< HEAD
         public int accountingSystemID { get; set; }
+=======
+        public DateTime intakeDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime ifspDate { get; set; }
+        [DataType(DataType.Date)]
+        public DateTime compSvcDate { get; set; }
+        public string referralSource { get; set; }
+>>>>>>> origin/master
         public string firstName { get; set; }
         public string middleInitial { get; set; }
         public string lastName { get; set; }

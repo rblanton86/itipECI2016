@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_Office]
+CREATE PROCEDURE [dbo].[get_Office]
 	@officeID int
 
 AS

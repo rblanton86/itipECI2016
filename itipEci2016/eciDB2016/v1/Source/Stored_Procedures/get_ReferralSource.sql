@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-alter PROCEDURE [dbo].[get_ReferralSource]
+CREATE PROCEDURE [dbo].[get_ReferralSource]
 	@referralSourceID int
 	
 AS

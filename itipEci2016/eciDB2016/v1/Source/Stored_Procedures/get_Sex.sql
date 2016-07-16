@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-alter PROCEDURE [dbo].[get_Sex]
+CREATE PROCEDURE [dbo].[get_Sex]
 	@sexID int
 
 AS

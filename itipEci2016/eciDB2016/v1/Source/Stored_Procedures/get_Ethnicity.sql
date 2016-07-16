@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_Ethnicity]
+CREATE PROCEDURE [dbo].[get_Ethnicity]
 	@ethnicityID int
 
 AS
