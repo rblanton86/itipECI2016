@@ -6,11 +6,12 @@ Author:
 Date: 
 	6.21.16
 Change History:
-	
+	7.15.2016 -tpc- Added memberTypeID 
 ************************************************************************************************************/
 ALTER PROCEDURE [dbo].[ins_StaffMember]
 	@staffTypeID int,
 	@addressesID int,
+	@memberTypeID int,
 	@additionalContactInfoID int,
 	@firstName varchar(500),
 	@lastName varchar(500),
@@ -32,6 +33,7 @@ AS
 
 				INSERT Staff (staffTypeID, 
 								addressesID, 
+								memberTypeID,
 								additionalContactInfoID, 
 								firstName, 
 								lastName, 
@@ -43,6 +45,7 @@ AS
 
 				VALUES (@staffTypeID, 
 						@addressesID, 
+						@memberTypeID,
 						@additionalContactInfoID, 
 						@firstName, 
 						@lastName, 

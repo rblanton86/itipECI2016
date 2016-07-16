@@ -19,6 +19,7 @@ AS
 				ISNULL(staff.staffID, 1) AS staffID,
 				ISNULL(staff.staffTypeID, 1) AS staffTypeID,
 				ISNULL(staff.addressesID, 1) AS addressesID,
+				ISNULL(staff.memberTypeID, 1) AS memberTypeID,
 				ISNULL(staff.additionalContactInfoID, 1) AS additionalContactInfoID,
 				ISNULL(staff.firstName, ' ') AS firstName,
 				ISNULL(staff.lastName, ' ') AS lastName,
