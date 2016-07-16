@@ -94,10 +94,7 @@
     <None Include="v1\Source\Stored_Procedures\get_InsAuthByClientID.sql" />
     <None Include="v1\Source\Stored_Procedures\get_InsuranceByClientID.sql" />
     <None Include="v1\Source\Stored_Procedures\get_StaffbyClientID.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_StaffByClientID_1.sql" />
     <None Include="v1\Source\Stored_Procedures\get_PhysicianByClientID.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_FamilyByClientID_1.sql" />
-    <None Include="v1\Source\Stored_Procedures\get_DiagnosisByClientID_1.sql" />
     <None Include="v1\Source\Stored_Procedures\get_ReferralByClientID.sql" />
     <None Include="v1\Source\Schema\init_CommentsType.sql" />
   </ItemGroup>
@@ -240,9 +237,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Unused\del_Addresses.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Source\Unused\del_Clients.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Unused\del_Comments.sql" />
@@ -433,15 +427,16 @@
     <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ReferralSourceType.sql" />
     <Build Include="v1\Release\Sprint4\Stored_Procedures\get_StaffType.sql" />
     <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientStatus.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_ClientStatus.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_CommunicationPreferences.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_DiagnosisType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_FamilyMemberType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_MemberType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_Office.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_PrimaryLanguage.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_ReferralSourceType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_StaffType.sql" />
-    <Build Include="v1\Source\Stored_Procedures\get_AllPhysicians.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_ClientStatus.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_CommunicationPreferences.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_DiagnosisType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_FamilyMemberType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_MemberType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_Office.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_PrimaryLanguage.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_ReferralSourceType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_StaffType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllPhysicians.sql" />
+    <None Include="v1\Source\Stored_Procedures\del_ClientByID.sql" />
   </ItemGroup>
 </Project>

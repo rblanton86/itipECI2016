@@ -177,12 +177,10 @@ namespace eciWEB2016.Controllers.DataControllers
             // Executes the database command, returns values as a DataSet.
             DataSet pds = db.ExecuteDataSet(get_PhysicianByClientID);
 
-
             // TODO: Jen - Finish all fields.
             List<Physician> PhysicianList = (from drRow in pds.Tables[0].AsEnumerable()
                                              select new Physician()
-                                             {
-
+                                             { 
 
                                              }).ToList();
 
@@ -262,8 +260,7 @@ namespace eciWEB2016.Controllers.DataControllers
             List<Comments> CommentsList = (from drRow in cds.Tables[0].AsEnumerable()
                                            select new Comments()
                                            {
-
-
+                                               
                                            }).ToList();
 
             // Inserts the created list of comments into the client.
@@ -272,8 +269,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public bool UpdateClient(Client thisClient)
         {
-            try
-            {
                 DbCommand upd_Clients = db.GetStoredProcCommand("upd_Clients");
 
                 db.AddInParameter(upd_Clients, "@clientsID", DbType.Int32, thisClient.clientID);
@@ -291,7 +286,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
                 db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
                 db.AddInParameter(upd_Clients, "@ssn", DbType.Int32, thisClient.ssn);
-                db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource);
+                db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource.referralSourceName);
                 db.AddInParameter(upd_Clients, "@intakeDate", DbType.Int32, thisClient.intakeDate);
                 db.AddInParameter(upd_Clients, "@ifspDate", DbType.Int32, thisClient.ifspDate);
                 db.AddInParameter(upd_Clients, "@compSvcDate", DbType.Int32, thisClient.compSvcDate);
@@ -300,6 +295,8 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Clients, "@eci", DbType.Boolean, thisClient.ECI);
                 db.AddInParameter(upd_Clients, "@accountingSystemID", DbType.Int32, thisClient.accountingSystemID);
 
+            try
+            {
                 db.ExecuteNonQuery(upd_Clients);
 
                 thisClient = UpdateClientAddress(thisClient);

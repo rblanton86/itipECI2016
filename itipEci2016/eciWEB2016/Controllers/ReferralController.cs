@@ -1,4 +1,6 @@
-﻿using System;
+﻿using eciWEB2016.Controllers.DataControllers;
+using eciWEB2016.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,9 +17,25 @@ namespace eciWEB2016.Controllers
         }
 
         // GET: Referral/Details/5
-        public ActionResult Details(int id)
+        public ActionResult ReferralSourceDetails(int id)
         {
-            return View();
+            ReferralSource thisReferralSource = new ReferralSource()
+            {
+                referralSourceID = id
+            };
+
+            ReferralDataController dataController = new ReferralDataController();
+
+            thisReferralSource = dataController.GetReferralSourceDetails(thisReferralSource);
+
+            return Json(thisReferralSource, JsonRequestBehavior.AllowGet);
+        }
+
+        public List<ReferralSource> GetAllReferralSources()
+        {
+            List<ReferralSource> listReferralSources = new List<ReferralSource>();
+
+            return listReferralSources;
         }
 
         // GET: Referral/Create

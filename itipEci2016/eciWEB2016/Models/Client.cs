@@ -29,29 +29,48 @@ namespace eciWEB2016.Models
         public int sexID { get; set; }
         public int officeID { get; set; }
         public string altID { get; set; }
-        public DateTime intakeDate { get; set; }
-        public DateTime ifspDate { get; set; }
-        public DateTime compSvcDate { get; set; }
-        public string referralSource { get; set; }
+        public int accountingSystemID { get; set; }
         public string firstName { get; set; }
         public string middleInitial { get; set; }
         public string lastName { get; set; }
         public string fullName { get; set; }
+        public bool reReferral { get; set; }
         [DataType(DataType.Date)]
         public DateTime dob { get; set; }
         public int ageInMonths { get; set; }
         public int ssn { get; set; }
         public Address clientAddress { get; set; }
-        public string additionalContactInfo { get; set; }
-        public int additioalContactInfoType { get; set; }
+        public ReferralSource referralSource { get; set; }
+
+        public AdditionalContactInfoModel phone
+        {
+            get { return phone; }
+            set { phone.additionalContactInfoTypeID = 1; }
+        }
         public int TKIDcaseNumber { get; set; }
         public bool consentRelease { get; set; }
         public bool serviceAreaException { get; set; }
         public bool ECI { get; set; }
-        public int accountingSystemID { get; set; }
+        public string referralReason { get; set; }
+        public string referralComments { get; set; }
+        public string referralOutcome { get; set; }
+        public bool otherFAtoITIPFA { get; set; }
+        public bool ITIPcomptoITIPFA { get; set; }
+        public bool ITIPFAtoITIPcomp { get; set; }
+        public bool fromOtherECI { get; set; }
+        public bool pointOfAccess { get; set; }
+        public string agencyFrom { get; set; }
+        public DateTime ECIReferredTo { get; set; }
+        public DateTime ECIReferredDate { get; set; }
+        public DateTime intakeDate { get; set; }
+        public DateTime ifspDate { get; set; }
+        public DateTime compSvcDate { get; set; }
+        public DateTime referralDate { get; set; }
+        public DateTime referralDueDate { get; set; }
+        public DateTime prevReferralDate { get; set; }
+        public DateTime referralOutcomeDate { get; set; }
         public List<Insurance> clientInsurance { get; set; }
         public List<InsuranceAuthorization> clientInsAuths { get; set; }
-        public List<Referral> clientReferral { get; set; }
         public List<Family> clientFamily { get; set; }
         public List<Staff> clientStaff { get; set; }
         public List<Diagnosis> clientDiagnosis { get; set; }

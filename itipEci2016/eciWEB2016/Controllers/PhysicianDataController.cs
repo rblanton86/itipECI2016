@@ -71,9 +71,9 @@ namespace eciWEB2016.Controllers.DataControllers
                 fullName = dr.Field<string>("firstName") + " " + dr.Field<string>("lastName"),
             };
 
-            Addresses addr = new Addresses();
+            //Addresses addr = new Addresses();
 
-            currentPhysician.physicianAddrs = addr.GetAddressByDataSet(ds);
+            //currentPhysician.physicianAddrs = addr.GetAddressByDataSet(ds);
 
             return currentPhysician;
         }
@@ -98,18 +98,18 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.ExecuteNonQuery(upd_Physician);
 
                 //update Physician's Addresses
-                DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
+                //DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
-                db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisPhysician.physicianAddrs.addressesID);
-                db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisPhysician.physicianAddrs.addressType);
-                db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisPhysician.physicianAddrs.address1);
-                db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisPhysician.physicianAddrs.address2);
-                db.AddInParameter(upd_Addresses, "@city", DbType.String, thisPhysician.physicianAddrs.city);
-                db.AddInParameter(upd_Addresses, "@st", DbType.String, thisPhysician.physicianAddrs.state);
-                db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisPhysician.physicianAddrs.zip);
-                db.AddInParameter(upd_Addresses, "@deleted", DbType.Boolean, thisPhysician.physicianAddrs.deleted);
+                //db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, thisPhysician.physicianAddrs.addressesID);
+                //db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, thisPhysician.physicianAddrs.addressType);
+                //db.AddInParameter(upd_Addresses, "@address1", DbType.String, thisPhysician.physicianAddrs.address1);
+                //db.AddInParameter(upd_Addresses, "@address2", DbType.String, thisPhysician.physicianAddrs.address2);
+                //db.AddInParameter(upd_Addresses, "@city", DbType.String, thisPhysician.physicianAddrs.city);
+                //db.AddInParameter(upd_Addresses, "@st", DbType.String, thisPhysician.physicianAddrs.state);
+                //db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, thisPhysician.physicianAddrs.zip);
+                //db.AddInParameter(upd_Addresses, "@deleted", DbType.Boolean, thisPhysician.physicianAddrs.deleted);
 
-                db.ExecuteNonQuery(upd_Addresses);
+                //db.ExecuteNonQuery(upd_Addresses);
 
                 return true;
             }
@@ -124,35 +124,35 @@ namespace eciWEB2016.Controllers.DataControllers
             try
             {
 
-                string addressID;
-                int aciID;
-                string succesful;
+                //string addressID;
+                //int aciID;
+                //string succesful;
 
-                //insert Staff's Addresses
-                DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
+                ////insert Staff's Addresses
+                //DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
 
-                db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisPhysician.addressesID);
-                db.AddInParameter(ins_Addresses, "@address1", DbType.String, thisPhysician.address1);
-                db.AddInParameter(ins_Addresses, "@address2", DbType.String, thisPhysician.address2);
-                db.AddInParameter(ins_Addresses, "@city", DbType.String, thisPhysician.city);
-                db.AddInParameter(ins_Addresses, "@st", DbType.String, thisPhysician.state);
-                db.AddInParameter(ins_Addresses, "@zip", DbType.Int32, thisPhysician.zip);
-                db.AddInParameter(ins_Addresses, "@deleted", DbType.Boolean, false);
-                db.AddOutParameter(ins_Addresses, "@addressID", DbType.Int32, sizeof(Int32));
+                //db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisPhysician.addressesID);
+                //db.AddInParameter(ins_Addresses, "@address1", DbType.String, thisPhysician.address1);
+                //db.AddInParameter(ins_Addresses, "@address2", DbType.String, thisPhysician.address2);
+                //db.AddInParameter(ins_Addresses, "@city", DbType.String, thisPhysician.city);
+                //db.AddInParameter(ins_Addresses, "@st", DbType.String, thisPhysician.state);
+                //db.AddInParameter(ins_Addresses, "@zip", DbType.Int32, thisPhysician.zip);
+                //db.AddInParameter(ins_Addresses, "@deleted", DbType.Boolean, false);
+                //db.AddOutParameter(ins_Addresses, "@addressID", DbType.Int32, sizeof(Int32));
 
-                addressID = (string)(db.ExecuteScalar(ins_Addresses));
+                //addressID = (string)(db.ExecuteScalar(ins_Addresses));
 
 
                 //Inserts physician
-                DbCommand ins_Physician = db.GetStoredProcCommand("ins_Physician");
+                //DbCommand ins_Physician = db.GetStoredProcCommand("ins_Physician");
 
-                db.AddInParameter(ins_Physician, "@addressesID", DbType.Int32, Convert.ToInt32(addressID));
-                db.AddInParameter(ins_Physician, "@additionalContactInfoID", DbType.Int32, 1);
-                db.AddInParameter(ins_Physician, "@firstName", DbType.String, thisPhysician.firstName);
-                db.AddInParameter(ins_Physician, "@lastName", DbType.String, thisPhysician.lastName);
-                db.AddInParameter(ins_Physician, "@title", DbType.String, thisPhysician.title);
+                //db.AddInParameter(ins_Physician, "@addressesID", DbType.Int32, Convert.ToInt32(addressID));
+                //db.AddInParameter(ins_Physician, "@additionalContactInfoID", DbType.Int32, 1);
+                //db.AddInParameter(ins_Physician, "@firstName", DbType.String, thisPhysician.firstName);
+                //db.AddInParameter(ins_Physician, "@lastName", DbType.String, thisPhysician.lastName);
+                //db.AddInParameter(ins_Physician, "@title", DbType.String, thisPhysician.title);
 
-                db.ExecuteNonQuery(ins_Physician);
+                //db.ExecuteNonQuery(ins_Physician);
 
                 return true;
             }

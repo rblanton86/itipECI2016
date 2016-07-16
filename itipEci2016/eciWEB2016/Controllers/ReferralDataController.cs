@@ -14,6 +14,7 @@ using Microsoft.Practices.EnterpriseLibrary.Data;
 using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
 
 using eciWEB2016.Models;
+using System.Web.Mvc;
 
 namespace eciWEB2016.Controllers.DataControllers
 {
@@ -29,33 +30,40 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
-        public List<Referral> GetAllReferralSources()
+        public List<ReferralSource> GetAllReferralSources()
         {
             DbCommand dbCommand = db.GetStoredProcCommand("get_ReferralSource");
 
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
             var referralSource = (from drRow in ds.Tables[0].AsEnumerable()
-                           select new Referral()
-                           {
-                               referralSource = drRow.Field<string>("referralSource"),
-                               referralSourceType = drRow.Field<string>("referralSourceType")
-                           }).ToList();
+                                  select new ReferralSource()
+                                  {
+                                      referralSourceID = drRow.Field<int>("referralSourceID"),
+                                      referralSourceName = drRow.Field<string>("referralSource"),
+                                      referralSourceType = drRow.Field<string>("referralSourceType")
+
+                                  }).ToList();
 
             return referralSource;
         }
 
-        public bool UpdateReferralSource(Referral thisReferralSource)
+        public ReferralSource GetReferralSourceDetails(ReferralSource thisReferralSource)
+        {
+            return thisReferralSource;
+        }
+
+        public bool UpdateReferralSource(ReferralSource thisReferralSource)
         {
             DbCommand dbCommand = db.GetStoredProcCommand("upd_ReferralSource");
 
             // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
 
-            db.AddInParameter(dbCommand, "@referralSourceID", DbType.Int32, thisReferralSource.referralSourceID);
-            db.AddInParameter(dbCommand, "@additionalContactInfoID", DbType.Int32, thisReferralSource.additionalContactInfoID);
-            db.AddInParameter(dbCommand, "@referralSourceTypeID", DbType.Int32, thisReferralSource.referralSourceTypeID);
-            db.AddInParameter(dbCommand, "@addressesID", DbType.Int32, thisReferralSource.referralSourceAddress.addressesID);
-            db.AddInParameter(dbCommand, "@referralSource", DbType.String, thisReferralSource.referralSource);
+            //db.AddInParameter(dbCommand, "@referralSourceID", DbType.Int32, thisReferralSource.referralSourceID);
+            //db.AddInParameter(dbCommand, "@additionalContactInfoID", DbType.Int32, thisReferralSource.additionalContactInfoID);
+            //db.AddInParameter(dbCommand, "@referralSourceTypeID", DbType.Int32, thisReferralSource.referralSourceTypeID);
+            //db.AddInParameter(dbCommand, "@addressesID", DbType.Int32, thisReferralSource.referralSourceAddress.addressesID);
+            //db.AddInParameter(dbCommand, "@referralSource", DbType.String, thisReferralSource.referralSource);
 
             return true;
         }

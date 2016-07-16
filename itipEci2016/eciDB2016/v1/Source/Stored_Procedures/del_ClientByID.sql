@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[del_ClientByID]
+ALTER PROCEDURE [dbo].[del_ClientByID]
 	@clientID int
 
 AS

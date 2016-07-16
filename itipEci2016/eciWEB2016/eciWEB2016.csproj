@@ -235,7 +235,8 @@
     <Compile Include="Models\InsuranceAuthorization.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Physician.cs" />
-    <Compile Include="Models\Referral.cs" />
+    <Compile Include="Models\ReferralSource.cs" />
+    <Compile Include="Models\ReferralViewModel.cs" />
     <Compile Include="Models\Staff.cs" />
     <Compile Include="Models\TimeSheetModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

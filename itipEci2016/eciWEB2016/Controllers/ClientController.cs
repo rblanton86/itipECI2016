@@ -91,7 +91,7 @@ namespace eciWEB2016.Controllers
 
             success = dataController.UpdateClient(model);
 
-            return Content(success.ToString());
+            return View("Client_Update");
         }
 
         // GET: Client/Edit/5
