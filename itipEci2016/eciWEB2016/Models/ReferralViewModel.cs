@@ -1,0 +1,13 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace eciWEB2016.Models
+{
+    public class ReferralViewModel
+    {
+        public ReferralSource ReferralSource { get; set; }
+        public Client Client { get; set; }
+    }
+}

@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_DiagnosisType]
+CREATE PROCEDURE [dbo].[get_DiagnosisType]
 	@diagnosisTypeID int
 
 AS

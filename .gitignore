@@ -13,3 +13,6 @@
 /itipEci2016/eciWEB2016/Images/ballpitrotated.jpg
 /itipEci2016/eciWEB2016/Images/ballpitleft.jpg
 /itipEci2016/eciWEB2016/Images/aqua-stripes-background.jpg
+*.config
+itipEci2016/.vs/config/applicationhost.config
+itipEci2016/eciDB2016/obj/Debug/eciDB2016.sqlproj.FileListAbsolute.txt

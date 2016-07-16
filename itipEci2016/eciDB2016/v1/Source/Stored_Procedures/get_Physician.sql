@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_Physician]
+CREATE PROCEDURE [dbo].[get_Physician]
 	@firstName varchar(25),
 	@lastName varchar(25)
 

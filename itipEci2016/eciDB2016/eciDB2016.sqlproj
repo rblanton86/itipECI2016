@@ -241,9 +241,6 @@
     <None Include="v1\Source\Unused\del_Addresses.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Source\Unused\del_Clients.sql" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="v1\Source\Unused\del_Comments.sql" />
   </ItemGroup>
   <ItemGroup>
@@ -442,9 +439,13 @@
     <None Include="v1\Source\Stored_Procedures\get_ReferralSourceType.sql" />
     <None Include="v1\Source\Stored_Procedures\get_StaffType.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AllPhysicians.sql" />
+    <None Include="v1\Source\Stored_Procedures\del_ClientByID.sql" />
     <Build Include="v1\Source\Stored_Procedures\get_AddressesByMemberID.sql" />
     <None Include="v1\Release\Sprint4\Schema\del_LnkFamilyAddresses.sql" />
     <None Include="v1\Release\Sprint4\Schema\init_LnkAddressMember.sql" />
     <Build Include="v1\Release\Sprint4\Stored_Procedures\get_AddressesByMemberID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Stored_Procedures\del_Clients.sql" />
   </ItemGroup>
 </Project>

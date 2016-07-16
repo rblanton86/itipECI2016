@@ -7,7 +7,7 @@ Date:
 	07-05-2016
 Change History:
 	07-05-2016: JMG - Altered table to add deleted bit.
-	07-14-2016: JMG - Removed comments foreign key.
+	07-14-2016: JMG - Removed comments foreign key, added InsuranceAuthorization table.
 ************************************************************************************************************/
 -- Declares table variable for InsuranceAuthorization.
 DECLARE @insa INT = 0

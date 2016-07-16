@@ -30,6 +30,7 @@ IF ISNULL(@rs, 0) = 0
 			additionalContactInfoID INT CONSTRAINT FK_referralSource_contactInfo FOREIGN KEY REFERENCES AdditionalContactInfo(additionalContactInfoID),
 			referralSourceTypeID INT CONSTRAINT FK_referralSource_referralSourceType FOREIGN KEY REFERENCES ReferralSourceType(referralSourceTypeID),
 			addressesID INT CONSTRAINT FK_referralSource_addresses FOREIGN KEY REFERENCES Addresses(addressesID),
+			referralSource VARCHAR(50),
 			updDate DATETIME DEFAULT (GETDATE()),
 			deleted BIT
 		)
@@ -75,5 +76,16 @@ ELSE
 				ALTER TABLE ReferralSource
 					ADD updDate DATETIME DEFAULT (GETDATE())
 				PRINT 'Added updDate column to table.'
+			END
+
+		IF EXISTS (SELECT * FROM sys.columns WHERE @rs = OBJECT_ID AND name ='referralSource')
+			BEGIN
+				PRINT 'Unneeded: referralSource column exists.'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE ReferralSource
+					ADD referralSource VARCHAR(50)
+				PRINT 'Added referralSource column to table.'
 			END
 	END

@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[ins_Physician]
+CREATE PROCEDURE [dbo].[ins_Physician]
 	@addressesID int,
 	@additionalContactInfoID int,
 	@title varchar(10),

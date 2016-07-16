@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_TimeHeader]
+CREATE PROCEDURE [dbo].[get_TimeHeader]
 	@staffID int
 	
 AS

@@ -91,51 +91,25 @@ namespace eciWEB2016.Controllers
 
             success = dataController.UpdateClient(model);
 
-            return Content(success.ToString());
-        }
-
-        // GET: Client/Edit/5
-        public ActionResult Edit(int id)
-        {
-            return View();
-        }
-
-        // POST: Client/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add update logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View("Client_Update");
         }
 
         // GET: Client/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult DeleteClient()
         {
-            return View();
-        }
-
-        // POST: Client/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
+            if (Session["client"] != null)
             {
-                // TODO: Add delete logic here
+                Client deletingClient = new Client();
+                deletingClient = (Client)Session["client"];
 
-                return RedirectToAction("Index");
+                bool success;
+
+                ClientDataController dataController = new ClientDataController();
+
+                success = dataController.DeleteClient(deletingClient);
+            
             }
-            catch
-            {
-                return View();
-            }
+            return View("Client_Update");
         }
     }
 }

@@ -8,7 +8,7 @@ Date:
 Change History:
 	7.15.2016 -tpc- Added memberTypeID 
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[ins_StaffMember]
+CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@staffTypeID int,
 	@addressesID int,
 	@memberTypeID int,

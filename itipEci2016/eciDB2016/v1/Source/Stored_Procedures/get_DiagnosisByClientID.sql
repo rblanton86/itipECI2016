@@ -4,7 +4,7 @@ Author: Jennifer M Graves
 Date: 07-12-2016
 Change History:
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_DiagnosisByClientID]
+CREATE PROCEDURE [dbo].[get_DiagnosisByClientID]
 	@clientID int
 
 AS

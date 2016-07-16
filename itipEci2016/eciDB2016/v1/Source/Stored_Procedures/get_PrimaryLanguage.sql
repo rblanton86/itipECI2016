@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-alter PROCEDURE [dbo].[get_PrimaryLanguage]
+CREATE PROCEDURE [dbo].[get_PrimaryLanguage]
 	@primaryLanguageID int
 
 AS

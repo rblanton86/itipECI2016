@@ -1,23 +1,25 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from additionalContactInfoType
+Description: Stored Procedure to delete information from Clients table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.22.16
+	6.23.16
 Change History:
-	
+	07-14-2016: Updated to switch bit instead of deleting client.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoType]
-	@additionalContactInfoTypeID int
+CREATE PROCEDURE [dbo].[del_ClientByID]
+	@clientID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(additionalContactInfoType, ' ') AS additionalContactInfoType
-			FROM AdditionalContactInfoType
-			WHERE additionalContactInfoTypeID = @additionalContactInfoTypeID
+			UPDATE Clients
+			SET
+				deleted = 1
+			
+			WHERE clientID = @clientID
 
 		END TRY
 		BEGIN CATCH
@@ -34,4 +36,3 @@ AS
 
 		END CATCH
 	END
-

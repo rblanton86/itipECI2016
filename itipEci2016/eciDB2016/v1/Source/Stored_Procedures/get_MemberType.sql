@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-alter PROCEDURE [dbo].[get_MemberType]
+CREATE PROCEDURE [dbo].[get_MemberType]
 	@memberTypeID int
 
 AS
