@@ -121,6 +121,18 @@ ELSE
 					ADD sexID INT FOREIGN KEY REFERENCES Sex(sexID)
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name ='memberTypeID')
+			BEGIN
+				PRINT 'memberTypeID already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE FamilyMember
+					ADD memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID)
+				PRINT 'Added memberTypeID column to table.'
+			END
+
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @fm = OBJECT_ID AND name = 'deleted')
 			BEGIN
 				PRINT 'Unneeded, deleted column exists.'

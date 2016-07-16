@@ -54,6 +54,17 @@ ELSE
 				PRINT 'Added deleted column on Physician table.'
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @md = OBJECT_ID AND name ='memberTypeID')
+			BEGIN
+				PRINT 'memberTypeID already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Physician
+					ADD memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID)
+				PRINT 'Added memberTypeID column to table.'
+			END
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @md = OBJECT_ID AND name ='updDate')
 			BEGIN
 				ALTER TABLE Physician ADD CONSTRAINT

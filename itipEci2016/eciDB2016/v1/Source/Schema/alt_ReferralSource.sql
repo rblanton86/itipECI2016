@@ -53,6 +53,18 @@ ELSE
 				PRINT 'Added deleted column on ReferralSource table.'
 			END
 
+		IF EXISTS (SELECT * FROM sys.columns WHERE @rs = OBJECT_ID AND name ='memberTypeID')
+			BEGIN
+				PRINT 'memberTypeID already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE ReferralSource
+					ADD memberTypeID INT FOREIGN KEY REFERENCES MemberType(memberTypeID)
+				PRINT 'Added memberTypeID column to table.'
+			END
+
+
 		IF EXISTS (SELECT * FROM sys.columns WHERE @rs = OBJECT_ID AND name ='updDate')
 			BEGIN
 				ALTER TABLE ReferralSource ADD CONSTRAINT

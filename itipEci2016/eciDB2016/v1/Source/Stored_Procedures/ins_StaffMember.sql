@@ -19,7 +19,7 @@ CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@handicapped bit,
 	@ssn int,
 	@dob date,
-	@success int OUTPUT
+	@success bit OUTPUT
 	
 AS
 	BEGIN
