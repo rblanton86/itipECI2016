@@ -29,16 +29,13 @@ namespace eciWEB2016.Models
         public int sexID { get; set; }
         public int officeID { get; set; }
         public string altID { get; set; }
-<<<<<<< HEAD
         public int accountingSystemID { get; set; }
-=======
         public DateTime intakeDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime ifspDate { get; set; }
         [DataType(DataType.Date)]
         public DateTime compSvcDate { get; set; }
         public string referralSource { get; set; }
->>>>>>> origin/master
         public string firstName { get; set; }
         public string middleInitial { get; set; }
         public string lastName { get; set; }
@@ -49,7 +46,6 @@ namespace eciWEB2016.Models
         public int ageInMonths { get; set; }
         public int ssn { get; set; }
         public Address clientAddress { get; set; }
-        public ReferralSource referralSource { get; set; }
 
         public AdditionalContactInfoModel phone
         {
@@ -71,9 +67,6 @@ namespace eciWEB2016.Models
         public string agencyFrom { get; set; }
         public DateTime ECIReferredTo { get; set; }
         public DateTime ECIReferredDate { get; set; }
-        public DateTime intakeDate { get; set; }
-        public DateTime ifspDate { get; set; }
-        public DateTime compSvcDate { get; set; }
         public DateTime referralDate { get; set; }
         public DateTime referralDueDate { get; set; }
         public DateTime prevReferralDate { get; set; }
