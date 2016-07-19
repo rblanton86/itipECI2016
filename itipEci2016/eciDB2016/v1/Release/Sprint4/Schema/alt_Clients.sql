@@ -8,7 +8,6 @@ Date:
 Change History:
 	07-05-2016 -- jmg -- added middleInitial column.
 	07-11-2016 -- jmg -- added additional columns on client table.
-	TODO: Alter script to remove diagnosisID column with dynamic foreign key constraint.
 ************************************************************************************************************/
 
 -- Declares table variable for Clients.
@@ -20,6 +19,18 @@ SELECT @clients = (
 	FROM sys.tables
 	WHERE name = 'Clients'
 )
+
+DECLARE @fkn NVARCHAR(50)
+
+-- Assigns a foreign key name for use in later script which will drop the foreign key constraint
+SELECT @fkn = (
+    SELECT name
+    FROM sys.foreign_keys
+    WHERE referenced_object_id = object_id('Diagnosis') AND parent_object_id = object_id('Clients')
+)
+
+DECLARE @databaseName NVARCHAR(50) -- Variable to hold your database's name
+DECLARE @dtscript NVARCHAR(255) -- Variable to hold the script, which we will build later, and which drops all constraints for the table you are dropping
 
 SELECT @clients
 
@@ -184,8 +195,18 @@ ELSE
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='diagnosisID')
 			BEGIN
-				ALTER TABLE Clients
-					DROP FK_diagnosisID
+				WHILE EXISTS(select * from INFORMATION_SCHEMA.TABLE_CONSTRAINTS where constraint_catalog = @databaseName and table_name = 'Clients')
+					BEGIN
+						SELECT @dtscript = (
+						  'ALTER TABLE FamiyMember' + 
+						  ' DROP CONSTRAINT ' + 
+						  @fkn
+						  )
+						FROM INFORMATION_SCHEMA.TABLE_CONSTRAINTS 
+						WHERE constraint_catalog = @databaseName and table_name = 'Clients'
+						exec sp_executesql @dtscript
+					END
+
 				ALTER TABLE Clients
 					DROP COLUMN diagnosisID
 				PRINT 'Removed diagnosisID foreign key column.'

@@ -8,12 +8,12 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[ins_StaffMember]
+CREATE PROCEDURE [dbo].[ins_StaffMember]
 	@staffTypeID int,
 	@addressesID int,
 	@additionalContactInfoID int,
-	@firstName varchar(500),
-	@lastName varchar(500),
+	@firstName varchar(20),
+	@lastName varchar(20),
 	@staffAltID int,
 	@deleted bit,
 	@handicapped bit,
@@ -30,8 +30,7 @@ AS
 						lastName, 
 						staffAltID,
 						deleted,
-						handicapped,
-						staffSSN)
+						handicapped)
 
 		VALUES (@staffTypeID, 
 				@addressesID, 
@@ -40,15 +39,14 @@ AS
 				@lastName, 
 				@staffAltID,
 				@deleted,
-				@handicapped,
-				@staffSSN)
+				@handicapped)
 
 		END TRY
 		BEGIN CATCH
 
 			DECLARE @timeStamp DATETIME,
-				@errorMessage VARCHAR(250),
-				@errorProcedure VARCHAR(200)	
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
 
 			SELECT @timeStamp = GETDATE(),
 					@errorMessage = ERROR_MESSAGE(),

@@ -9,7 +9,7 @@ Change History:
 	06-30-2016 -- jmg -- Generated altID.
 	07-05-2016 -- removed generated altID. Updated stored proc to new column names for compliance.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllClients]
+ALTER PROCEDURE [dbo].[get_AllClients]
 
 AS
 	BEGIN

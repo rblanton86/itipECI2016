@@ -1,30 +1,34 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to update information into Additional Contact Info Table
+Description: Stored Procedure that gets last & first name from the Staff table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	6.23.16
+	6.21.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[upd_AdditionalContactInfo]
-	@additionalContactInfoID int,
-	@additionalContactInfo varchar (25),
-	@additionalContactInfoTypeID int
-
+ALTER PROCEDURE [dbo].[get_StaffByID]
+	@staffID int
 	
 AS
 	BEGIN
 		BEGIN TRY
 
-			UPDATE AdditionalContactInfo
-			
-			SET	additionalContactInfo = @additionalContactInfo,
-				additionalContactInfoTypeID = @additionalContactInfoTypeID
+		SELECT staff.*, 
+				stafft.staffType, 
+				addr.address1, addr.address2, addr.st, addr.city, addr.zip, 
+				aci.additionalContactInfo
 
-			WHERE additionalContactInfoID = @additionalContactInfoID
-			
+			FROM Staff staff 
+				LEFT JOIN StaffType stafft ON
+					staff.staffTypeID = stafft.staffTypeID
+				LEFT JOIN Addresses addr ON
+					staff.addressesID = addr.addressesID
+				LEFT JOIN AdditionalContactInfo aci ON
+					staff.additionalContactInfoID = aci.additionalContactInfoID
+
+			WHERE staffID = @staffID;
 
 		END TRY
 		BEGIN CATCH
@@ -41,5 +45,3 @@ AS
 
 		END CATCH
 	END
-
-

@@ -8,16 +8,15 @@ Date:
 Change History:
 	07-11-2016: -- jmg -- Added sexID, officeID, addressesID, altID, intakeDate, ifspDate, compSvcDate,
 			serviceAreaException, tkidsCaseNumber, consentToRelease, eci, and accountingSystemID columns.
+	07-19-2016: -- jmg -- Corrected insert to insert values properly.
 ************************************************************************************************************/
 ALTER PROCEDURE [dbo].[ins_Client]
 	@clientsID INT,
 	@raceID INT,
 	@ethnicityID INT,
 	@clientStatusID INT,
-	@diagnosisID INT,
 	@primaryLanguageID INT,
 	@schoolInfoID INT,
-	@commentsID INT,
 	@insuranceAuthID INT,
 	@communicationPreferencesID INT,
 	@sexID INT,
@@ -37,82 +36,58 @@ ALTER PROCEDURE [dbo].[ins_Client]
 	@tkidsCaseNumber INT,
 	@consentToRelease BIT,
 	@eci VARCHAR(25),
-	@accountingSystemID VARCHAR(25),
-	@success BIT OUTPUT
-
+	@accountingSystemID VARCHAR(25)
+	
 AS
 	BEGIN
 		BEGIN TRY
 
-		SELECT ssn, firstName, lastName, dob FROM Clients
+			INSERT Clients (raceID,
+							ethnicityID,
+							clientStatusID,
+							primaryLanguageID,
+							schoolInfoID,
+							communicationPreferencesID,
+							sexID,
+							officeID,
+							firstName,
+							middleInitial,
+							lastName,
+							dob,
+							ssn,
+							referralSource,
+							intakeDate,
+							ifspDate,
+							compSvcDate,
+							serviceAreaException,
+							tkidsCaseNumber,
+							consentToRelease,
+							eci,
+							accountingSystemID)
 
-		IF (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob)  
-			BEGIN
-
-				SET @success = 1
-
-				INSERT Clients 
-								(raceID,
-								ethnicityID,
-								clientStatusID,
-								diagnosisID,
-								primaryLanguageID,
-								schoolInfoID,
-								commentsID,
-								insuranceAuthID,
-								communicationPreferencesID,
-								sexID,
-								officeID,
-								firstName,
-								middleInitial,
-								lastName,
-								dob,
-								ssn,
-								referralSource,
-								intakeDate,
-								ifspDate,
-								compSvcDate,
-								serviceAreaException,
-								tkidsCaseNumber,
-								consentToRelease,
-								eci,
-								acountingSystemID,
-								updDate)
-
-				VALUES (@raceID,
-						@ethnicityID,
-						@clientStatusID,
-						@diagnosisID,
-						@primaryLanguageID,
-						@schoolInfoID,
-						@commentsID,
-						@insuranceAuthID,
-						@communicationPreferencesID,
-						@sexID,
-						@officeID,
-						@addressesID,
-						@altID,
-						@firstName,
-						@middleInitial,
-						@lastName,
-						@dob,
-						@ssn,
-						@referralSource,
-						@intakeDate,
-						@ifspDate,
-						@compSvcDate,
-						@serviceAreaExeption,
-						@tkidsCaseNumber,
-						@consentToRelease,
-						@eci,
-						@accountingSystemID,
-						GETDATE() 
-						)
-				END
-			ELSE
-				BEGIN
-					SET @success = 0
-				END
+			VALUES (@raceID,
+					@ethnicityID,
+					@clientStatusID,
+					@primaryLanguageID,
+					@schoolInfoID,
+					@communicationPreferencesID,
+					@sexID,
+					@officeID,
+					@firstName,
+					@middleInitial,
+					@lastName,
+					@dob,
+					@ssn,
+					@referralSource,
+					@intakeDate,
+					@ifspDate,
+					@compSvcDate,
+					@serviceAreaExeption,
+					@tkidsCaseNumber,
+					@consentToRelease,
+					@eci,
+					@accountingSystemID 
+					)
 
 		END TRY
 		BEGIN CATCH

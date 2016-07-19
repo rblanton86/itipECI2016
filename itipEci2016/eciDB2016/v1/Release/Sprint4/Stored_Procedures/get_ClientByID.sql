@@ -10,7 +10,7 @@ Change History:
 	07-06-2016: -- jmg -- Corrected spelling error which caused exception on webApp run.
 	07-11-2016: -- jmg -- Update to stored procedure to include additionally added information.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
+ALTER PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS
@@ -31,9 +31,6 @@ AS
 				addr.st,
 				addr.zip,
 				addr.mapsco,
-				insauth.insuranceAuthorizationType,
-				insauth.authorized_From,
-				insauth.authorized_To,
 				comprf.communicationPreferences
 
 			FROM Clients clnt
@@ -43,8 +40,6 @@ AS
 					ON clnt.ethnicityID = eth.ethnicityID
 				LEFT JOIN ClientStatus sts
 					ON clnt.clientStatusID = sts.clientStatusID
-				LEFT JOIN Diagnosis dx
-					ON clnt.diagnosisID = dx.diagnosisID
 				LEFT JOIN PrimaryLanguage plang
 					ON clnt.primaryLanguageID = plang.primaryLanguageID
 				LEFT JOIN SchoolInformation sclinf
@@ -59,7 +54,7 @@ AS
 					ON clnt.officeID = office.officeID
 				LEFT JOIN Addresses addr
 					ON clnt.addressesID = addr.addressesID
-			WHERE clientID = @clientID
+			WHERE clnt.clientID = @clientID
 
 		END TRY
 		BEGIN CATCH
