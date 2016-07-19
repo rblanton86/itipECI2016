@@ -6,10 +6,10 @@ Author:
 Date: 
 	6.21.16
 Change History:
-	06-30-2016 -- jmg -- Generated altID.
-	07-05-2016 -- removed generated altID. Updated stored proc to new column names for compliance.
+	07-05-2016 -- jmg -- Updated stored proc to new column names for compliance.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllClients]
+ALTER PROCEDURE [dbo].[get_ClientByID]
+	@clientID int
 
 AS
 	BEGIN
@@ -19,6 +19,8 @@ AS
 				rce.race,
 				eth.ethnicity,
 				sts.clientStatus,
+				dx.icd10Code,
+				dx.icd9code,
 				plang.primaryLanguage,
 				sclinf.isd,
 				insauth.insuranceAuthorizationType,
@@ -41,8 +43,9 @@ AS
 				ON clnt.schoolInfoID = sclinf.schoolInfoID
 			LEFT JOIN InsuranceAuthorization insauth
 				ON clnt.insuranceAuthID = insauth.insuranceAuthID
-			LEFT JOIN CommunicationPreferences comprf
+			LEFT JOIN CommuniciationPreferences comprf
 				ON clnt.communicationPreferencesID = comprf.communicationPreferencesID
+			WHERE clientID = @clientID
 
 		END TRY
 		BEGIN CATCH

@@ -8,7 +8,7 @@ Date:
 Change History:
 	07-05-2016 -- jmg -- Added middle inital column.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[upd_Client]
+ALTER PROCEDURE [dbo].[upd_Client]
 	@clientsID int,
 	@raceID int,
 	@ethnicityID int,

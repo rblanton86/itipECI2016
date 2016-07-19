@@ -105,4 +105,3 @@ ELSE
 				PRINT 'Added staffDOB column on Staff Table.'
 			END
 	END
-
