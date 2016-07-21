@@ -14,6 +14,7 @@ namespace eciWEB2016.Models
         public int memberTypeID { get; set; }
         public int additionalContactInfoTypeID { get; set; }
         public string additionalContactInfo { get; set; }
+        public string additionalContactInfoType { get; set; }
         public bool deleted { get; set; }
     }
 }

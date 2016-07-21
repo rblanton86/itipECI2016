@@ -155,12 +155,6 @@ namespace eciWEB2016.Controllers
             return View();
         }
 
-        // GET: Staff/Details/5
-        public ActionResult Details(int id)
-        {
-            return View();
-        }
-
         // GET: Staff/Create
         //returns Add_Staff View
         public ActionResult Add_Staff()
@@ -169,16 +163,61 @@ namespace eciWEB2016.Controllers
 
             return View(blankStaff);
         }
+
+        public ActionResult StaffAdditionalContactInfoPartial()
+        {
+            ViewBag.contactTypeList = GetContactTypeList();
+
+            return PartialView();
+        }
+
+        public SelectList GetContactTypeList()
+        {
+            var optionHome = new SelectListItem()
+            {
+                Text = "Home",
+                Value = "home"
+            };
+
+            var optionCell = new SelectListItem()
+            {
+                Text = "Cell",
+                Value = "cell"
+            };
+
+            var optionWork = new SelectListItem()
+            {
+                Text = "Work",
+                Value = "work"
+            };
+
+            List<SelectListItem> contactList = new List<SelectListItem>();
+
+            contactList.Add(optionHome);
+            contactList.Add(optionCell);
+            contactList.Add(optionWork);
+
+            return new SelectList(contactList, "Value", "Text");
+
+
+        }
+
+        public ActionResult StaffAddressPartial()
+        {
+            Address thisAddress = new Address();
+
+            return PartialView(thisAddress);
+        }
         // POST: Staff/Create
         [HttpPost]
-        public ActionResult CreateStaffMember(Staff model)
+        public ActionResult CreateStaffMember(Staff staff, Address address, AdditionalContactInfoModel aci)
         {
-                Staff newStaff = new Staff();
+               
                 bool success;
 
                 StaffDataController dataController = new StaffDataController();
 
-                success = dataController.InsertStaff(model);
+                success = dataController.InsertStaff(staff, address, aci);
                 
                 
 

@@ -23,10 +23,11 @@ Change History:
         <div id="target"></div>
         <ul class="flex">          
             <li>
-                <label>Staff ID:</label><Input type="text" name="staffID" >
-                <label>Status</label><select>
-                    <option value="1">A</option>
-                    <option value="2">I</option>
+                <label>Staff Alt ID:</label>
+                @Html.TextBoxFor(Staff => Staff.staffAltID)
+                <label>Status</label>
+                <select>
+                    <option>A</option>
                 </select>
                 <label>Office</label><select>
                     <option value="1">Some Option</option>
@@ -35,7 +36,6 @@ Change History:
             <li>
                 <label>Last Name: </label>
                 @Html.TextBoxFor(Staff => Staff.firstName)  
-                @Html.ValidationMessage("Name")
                 <label> First Name: </label>              
                 @Html.TextBoxFor(Staff => Staff.lastName)
                 <label> Middle Initial: </label>
@@ -50,27 +50,10 @@ Change History:
         </ul>
         <ul>
             <span>
-                <li>
-                    <label>Address:</label>
-                    @Html.TextBoxFor(Staff => Staff.address1)
-                    <label>Zip:</label>
-                    @Html.TextBoxFor(Staff => Staff.zip)
-                    <label>City:</label>
-                    @Html.TextBoxFor(Staff => Staff.city)
-                    <label>State:</label>
-                    @Html.TextBoxFor(Staff => Staff.state)
-                    <select>
-                        <option value="1">AL</option>
-                    </select>
-                </li>
-                <li>
-                    <label>Home:</label>
-                
-                    <label>Work ID:</label>
-
-                    <label>Cell:</label>
- 
-                </li>
+                @{Html.RenderAction("StaffAddressPartial","Staff");
+                }
+                @{ Html.RenderAction("StaffAdditionalContactInfoPartial", "Staff");
+                }
 
             </span>
             <li>

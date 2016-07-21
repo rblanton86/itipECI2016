@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffByID]
+ALTER PROCEDURE [dbo].[get_StaffByID]
 	@staffID int
 	
 AS
@@ -38,16 +38,24 @@ AS
 				ISNULL(addr.st, ' ') AS st,
 				ISNULL(addr.zip, 0) AS zip,
 				ISNULL(addr.mapsco, ' ') AS mapsco,
+				ISNULL(addrt.addressesType, ' ') AS addressesType,
  
-				ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo
+				ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo,
+				ISNULL(aci.additionalContactInfoID, 0) AS addtionalContactInfoID,
+				ISNULL(aci.additionalContactInfoTypeID, 0) AS additionalContactInfoTypeID,
+				ISNULL(acit.additionalContactInfoType, ' ') AS additionalContactInfoType
 
 			FROM Staff staff 
 				LEFT JOIN StaffType stafft ON
 					staff.staffTypeID = stafft.staffTypeID
 				LEFT JOIN Addresses addr ON
 					staff.addressesID = addr.addressesID
+				LEFT JOIN AddressesType addrt ON
+					addr.addressesTypeID = addrt.addressesTypeID
 				LEFT JOIN AdditionalContactInfo aci ON
 					staff.additionalContactInfoID = aci.additionalContactInfoID
+				LEFT JOIN AdditionalContactInfoType acit ON
+					aci.additionalContactInfoTypeID = acit.additionalContactInfoTypeID
 
 			WHERE (staffID = @staffID) AND (Staff.deleted <> 1)
 
