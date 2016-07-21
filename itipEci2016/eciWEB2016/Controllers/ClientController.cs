@@ -21,6 +21,14 @@ namespace eciWEB2016.Controllers
             {
                 // Creates a blank client for the inital view.
                 Client currentClient = new Client();
+                currentClient.clientID = 0;
+                currentClient.accountingSystemID = 0;
+                currentClient.ageInMonths = 0;
+                currentClient.agencyFrom = "";
+                currentClient.altID = "";
+                currentClient.firstName = "";
+                currentClient.lastName = "";
+                currentClient.fullName = "";
 
                 // Generates blank address data for blank Client.
                 Address blankAddress = new Address()
@@ -57,6 +65,7 @@ namespace eciWEB2016.Controllers
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
             }
+
             return PartialView("Client_Partial");
         }
 
@@ -91,7 +100,7 @@ namespace eciWEB2016.Controllers
 
             success = dataController.UpdateClient(model);
 
-            return View("Client_Update");
+            return View("Client_Update", newclient);
         }
 
         // GET: Client/Delete/5

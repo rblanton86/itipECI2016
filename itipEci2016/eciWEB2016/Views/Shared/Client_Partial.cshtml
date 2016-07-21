@@ -10,19 +10,19 @@ Change History:
 ****************************************************************************/*@
 @model eciWEB2016.Models.Client
 @{
-    eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
+    eciWEB2016.Models.Client client = new eciWEB2016.Models.Client();
 
     if (Session["client"] != null)
     {
-        currentClient = (eciWEB2016.Models.Client)Session["client"];
+        client = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-@using (Html.BeginForm("UpdateClient", "Client", FormMethod.Post, new { }))
+@using (Html.BeginForm("UpdateClient", "Client", FormMethod.Post))
 {
 <ul class="flex">
     <li>
         <label for="ClientID">Alt ID:</label>
-        @Html.TextBoxFor(client => client.altID, new { Value = currentClient.altID, name = "altID"})
+        @Html.TextBoxFor(c => c.altID, new { Value = client.altID, name = "altID"})
     </li>
     <li>
         <label for="fullName">Full Name:</label>
@@ -37,15 +37,15 @@ Change History:
 <ul class="flex">
     <li>
         <label>Last Name:</label>
-        @Html.TextBoxFor(client => client.lastName, new { Value = @currentClient.lastName, name = "lastName" })
+        @Html.TextBoxFor(c => c.lastName, new { Value = @client.lastName, name = "lastName" })
     </li>
     <li>
         <label>First Name:</label>
-        @Html.TextBoxFor(client => client.firstName, new { Value = currentClient.firstName, name = "firstName"})
+        @Html.TextBoxFor(c => c.firstName, new { Value = client.firstName, name = "firstName"})
     </li>
     <li>
         <label>MI:</label>
-        @Html.TextBoxFor(client => client.middleInitial, new { Value = currentClient.middleInitial, name = "middleInitial" })
+        @Html.TextBoxFor(c => c.middleInitial, new { Value = client.middleInitial, name = "middleInitial" })
     </li>
     <li>
         <label>Status:</label>
@@ -56,11 +56,11 @@ Change History:
     </li>
     <li>
         <label>Months Old:</label>
-        @Html.TextBoxFor(client => client.ageInMonths, new { Value = currentClient.ageInMonths, name = "ageInMonths" })
+        @Html.TextBoxFor(c => c.ageInMonths, new { Value = client.ageInMonths, name = "ageInMonths" })
     </li>
     <li>
         <label>DOB:</label>
-        @Html.TextBoxFor(client => client.dob, null , new { Value = currentClient.dob, name = "dob", @class = "datefield" })
+        @Html.TextBoxFor(c => c.dob, null , new { Value = client.dob, name = "dob", @class = "datefield" })
     </li>
     <li>
         <label>Sex:</label>
@@ -84,20 +84,20 @@ Change History:
     </li>
     <li>
         <label>SSN:</label>
-        @Html.TextBoxFor(client => client.ssn, null, new { Value = currentClient.ssn, name = "ssn" })
+        @Html.TextBoxFor(c => c.ssn, null, new { Value = client.ssn, name = "ssn" })
     </li>
 </ul>
 <ul class="flex">
     <li>
         <label>Address 1:</label>
-        @Html.TextBoxFor(client => client.clientAddress.address1, new { Value = currentClient.clientAddress.address1, name = "address1" })
+        @Html.TextBoxFor(c => c.clientAddress.address1, new { Value = client.clientAddress.address1, name = "address1" })
     </li>
     <li>
         <label>ISD:</label>
     </li>
     <li>
         <label>Address 2:</label>
-        @Html.TextBoxFor(client => client.clientAddress.address2, new { Value = currentClient.clientAddress.address2, name = "address2" })
+        @Html.TextBoxFor(c => c.clientAddress.address2, new { Value = client.clientAddress.address2, name = "address2" })
     </li>
     <li>
         <label>Language:</label>
@@ -107,11 +107,11 @@ Change History:
     </li>
     <li class="inline">
         <label>City:</label>
-        @Html.TextBoxFor(client => client.clientAddress.city, new { Value = currentClient.clientAddress.city, name = "city" })
+        @Html.TextBoxFor(c => c.clientAddress.city, new { Value = client.clientAddress.city, name = "city" })
     </li>
     <li class="inline">
         <label>State:</label>
-        @Html.TextBoxFor(client => client.clientAddress.state, new { Value = currentClient.clientAddress.state, name = "state" })
+        @Html.TextBoxFor(c => c.clientAddress.state, new { Value = client.clientAddress.state, name = "state" })
         @*<input list="clientState" />
             <datalist id="clientState" name="state">
                 <option stateCode="AL">Alabama</option>
@@ -175,11 +175,11 @@ Change History:
     </li>
     <li class="inline">
         <label>Zip:</label>
-        @Html.TextBoxFor(client => client.clientAddress.zip, new { Value = currentClient.clientAddress.zip, name = "zip" })
+        @Html.TextBoxFor(c => c.clientAddress.zip, new { Value = client.clientAddress.zip, name = "zip" })
     </li>
     <li class="inline">
         <label>MAPSCO:</label>
-        @Html.TextBoxFor(client => client.clientAddress.mapsco, new { Value = currentClient.clientAddress.mapsco, name = "mapsco" })
+        @Html.TextBoxFor(c => c.clientAddress.mapsco, new { Value = client.clientAddress.mapsco, name = "mapsco" })
     </li>
     <li>
         <input type="submit" Value="UpdateClient" />
@@ -189,12 +189,11 @@ Change History:
 <ul>
     <li>
         <label>Client Phone:</label>
-        <input type="text" name="clientPhone" value="@currentClient.phone.additionalContactInfo" />
->>>>>>> origin/master
+        @*<input type="text" name="clientPhone" value="@client.phone.additionalContactInfo" />*@
     </li>
     <li>
         <label>County:</label>
-        <input type="text" name="clientCounty" Value="@currentClient.clientAddress.county" />
+        @*<input type="text" name="clientCounty" Value="@client.clientAddress.county" />*@
     </li>
     <li>
         <label>Service Area Exception:</label>
@@ -205,7 +204,7 @@ Change History:
     </li>
     <li>
         <label>TKID's Case Number:</label>
-        <input type="text" name="TKIDScaseNumber" Value="@currentClient.TKIDcaseNumber">
+        @*<input type="text" name="TKIDScaseNumber" Value="@client.TKIDcaseNumber">*@
     </li>
     <li>
         <label>Consent to Release Information?</label>
@@ -219,7 +218,7 @@ Change History:
     </li>
     <li>
         <label>Accounting System ID:</label>
-        <input type="text" Value="@currentClient.accountingSystemID" />
+        @*<input type="text" Value="@client.accountingSystemID" />*@
     </li>
 </ul>
 <ul class="flex">
@@ -234,7 +233,7 @@ Change History:
     </li>
 </ul>
 <div id="diagnosisGridContainer">
-    @Html.Partial("Client_DiagnosisGrid_Partial")
+    @*@Html.Partial("Client_DiagnosisGrid_Partial")*@
 </div>
 <h4>Physician Information:</h4>
 <ul class="flex">
@@ -368,59 +367,59 @@ Change History:
     </li>
 </ul>
 <div id="familyGridContainer">
-    @Html.Partial("Client_FamilyGrid_Partial")
+    @*@Html.Partial("Client_FamilyGrid_Partial")*@
 </div>
 <div id="physicianGridContainer">
-    @Html.Partial("Client_PhysicianGrid_Partial")
+    @*@Html.Partial("Client_PhysicianGrid_Partial")*@
 </div>
 @*@section JavaScript
 {
     <script>
         // Selects the appropriate client status from the office property based on result of the current client in session.
         $(function () {
-            $('select[name^="office" option[Value="@currentClient.officeID"]').attr("selected", "selected");
+            $('select[name^="office" option[Value="@client.officeID"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate client status from the clientStatus property based on result of the current client in session.
         $(function () {
-            $('select[name^="clientStatus" option[Value="@currentClient.clientStatusID"]').attr("selected", "selected");
+            $('select[name^="clientStatus" option[Value="@client.clientStatusID"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate sex from the sex dropdown property based on result of the current client in session.
         $(function () {
-            $('select[name^="sex"] option[Value="@currentClient.sexID"]').attr("selected", "selected");
+            $('select[name^="sex"] option[Value="@client.sexID"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate ethnicity from the ethnicity dropdown property based on result of the current client in session.
         $(function () {
-            $('select[name^="ethnicity"] option[Value="@currentClient.ethnicityID"]').attr("selected", "selected");
+            $('select[name^="ethnicity"] option[Value="@client.ethnicityID"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate race from the race dropdown property based on result of the current client in session.
         $(function () {
-            $('select[name^="race"] option[Value="@currentClient.raceID"]').attr("selected", "selected");
+            $('select[name^="race"] option[Value="@client.raceID"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate language from the language dropdown property based on result of the current client in session.
         $(function () {
-            $('select[name^="language"] option[Value="@currentClient.primaryLanguageID"]').attr("selected", "selected");
+            $('select[name^="language"] option[Value="@client.primaryLanguageID"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate state from the state dropdown property based on result of the current client in session.
         $(function () {
-            $('select[id^="clientState"] option[Value="@currentClient.clientAddress.state"]').attr("selected", "selected");
+            $('select[id^="clientState"] option[Value="@client.clientAddress.state"]').attr("selected", "selected");
         });
     </script>
     <script>
         // Selects the appropriate eci from the eci dropdown property based on result of the current client in session.
         $(function () {
-            $('select[name^="eci"] option[Value="@currentClient.ECI"]').attr("selected", "selected");
+            $('select[name^="eci"] option[Value="@client.ECI"]').attr("selected", "selected");
         });
     </script>
 }*@

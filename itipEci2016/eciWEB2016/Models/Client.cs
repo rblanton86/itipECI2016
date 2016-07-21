@@ -47,11 +47,7 @@ namespace eciWEB2016.Models
         public int ssn { get; set; }
         public Address clientAddress { get; set; }
 
-        public AdditionalContactInfoModel phone
-        {
-            get { return phone; }
-            set { phone.additionalContactInfoTypeID = 1; }
-        }
+        public AdditionalContactInfoModel phone { get; set; }
         public int TKIDcaseNumber { get; set; }
         public bool consentRelease { get; set; }
         public bool serviceAreaException { get; set; }
