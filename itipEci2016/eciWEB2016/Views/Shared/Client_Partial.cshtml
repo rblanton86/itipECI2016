@@ -90,14 +90,14 @@ Change History:
 <ul class="flex">
     <li>
         <label>Address 1:</label>
-        @Html.TextBoxFor(c => c.clientAddress.address1, new { Value = client.clientAddress.address1, name = "address1" })
+        @Html.TextBoxFor(c => c.clientAddress.address1, null, new { Value = client.clientAddress.address1, name = "address1" })
     </li>
     <li>
         <label>ISD:</label>
     </li>
     <li>
         <label>Address 2:</label>
-        @Html.TextBoxFor(c => c.clientAddress.address2, new { Value = client.clientAddress.address2, name = "address2" })
+        @Html.TextBoxFor(c => c.clientAddress.address2, null, new { Value = client.clientAddress.address2, name = "address2" })
     </li>
     <li>
         <label>Language:</label>
@@ -107,120 +107,63 @@ Change History:
     </li>
     <li class="inline">
         <label>City:</label>
-        @Html.TextBoxFor(c => c.clientAddress.city, new { Value = client.clientAddress.city, name = "city" })
+        @Html.TextBoxFor(c => c.clientAddress.city, null, new { Value = client.clientAddress.city, name = "city" })
     </li>
     <li class="inline">
         <label>State:</label>
-        @Html.TextBoxFor(c => c.clientAddress.state, new { Value = client.clientAddress.state, name = "state" })
-        @*<input list="clientState" />
-            <datalist id="clientState" name="state">
-                <option stateCode="AL">Alabama</option>
-                <option stateCode="AK">Alaska</option>
-                <option stateCode="AZ">Arizona</option>
-                <option stateCode="AR">Arkansas</option>
-                <option stateCode="CA">California</option>
-                <option stateCode="CO">Colorado</option>
-                <option stateCode="CT">Connecticut</option>
-                <option stateCode="DE">Delaware</option>
-                <option stateCode="DC">District Of Columbia</option>
-                <option stateCode="FL">Florida</option>
-                <option stateCode="GA">Georgia</option>
-                <option stateCode="HI">Hawaii</option>
-                <option stateCode="ID">Idaho</option>
-                <option stateCode="IL">Illinois</option>
-                <option stateCode="IN">Indiana</option>
-                <option stateCode="IA">Iowa</option>
-                <option stateCode="KS">Kansas</option>
-                <option stateCode="KY">Kentucky</option>
-                <option stateCode="LA">Louisiana</option>
-                <option stateCode="ME">Maine</option>
-                <option stateCode="MD">Maryland</option>
-                <option stateCode="MA">Massachusetts</option>
-                <option stateCode="MI">Michigan</option>
-                <option stateCode="MN">Minnesota</option>
-                <option stateCode="MS">Mississippi</option>
-                <option stateCode="MO">Missouri</option>
-                <option stateCode="MT">Montana</option>
-                <option stateCode="NE">Nebraska</option>
-                <option stateCode="NV">Nevada</option>
-                <option stateCode="NH">New Hampshire</option>
-                <option stateCode="NJ">New Jersey</option>
-                <option stateCode="NM">New Mexico</option>
-                <option stateCode="NY">New York</option>
-                <option stateCode="NC">North Carolina</option>
-                <option stateCode="ND">North Dakota</option>
-                <option stateCode="OH">Ohio</option>
-                <option stateCode="OK">Oklahoma</option>
-                <option stateCode="OR">Oregon</option>
-                <option stateCode="PA">Pennsylvania</option>
-                <option stateCode="RI">Rhode Island</option>
-                <option stateCode="SC">South Carolina</option>
-                <option stateCode="SD">South Dakota</option>
-                <option stateCode="TN">Tennessee</option>
-                <option stateCode="TX">Texas</option>
-                <option stateCode="UT">Utah</option>
-                <option stateCode="VT">Vermont</option>
-                <option stateCode="VA">Virginia</option>
-                <option stateCode="WA">Washington</option>
-                <option stateCode="WV">West Virginia</option>
-                <option stateCode="WI">Wisconsin</option>
-                <option stateCode="WY">Wyoming</option>
-                <option stateCode="AS">American Samoa</option>
-                <option stateCode="GU">Guam</option>
-                <option stateCode="MP">Northern Mariana Islands</option>
-                <option stateCode="PR">Puerto Rico</option>
-                <option stateCode="UM">United States Minor Outlying Islands</option>
-                <option stateCode="VI">Virgin Islands</option>
-            </datalist>*@
+        @Html.TextBoxFor(c => c.clientAddress.state, null, new { Value = client.clientAddress.state, name = "state" })
     </li>
     <li class="inline">
         <label>Zip:</label>
-        @Html.TextBoxFor(c => c.clientAddress.zip, new { Value = client.clientAddress.zip, name = "zip" })
+        @Html.TextBoxFor(c => c.clientAddress.zip, null, new { Value = client.clientAddress.zip, name = "zip" })
     </li>
     <li class="inline">
         <label>MAPSCO:</label>
-        @Html.TextBoxFor(c => c.clientAddress.mapsco, new { Value = client.clientAddress.mapsco, name = "mapsco" })
+        @Html.TextBoxFor(c => c.clientAddress.mapsco, null, new { Value = client.clientAddress.mapsco, name = "mapsco" })
     </li>
     <li>
         <input type="submit" Value="UpdateClient" />
     </li>
 </ul>
-}
 <ul>
     <li>
         <label>Client Phone:</label>
-        @*<input type="text" name="clientPhone" value="@client.phone.additionalContactInfo" />*@
+        @Html.TextBoxFor(c => c.phone.additionalContactInfo , null, new { Value = client.phone.additionalContactInfo , name = "clientPhone" })
     </li>
     <li>
         <label>County:</label>
-        @*<input type="text" name="clientCounty" Value="@client.clientAddress.county" />*@
+        @Html.TextBoxFor(c => c.clientAddress.county , null, new { Value = client.clientAddress.county , name = "clientCounty" })
     </li>
     <li>
         <label>Service Area Exception:</label>
+        @Html.TextBoxFor(c => c.serviceAreaException , null, new { Value = client.serviceAreaException , name = "serviceAreaException" })
         <input type="checkbox" Value="ServiceAreaException" name="serviceAreaExeption">
     </li>
     <li>
         <label>Case Manager:</label>
+        @Html.TextBoxFor(c => c.clientStaff , null, new { Value = client.clientStaff, name = "caseManager" })
     </li>
     <li>
         <label>TKID's Case Number:</label>
-        @*<input type="text" name="TKIDScaseNumber" Value="@client.TKIDcaseNumber">*@
+        @Html.TextBoxFor(c => c.TKIDcaseNumber , null, new { Value = client.TKIDcaseNumber, name = "TKIDcaseNumber" })
     </li>
     <li>
         <label>Consent to Release Information?</label>
-        <input type="checkbox">
+        @Html.CheckBoxFor(c => c.consentRelease, new { Value = client.consentRelease, name = "consentToRelease"})
     </li>
 </ul>
 <ul class="flex">
     <li>
         <label>ECI:</label>
-        <select name="eci"></select>
+        @Html.CheckBoxFor(c => c.ECI, new { Value = client.ECI, name = "ECI"})
     </li>
     <li>
         <label>Accounting System ID:</label>
-        @*<input type="text" Value="@client.accountingSystemID" />*@
+        @Html.TextBoxFor(c => c.accountingSystemID , null, new { Value = client.accountingSystemID, name = "accountingSystemID" })
     </li>
 </ul>
+
+}
 <ul class="flex">
     <li>
         <button type="button">Insurance Update</button>

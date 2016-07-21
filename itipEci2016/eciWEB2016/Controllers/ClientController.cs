@@ -20,33 +20,16 @@ namespace eciWEB2016.Controllers
             if (Session["client"] == null)
             {
                 // Creates a blank client for the inital view.
-                Client currentClient = new Client();
-                currentClient.clientID = 0;
-                currentClient.accountingSystemID = 0;
-                currentClient.ageInMonths = 0;
-                currentClient.agencyFrom = "";
-                currentClient.altID = "";
-                currentClient.firstName = "";
-                currentClient.lastName = "";
-                currentClient.fullName = "";
+                Client newClient = new Client();
 
-                // Generates blank address data for blank Client.
-                Address blankAddress = new Address()
-                {
-                    address1 = " ",
-                    address2 = " ",
-                    city = " ",
-                    state = "TX",
-                    zip = 0,
-                    mapsco = "A1",
-                    county = " "
-                };
-                currentClient.clientAddress = blankAddress;
-
-                Session["client"] = currentClient;
+                Session["client"] = newClient;
+                return View(newClient);
             }
 
-            return View();
+            Client currentClient = new Client();
+            currentClient = (Client)Session["client"];
+
+            return View(currentClient);
         }
 
         [HttpPost]

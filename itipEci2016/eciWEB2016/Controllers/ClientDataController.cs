@@ -111,6 +111,9 @@ namespace eciWEB2016.Controllers.DataControllers
             // Calls method to return client's Comments.
             currentClient.clientComments = GetClientComments(thisClientID);
 
+            // Calls method to return client's phone number.
+            currentClient.phone = GetClientAdditionalContactInfo(currentClient);
+
             return currentClient;
         }
 
@@ -265,6 +268,43 @@ namespace eciWEB2016.Controllers.DataControllers
 
             // Inserts the created list of comments into the client.
             return CommentsList;
+        }
+
+        public AdditionalContactInfoModel GetClientAdditionalContactInfo(Client thisClient)
+        {
+
+            DbCommand get_AdditionalContactInfo = db.GetStoredProcCommand("get_AdditionalContactInfo");
+            db.AddInParameter(get_AdditionalContactInfo, "memberID", DbType.Int32, thisClient.clientID);
+            db.AddInParameter(get_AdditionalContactInfo, "memberTypeID", DbType.Int32, thisClient.memberTypeID);
+            db.AddOutParameter(get_AdditionalContactInfo, "additionalContactInfoID", DbType.Int32, sizeof(int));
+            db.AddOutParameter(get_AdditionalContactInfo, "additionalContactInfo", DbType.String, 255);
+            db.AddOutParameter(get_AdditionalContactInfo, "additionalContactInfoTypeID", DbType.Int32, sizeof(int));
+            db.AddOutParameter(get_AdditionalContactInfo, "additionalContactInfoType", DbType.String, 25);
+            db.AddOutParameter(get_AdditionalContactInfo, "memberType", DbType.String, 25);
+            db.AddOutParameter(get_AdditionalContactInfo, "success", DbType.Boolean, 1);
+
+            db.ExecuteNonQuery(get_AdditionalContactInfo);
+
+            bool success = Convert.ToBoolean(db.GetParameterValue(get_AdditionalContactInfo, "@success"));
+
+            if(success == true)
+            { 
+                AdditionalContactInfoModel contactInfo = new AdditionalContactInfoModel()
+                {
+                    additionalContactInfoID = Convert.ToInt32(db.GetParameterValue(get_AdditionalContactInfo, "@additionalContactInfoID")),
+                    additionalContactInfo = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfo, "@additionalContactInfo")),
+                    additionalContactInfoTypeID = Convert.ToInt32(db.GetParameterValue(get_AdditionalContactInfo, "@additionalContactInfoTypeID")),
+                    additionalContactInfoType = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfo, "@additionalContactInfoType")),
+                    memberType = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfo, "@memberType"))
+                };
+
+                return contactInfo;
+            }
+            else
+            {
+                AdditionalContactInfoModel contactInfo = new AdditionalContactInfoModel();
+                return contactInfo;
+            }
         }
 
         public bool UpdateClient(Client thisClient)

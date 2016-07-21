@@ -434,6 +434,9 @@
     <None Include="v1\Release\Sprint4\Stored_Procedures\ins_StaffMember.sql" />
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_Clients.sql" />
+    <None Include="v1\Release\Sprint 5\Schema\alt_AdditionalContactInfo.sql" />
+    <None Include="v1\Release\Sprint 5\Schema\init_TypeTableData.sql" />
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AdditionalContactInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Stored_Procedures\del_Clients.sql" />
