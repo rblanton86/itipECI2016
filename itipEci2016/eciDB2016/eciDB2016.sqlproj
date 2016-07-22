@@ -102,6 +102,8 @@
     <None Include="v1\Source\Schema\init_CommentsType.sql" />
     <None Include="v1\Source\Schema\init_LnkAddressMember.sql" />
     <None Include="v1\Source\Schema\del_LnkFamilyAddresses.sql" />
+    <None Include="v1\Source\Stored_Procedures\upd_Diagnosis.sql" />
+    <None Include="v1\Source\Stored_Procedures\ins_Diagnosis.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />

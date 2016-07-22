@@ -9,7 +9,8 @@ Change History:
 	
 ************************************************************************************************************/
 CREATE PROCEDURE [dbo].[get_Addresses]
-	@addressesID int
+	@memberID INT,
+	@memberTypeID INT
 
 
 AS

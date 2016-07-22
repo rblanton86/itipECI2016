@@ -183,8 +183,11 @@ namespace eciWEB2016.Controllers.DataControllers
             // TODO: Jen - Finish all fields.
             List<Physician> PhysicianList = (from drRow in pds.Tables[0].AsEnumerable()
                                              select new Physician()
-                                             { 
-
+                                             {
+                                                 physicianID = drRow.Field<int>("physicianID"),
+                                                 firstName = drRow.Field<string>("firstName"),
+                                                 lastName = drRow.Field<string>("lastName"),
+                                                 title = drRow.Field<string>("title")
                                              }).ToList();
 
             return PhysicianList;
@@ -203,8 +206,10 @@ namespace eciWEB2016.Controllers.DataControllers
             List<Staff> StaffList = (from drRow in sds.Tables[0].AsEnumerable()
                                      select new Staff()
                                      {
-
-
+                                         staffAltID = drRow.Field<string>("staffAltID"),
+                                         staffTypeID = drRow.Field<int>("staffTypeID"),
+                                         staffType = drRow.Field<string>("staffType"),
+                                         fullName = drRow.Field<string>("fullName")
                                      }).ToList();
 
             return StaffList;
@@ -223,29 +228,41 @@ namespace eciWEB2016.Controllers.DataControllers
             List<Insurance> InsuranceList = (from drRow in ids.Tables[0].AsEnumerable()
                                              select new Insurance()
                                              {
-
-
+                                                insuranceID = drRow.Field<int>("insuranceID"),
+                                                insurancePolicyID = drRow.Field<string>("insurancePolicyID"),
+                                                insuranceName = drRow.Field<string>("insuranceName"),
+                                                medPreAuthNumber = drRow.Field<int>("medPreAuthNumber")
                                              }).ToList();
 
             return InsuranceList;
         }
 
-        public List<InsuranceAuthorization> GetClientInsuranceAuths(int thisClientID)
+        public List<InsuranceAuthorization> GetClientInsuranceAuths(Client currentClient)
         {
-            // Accesses stored proc on SQL server.
-            DbCommand get_InsAuthsByClientID = db.GetStoredProcCommand("get_InsAuthByClientID");
-            db.AddInParameter(get_InsAuthsByClientID, "clientID", DbType.Int32, thisClientID);
+            // TODO: Rewrite this, will hit the database multiple times...
+            List<InsuranceAuthorization> InsAuthList = new List<InsuranceAuthorization>();
+            foreach (var insurance in currentClient.clientInsurance)
+            {
+                // Accesses stored proc on SQL server.
+                DbCommand get_InsAuthsByClientID = db.GetStoredProcCommand("get_InsAuthByClientID");
+                db.AddInParameter(get_InsAuthsByClientID, "clientID", DbType.Int32, currentClient.clientID);
+                db.AddInParameter(get_InsAuthsByClientID, "insuranceID", DbType.Int32, insurance.insuranceID);
 
-            // Executes the database command, returns values as a DataSet.
-            DataSet iads = db.ExecuteDataSet(get_InsAuthsByClientID);
+                // Executes the database command, returns values as a DataSet.
+                DataSet iads = db.ExecuteDataSet(get_InsAuthsByClientID);
 
-            // TODO: Jen - Finish all fields.
-            List<InsuranceAuthorization> InsAuthList = (from drRow in iads.Tables[0].AsEnumerable()
-                                                        select new InsuranceAuthorization()
-                                                        {
+                // TODO: Jen - Finish all fields.
+                var authorizations = (from drRow in iads.Tables[0].AsEnumerable()
+                                                            select new InsuranceAuthorization()
+                                                            {
+                                                                insuranceAuthorizationType = drRow.Field<string>("insuranceAuthorizationType"),
+                                                                insuranceAuthID = drRow.Field<int>("insuranceAuthID"),
+                                                                authorizedFrom = drRow.Field<DateTime>("authorized_From"),
+                                                                authorizedTo = drRow.Field<DateTime>("authorized_To")
+                                                            }).ToList();
 
-
-                                                        }).ToList();
+                InsAuthList.AddRange(authorizations);
+            }
 
             return InsAuthList;
         }
@@ -263,7 +280,8 @@ namespace eciWEB2016.Controllers.DataControllers
             List<Comments> CommentsList = (from drRow in cds.Tables[0].AsEnumerable()
                                            select new Comments()
                                            {
-                                               
+                                               commentsID = drRow.Field<int>("commentsID"),
+                                               comments = drRow.Field<string>("comments")
                                            }).ToList();
 
             // Inserts the created list of comments into the client.
@@ -324,17 +342,17 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Clients, "@firstName", DbType.String, thisClient.firstName);
                 db.AddInParameter(upd_Clients, "@middleInitial", DbType.String, thisClient.middleInitial);
                 db.AddInParameter(upd_Clients, "@lastName", DbType.String, thisClient.lastName);
-                db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob == null ? (object)DBNull.Value : (object)thisClient.dob);
+                db.AddInParameter(upd_Clients, "@dob", DbType.Date, thisClient.dob);
                 db.AddInParameter(upd_Clients, "@ssn", DbType.Int32, thisClient.ssn);
                 db.AddInParameter(upd_Clients, "@referralSource", DbType.String, thisClient.referralSource);
-                db.AddInParameter(upd_Clients, "@intakeDate", DbType.DateTime, thisClient.intakeDate == null ? (object)DBNull.Value : (object)thisClient.intakeDate);
-                db.AddInParameter(upd_Clients, "@ifspDate", DbType.Date, thisClient.ifspDate == null ? (object)DBNull.Value : (object)thisClient.ifspDate);
-                db.AddInParameter(upd_Clients, "@compSvcDate", DbType.Date, thisClient.compSvcDate == null ? (object)DBNull.Value : (object)thisClient.compSvcDate);
+                db.AddInParameter(upd_Clients, "@intakeDate", DbType.DateTime, thisClient.intakeDate);
+                db.AddInParameter(upd_Clients, "@ifspDate", DbType.Date, thisClient.ifspDate);
+                db.AddInParameter(upd_Clients, "@compSvcDate", DbType.Date, thisClient.compSvcDate);
                 db.AddInParameter(upd_Clients, "@serviceAreaException", DbType.Boolean, thisClient.serviceAreaException);
                 db.AddInParameter(upd_Clients, "@tkidsCaseNumber", DbType.Int32, thisClient.TKIDcaseNumber);
                 db.AddInParameter(upd_Clients, "@consentToRelease", DbType.Boolean, thisClient.consentRelease);
                 db.AddInParameter(upd_Clients, "@eci", DbType.Boolean, thisClient.ECI);
-                db.AddInParameter(upd_Clients, "@accountingSystemID", DbType.Int32, thisClient.accountingSystemID);
+                db.AddInParameter(upd_Clients, "@accountingSystemID", DbType.String, thisClient.accountingSystemID);
 
             try
             {
@@ -372,6 +390,13 @@ namespace eciWEB2016.Controllers.DataControllers
                 return thisClient;
             }
         }
+
+        //public Client Update ClientDiagnosis(Client thisClient)
+        //{
+        //    DbCommand upd_Diagnosis = db.GetStoredProcCommand("upd_Diagnosis");
+
+        //    db.AddInParameter(upd_Diagnosis, "@clientID", )
+        //}
 
         public bool InsertClient(Client thisClient)
         {
