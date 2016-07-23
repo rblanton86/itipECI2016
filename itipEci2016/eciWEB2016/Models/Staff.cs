@@ -22,6 +22,28 @@ namespace eciWEB2016.Models
 {
     public class Staff
     {
+
+        public Staff()
+        {
+            firstName = "";
+            lastName = "";
+            middleInitial = "";
+            fullName = "";
+            staffAltID = "";
+            deleted = false;
+            sexID = 1;
+            status = 1;
+            addressesID = 1;
+            memberType = "";
+            memberTypeID = 3;
+            staffTypeID = 1;
+            DOB = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+            SSN = 1;
+            handicapped = false;
+            staffAddress = new Address();
+            staffContact = new AdditionalContactInfoModel();
+
+        }
         [Required]
         public int staffID { get; set; }
         public string firstName { get; set; }
@@ -30,26 +52,20 @@ namespace eciWEB2016.Models
         public string fullName { get; set; }
         public string staffAltID { get; set; }
         public bool deleted { get; set; }
-        public int additionalContactInfoID { get; set; }
-        public string additionalContactInfo { get; set; }
+        public int sexID { get; set; }
         public int addressesID { get; set; }
-        public string address1 { get; set; }
-        public string address2 { get; set; }
-        public string addressType { get; set; }
-        public string city { get; set; }
-        public string state { get; set; }
-        public int zip { get; set; }
-        public string county { get; set; }
-        public string mapsco { get; set; }
-        public bool addrDeleted { get; set; }
         public Address staffAddress { get; set; }
         public AdditionalContactInfoModel staffContact { get; set; }
         public string memberType { get; set; }
+        public int memberTypeID { get; set; }
         public string staffType { get; set; }
         public int staffTypeID { get; set; }
+        [DataType(DataType.Date)]
         public DateTime DOB { get; set; }
         public int SSN { get; set; }
         public bool handicapped { get; set; }
+        public int status { get; set; }
+        public List<TimeHeaderModel> timeHeaders { get; set; }
 
         
        //TODO: add staff home, cell, work...remove phone....probably aci table

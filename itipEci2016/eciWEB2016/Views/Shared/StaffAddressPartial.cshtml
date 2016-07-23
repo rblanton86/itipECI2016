@@ -1,0 +1,25 @@
+﻿@model eciWEB2016.Models.Address
+
+<li>
+    <label>Address 1:</label>
+    @Html.TextBoxFor(Address => Address.address1)
+
+    <label>Address 2:</label>
+    @Html.TextBoxFor(Address => Address.address2)
+
+    <label>Address Type:</label>
+    @Html.DropDownListFor(Address => Address.addressTypeID, (SelectList)ViewBag.addressTypeList, "--select--")
+
+    <label>City:</label>
+    @Html.TextBoxFor(Address => Address.city)
+
+    <label>State:</label>
+    @Html.TextBoxFor(Address => Address.state)
+
+    <label>Zip:</label>
+    @Html.TextBoxFor(Address => Address.zip)
+
+    <select>
+        <option value="1">AL</option>
+    </select>
+</li>

@@ -1,0 +1,12 @@
+﻿@model eciWEB2016.Models.AdditionalContactInfoModel
+
+
+<li>
+    <label>Contact Type:</label>
+    @Html.DropDownListFor(aci => aci.additionalContactInfoTypeID, (SelectList)ViewBag.contactTypeList, "--Select--")
+
+    <label>Contact Info:</label>
+    @Html.TextBoxFor(aci => aci.additionalContactInfo)
+</li>
+
+

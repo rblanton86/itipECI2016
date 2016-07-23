@@ -39,7 +39,7 @@ Change History:
         <label>Last Name:</label>
         <label class="staffLast"></label>
         <label>Staff Status:</label>
-        <label class=""></label>
+        <label class="staffStatus"></label>
 
     </nav>
     <div class="main">
@@ -50,18 +50,22 @@ Change History:
         <div id="gridContainer" class="scroll">
             @Html.Partial("TimeSheet_Grid_Partial")
         </div>
+        <div id="timeSheetContainer" class="scroll">
+            @Html.Partial("TimeDetails_Grid_Partial")
+        </div>
     </div>
 @section JavaScript
 {
 <script>
 
             $(document).ready(function () {
-
+                //on dropdown change, will fill grid with timeheaders for that staff member
                 $("#staffListID").change(function () {
                     var staffID = $("#staffListID").val();
                     $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
                         $('#gridContent').replaceWith(data);
                     });
+
                         //calls webmethod to get and store selected staff member in the session
                         $.getJSON('@Url.Action("GetStaffMemberFromSession", "Staff")', { staffID: staffID },
                             function (data) {
@@ -69,10 +73,16 @@ Change History:
                                 $('.staffFirst').html(data.firstName);
                                 $('.staffLast').html(data.lastName);
                                 $('.staffIDLabel').html(data.staffID);
+                                $('.staffStatus').html(data.status);
                                
                             }
                         );
                 });
+                @*$('#item.ID').click(function(){
+                    $.get('@Url.Action("StaffTimeSheet", "TimeSheet")', { timeHeaderID: staffID }, function (data) {
+                        $('#gridTimeDetailContent').replaceWith(data);
+                    });*@
+                //});
             });
 </script>
     }

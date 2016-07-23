@@ -1,23 +1,22 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from MemberType
+Description: Stored Procedure that retrieves the address type from the AddressType Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	7.14.16
+	7.21.16
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_MemberType]
-	@memberTypeID int
+CREATE PROCEDURE [dbo].[get_AllAddressTypes]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(memberType, ' ') AS memberType
-			FROM MemberType
-			WHERE memberTypeID = @memberTypeID
+			SELECT ISNULL(addressesType, ' ') AS addressesType,
+					ISNULL(addressesTypeID, 0) AS addressesTypeID
+			FROM AddressesType
 
 		END TRY
 		BEGIN CATCH

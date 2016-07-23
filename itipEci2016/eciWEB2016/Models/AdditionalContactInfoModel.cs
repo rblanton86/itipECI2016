@@ -15,7 +15,7 @@ namespace eciWEB2016.Models
             additionalContactInfoID = 0;
             memberTypeID = 0;
             memberType = "";
-            additionalContactInfoTypeID = 0;
+            additionalContactInfoTypeID = 1;
             additionalContactInfoType = "";
             additionalContactInfo = "";
         }

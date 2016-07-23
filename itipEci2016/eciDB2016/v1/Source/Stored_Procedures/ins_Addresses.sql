@@ -8,12 +8,12 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_Addresses]
+ALTER PROCEDURE [dbo].[ins_Addresses]
 	@addressTypeID int,
 	@address1 varchar(20),
 	@address2 varchar(20),
 	@city varchar(15),
-	@st varchar(10),
+	@st varchar(2),
 	@zip int,
 	@deleted bit,
 	@addressID INT OUTPUT
@@ -23,16 +23,19 @@ AS
 		BEGIN TRY
 
 			IF EXISTS (SELECT * FROM Addresses WHERE 
-						addressesTypeID <> @addressTypeID
-						AND address1 <> @address1
-						AND address2 <> @address2 
-						AND city <> @city 
-						AND st <> @st 
-						AND zip <> @zip
+						addressesTypeID = @addressTypeID
+						AND address1 = @address1
+						AND address2 = @address2 
+						AND city = @city 
+						AND st = @st 
+						AND zip = @zip
 						)
 
 			BEGIN
-
+				RETURN 0
+			END
+		ELSE
+			BEGIN
 				INSERT Addresses (addressesTypeID, 
 									address1, 
 									address2, 
@@ -61,10 +64,6 @@ AS
 								)
 
 				RETURN @addressID 
-			END
-		ELSE
-			BEGIN
-				RETURN 0
 			END
 
 		END TRY

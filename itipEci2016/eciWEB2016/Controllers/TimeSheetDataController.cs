@@ -29,6 +29,7 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
+        //gets staff members time sheet headers from the database
         public List<TimeHeaderModel> GetTimeHeaders(int staffID)
         {
             DbCommand dbCommand = db.GetStoredProcCommand("get_TimeHeader");
@@ -48,6 +49,28 @@ namespace eciWEB2016.Controllers.DataControllers
 
             return headers;
 
+        }
+
+        //gets staff member's time sheet details from the database
+        public List<TimeDetailModel> GetTimeSheet(int timeHeaderID)
+        {
+            DbCommand dbCommand = db.GetStoredProcCommand("get_TimeDetail");
+            db.AddInParameter(dbCommand, "timeHeaderID", DbType.Int32, timeHeaderID);
+            // db.AddInParameter(dbCommand, "@parameterName", DbType.TypeName, variableName);
+
+            DataSet ds = db.ExecuteDataSet(dbCommand);
+
+            var details = (from drRow in ds.Tables[0].AsEnumerable()
+                           select new TimeDetailModel()
+                           {
+                               actualTime = drRow.Field<decimal>("actualTime"),
+                               insuranceTime = drRow.Field<decimal>("insuranceTime"),
+                               placeOfService = drRow.Field<string>("placeOfService"),
+                               canceled = drRow.Field<string>("canceled"),
+                               deleted = drRow.Field<bool>("deleted")
+                           }).ToList();
+
+            return details;
         }
 
     }

@@ -1,23 +1,28 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from MemberType
+Description: Stored Procedure that updates the race of the Race Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	7.14.16
+	6.23.16
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_MemberType]
-	@memberTypeID int
 
-AS
-	BEGIN
+CREATE PROCEDURE [dbo].[upd_StaffAltID]
+	@staffID int,
+	@staffAltID int
+
+	AS
+
+BEGIN
 		BEGIN TRY
+		
+			UPDATE Staff
 
-			SELECT ISNULL(memberType, ' ') AS memberType
-			FROM MemberType
-			WHERE memberTypeID = @memberTypeID
+			SET	staffAltID = @staffAltID
+
+			WHERE staffID = @staffID
 
 		END TRY
 		BEGIN CATCH
@@ -34,5 +39,3 @@ AS
 
 		END CATCH
 	END
-
-

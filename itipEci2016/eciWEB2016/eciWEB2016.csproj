@@ -210,7 +210,6 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
-    <Compile Include="Controllers\DiagnosisController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\PhysicianDataController.cs" />
@@ -242,7 +241,6 @@
     <Compile Include="Models\TimeSheetModels.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
-    <Compile Include="System\Data\SqlTypes\SqlDate.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\style.css" />
@@ -351,12 +349,13 @@
     <Content Include="Views\Shared\Client_FamilyGrid_Partial.cshtml" />
     <Content Include="Views\Shared\Client_PhysicianGrid_Partial.cshtml" />
     <Content Include="Views\Shared\Client_DiagnosisGrid_Partial.cshtml" />
-    <Content Include="Views\Shared\Client_PhysicianMedical_Partial.cshtml" />
+    <Content Include="Views\Shared\StaffAddressPartial.cshtml" />
+    <Content Include="Views\Shared\StaffAdditionalContactInfoPartial.cshtml" />
+    <Content Include="Views\Shared\TimeDetails_Grid_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Views\ClientData\" />
-    <Folder Include="Views\Diagnosis\" />
     <Folder Include="Views\eciDropDownList\" />
     <Folder Include="Views\ReferralData\" />
     <Folder Include="Views\TimeSheet\" />

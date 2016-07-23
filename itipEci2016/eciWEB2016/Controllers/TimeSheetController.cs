@@ -36,6 +36,27 @@ namespace eciWEB2016.Controllers
 
         }
 
+        //gets the selected staff member's time sheet
+        public ActionResult StaffTimeSheet(int timeHeaderID)
+        {
+            try
+            {
+                List<TimeDetailModel> details = new List<TimeDetailModel>();
+
+                TimeSheetDataController dataController = new TimeSheetDataController();
+
+                details = dataController.GetTimeSheet(timeHeaderID);
+
+                return PartialView("TimeDetails_Grid_Partial", details);
+
+
+            }
+            catch (Exception ex)
+            {
+                return Json(new { ok = false, message = ex.Message }, JsonRequestBehavior.AllowGet);
+            }
+        }
+
         // GET: TimeSheet/Details/5
         public ActionResult Details(int id)
         {
