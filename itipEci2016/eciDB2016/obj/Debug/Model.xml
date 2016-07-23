@@ -12,7 +12,7 @@
 		</CustomData>
 		<CustomData Category="Reference" Type="Assembly">
 			<Metadata Name="LogicalName" Value="eciDB2016.dll" />
-			<Metadata Name="FileName" Value="C:\USERS\TYRELL\DOCUMENTS\GITHUB\ITIPECI2016\ITIPECI2016\ECIDB2016\OBJ\DEBUG\ECIDB2016.DLL" />
+			<Metadata Name="FileName" Value="E:\SOURCE\REPOS\ITIPECI2016\ITIPECI2016\ECIDB2016\OBJ\DEBUG\ECIDB2016.DLL" />
 			<Metadata Name="AssemblyName" Value="eciDB2016" />
 			<Metadata Name="PermissionSet" Value="SAFE" />
 			<Metadata Name="Owner" Value="" />
@@ -20,7 +20,7 @@
 			<Metadata Name="IsVisible" Value="True" />
 			<Metadata Name="IsModelAware" Value="True" />
 			<Metadata Name="SkipCreationIfEmpty" Value="True" />
-			<Metadata Name="AssemblySymbolsName" Value="C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb" />
+			<Metadata Name="AssemblySymbolsName" Value="E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb" />
 		</CustomData>
 		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
 	</Header>
@@ -44,6 +44,127 @@
 					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
 				</Entry>
 			</Relationship>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_AddressesByMemberID]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	BEGIN TRY
+		SELECT addr.addressesID,
+				ISNULL(addr.addressesTypeID, 1) AS addressesTypeID,
+				ISNULL (addr.address1, ' ') AS address1,
+				ISNULL(addr.address2, ' ') AS address2,
+				ISNULL(addr.city, ' ') AS city,
+				ISNULL(addr.st, ' ') AS st,
+				ISNULL(addr.zip, 0) AS zip,
+				ISNULL(addr.mapsco, ' ') AS mapsco,
+				ISNULL(addrt.addressesType, ' ') AS addressesType,
+				ISNULL(mbt.addressesID, 1) AS addressesID,
+				ISNULL(mbt.memberTypeID, 1) AS memberTypeID
+
+				FROM Addresses addr
+					LEFT JOIN AddressesType addrt ON
+						addr.addressesTypeID = addrt.addressesTypeID
+					LEFT JOIN LnkAddressMember  mbt ON
+						addr.addressesID = mbt.addressesID
+
+			WHERE mbt.memberTypeID = @memberID AND mbt.memberTypeID = @memberTypeID AND addr.deleted <> 1
+	END TRY
+	BEGIN CATCH
+
+		DECLARE @timeStamp DATETIME,
+			@errorMessage VARCHAR(255),
+			@errorProcedure VARCHAR(100)	
+
+		SELECT @timeStamp = GETDATE(),
+				@errorMessage = ERROR_MESSAGE(),
+				@errorProcedure = ERROR_PROCEDURE()
+			
+		EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+	END CATCH
+END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_AddressesByMemberID].[@memberID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[get_AddressesByMemberID].[@memberTypeID]" />
+				</Entry>
+				<Entry />
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_AddressesByMemberID].[@memberID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_AddressesByMemberID].[@memberTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="330" />
+				<Property Name="Length" Value="1552" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****************************************************************************&#xD;&#xA;Description: Creates stored procedure get_AddressesByMemberID.&#xD;&#xA;        &#x9;&#xD;&#xA;Author: Tyrell Powers-Crane&#xD;&#xA;        &#x9;&#xD;&#xA;Date: 07-15-2016&#xD;&#xA;        &#x9;&#xD;&#xA;Change History:&#xD;&#xA;        &#x9;&#xD;&#xA;****************************************************************************/&#xD;&#xA;CREATE PROCEDURE [dbo].[get_AddressesByMemberID]&#xD;&#xA;&#x9;@memberID INT,&#xD;&#xA;&#x9;@memberTypeID INT&#xD;&#xA;AS" />
+			</Annotation>
 		</Element>
 		<Element Type="SqlProcedure" Name="[dbo].[get_ClientStatus]">
 			<Property Name="BodyScript">

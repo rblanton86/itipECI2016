@@ -39,3 +39,7 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciDB2016\obj\Debug\pos
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciDB2016\obj\Debug\predeploy.sql
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb
+E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\Model.xml
+E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\refactor.xml
+E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\postdeploy.sql
+E:\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\predeploy.sql

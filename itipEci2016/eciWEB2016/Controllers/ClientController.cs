@@ -20,25 +20,16 @@ namespace eciWEB2016.Controllers
             if (Session["client"] == null)
             {
                 // Creates a blank client for the inital view.
-                Client currentClient = new Client();
+                Client newClient = new Client();
 
-                // Generates blank address data for blank Client.
-                Address blankAddress = new Address()
-                {
-                    address1 = " ",
-                    address2 = " ",
-                    city = " ",
-                    state = "TX",
-                    zip = 0,
-                    mapsco = "A1",
-                    county = " "
-                };
-                currentClient.clientAddress = blankAddress;
-
-                Session["client"] = currentClient;
+                Session["client"] = newClient;
+                return View(newClient);
             }
 
-            return View();
+            Client currentClient = new Client();
+            currentClient = (Client)Session["client"];
+
+            return View(currentClient);
         }
 
         [HttpPost]
@@ -57,6 +48,7 @@ namespace eciWEB2016.Controllers
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
             }
+
             return PartialView("Client_Partial");
         }
 
@@ -91,7 +83,7 @@ namespace eciWEB2016.Controllers
 
             success = dataController.UpdateClient(model);
 
-            return View("Client_Update");
+            return View("Client_Update", newclient);
         }
 
         // GET: Client/Delete/5

@@ -30,10 +30,10 @@ AS
 
 							SELECT ISNULL(aci.additionalContactInfoID, 0) AS additionalContactInfoID,
 								ISNULL(aci.memberTypeID, 1) AS memberTypeID,
-								ISNULL(mbt.memberType,'') AS memberType,
+								ISNULL(mbt.memberType,' ') AS memberType,
 								ISNULL(aci.additionalContactInfoTypeID, 1) AS additionalContactInfoTypeID,
-								ISNULL(acit.additionalContactInfoType, '') AS additionalContactInfoType,
-								ISNULL(aci.additionalContactInfo, '') AS additionalContactInfo,
+								ISNULL(acit.additionalContactInfoType, ' ') AS additionalContactInfoType,
+								ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo,
 								aci.deleted
 
 							FROM AdditionalContactInfo aci
@@ -44,17 +44,7 @@ AS
 								LEFT JOIN Clients clnt ON
 									clnt.clientID = aci.memberID
 					
-							WHERE clnt.clientID = @memberID AND aci.deleted <> 1
-
-							UNION all
-								SELECT 0,
-									1,
-									'',
-									1,
-									'',
-									'',
-									0
-							WHERE NOT EXISTS (SELECT 1 FROM AdditionalContactInfo)
+							WHERE aci.memberID = @memberID AND aci.deleted <> 1
 
 							SET @success = 1
 
@@ -79,7 +69,7 @@ AS
 								LEFT JOIN FamilyMember fam ON
 									fam.familyMemberID = aci.memberID
 					
-							WHERE fam.familyMemberID = @memberID AND aci.deleted <> 1
+							WHERE aci.memberID = @memberID AND aci.deleted <> 1
 
 							SET @success = 1
 
@@ -104,7 +94,7 @@ AS
 								LEFT JOIN Staff stf ON
 									stf.staffID = aci.memberID
 					
-							WHERE stf.staffID = @memberID AND aci.deleted <> 1
+							WHERE aci.memberID = @memberID AND aci.deleted <> 1
 
 							SET @success = 1
 
@@ -129,7 +119,7 @@ AS
 								LEFT JOIN Staff stf ON
 									stf.staffID = aci.memberID
 					
-							WHERE stf.staffID = @memberID AND aci.deleted <> 1
+							WHERE aci.memberID = @memberID AND aci.deleted <> 1
 
 							SET @success = 1
 
@@ -154,7 +144,7 @@ AS
 								LEFT JOIN ReferralSource rs ON
 									rs.referralSourceID = aci.memberID
 					
-							WHERE rs.referralSourceID = @memberID AND aci.deleted <> 1
+							WHERE aci.memberID = @memberID AND aci.deleted <> 1
 
 							SET @success = 1
 
@@ -179,7 +169,7 @@ AS
 								LEFT JOIN Insurance ins ON
 									ins.insuranceID = aci.memberID
 					
-							WHERE ins.insuranceID = @memberID AND aci.deleted <> 1
+							WHERE aci.memberID = @memberID AND aci.deleted <> 1
 
 							SET @success = 1
 
@@ -210,4 +200,3 @@ AS
 
 		END CATCH
 	END
-

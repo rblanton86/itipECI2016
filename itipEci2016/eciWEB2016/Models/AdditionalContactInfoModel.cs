@@ -10,9 +10,21 @@ namespace eciWEB2016.Models
 {
     public class AdditionalContactInfoModel
     {
+        public AdditionalContactInfoModel()
+        {
+            additionalContactInfoID = 0;
+            memberTypeID = 0;
+            memberType = "";
+            additionalContactInfoTypeID = 0;
+            additionalContactInfoType = "";
+            additionalContactInfo = "";
+        }
+
         public int additionalContactInfoID { get; set; }
         public int memberTypeID { get; set; }
+        public string memberType { get; set; }
         public int additionalContactInfoTypeID { get; set; }
+        public string additionalContactInfoType { get; set; }
         public string additionalContactInfo { get; set; }
         public string additionalContactInfoType { get; set; }
         public bool deleted { get; set; }

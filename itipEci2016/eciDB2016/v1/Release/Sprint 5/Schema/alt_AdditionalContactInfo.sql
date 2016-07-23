@@ -6,7 +6,8 @@ Author: Jennifer M Graves
 Date: 07-05-2016
 
 Change History:
-		07-05-2016 -- jmg: Added deleted bit column to table.
+		07-05-2016: JMG - Added deleted bit column to table.
+		07-20-2016: JMG - Added memberID to table for stored procedure.
 ****************************************************************************/
 
 -- Declares the table variable for additionalContactInfo
