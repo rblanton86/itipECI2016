@@ -8,6 +8,7 @@ Date: 07-12-2016
 Change History:
 
 ****************************************************************************/*@
+@model eciWEB2016.Models.Client
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
 
@@ -18,19 +19,29 @@ Change History:
 }
 <ul class="flex">
     <li>
-        <label>Dx Type</label>
-        <select>
-            <option>Primary</option>
-            <option>Alternate</option>
-        </select>
+        @Html.LabelFor(c => c.clientDiagnosis)
+        @*@Html.DropDownListFor(c => c.clientDiagnosis)*@
     </li>
     <li>
-        <label>Dx Code</label>
-        <input type="text" id="dxCodeList" name="dxCode" />
-    </li>
-    <li>
-        <label>Diagnosis</label>
-        <input type="text" id="dxDescription" name="dx" />
+        <table>
+            <tr>
+                <th>Diagnosis Type</th>
+                <th>Diagnosis Code</th>
+                <th>Diagnosis</th>
+                <th>Diagnosis From</th>
+                <th>Diagnosis To</th>
+            </tr>
+            @foreach (var item in Model.clientDiagnosis)
+            {
+                <tr>
+                    <td>@item.diagnosisType</td>
+                    <td>@item.diagnosisCode</td>
+                    <td>@item.diagnosisDescription</td>
+                    <td>@item.diagnosisFrom</td>
+                    <td>@item.diagnosisTo</td>
+                </tr>
+            }
+        </table>
     </li>
     <li>
         <button type="button">Add</button>

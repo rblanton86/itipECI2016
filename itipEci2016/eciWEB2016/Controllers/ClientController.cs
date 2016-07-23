@@ -76,14 +76,15 @@ namespace eciWEB2016.Controllers
         [HttpPost]
         public ActionResult UpdateClient(Client model)
         {
-            Client newclient = new Client();
             bool success;
 
             ClientDataController dataController = new ClientDataController();
 
             success = dataController.UpdateClient(model);
 
-            return View("Client_Update", newclient);
+            Session["client"] = model;
+
+            return View("Client_Update", model);
         }
 
         // GET: Client/Delete/5
@@ -101,7 +102,10 @@ namespace eciWEB2016.Controllers
                 success = dataController.DeleteClient(deletingClient);
             
             }
-            return View("Client_Update");
+
+            Client newClient = new Client();
+
+            return View("Client_Update", newClient);
         }
     }
 }

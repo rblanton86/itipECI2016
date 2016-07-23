@@ -19,350 +19,134 @@ Change History:
 }
 @using (Html.BeginForm("UpdateClient", "Client", FormMethod.Post))
 {
+<span style="display: none;">
+    @Html.TextBoxFor(c => c.clientID, new { Value = client.clientID, name = "clientID" })
+</span>
 <ul class="flex">
     <li>
-        <label for="ClientID">Alt ID:</label>
+        @Html.LabelFor(c => c.altID):
         @Html.TextBoxFor(c => c.altID, new { Value = client.altID, name = "altID"})
     </li>
     <li>
-        <label for="fullName">Full Name:</label>
+        @Html.LabelFor(c => c.fullName):
+        @Html.TextBoxFor(c => c.fullName, new { Value = client.fullName, name = "fullName"})
     </li>
     <li>
-        <label>Office:</label>
-        <select name="office">
-            <option>M</option>
-        </select>
+        @Html.Label("Office Name:")
+        @*@Html.DropDownListFor(c => c.officeID, )*@
     </li>
 </ul>
 <ul class="flex">
     <li>
-        <label>Last Name:</label>
+        @Html.LabelFor(c => c.lastName):
         @Html.TextBoxFor(c => c.lastName, new { Value = @client.lastName, name = "lastName" })
     </li>
     <li>
-        <label>First Name:</label>
+        @Html.LabelFor(c => c.firstName):
         @Html.TextBoxFor(c => c.firstName, new { Value = client.firstName, name = "firstName"})
     </li>
     <li>
-        <label>MI:</label>
+        @Html.LabelFor(c => c.middleInitial):
         @Html.TextBoxFor(c => c.middleInitial, new { Value = client.middleInitial, name = "middleInitial" })
     </li>
     <li>
-        <label>Status:</label>
-        <select name="clientStatus">
-            <option>Active</option>
-            <option>Inactive</option>
-        </select>
+        @Html.LabelFor(c => c.clientStatusID):
+        @*@Html.DropDownListFor(c => c.clientStatusID)*@
     </li>
     <li>
-        <label>Months Old:</label>
+        @Html.LabelFor(c => c.ageInMonths):
         @Html.TextBoxFor(c => c.ageInMonths, new { Value = client.ageInMonths, name = "ageInMonths" })
     </li>
     <li>
-        <label>DOB:</label>
+        @Html.LabelFor(c => c.dob):
         @Html.TextBoxFor(c => c.dob, null , new { Value = client.dob, name = "dob", @class = "datefield" })
     </li>
+        @Html.LabelFor(c => c.sexID):
+        @*@Html.DropDownListFor(c => c.sexID)*@
     <li>
-        <label>Sex:</label>
-        <select name="sex">
-            <option Value="M">M</option>
-            <option Value="F">F</option>
-        </select>
     </li>
     <li>
-        <label>Ethnicity:</label>
-        <select name="ethnicity">
-            <option Value="Hispanic">Hispanic</option>
-            <option Value="Non-Hispanic">Non-Hispanic</option>
-        </select>
+        @Html.LabelFor(c => c.ethnicityID):
+        @*@Html.DropDownListFor(c => c.ethnicityID)*@
     </li>
     <li>
-        <label>Race:</label>
-        <select name="race">
-            <option>E</option>
-        </select>
+        @Html.LabelFor(c => c.raceID):
+        @*@Html.DropDownListFor(c => c.sexID)*@
     </li>
     <li>
-        <label>SSN:</label>
+        @Html.LabelFor(c => c.ssn):
         @Html.TextBoxFor(c => c.ssn, null, new { Value = client.ssn, name = "ssn" })
     </li>
 </ul>
 <ul class="flex">
     <li>
-        <label>Address 1:</label>
+        @Html.LabelFor(c => c.clientAddress.address1):
         @Html.TextBoxFor(c => c.clientAddress.address1, null, new { Value = client.clientAddress.address1, name = "address1" })
     </li>
     <li>
-        <label>ISD:</label>
+        @Html.LabelFor(c => c.schoolInfoID):
+        @*@Html.DropDownListFor(c => c.schoolInfoID)*@
     </li>
     <li>
-        <label>Address 2:</label>
+        @Html.LabelFor(c => c.clientAddress.address2):
         @Html.TextBoxFor(c => c.clientAddress.address2, null, new { Value = client.clientAddress.address2, name = "address2" })
     </li>
     <li>
-        <label>Language:</label>
-        <select name="language">
-            <option>E</option>
-        </select>
+        @Html.LabelFor(c => c.primaryLanguageID):
+        @*@Html.DropDownListFor(c => c.primaryLanguageID)*@
     </li>
     <li class="inline">
-        <label>City:</label>
+        @Html.LabelFor(c => c.clientAddress.city):
         @Html.TextBoxFor(c => c.clientAddress.city, null, new { Value = client.clientAddress.city, name = "city" })
     </li>
     <li class="inline">
-        <label>State:</label>
+        @Html.LabelFor(c => c.clientAddress.state):
         @Html.TextBoxFor(c => c.clientAddress.state, null, new { Value = client.clientAddress.state, name = "state" })
     </li>
     <li class="inline">
-        <label>Zip:</label>
+        @Html.LabelFor(c => c.clientAddress.zip):
         @Html.TextBoxFor(c => c.clientAddress.zip, null, new { Value = client.clientAddress.zip, name = "zip" })
     </li>
     <li class="inline">
-        <label>MAPSCO:</label>
+        @Html.LabelFor(c => c.clientAddress.mapsco):
         @Html.TextBoxFor(c => c.clientAddress.mapsco, null, new { Value = client.clientAddress.mapsco, name = "mapsco" })
     </li>
     <li>
-        <input type="submit" Value="UpdateClient" />
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Client Phone:</label>
+        @Html.LabelFor(c => c.phone.additionalContactInfo):
         @Html.TextBoxFor(c => c.phone.additionalContactInfo , null, new { Value = client.phone.additionalContactInfo , name = "clientPhone" })
     </li>
     <li>
-        <label>County:</label>
+        @Html.LabelFor(c => c.clientAddress.county):
         @Html.TextBoxFor(c => c.clientAddress.county , null, new { Value = client.clientAddress.county , name = "clientCounty" })
     </li>
     <li>
-        <label>Service Area Exception:</label>
-        @Html.TextBoxFor(c => c.serviceAreaException , null, new { Value = client.serviceAreaException , name = "serviceAreaException" })
-        <input type="checkbox" Value="ServiceAreaException" name="serviceAreaExeption">
+        @Html.LabelFor(c => c.serviceAreaException):
+        @Html.CheckBoxFor(c => c.serviceAreaException)
     </li>
     <li>
-        <label>Case Manager:</label>
+        @Html.LabelFor(c => c.clientStaff):
         @Html.TextBoxFor(c => c.clientStaff , null, new { Value = client.clientStaff, name = "caseManager" })
     </li>
     <li>
-        <label>TKID's Case Number:</label>
+        @Html.LabelFor(c => c.TKIDcaseNumber):
         @Html.TextBoxFor(c => c.TKIDcaseNumber , null, new { Value = client.TKIDcaseNumber, name = "TKIDcaseNumber" })
     </li>
     <li>
-        <label>Consent to Release Information?</label>
+        @Html.LabelFor(c => c.consentRelease):
         @Html.CheckBoxFor(c => c.consentRelease, new { Value = client.consentRelease, name = "consentToRelease"})
     </li>
 </ul>
 <ul class="flex">
     <li>
-        <label>ECI:</label>
+        @Html.LabelFor(c => c.ECI):
         @Html.CheckBoxFor(c => c.ECI, new { Value = client.ECI, name = "ECI"})
     </li>
     <li>
-        <label>Accounting System ID:</label>
+        @Html.LabelFor(c => c.accountingSystemID):
         @Html.TextBoxFor(c => c.accountingSystemID , null, new { Value = client.accountingSystemID, name = "accountingSystemID" })
     </li>
 </ul>
-
+<li>
+    <input type="submit" Value="UpdateClient" />
+</li>
 }
-<ul class="flex">
-    <li>
-        <button type="button">Insurance Update</button>
-    </li>
-    <li>
-        <button type="button">Cost Share and DRS</button>
-    </li>
-    <li>
-        <button type="button">Credit Card Update</button>
-    </li>
-</ul>
-<div id="diagnosisGridContainer">
-    @*@Html.Partial("Client_DiagnosisGrid_Partial")*@
-</div>
-<h4>Physician Information:</h4>
-<ul class="flex">
-    <li>
-        <label>Last Name:</label>
-        <input type="text" />
-    </li>
-    <li>
-        <label>First Name:</label>
-        <input type="text" />
-    </li>
-    <li>
-        <label>Type:</label>
-        <input type="text" />
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Address 1:</label>
-        <input type="text" size="60">
-    </li>
-    <li>
-        <label>Address 2:</label>
-        <input type="text" size="60"><br />
-    </li>
-</ul>
-<ul class="flex">
-    <li>
-        <label>City:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>State:</label>
-        <input list="states" />
-        <datalist id="states" name="state">
-            <option stateCode="AL">Alabama</option>
-            <option stateCode="AK">Alaska</option>
-            <option stateCode="AZ">Arizona</option>
-            <option stateCode="AR">Arkansas</option>
-            <option stateCode="CA">California</option>
-            <option stateCode="CO">Colorado</option>
-            <option stateCode="CT">Connecticut</option>
-            <option stateCode="DE">Delaware</option>
-            <option stateCode="DC">District Of Columbia</option>
-            <option stateCode="FL">Florida</option>
-            <option stateCode="GA">Georgia</option>
-            <option stateCode="HI">Hawaii</option>
-            <option stateCode="ID">Idaho</option>
-            <option stateCode="IL">Illinois</option>
-            <option stateCode="IN">Indiana</option>
-            <option stateCode="IA">Iowa</option>
-            <option stateCode="KS">Kansas</option>
-            <option stateCode="KY">Kentucky</option>
-            <option stateCode="LA">Louisiana</option>
-            <option stateCode="ME">Maine</option>
-            <option stateCode="MD">Maryland</option>
-            <option stateCode="MA">Massachusetts</option>
-            <option stateCode="MI">Michigan</option>
-            <option stateCode="MN">Minnesota</option>
-            <option stateCode="MS">Mississippi</option>
-            <option stateCode="MO">Missouri</option>
-            <option stateCode="MT">Montana</option>
-            <option stateCode="NE">Nebraska</option>
-            <option stateCode="NV">Nevada</option>
-            <option stateCode="NH">New Hampshire</option>
-            <option stateCode="NJ">New Jersey</option>
-            <option stateCode="NM">New Mexico</option>
-            <option stateCode="NY">New York</option>
-            <option stateCode="NC">North Carolina</option>
-            <option stateCode="ND">North Dakota</option>
-            <option stateCode="OH">Ohio</option>
-            <option stateCode="OK">Oklahoma</option>
-            <option stateCode="OR">Oregon</option>
-            <option stateCode="PA">Pennsylvania</option>
-            <option stateCode="RI">Rhode Island</option>
-            <option stateCode="SC">South Carolina</option>
-            <option stateCode="SD">South Dakota</option>
-            <option stateCode="TN">Tennessee</option>
-            <option stateCode="TX">Texas</option>
-            <option stateCode="UT">Utah</option>
-            <option stateCode="VT">Vermont</option>
-            <option stateCode="VA">Virginia</option>
-            <option stateCode="WA">Washington</option>
-            <option stateCode="WV">West Virginia</option>
-            <option stateCode="WI">Wisconsin</option>
-            <option stateCode="WY">Wyoming</option>
-            <option stateCode="AS">American Samoa</option>
-            <option stateCode="GU">Guam</option>
-            <option stateCode="MP">Northern Mariana Islands</option>
-            <option stateCode="PR">Puerto Rico</option>
-            <option stateCode="UM">United States Minor Outlying Islands</option>
-            <option stateCode="VI">Virgin Islands</option>
-        </datalist>
-    </li>
-    <li>
-        <label>Zip:</label>
-        <input list="zipCode" size="6">
-        <input type="text" size="4">
-    </li>
-</ul>
-<ul class="flex">
-    <li>
-        <label>Home Phone:</label>
-        <input type="Text">
-    </li>
-    <li>
-        <label>Fax:</label>
-        <input type="Text">
-    </li>
-    <li>
-        <label>Physician ID:</label>
-        <input type="Text">
-    </li>
-    <li>
-        <label>Physician NPI:</label>
-        <input type="Text">
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Medical Recieved:</label>
-        <input type="CheckBox">
-    </li>
-    <li>
-        <label>Date Recieved:</label>
-        <input type="date">
-    </li>
-    <li>
-        <label>Immunizations Recieved:</label>
-        <input type="CheckBox">
-    </li>
-</ul>
-<div id="familyGridContainer">
-    @*@Html.Partial("Client_FamilyGrid_Partial")*@
-</div>
-<div id="physicianGridContainer">
-    @*@Html.Partial("Client_PhysicianGrid_Partial")*@
-</div>
-@*@section JavaScript
-{
-    <script>
-        // Selects the appropriate client status from the office property based on result of the current client in session.
-        $(function () {
-            $('select[name^="office" option[Value="@client.officeID"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate client status from the clientStatus property based on result of the current client in session.
-        $(function () {
-            $('select[name^="clientStatus" option[Value="@client.clientStatusID"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate sex from the sex dropdown property based on result of the current client in session.
-        $(function () {
-            $('select[name^="sex"] option[Value="@client.sexID"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate ethnicity from the ethnicity dropdown property based on result of the current client in session.
-        $(function () {
-            $('select[name^="ethnicity"] option[Value="@client.ethnicityID"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate race from the race dropdown property based on result of the current client in session.
-        $(function () {
-            $('select[name^="race"] option[Value="@client.raceID"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate language from the language dropdown property based on result of the current client in session.
-        $(function () {
-            $('select[name^="language"] option[Value="@client.primaryLanguageID"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate state from the state dropdown property based on result of the current client in session.
-        $(function () {
-            $('select[id^="clientState"] option[Value="@client.clientAddress.state"]').attr("selected", "selected");
-        });
-    </script>
-    <script>
-        // Selects the appropriate eci from the eci dropdown property based on result of the current client in session.
-        $(function () {
-            $('select[name^="eci"] option[Value="@client.ECI"]').attr("selected", "selected");
-        });
-    </script>
-}*@

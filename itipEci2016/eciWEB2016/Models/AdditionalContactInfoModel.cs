@@ -19,11 +19,12 @@ namespace eciWEB2016.Models
             additionalContactInfoType = "";
             additionalContactInfo = "";
         }
-
+        
         public int additionalContactInfoID { get; set; }
         public int memberTypeID { get; set; }
         public string memberType { get; set; }
         public int additionalContactInfoTypeID { get; set; }
+        [Display(Name = "Contact Type")]
         public string additionalContactInfoType { get; set; }
         public string additionalContactInfo { get; set; }
         public bool deleted { get; set; }
