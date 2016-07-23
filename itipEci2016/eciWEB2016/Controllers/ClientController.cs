@@ -14,7 +14,6 @@ namespace eciWEB2016.Controllers
 {
     public class ClientController : Controller
     {
-        // GET: Client
         public ActionResult Client_Update()
         {
             if (Session["client"] == null)
@@ -32,6 +31,40 @@ namespace eciWEB2016.Controllers
             return View(currentClient);
         }
 
+        [HttpGet]
+        [ActionName("GetAjaxClientList")]
+        public JsonResult GetClientList()
+        {
+            List<Client> clientList = new List<Client>();
+            ClientDataController dataController = new ClientDataController();
+            clientList = dataController.GetListClients();
+
+            // Takes select list of all clients, returns at Json object.
+            return Json(clientList, JsonRequestBehavior.AllowGet);
+        }
+
+
+        /************************************************************************** CREATE *******************************************************/
+
+        public ActionResult InsertClient(Client newClient)
+        {
+            ClientDataController dataController = new ClientDataController();
+
+            // Inserts client demographics and miscellaneous client only information.
+            newClient = dataController.InsertClient(newClient);
+
+            // Inserts client's address.
+            newClient = dataController.InsertClientAddress(newClient);
+
+            // Inserts all family members attached to family.
+            newClient = dataController.InsertClientFamily(newClient);
+
+
+
+            return View("Referral", newClient);
+        }
+
+        /************************************************************************** READ ********************************************************/
         [HttpPost]
         [ActionName("GetAjaxClient")]
         [WebMethod(EnableSession = true)]
@@ -52,27 +85,8 @@ namespace eciWEB2016.Controllers
             return PartialView("Client_Partial");
         }
 
-        // GET: Client/Details/5
-        [HttpGet]
-        [ActionName("GetAjaxClientList")]
-        public JsonResult GetClientList()
-        {
-            List<Client> clientList = new List<Client>();
-            ClientDataController dataController = new ClientDataController();
-            clientList = dataController.GetListClients();
+        /************************************************************************** UPDATE ********************************************************/
 
-            // Takes select list of all clients, returns at Json object.
-            return Json(clientList, JsonRequestBehavior.AllowGet);
-        }
-
-        // GET: Client/Create
-        public ActionResult Create()
-        {
-
-            return View();
-        }
-
-        // POST: Client/Create
         [HttpPost]
         public ActionResult UpdateClient(Client model)
         {
@@ -87,7 +101,7 @@ namespace eciWEB2016.Controllers
             return View("Client_Update", model);
         }
 
-        // GET: Client/Delete/5
+        /************************************************************************** DELETE ********************************************************/
         public ActionResult DeleteClient()
         {
             if (Session["client"] != null)

@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<DataSchemaModel FileFormatVersion="1.2" SchemaVersion="2.9" DspName="Microsoft.Data.Tools.Schema.Sql.Sql130DatabaseSchemaProvider" CollationLcid="1033" CollationCaseSensitive="False" xmlns="http://schemas.microsoft.com/sqlserver/dac/Serialization/2012/02">
+	<Header>
+		<CustomData Category="AnsiNulls">
+			<Metadata Name="AnsiNulls" Value="True" />
+		</CustomData>
+		<CustomData Category="QuotedIdentifier">
+			<Metadata Name="QuotedIdentifier" Value="True" />
+		</CustomData>
+		<CustomData Category="CompatibilityMode">
+			<Metadata Name="CompatibilityMode" Value="130" />
+		</CustomData>
+		<CustomData Category="Reference" Type="Assembly">
+			<Metadata Name="LogicalName" Value="eciDB2016.dll" />
+			<Metadata Name="FileName" Value="C:\USERS\JGRAVES\SOURCE\REPOS\ITIPECI2016\ITIPECI2016\ECIDB2016\OBJ\DEBUG\ECIDB2016.DLL" />
+			<Metadata Name="AssemblyName" Value="eciDB2016" />
+			<Metadata Name="PermissionSet" Value="SAFE" />
+			<Metadata Name="Owner" Value="" />
+			<Metadata Name="GenerateSqlClrDdl" Value="True" />
+			<Metadata Name="IsVisible" Value="True" />
+			<Metadata Name="IsModelAware" Value="True" />
+			<Metadata Name="SkipCreationIfEmpty" Value="True" />
+			<Metadata Name="AssemblySymbolsName" Value="C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciDB2016\obj\Debug\eciDB2016.pdb" />
+		</CustomData>
+		<CustomData Category="SqlCmdVariables" Type="SqlCmdVariable" />
+	</Header>
+	<Model>
+		<Element Type="SqlDatabaseOptions">
+			<Property Name="Collation" Value="SQL_Latin1_General_CP1_CI_AS" />
+			<Property Name="IsAnsiNullDefaultOn" Value="True" />
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Property Name="IsAnsiWarningsOn" Value="True" />
+			<Property Name="IsArithAbortOn" Value="True" />
+			<Property Name="IsConcatNullYieldsNullOn" Value="True" />
+			<Property Name="IsTornPageProtectionOn" Value="False" />
+			<Property Name="IsFullTextEnabled" Value="True" />
+			<Property Name="CompatibilityMode" Value="130" />
+			<Property Name="PageVerifyMode" Value="3" />
+			<Property Name="DefaultLanguage" Value="" />
+			<Property Name="DefaultFullTextLanguage" Value="" />
+			<Property Name="QueryStoreStaleQueryThreshold" Value="367" />
+			<Relationship Name="DefaultFilegroup">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[PRIMARY]" />
+				</Entry>
+			</Relationship>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_AddressesByMemberID]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+BEGIN
+	BEGIN TRY
+		SELECT addr.addressesID,
+				ISNULL(addr.addressesTypeID, 1) AS addressesTypeID,
+				ISNULL (addr.address1, ' ') AS address1,
+				ISNULL(addr.address2, ' ') AS address2,
+				ISNULL(addr.city, ' ') AS city,
+				ISNULL(addr.st, ' ') AS st,
+				ISNULL(addr.zip, 0) AS zip,
+				ISNULL(addr.mapsco, ' ') AS mapsco,
+				ISNULL(addrt.addressesType, ' ') AS addressesType,
+				ISNULL(mbt.addressesID, 1) AS addressesID,
+				ISNULL(mbt.memberTypeID, 1) AS memberTypeID
+
+				FROM Addresses addr
+					LEFT JOIN AddressesType addrt ON
+						addr.addressesTypeID = addrt.addressesTypeID
+					LEFT JOIN LnkAddressMember  mbt ON
+						addr.addressesID = mbt.addressesID
+
+			WHERE mbt.memberTypeID = @memberID AND mbt.memberTypeID = @memberTypeID AND addr.deleted <> 1
+	END TRY
+	BEGIN CATCH
+
+		DECLARE @timeStamp DATETIME,
+			@errorMessage VARCHAR(255),
+			@errorProcedure VARCHAR(100)	
+
+		SELECT @timeStamp = GETDATE(),
+				@errorMessage = ERROR_MESSAGE(),
+				@errorProcedure = ERROR_PROCEDURE()
+			
+		EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+	END CATCH
+END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_AddressesByMemberID].[@memberID]" />
+				</Entry>
+				<Entry>
+					<References Name="[dbo].[get_AddressesByMemberID].[@memberTypeID]" />
+				</Entry>
+				<Entry />
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_AddressesByMemberID].[@memberID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_AddressesByMemberID].[@memberTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="330" />
+				<Property Name="Length" Value="1552" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/****************************************************************************&#xD;&#xA;Description: Creates stored procedure get_AddressesByMemberID.&#xD;&#xA;        &#x9;&#xD;&#xA;Author: Tyrell Powers-Crane&#xD;&#xA;        &#x9;&#xD;&#xA;Date: 07-15-2016&#xD;&#xA;        &#x9;&#xD;&#xA;Change History:&#xD;&#xA;        &#x9;&#xD;&#xA;****************************************************************************/&#xD;&#xA;CREATE PROCEDURE [dbo].[get_AddressesByMemberID]&#xD;&#xA;&#x9;@memberID INT,&#xD;&#xA;&#x9;@memberTypeID INT&#xD;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_ClientStatus]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT clientStatus
+			FROM ClientStatus
+			WHERE clientStatusID = @clientStatusID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_ClientStatus].[@clientStatusID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_ClientStatus].[@clientStatusID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="358" />
+				<Property Name="Length" Value="867" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from ClientStatus&#xA;&#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_ClientStatus]&#xA;&#x9;@clientStatusID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_CommunicationPreferences]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT communicationPreferences
+			FROM CommunicationPreferences
+			WHERE communicationPreferencesID = @communicationPreferencesID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_CommunicationPreferences].[@communicationPreferencesID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_CommunicationPreferences].[@communicationPreferencesID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="370" />
+				<Property Name="Length" Value="951" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from CommunicationPreferences&#xA;&#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_CommunicationPreferences]&#xA;&#x9;@communicationPreferencesID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_DiagnosisType]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT diagnosisType
+			FROM DiagnosisType
+			WHERE diagnosisTypeID = @diagnosisTypeID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_DiagnosisType].[@diagnosisTypeID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_DiagnosisType].[@diagnosisTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="361" />
+				<Property Name="Length" Value="876" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from DiagnosisType&#xA;&#x9; &#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_DiagnosisType]&#xA;&#x9;@diagnosisTypeID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_FamilyMemberType]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT familyMemberType
+			FROM FamilyMemberType
+			WHERE familyMemberTypeID = @familyMemberTypeID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_FamilyMemberType].[@familyMemberTypeID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_FamilyMemberType].[@familyMemberTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="362" />
+				<Property Name="Length" Value="895" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from FamilyMemberType&#xA;&#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_FamilyMemberType]&#xA;&#x9;@familyMemberTypeID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_MemberType]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT memberType
+			FROM MemberType
+			WHERE memberTypeID = @memberTypeID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_MemberType].[@memberTypeID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_MemberType].[@memberTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="358" />
+				<Property Name="Length" Value="855" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from MemberType&#xA;&#x9; &#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_MemberType]&#xA;&#x9;@memberTypeID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_Office]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT officeName
+			FROM Office
+			WHERE officeID = @officeID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_Office].[@officeID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_Office].[@officeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="352" />
+				<Property Name="Length" Value="829" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from Office&#xA;&#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_Office]&#xA;&#x9;@officeID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_PrimaryLanguage]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT primaryLanguage
+			FROM PrimaryLanguage
+			WHERE primaryLanguageID = @primaryLanguageID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_PrimaryLanguage].[@primaryLanguageID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_PrimaryLanguage].[@primaryLanguageID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="361" />
+				<Property Name="Length" Value="888" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from PrimaryLanguage&#xA;&#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_PrimaryLanguage]&#xA;&#x9;@primaryLanguageID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_referralSourceType]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT referralSourceType, referralNotificationType
+			FROM ReferralSourceType
+			WHERE referralSourceTypeID = @referralSourceTypeID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_referralSourceType].[@referralSourceTypeID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_referralSourceType].[@referralSourceTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="364" />
+				<Property Name="Length" Value="935" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from ReferralSourceType&#xA;&#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_referralSourceType]&#xA;&#x9;@referralSourceTypeID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+		<Element Type="SqlProcedure" Name="[dbo].[get_StaffType]">
+			<Property Name="BodyScript">
+				<Value><![CDATA[
+	BEGIN
+		BEGIN TRY
+
+			SELECT staffType
+			FROM StaffType
+			WHERE staffTypeID = @staffTypeID
+
+		END TRY
+		BEGIN CATCH
+
+			DECLARE @timeStamp DATETIME,
+				@errorMessage VARCHAR(255),
+				@errorProcedure VARCHAR(100)	
+
+			SELECT @timeStamp = GETDATE(),
+					@errorMessage = ERROR_MESSAGE(),
+					@errorProcedure = ERROR_PROCEDURE()
+			
+			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
+
+		END CATCH
+	END]]></Value>
+			</Property>
+			<Property Name="IsAnsiNullsOn" Value="True" />
+			<Relationship Name="BodyDependencies">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[datetime]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[varchar]" />
+				</Entry>
+				<Entry />
+				<Entry />
+				<Entry />
+				<Entry>
+					<References Name="[dbo].[get_StaffType].[@staffTypeID]" />
+				</Entry>
+				<Entry />
+			</Relationship>
+			<Relationship Name="Parameters">
+				<Entry>
+					<Element Type="SqlSubroutineParameter" Name="[dbo].[get_StaffType].[@staffTypeID]">
+						<Relationship Name="Type">
+							<Entry>
+								<Element Type="SqlTypeSpecifier">
+									<Relationship Name="Type">
+										<Entry>
+											<References ExternalSource="BuiltIns" Name="[int]" />
+										</Entry>
+									</Relationship>
+								</Element>
+							</Entry>
+						</Relationship>
+					</Element>
+				</Entry>
+			</Relationship>
+			<Relationship Name="Schema">
+				<Entry>
+					<References ExternalSource="BuiltIns" Name="[dbo]" />
+				</Entry>
+			</Relationship>
+			<Annotation Type="SysCommentsObjectAnnotation">
+				<Property Name="CreateOffset" Value="357" />
+				<Property Name="Length" Value="848" />
+				<Property Name="StartLine" Value="1" />
+				<Property Name="StartColumn" Value="1" />
+				<Property Name="HeaderContents" Value="/***********************************************************************************************************&#xA;Description: Stored Procedure to pull type information from StaffType&#xA;&#x9; &#xA;Author: &#xA;&#x9;Tyrell Powers-Crane &#xA;Date: &#xA;&#x9;7.14.16&#xA;Change History:&#xA;&#x9;&#xA;************************************************************************************************************/&#xA;CREATE PROCEDURE [dbo].[get_StaffType]&#xA;&#x9;@staffTypeID int&#xA;&#xA;AS" />
+			</Annotation>
+		</Element>
+	</Model>
+</DataSchemaModel>

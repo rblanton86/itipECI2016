@@ -125,10 +125,8 @@ namespace eciWEB2016.Models
         [Display(Name ="Referral Outcome Date")]
         public DateTime referralOutcomeDate { get; set; }
         [Display(Name ="Insurance")]
-        public List<Insurance> clientInsurance { get; set; }
+        public List<ClientInsurance> clientInsurance { get; set; }
         [Display(Name ="Insurance Authorization")]
-        public List<InsuranceAuthorization> clientInsAuths { get; set; }
-        [Display(Name ="Family")]
         public List<Family> clientFamily { get; set; }
         [Display(Name ="Staff")]
         public List<Staff> clientStaff { get; set; }
@@ -181,6 +179,10 @@ namespace eciWEB2016.Models
 
             // Contact
             phone = new AdditionalContactInfoModel();
+
+            clientDiagnosis = new List<Diagnosis>();
+
+            clientFamily = new List<Family>();
     }
 }
 }

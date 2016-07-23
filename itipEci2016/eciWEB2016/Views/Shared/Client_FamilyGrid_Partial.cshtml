@@ -8,7 +8,7 @@ Date: 07-12-2016
 Change History:
 
 ****************************************************************************/*@
-
+@model eciWEB2016.Models.Client
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
 
@@ -16,6 +16,22 @@ Change History:
     {
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
+}
+@if(currentClient.clientFamily.Count == 0)
+{
+    <p>Client has no family members yet added.</p>
+}
+else
+{
+    <ul>
+        @foreach (var family in currentClient.clientFamily)
+        {
+            <li>@Html.Label(family.familyMemberType)</li>
+            <li>@Html.TextBox(family.familyMemberType)</li>
+            <li>@Html.Label(family.firstName)</li>
+            <li>@Html.Label(family.lastName)</li>
+        }
+    </ul>
 }
 <ul>
     <li><h4>Guardian 1:</h4></li>
