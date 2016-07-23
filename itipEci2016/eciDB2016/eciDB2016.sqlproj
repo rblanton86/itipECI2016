@@ -437,6 +437,11 @@
     <None Include="v1\Release\Sprint 5\Schema\alt_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint 5\Schema\init_TypeTableData.sql" />
     <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AdditionalContactInfo.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AllMemberType.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AllAdditionalContactInfoType.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AllAddressTypes.sql" />
+    <Build Include="v1\Source\Stored_Procedures\get_AllStatus.sql" />
+    <Build Include="v1\Source\Stored_Procedures\upd_StaffAltID.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Stored_Procedures\del_Clients.sql" />

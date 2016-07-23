@@ -1,23 +1,23 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from MemberType
-	 
+Description: Stored Procedure to pull type information from Status
+
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	7.14.16
+	7.121.16
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_MemberType]
-	@memberTypeID int
+CREATE PROCEDURE [dbo].[get_AllStatus]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(memberType, ' ') AS memberType
-			FROM MemberType
-			WHERE memberTypeID = @memberTypeID
+			SELECT ISNULL(clientStatus, ' ') AS clientStatus,
+					ISNULL(clientStatusID, 1) AS clientStatusID
+
+			FROM ClientStatus
 
 		END TRY
 		BEGIN CATCH
@@ -34,5 +34,4 @@ AS
 
 		END CATCH
 	END
-
 

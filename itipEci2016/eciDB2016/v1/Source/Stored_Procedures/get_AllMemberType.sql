@@ -4,20 +4,19 @@ Description: Stored Procedure to pull type information from MemberType
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	7.14.16
+	7.121.16
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_MemberType]
-	@memberTypeID int
+CREATE PROCEDURE [dbo].[get_AllMemberType]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(memberType, ' ') AS memberType
+			SELECT ISNULL(memberType, ' ') AS memberType,
+					ISNULL(memberTypeID, 0) AS memberTypeID
 			FROM MemberType
-			WHERE memberTypeID = @memberTypeID
 
 		END TRY
 		BEGIN CATCH

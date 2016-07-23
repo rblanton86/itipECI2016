@@ -403,7 +403,7 @@ namespace eciWEB2016.Controllers.DataControllers
             {
                 DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
 
-                db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressType);
+                db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisClient.clientAddress.addressesType);
                 db.AddInParameter(ins_Addresses, "@address1", DbType.String, thisClient.clientAddress.address1);
                 db.AddInParameter(ins_Addresses, "@address2", DbType.String, thisClient.clientAddress.address2);
                 db.AddInParameter(ins_Addresses, "@city", DbType.String, thisClient.clientAddress.city);

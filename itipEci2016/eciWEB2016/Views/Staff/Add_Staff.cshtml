@@ -23,15 +23,10 @@ Change History:
         <div id="target"></div>
         <ul class="flex">          
             <li>
-                <label>Staff Alt ID:</label>
-                @Html.TextBoxFor(Staff => Staff.staffAltID)
+                <label>Staff Type:</label>
+                @Html.DropDownListFor(Staff => Staff.staffTypeID, (SelectList)ViewBag.staffTypeList, "--select--")
                 <label>Status</label>
-                <select>
-                    <option>A</option>
-                </select>
-                <label>Office</label><select>
-                    <option value="1">Some Option</option>
-                </select>
+                @Html.DropDownListFor(Staff => Staff.status, (SelectList)ViewBag.statusList, "--select--")
             </li>
             <li>
                 <label>Last Name: </label>
@@ -43,7 +38,7 @@ Change History:
             </li>
             <li>
                 <label>Date of Birth:</label>
-                @Html.TextBoxFor(Staff => Staff.DOB)
+                @Html.TextBoxFor(Staff => Staff.DOB, new { @class = "datefield" })
                 <label>SSN:</label>
                 @Html.TextBoxFor(Staff => Staff.SSN)
             </li>
@@ -121,4 +116,11 @@ Change History:
 }
 
 
+@section JavaScript {
 
+    <script>
+        $(function () {
+            $(".datefield").datepicker();
+        })
+    </script>
+}

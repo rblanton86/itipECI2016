@@ -54,7 +54,7 @@ namespace eciWEB2016.Class
             List<Address> AddressList = (from drRow in ds.Tables[0].AsEnumerable()
                                          select new Address()
                                          {
-                                             addressType = drRow.Field<string>(""),
+                                             addressesType = drRow.Field<string>(""),
                                              address1 = drRow.Field<string>(""),
                                              address2 = drRow.Field<string>(""),
                                              city = drRow.Field<string>(""),

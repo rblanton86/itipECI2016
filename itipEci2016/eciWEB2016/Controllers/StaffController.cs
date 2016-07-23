@@ -53,7 +53,10 @@ namespace eciWEB2016.Controllers
                              firstName = drRow.Field<string>("firstName"),
                              lastName = drRow.Field<string>("lastName"),
                              fullName = drRow.Field<string>("firstName") + " " + drRow.Field<string>("lastName"),
-                             staffID = drRow.Field<int>("staffID")
+                             staffID = drRow.Field<int>("staffID"),
+                             status = drRow.Field<int>("staffStatus"),
+                             staffAltID = drRow.Field<string>("staffAltID")
+                             
                          }).ToList();
             //stores the list in the session
                 System.Web.HttpContext.Current.Session["staffList"] = staff;
@@ -107,8 +110,12 @@ namespace eciWEB2016.Controllers
             // staffMember = dataController.getStaffMember(Convert.ToInt32(staffMember.staffID));
             System.Web.HttpContext.Current.Session["staffMember"] = staffMember;
 
+            ViewBag.statusList = GetStatusList();
+
             return PartialView("Staff_Partial");
         }
+
+
 
         //used to fill webgrid with staff details
         public ActionResult Staff_Time_Headers(string staffID)
@@ -160,54 +167,85 @@ namespace eciWEB2016.Controllers
         public ActionResult Add_Staff()
         {
             Staff blankStaff = new Staff();
-
+            ViewBag.statusList = GetStatusList();
+            ViewBag.staffTypeList = GetStaffTypeList();
             return View(blankStaff);
+        }
+
+        //populates a staff type dropdown
+        public SelectList GetStaffTypeList()
+        {
+            SelectList staffTypeList;
+            StaffDataController dataController = new StaffDataController();
+
+            staffTypeList = dataController.GetStaffTypeList();
+
+            return new SelectList(staffTypeList, "Value", "Text", new Staff().staffTypeID);
+        }
+
+        //populates a status dropdown
+        public SelectList GetStatusList()
+        {
+            SelectList statusList;
+            StaffDataController dataController = new StaffDataController();
+
+            statusList = dataController.GetStatusList();
+
+            return new SelectList(statusList, "Value", "Text", new Staff().status);
         }
 
         public ActionResult StaffAdditionalContactInfoPartial()
         {
             ViewBag.contactTypeList = GetContactTypeList();
+            ViewBag.memberTypeList = GetMemberTypeList();
 
             return PartialView();
         }
 
-        public SelectList GetContactTypeList()
+        //populates drop down for member type
+        public SelectList GetMemberTypeList()
         {
-            var optionHome = new SelectListItem()
-            {
-                Text = "Home",
-                Value = "home"
-            };
 
-            var optionCell = new SelectListItem()
-            {
-                Text = "Cell",
-                Value = "cell"
-            };
+            SelectList memberList;
+            StaffDataController dataController = new StaffDataController();
 
-            var optionWork = new SelectListItem()
-            {
-                Text = "Work",
-                Value = "work"
-            };
+            memberList = dataController.GetMemberTypeList();
 
-            List<SelectListItem> contactList = new List<SelectListItem>();
-
-            contactList.Add(optionHome);
-            contactList.Add(optionCell);
-            contactList.Add(optionWork);
-
-            return new SelectList(contactList, "Value", "Text");
-
-
+            return new SelectList(memberList, "Value", "Text", new AdditionalContactInfoModel().memberTypeID);
         }
 
+        //populates drop down list for contact info type
+        public SelectList GetContactTypeList()
+        {
+            SelectList contactList;
+            StaffDataController dataController = new StaffDataController();
+
+            contactList = dataController.GetContactTypeList();
+
+            return new SelectList(contactList, "Value", "Text", new AdditionalContactInfoModel().additionalContactInfoTypeID);
+        }
+        //returns partial view for inserting addresses
         public ActionResult StaffAddressPartial()
         {
             Address thisAddress = new Address();
 
+            ViewBag.addressTypeList = GetAddressTypeList();
+
             return PartialView(thisAddress);
         }
+
+        //Populates a dropdown for address types
+        public SelectList GetAddressTypeList()
+        {
+            SelectList addressList;
+            StaffDataController dataController = new StaffDataController();
+
+            addressList = dataController.GetAddressTypeList();
+
+            return new SelectList(addressList, "Value", "Text", new Address().addressTypeID);
+        }
+        //populates address type list
+
         // POST: Staff/Create
         [HttpPost]
         public ActionResult CreateStaffMember(Staff staff, Address address, AdditionalContactInfoModel aci)
@@ -240,52 +278,28 @@ namespace eciWEB2016.Controllers
             }
             else
             {
-                
+             
                 blankStaff = (Staff)Session["staffMember"];
-                blankStaff.staffAddress = blankAddress;
-                Session["staffMember"] = blankStaff;
             }
             ViewBag.staffList = GetStaffList();
+            ViewBag.statusList = GetStatusList();
 
             return View();
         }
 
-        // POST: Staff/Edit/5
         [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public ActionResult staffUpdate(Staff staff, Address address, AdditionalContactInfoModel aci)
         {
-            try
-            {
-                // TODO: Add update logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            bool success;
+
+            StaffDataController dataController = new StaffDataController();
+
+            success = dataController.InsertStaff(staff, address, aci);
+
+            return Content(success.ToString());
+
         }
-
-        // GET: Staff/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: Staff/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
-            try
-            {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
+        
     }
 }

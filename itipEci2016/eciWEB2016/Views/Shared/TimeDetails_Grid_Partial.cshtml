@@ -1,0 +1,33 @@
+﻿
+@model  List<eciWEB2016.Models.TimeDetailModel>
+<div id="gridTimeDetailContent" style="font-family: Arial; padding: 10px;">
+    @{
+        var grid = new WebGrid(ajaxUpdateContainerId: "gridTimeDetailContent");
+
+        if (Model != null && Model.Count > 0)
+        {
+            grid = new WebGrid(source: Model, rowsPerPage: 10, ajaxUpdateContainerId: "gridTimeDetailContent", defaultSort: "timeHeaderID");
+            //grid.Pager(WebGridPagerModes.All);
+        }
+        else
+        {
+            List<eciWEB2016.Models.TimeDetailModel> detailList = new List<eciWEB2016.Models.TimeDetailModel>();
+            grid = new WebGrid(source: detailList, rowsPerPage: 10, ajaxUpdateContainerId: "gridTimeDetailContent", defaultSort: "timeHeaderID");
+            @:No Data to display
+        }
+
+    }
+
+    @grid.GetHtml(tableStyle: "gTable",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    selectedRowStyle: "webgrid-selected-row",
+    rowStyle: "webgrid-row-style",
+    columns: grid.Columns(
+    grid.Column(columnName: "actualTime", header: "Actual Time"),
+    grid.Column(columnName: "insuranceTime", header: "Insurance Time"),
+    grid.Column(columnName: "placeOfService", header: "Place of Service"),
+    grid.Column(columnName: "canceled", header: "Canceled")
+    ))
+</div>

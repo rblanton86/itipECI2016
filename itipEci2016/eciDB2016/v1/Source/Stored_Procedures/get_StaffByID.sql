@@ -15,6 +15,9 @@ AS
 	BEGIN
 		BEGIN TRY
 
+		DECLARE @memberID int
+		SET @memberID = @staffID
+
 		SELECT 
 				ISNULL(staff.staffID, 1) AS staffID,
 				ISNULL(staff.staffTypeID, 1) AS staffTypeID,
@@ -41,7 +44,7 @@ AS
 				ISNULL(addrt.addressesType, ' ') AS addressesType,
  
 				ISNULL(aci.additionalContactInfo, ' ') AS additionalContactInfo,
-				ISNULL(aci.additionalContactInfoID, 0) AS addtionalContactInfoID,
+				ISNULL(aci.additionalContactInfoID, 0) AS additionalContactInfoID,
 				ISNULL(aci.additionalContactInfoTypeID, 0) AS additionalContactInfoTypeID,
 				ISNULL(acit.additionalContactInfoType, ' ') AS additionalContactInfoType
 
@@ -53,7 +56,7 @@ AS
 				LEFT JOIN AddressesType addrt ON
 					addr.addressesTypeID = addrt.addressesTypeID
 				LEFT JOIN AdditionalContactInfo aci ON
-					staff.additionalContactInfoID = aci.additionalContactInfoID
+					staff.staffID = aci.memberID AND aci.memberTypeID = 3
 				LEFT JOIN AdditionalContactInfoType acit ON
 					aci.additionalContactInfoTypeID = acit.additionalContactInfoTypeID
 
