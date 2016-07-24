@@ -349,6 +349,9 @@
     <Content Include="Views\Shared\Client_FamilyGrid_Partial.cshtml" />
     <Content Include="Views\Shared\Client_PhysicianGrid_Partial.cshtml" />
     <Content Include="Views\Shared\Client_DiagnosisGrid_Partial.cshtml" />
+    <Content Include="Views\Shared\StaffAddressPartial.cshtml" />
+    <Content Include="Views\Shared\StaffAdditionalContactInfoPartial.cshtml" />
+    <Content Include="Views\Shared\TimeDetails_Grid_Partial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

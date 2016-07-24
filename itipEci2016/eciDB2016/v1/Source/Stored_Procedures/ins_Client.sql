@@ -6,22 +6,21 @@ Author:
 Date: 
 	6.21.16
 Change History:
-	07-11-2016: -- jmg -- Added sexID, officeID, addressesID, altID, intakeDate, ifspDate, compSvcDate,
+	07-11-2016: JMG - Added sexID, officeID, addressesID, altID, intakeDate, ifspDate, compSvcDate,
 			serviceAreaException, tkidsCaseNumber, consentToRelease, eci, and accountingSystemID columns.
+	07-22-2015: JMG - Removed commentsID, as is no longer on Clients table. Selected outputting clientID and
+			returned value as output.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_Client]
-	@clientsID INT,
+ALTER PROCEDURE [dbo].[ins_Client]
 	@raceID INT,
 	@ethnicityID INT,
 	@clientStatusID INT,
 	@primaryLanguageID INT,
 	@schoolInfoID INT,
-	@commentsID INT,
 	@communicationPreferencesID INT,
 	@sexID INT,
 	@officeID INT,
 	@addressesID INT,
-	@altID VARCHAR(25),
 	@firstName VARCHAR(20),
 	@middleInitial VARCHAR(1),
 	@lastName VARCHAR(20),
@@ -36,7 +35,9 @@ CREATE PROCEDURE [dbo].[ins_Client]
 	@consentToRelease BIT,
 	@eci VARCHAR(25),
 	@accountingSystemID VARCHAR(25),
-	@success BIT OUTPUT
+	@success BIT OUTPUT,
+	@clientID INT OUTPUT,
+	@altID VARCHAR(25)
 
 AS
 	BEGIN
@@ -53,12 +54,10 @@ AS
 								clientStatusID,
 								primaryLanguageID,
 								schoolInfoID,
-								commentsID,
 								communicationPreferencesID,
 								sexID,
 								officeID,
 								addressesID,
-								altID,
 								firstName,
 								middleInitial,
 								lastName,
@@ -80,12 +79,10 @@ AS
 						@clientStatusID,
 						@primaryLanguageID,
 						@schoolInfoID,
-						@commentsID,
 						@communicationPreferencesID,
 						@sexID,
 						@officeID,
 						@addressesID,
-						@altID,
 						@firstName,
 						@middleInitial,
 						@lastName,
@@ -101,6 +98,36 @@ AS
 						@eci,
 						@accountingSystemID 
 						)
+
+					SET @clientID = ( SELECT clientID
+										FROM Clients
+										WHERE raceID = @raceID AND
+												ethnicityID = @ethnicityID AND
+												clientStatusID = @clientStatusID AND
+												primaryLanguageID = @primaryLanguageID AND
+												schoolInfoID = @schoolInfoID AND
+												communicationPreferencesID = @communicationPreferencesID AND
+												sexID = @sexID AND
+												officeID = @officeID AND
+												addressesID = @addressesID AND
+												altID = @altID AND
+												firstName = @firstName AND
+												middleInitial = @middleInitial AND
+												lastName = @lastName AND
+												dob = @dob AND
+												ssn = @ssn AND
+												referralSource = @referralSource AND
+												intakeDate = @intakeDate AND
+												ifspDate = @ifspDate AND
+												compSvcDate = @compSvcDate AND
+												serviceAreaException = @serviceAreaExeption AND
+												tkidsCaseNumber = @tkidsCaseNumber AND
+												consentToRelease = @consentToRelease AND
+												eci = @eci AND
+												accountingSystemID = @accountingSystemID
+									)
+
+					SET @success = 1
 				END
 			ELSE
 				BEGIN

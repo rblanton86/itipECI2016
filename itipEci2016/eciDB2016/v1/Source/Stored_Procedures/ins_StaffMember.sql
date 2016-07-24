@@ -8,59 +8,61 @@ Date:
 Change History:
 	7.15.2016 -tpc- Added memberTypeID 
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_StaffMember]
+ALTER PROCEDURE [dbo].[ins_StaffMember]
 	@staffTypeID int,
 	@addressesID int,
 	@memberTypeID int,
-	@additionalContactInfoID int,
-	@firstName varchar(500),
-	@lastName varchar(500),
-	@staffAltID int,
+	@firstName varchar(25),
+	@lastName varchar(25),
+	@staffAltID varchar(25),
 	@deleted bit,
 	@handicapped bit,
 	@ssn int,
 	@dob date,
-	@success bit OUTPUT
+	@staffStatus int,
+	@staffID int OUTPUT
 	
 AS
 	BEGIN
 		BEGIN TRY
 		
-		IF EXISTS (SELECT * FROM Staff WHERE (ssn <> @ssn) OR (firstName <> @firstName AND lastName <> @lastName AND dob <> @dob))
+		IF EXISTS (SELECT * FROM Staff WHERE (ssn = @ssn) OR (firstName = @firstName AND lastName = @lastName AND dob = @dob))
 			BEGIN
-
-				SET @success = 1
-
-				INSERT Staff (staffTypeID, 
+				RETURN 0		
+			END
+		ELSE
+			BEGIN
+			INSERT Staff (staffTypeID, 
 								addressesID, 
-								memberTypeID,
-								additionalContactInfoID, 
+								memberTypeID, 
 								firstName, 
 								lastName, 
 								staffAltID,
 								deleted,
 								handicapped,
 								ssn,
+								staffStatus,
 								dob)
 
 				VALUES (@staffTypeID, 
 						@addressesID, 
 						@memberTypeID,
-						@additionalContactInfoID, 
 						@firstName, 
 						@lastName, 
 						@staffAltID,
 						@deleted,
 						@handicapped,
 						@ssn,
+						@staffStatus,
 						@dob)
-			END
-		ELSE
-			BEGIN
-				SET @success = 0
-			END
 
-			RETURN @success
+				SET @staffID = (SELECT staffID FROM Staff Where firstName = @firstName AND
+																	lastName = @lastName AND
+																	staffAltID = @staffAltID AND
+																	ssn = @ssn)
+
+			RETURN @staffID
+		END
 
 		END TRY
 		BEGIN CATCH

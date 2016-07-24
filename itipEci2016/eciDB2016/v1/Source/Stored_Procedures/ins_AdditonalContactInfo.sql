@@ -8,47 +8,39 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_AdditionalContactInfo]
+alter PROCEDURE [dbo].[ins_AdditionalContactInfo]
 	@memberTypeID int,
 	@additionalContactInfoTypeID int,
 	@additionalContactInfo varchar (25),
 	@deleted bit,
-	@aciID int OUTPUT
+	@memberID int
 	
 AS
 	BEGIN
 		BEGIN TRY
 			
 			IF EXISTS(SELECT * FROM AdditionalContactInfo WHERE 
-						memberTypeID <> @memberTypeID
-						AND	 additionalContactInfoTypeID <> @additionalContactInfo
-						AND additionalContactInfo <> @additionalContactInfo
+						memberTypeID = @memberTypeID
+						AND	 additionalContactInfoTypeID = @additionalContactInfo
+						AND additionalContactInfo = @additionalContactInfo
 						)
-				BEGIN
-
+			BEGIN
+				RETURN 
+			END
+		ELSE
+			BEGIN
 					INSERT AdditionalContactInfo (memberTypeID, 
 													additionalContactInfoTypeID, 
 													additionalContactInfo,
+													memberID,
 													deleted)
 
 					VALUES (@memberTypeID, 
 							@additionalContactInfoTypeID, 
 							@additionalContactInfo,
+							@memberID,
 							@deleted)
 			
-					SET @aciID = (
-
-						SELECT additionalContactInfoID FROM AdditionalContactInfo
-				
-							WHERE	memberTypeID = @memberTypeID
-									AND	 additionalContactInfoTypeID = @additionalContactInfo
-									AND additionalContactInfo = @additionalContactInfo
-									)
-					RETURN @aciID
-			END
-		ELSE
-			BEGIN
-				RETURN 0
 			END
 
 		END TRY

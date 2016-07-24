@@ -6,21 +6,20 @@ Author:
 Date: 
 	6.23.16
 Change History:
-	
+	07/22/2016: JMG - Added familyMemberID output. Removed additionalContactInfoID.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_FamilyMember]
+ALTER PROCEDURE [dbo].[ins_FamilyMember]
 	@familyMemberTypeID int,
 	@firstName varchar (25),
 	@lastName varchar (25),
 	@isGuardian bit,
-	@additionalContactInfoID int,
 	@sexID int,
-	@deleted bit,
 	@raceID bit,
 	@occupation varchar(50),
 	@employer varchar(50),
 	@dob DATE,
-	@success bit OUTPUT
+	@success bit OUTPUT,
+	@familyMemberID INT OUTPUT
 
 
 AS
@@ -33,12 +32,10 @@ AS
 				SET @success = 1
 
 				INSERT FamilyMember (familyMemberTypeID,
-										additionalContactInfoID,
 										firstName,
 										lastName,
 										isGuardian,
 										sexID,
-										deleted,
 										raceID,
 										occupation,
 										employer,
@@ -46,21 +43,35 @@ AS
 										)
 									
 				VALUES (@familyMemberTypeID,
-						@additionalContactInfoID,
 						@firstName,
 						@lastName,
 						@isGuardian,
 						@sexID,
-						@deleted,
 						@raceID,
 						@occupation,
 						@employer,
 						@dob)
-				
+
+				SET @familyMemberID = (
+					SELECT familyMemberID
+						FROM FamilyMember
+						WHERE familyMemberTypeID = @familyMemberTypeID AND
+										firstName = @firstName AND
+										lastName = @lastName AND
+										isGuardian = @isGuardian AND
+										sexID = @sexID AND
+										raceID = @raceID AND
+										occupation = @occupation AND
+										employer = @employer AND
+										dob = @dob
+										)
+
+				SET @success = 1
+								
 				END
 			ELSE
 				BEGIN
-					SET @success = 0 
+					SET @success = 0
 				END	
 
 			RETURN @success

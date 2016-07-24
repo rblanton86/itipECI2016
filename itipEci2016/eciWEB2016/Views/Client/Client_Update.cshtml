@@ -38,8 +38,33 @@
         </ul>
     </div>
 </div>
-<div class="main" id="clientMain">
-    @Html.Partial("Client_Partial")
+<div class="main">
+    <div id="clientMain">
+        @Html.Partial("Client_Partial")
+    </div>
+    <ul class="flex">
+        <li>
+            <button type="button">Insurance Update</button>
+        </li>
+        <li>
+            <button type="button">Cost Share and DRS</button>
+        </li>
+        <li>
+            <button type="button">Credit Card Update</button>
+        </li>
+    </ul>
+    <div id="diagnosisGridContainer">
+        @Html.Partial("Client_DiagnosisGrid_Partial")
+    </div>
+    <div id="clientPhysicianContainer">
+        @Html.Partial("Client_PhysicianMedical_Partial")
+    </div>
+    <div id="familyGridContainer">
+        @Html.Partial("Client_FamilyGrid_Partial")
+    </div>
+    <div id="physicianGridContainer">
+        @Html.Partial("Client_PhysicianGrid_Partial")
+    </div>
 </div>
 @section JavaScript
 {

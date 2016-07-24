@@ -1,23 +1,22 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from MemberType
+Description: Stored Procedure to pull type information from additionalContactInfoType
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
-	7.14.16
+	7.21.16
 Change History:
 	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[get_MemberType]
-	@memberTypeID int
+CREATE PROCEDURE [dbo].[get_AllAdditionalContactInfoType]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(memberType, ' ') AS memberType
-			FROM MemberType
-			WHERE memberTypeID = @memberTypeID
+			SELECT ISNULL(additionalContactInfoType, ' ') AS additionalContactInfoType,
+					ISNULL(additionalContactInfoTypeID, 0) AS additionalContactInfoTypeID
+			FROM AdditionalContactInfoType
 
 		END TRY
 		BEGIN CATCH
@@ -34,5 +33,4 @@ AS
 
 		END CATCH
 	END
-
 

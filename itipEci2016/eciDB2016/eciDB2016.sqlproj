@@ -102,6 +102,8 @@
     <None Include="v1\Source\Schema\init_CommentsType.sql" />
     <None Include="v1\Source\Schema\init_LnkAddressMember.sql" />
     <None Include="v1\Source\Schema\del_LnkFamilyAddresses.sql" />
+    <None Include="v1\Source\Stored_Procedures\upd_Diagnosis.sql" />
+    <None Include="v1\Source\Stored_Procedures\ins_Diagnosis.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -437,6 +439,8 @@
     <None Include="v1\Release\Sprint 5\Schema\alt_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint 5\Schema\init_TypeTableData.sql" />
     <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AdditionalContactInfo.sql" />
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_FamilyMember.sql" />
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_Client.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Stored_Procedures\del_Clients.sql" />

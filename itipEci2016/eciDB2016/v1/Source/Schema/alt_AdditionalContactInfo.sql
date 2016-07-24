@@ -6,7 +6,8 @@ Author: Jennifer M Graves
 Date: 07-05-2016
 
 Change History:
-		07-05-2016 -- jmg: Added deleted bit column to table.
+		07-05-2016: JMG - Added deleted bit column to table.
+		07-21-2016: JMG - Added memberID column.
 ****************************************************************************/
 
 -- Declares the table variable for additionalContactInfo
@@ -55,9 +56,17 @@ ELSE
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @aci = OBJECT_ID AND name = 'updDate')
 			BEGIN
-				ALTER TABLE AdditionalContactInfo ADD CONSTRAINT
-				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
-				PRINT 'Altered updDate column: Added Constraint'
+
+				IF EXISTS (SELECT * FROM INFORMATION_SCHEMA WHERE CONSTRAINT_NAME = 'DF_MyTable_Inserted')
+					BEGIN
+						PRINT 'updDate Column not added or updated, exists and is correct.'
+					END
+				ELSE
+					BEGIN
+						ALTER TABLE AdditionalContactInfo ADD CONSTRAINT
+							DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+						PRINT 'Altered updDate column: Added Constraint'
+					END
 			END
 		ELSE
 			BEGIN

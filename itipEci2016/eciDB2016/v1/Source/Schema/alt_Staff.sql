@@ -117,6 +117,17 @@ ELSE
 				PRINT 'Added memberTypeID column to table.'
 			END
 
+			IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name ='staffStatus')
+			BEGIN
+				PRINT 'staffStatus already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Staff
+					ADD staffStatus INT 
+				PRINT 'Added staffStatus column to table.'
+			END
+
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @staff = OBJECT_ID AND name ='updDate')
 			BEGIN

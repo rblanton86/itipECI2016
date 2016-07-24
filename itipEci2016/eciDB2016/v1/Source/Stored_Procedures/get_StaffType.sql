@@ -8,18 +8,17 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_StaffType]
-	@staffTypeID int
+ALTER PROCEDURE [dbo].[get_StaffType]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(staffType, ' ')
+			SELECT ISNULL(staffType, ' ') AS staffType,
+				ISNULL(staffTypeID, 1) AS staffTypeID
 
 			FROM StaffType
 
-			WHERE staffTypeID = @staffTypeID
 
 		END TRY
 		BEGIN CATCH

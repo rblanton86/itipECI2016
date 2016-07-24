@@ -1,4 +1,5 @@
 ﻿
+@model eciWEB2016.Models.Staff
 @{
     eciWEB2016.Models.Staff currentStaffMember = new eciWEB2016.Models.Staff();
     //pull staffmember from session and store in variable
@@ -11,14 +12,9 @@
 <ul class="flex">
 
     <li>
-        <label>Staff ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
-        <label>Status</label><select>
-            <option value="1">A</option>
-            <option value="2">I</option>
-        </select>
-        <label>Office</label><select>
-            <option value="1">Some Option</option>
-        </select>
+        <label>Staff Alt ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
+        <label>Status</label>
+        @Html.DropDownListFor(Staff => Staff.status, (SelectList)ViewBag.statusList, "--select--", new { @Value = currentStaffMember.status })
     </li>
     <li>
         
@@ -35,7 +31,8 @@
 <ul>
     <span>
         <li>
-            <label>Address:</label><input type="Text" name="staffAddress" value="@currentStaffMember.staffAddress.address1">
+            <label>Address:</label>
+                @Html.TextBoxFor(Staff => Staff.staffAddress.address1, null, new { Value = currentStaffMember.staffAddress.address1})
             <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.staffAddress.zip">
             <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.staffAddress.city">
             <label>State:</label><select>
@@ -43,7 +40,7 @@
             </select>
         </li>
         <li>
-            <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="">
+            <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="@currentStaffMember.staffContact.additionalContactInfo">
             <label>Cell:</label><input type="Text" name="staffCell">
             <label>Work:</label><input type="Text" name="staffWork">
         </li>
@@ -107,3 +104,19 @@
         <label>Comments:</label><input type="Text" size=50>
     </li>
 </ul>
+
+@section JavaScript
+{
+    <script>
+
+            $(document).ready(function () {
+
+                $("#status").change(function () {
+                    var staffID = $("#staffListID").val();
+                    $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
+                        $('#gridContent').replaceWith(data);
+                    });
+                });
+            });
+    </script>
+}

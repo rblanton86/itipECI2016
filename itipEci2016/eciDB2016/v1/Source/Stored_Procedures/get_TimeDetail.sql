@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_TimeDetail]
+ALTER PROCEDURE [dbo].[get_TimeDetail]
 	@timeHeaderID int
 	
 AS
@@ -27,7 +27,7 @@ AS
 					ISNULL(tcm, ' ') AS tcm,
 					ISNULL(canceled, ' ') AS canceled,
 					updDate,
-					deleted
+					ISNULL(deleted, 0) AS deleted
 
 			FROM TimeDetail
 			WHERE timeHeaderID = @timeHeaderID AND deleted <> 1

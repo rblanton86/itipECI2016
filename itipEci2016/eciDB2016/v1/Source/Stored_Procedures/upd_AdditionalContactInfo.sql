@@ -8,10 +8,11 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[upd_AdditionalContactInfo]
+ALTER PROCEDURE [dbo].[upd_AdditionalContactInfo]
 	@additionalContactInfoID int,
 	@additionalContactInfo varchar (25),
-	@additionalContactInfoTypeID int
+	@additionalContactInfoTypeID int,
+	@deleted bit
 
 	
 AS
@@ -21,7 +22,8 @@ AS
 			UPDATE AdditionalContactInfo
 			
 			SET	additionalContactInfo = @additionalContactInfo,
-				additionalContactInfoTypeID = @additionalContactInfoTypeID
+				additionalContactInfoTypeID = @additionalContactInfoTypeID,
+				deleted = @deleted
 
 			WHERE additionalContactInfoID = @additionalContactInfoID
 			

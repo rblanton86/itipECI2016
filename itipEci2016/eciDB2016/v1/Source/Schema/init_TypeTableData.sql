@@ -7,7 +7,66 @@ Date: 07/12/2010
 
 Change History:
 	07-13-2016: JMG - Added MemberType values.
+	07-21-2016: JMG - Added CommunicationPreferences and School Information values.
 ****************************************************************************/
+IF EXISTS(SELECT * FROM CommunicationPreferences)
+	BEGIN
+		PRINT 'Did Not create office types, already exist.'
+	END
+ELSE
+	BEGIN
+		DELETE FROM DiagnosisType
+		DECLARE @m VARCHAR(MAX)
+		SELECT @m =
+			'SET IDENTITY_INSERT CommunicationPreferences ON;
+			INSERT INTO CommunicationPreferences(communicationPreferencesID, communicationPreferences)
+				VALUES (1, ''Home Phone''),
+					(2, ''Mobile Phone''),
+					(3, ''Work Phone''),
+					(4, ''Email''),
+					(5, ''Mail'')
+			SET IDENTITY_INSERT CommunicationPreferences OFF;'
+		EXEC(@m)
+		PRINT 'CommunicationPreferences table values added.'
+		SELECT * FROM CommunicationPreferences
+	END
+
+IF EXISTS(SELECT * FROM SchoolInformation)
+	BEGIN
+		PRINT 'Did Not create office types, already exist.'
+	END
+ELSE
+	BEGIN
+		DELETE FROM DiagnosisType
+		DECLARE @n VARCHAR(MAX)
+		SELECT @n =
+			'SET IDENTITY_INSERT SchoolInformation ON;
+			INSERT INTO SchoolInformation(schoolInfoID, isd)
+				VALUES (1, ''Unknown'')
+			SET IDENTITY_INSERT SchoolInformation OFF;'
+		EXEC(@n)
+		PRINT 'SchoolInformation table values added.'
+		SELECT * FROM SchoolInformation
+	END
+
+IF EXISTS(SELECT * FROM Office)
+	BEGIN
+		PRINT 'Did Not create office types, already exist.'
+	END
+ELSE
+	BEGIN
+		DELETE FROM DiagnosisType
+		DECLARE @o VARCHAR(MAX)
+		SELECT @o =
+			'SET IDENTITY_INSERT Office ON;
+			INSERT INTO Office(officeID, officeName)
+				VALUES (1, ''Main'')
+			SET IDENTITY_INSERT Office OFF;'
+		EXEC(@o)
+		PRINT 'Office table values added.'
+		SELECT * FROM Office
+	END
+
 DELETE FROM DiagnosisType
 DECLARE @p VARCHAR(MAX)
 SELECT @p =

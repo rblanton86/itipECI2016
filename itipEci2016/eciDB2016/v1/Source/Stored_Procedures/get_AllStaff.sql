@@ -8,7 +8,7 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllStaff]
+ALTER PROCEDURE [dbo].[get_AllStaff]
 	
 AS
 	BEGIN
@@ -20,6 +20,7 @@ AS
 				ISNULL(staff.additionalContactInfoID, 1) AS additionalContactInfoID,
 				ISNULL(staff.firstName, ' ') AS firstName,
 				ISNULL(staff.lastName, ' ') AS lastName,
+				ISNULL(staff.staffStatus, 1) AS staffStatus,
 				ISNULL(staff.handicapped, 0) AS handicapped,
 				ISNULL(staff.staffAltID, ' ') AS staffAltID,
 				ISNULL(staff.sexID, 1) AS sexID,

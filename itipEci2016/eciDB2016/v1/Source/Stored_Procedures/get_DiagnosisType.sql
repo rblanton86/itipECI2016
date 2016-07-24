@@ -6,18 +6,18 @@ Author:
 Date: 
 	7.14.16
 Change History:
-	
+	07/21/206: JMG - Updated procedure to pull types and typeIDs.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_DiagnosisType]
-	@diagnosisTypeID int
+CREATE PROCEDURE [dbo].[get_DiagnosisTypes]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(diagnosisType, ' ')
+			SELECT ISNULL(diagnosisType, ' ') AS diagnosisType,
+				ISNULL(diagnosisTypeID, 0) AS diagnosisTypeID
+			
 			FROM DiagnosisType
-			WHERE diagnosisTypeID = @diagnosisTypeID
 
 		END TRY
 		BEGIN CATCH

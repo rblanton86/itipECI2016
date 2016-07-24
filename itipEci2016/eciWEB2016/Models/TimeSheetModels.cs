@@ -25,11 +25,11 @@ namespace eciWEB2016.Models
         public int timeDetailID { get; set; }
         public int timeHeaderID { get; set; }
         public int clientID { get; set; }
-        public float actualTime { get; set; }
+        public decimal actualTime { get; set; }
         public string eciCode { get; set; }
         public string insuranceDesignation { get; set; }
         public string cptCode { get; set; }
-        public float insuranceTime { get; set; }
+        public decimal insuranceTime { get; set; }
         public string placeOfService { get; set; }
         public string tcm { get; set; }
         public string canceled { get; set; }
@@ -44,5 +44,6 @@ namespace eciWEB2016.Models
         public int staffID { get; set; }
         public string weekEnding { get; set; }
         public bool deleted { get; set; }
+        public List<TimeDetailModel> TimeDetails { get; set; }
     }
 }

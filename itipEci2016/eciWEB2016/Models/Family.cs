@@ -10,16 +10,29 @@ namespace eciWEB2016.Models
     {
         [Required]
         public int familyMemberID { get; set; }
+        public int familyMemberTypeID { get; set; }
         public string familyMemberType { get; set; }
         public string firstName { get; set; }
         public string lastName { get; set; }
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of Birth")]
         public DateTime dob { get; set; }
-        public string sex { get; set; }
-        public string race { get; set; }
+        public int sexID { get; set; }
+        public int raceID { get; set; }
         public bool isGuardian { get; set; }
         public string occupation { get; set; }
         public string employer { get; set; }
         public List<AdditionalContactInfoModel> familyContact { get; set; }
         public List<Address> familyAddrs { get; set; }
+
+        public Family()
+        {
+            familyMemberID = 0;
+            familyMemberTypeID = 1;
+            familyMemberType = "";
+            firstName = "";
+            lastName = "";
+            dob = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+        }
     }
 }

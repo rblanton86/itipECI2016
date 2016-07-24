@@ -23,19 +23,14 @@ Change History:
         <div id="target"></div>
         <ul class="flex">          
             <li>
-                <label>Staff ID:</label><Input type="text" name="staffID" >
-                <label>Status</label><select>
-                    <option value="1">A</option>
-                    <option value="2">I</option>
-                </select>
-                <label>Office</label><select>
-                    <option value="1">Some Option</option>
-                </select>
+                <label>Staff Type:</label>
+                @Html.DropDownListFor(Staff => Staff.staffTypeID, (SelectList)ViewBag.staffTypeList, "--select--")
+                <label>Status</label>
+                @Html.DropDownListFor(Staff => Staff.status, (SelectList)ViewBag.statusList, "--select--")
             </li>
             <li>
                 <label>Last Name: </label>
                 @Html.TextBoxFor(Staff => Staff.firstName)  
-                @Html.ValidationMessage("Name")
                 <label> First Name: </label>              
                 @Html.TextBoxFor(Staff => Staff.lastName)
                 <label> Middle Initial: </label>
@@ -43,36 +38,19 @@ Change History:
             </li>
             <li>
                 <label>Date of Birth:</label>
-                @Html.TextBoxFor(Staff => Staff.DOB)
+                @Html.TextBoxFor(Staff => Staff.DOB, new { @class = "datefield" })
                 <label>SSN:</label>
                 @Html.TextBoxFor(Staff => Staff.SSN)
             </li>
         </ul>
         <ul>
             <span>
-                <li>
-                    <label>Address:</label>
-                    @Html.TextBoxFor(Staff => Staff.address1)
-                    <label>Zip:</label>
-                    @Html.TextBoxFor(Staff => Staff.zip)
-                    <label>City:</label>
-                    @Html.TextBoxFor(Staff => Staff.city)
-                    <label>State:</label>
-                    @Html.TextBoxFor(Staff => Staff.state)
-                    <select>
-                        <option value="1">AL</option>
-                    </select>
-                </li>
-                <li>
-                    <label>Home:</label>
-                
-                    <label>Work ID:</label>
+                @{Html.RenderAction("StaffAddressPartial","Staff");
+                }
+                @{ Html.RenderAction("StaffAdditionalContactInfoPartial", "Staff");
+                }
 
-                    <label>Cell:</label>
- 
-                </li>
-
-            </span>
+            </span>e
             <li>
                 <label>Sex:</label><select>
                     <option value="1">M</option>
@@ -138,4 +116,11 @@ Change History:
 }
 
 
+@section JavaScript {
 
+    <script>
+        $(function () {
+            $(".datefield").datepicker();
+        })
+    </script>
+}
