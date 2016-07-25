@@ -61,7 +61,7 @@ namespace eciWEB2016.Controllers.DataControllers
             var selectList = (from drRow in ds.Tables[0].AsEnumerable()
                               select new SelectListItem()
                               {
-                                  Text = drRow.Field<string>("office"),
+                                  Text = drRow.Field<string>("officeName"),
                                   Value = drRow.Field<int>("officeID").ToString()
 
                               }).ToList();
@@ -69,108 +69,108 @@ namespace eciWEB2016.Controllers.DataControllers
             return new SelectList(selectList, "Value", "Text");
         }
 
-        public SelectList GetSexList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllSex");
+        //public SelectList GetSexList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllSex");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("sex"),
-                                  Value = drRow.Field<int>("sexID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("sex"),
+        //                          Value = drRow.Field<int>("sexID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
         
-        public SelectList GetRaceList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllRace");
+        //public SelectList GetRaceList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllRace");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("race"),
-                                  Value = drRow.Field<int>("raceID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("race"),
+        //                          Value = drRow.Field<int>("raceID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
 
-        public SelectList GetEthnicityList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllEthnicity");
+        //public SelectList GetEthnicityList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllEthnicity");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("ethnicity"),
-                                  Value = drRow.Field<int>("ethnicityID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("ethnicity"),
+        //                          Value = drRow.Field<int>("ethnicityID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
-        public SelectList GetClientStatusList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllClientStatus");
+        //public SelectList GetClientStatusList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllClientStatus");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("clientStatus"),
-                                  Value = drRow.Field<int>("clientStatusID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("clientStatus"),
+        //                          Value = drRow.Field<int>("clientStatusID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
-        public SelectList GetCommunicationPreferencesList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllCommunicationPreferences");
+        //public SelectList GetCommunicationPreferencesList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllCommunicationPreferences");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("communicationPreferences"),
-                                  Value = drRow.Field<int>("communicationPreferencesID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("communicationPreferences"),
+        //                          Value = drRow.Field<int>("communicationPreferencesID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
-        public SelectList GetContactTypeList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllContactType");
+        //public SelectList GetContactTypeList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllContactType");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("contactType"),
-                                  Value = drRow.Field<int>("contactTypeID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("contactType"),
+        //                          Value = drRow.Field<int>("contactTypeID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
         public SelectList GetStateCodeList()
         {
@@ -230,56 +230,56 @@ namespace eciWEB2016.Controllers.DataControllers
             return stateCodeList;
         }
 
-        public SelectList GetFamilyMemberTypeList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllFamilyMemberType");
+        //public SelectList GetFamilyMemberTypeList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllFamilyMemberType");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("familyFamilyMemberType"),
-                                  Value = drRow.Field<int>("familyFamilyMemberTypeID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("familyFamilyMemberType"),
+        //                          Value = drRow.Field<int>("familyFamilyMemberTypeID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
-        public SelectList GetPrimaryLanguageList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllPrimaryLanguage");
+        //public SelectList GetPrimaryLanguageList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllPrimaryLanguage");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("PrimaryLanguage"),
-                                  Value = drRow.Field<int>("PrimaryLanguageID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("PrimaryLanguage"),
+        //                          Value = drRow.Field<int>("PrimaryLanguageID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
-        public SelectList GetSchoolInfoList()
-        {
-            DbCommand dbCommand = db.GetStoredProcCommand("get_AllSchoolInfo");
+        //public SelectList GetSchoolInfoList()
+        //{
+        //    DbCommand dbCommand = db.GetStoredProcCommand("get_AllSchoolInfo");
 
-            DataSet ds = db.ExecuteDataSet(dbCommand);
+        //    DataSet ds = db.ExecuteDataSet(dbCommand);
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("schoolInfo"),
-                                  Value = drRow.Field<int>("schoolInfoID").ToString()
+        //    var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+        //                      select new SelectListItem()
+        //                      {
+        //                          Text = drRow.Field<string>("schoolInfo"),
+        //                          Value = drRow.Field<int>("schoolInfoID").ToString()
 
-                              }).ToList();
+        //                      }).ToList();
 
-            return new SelectList(selectList, "Value", "Text");
-        }
+        //    return new SelectList(selectList, "Value", "Text");
+        //}
 
 
         /************************************************************************** CREATE ********************************************************/

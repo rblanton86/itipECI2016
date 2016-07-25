@@ -225,7 +225,6 @@
     <Compile Include="Models\AccountViewModels.cs" />
     <Compile Include="Models\AdditionalContactInfoModel.cs" />
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\ClientViewModel.cs" />
     <Compile Include="Models\Comments.cs" />
     <Compile Include="Models\ContactInfoModel.cs" />
     <Compile Include="Models\Client.cs" />

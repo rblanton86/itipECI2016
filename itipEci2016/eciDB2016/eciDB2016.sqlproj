@@ -105,6 +105,7 @@
     <None Include="v1\Source\Stored_Procedures\upd_Diagnosis.sql" />
     <None Include="v1\Source\Stored_Procedures\ins_Diagnosis.sql" />
     <None Include="v1\Source\Schema\alt_ErrorLog.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllOffice.cs.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -458,5 +459,8 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint 5\Stored_Procedures\del_Addresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AllOffice.cs.sql" />
   </ItemGroup>
 </Project>

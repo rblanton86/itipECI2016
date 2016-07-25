@@ -33,17 +33,17 @@ namespace eciWEB2016.Controllers
             }
 
             ViewBag.officeList = GetOfficeList();
-            ViewBag.sexList = GetSexList();
-            ViewBag.raceList = GetRaceList();
-            ViewBag.ethnicityList = GetEthnicityList();
-            ViewBag.clientStatusList = GetClientStatusList();
-            ViewBag.communicationPreferencesList = GetCommunicationPreferencesList();
-            ViewBag.contactTypeList = GetContactTypeList();
-            ViewBag.stateCodeList = GetStateCodeList();
-            ViewBag.familyMemberTypeList = GetFamilyMemberTypeList();
-            ViewBag.staffTypeList = GetStaffTypeList();
-            ViewBag.primaryLanguageList = GetPrimaryLanguageList();
-            ViewBag.schoolInfoList = GetSchoolInfoList();
+            //ViewBag.sexList = GetSexList();
+            //ViewBag.raceList = GetRaceList();
+            //ViewBag.ethnicityList = GetEthnicityList();
+            //ViewBag.clientStatusList = GetClientStatusList();
+            //ViewBag.communicationPreferencesList = GetCommunicationPreferencesList();
+            //ViewBag.contactTypeList = GetContactTypeList();
+            //ViewBag.stateCodeList = GetStateCodeList();
+            //ViewBag.familyMemberTypeList = GetFamilyMemberTypeList();
+            //ViewBag.staffTypeList = GetStaffTypeList();
+            //ViewBag.primaryLanguageList = GetPrimaryLanguageList();
+            //ViewBag.schoolInfoList = GetSchoolInfoList();
 
             return View(client);
         }
@@ -55,61 +55,61 @@ namespace eciWEB2016.Controllers
             return new SelectList(officeList, "Value", "Text", new OfficeModel().officeID);
         }
 
-        public SelectList GetSexList()
-        {
-            SelectList sexList = dataController.GetSexList();
+        //public SelectList GetSexList()
+        //{
+        //    SelectList sexList = dataController.GetSexList();
 
-            return new SelectList(sexList, "Value", "Text", new SexModel().sexID);
-        }
+        //    return new SelectList(sexList, "Value", "Text", new SexModel().sexID);
+        //}
 
-        public SelectList GetRaceList()
-        {
-            SelectList raceList = dataController.GetRaceList();
+        //public SelectList GetRaceList()
+        //{
+        //    SelectList raceList = dataController.GetRaceList();
 
-            return new SelectList(raceList, "Value", "Text", new RaceModel().raceID);
-        }
+        //    return new SelectList(raceList, "Value", "Text", new RaceModel().raceID);
+        //}
 
-        public SelectList GetEthnicityList()
-        {
-            SelectList ethnicityList = dataController.GetEthnicityList();
+        //public SelectList GetEthnicityList()
+        //{
+        //    SelectList ethnicityList = dataController.GetEthnicityList();
 
-            return new SelectList(ethnicityList, "Value", "Text", new EthnicityModel().ethnicityID);
-        }
+        //    return new SelectList(ethnicityList, "Value", "Text", new EthnicityModel().ethnicityID);
+        //}
 
-        public SelectList GetClientStatusList()
-        {
-            SelectList clientStatusList = dataController.GetClientStatusList();
+        //public SelectList GetClientStatusList()
+        //{
+        //    SelectList clientStatusList = dataController.GetClientStatusList();
 
-            return new SelectList(clientStatusList, "Value", "Text", new ClientStatusModel().clientStatusID);
-        }
+        //    return new SelectList(clientStatusList, "Value", "Text", new ClientStatusModel().clientStatusID);
+        //}
 
-        public SelectList GetCommunicationPreferencesList()
-        {
-            SelectList communicationPreferencesList = dataController.GetCommunicationPreferencesList();
+        //public SelectList GetCommunicationPreferencesList()
+        //{
+        //    SelectList communicationPreferencesList = dataController.GetCommunicationPreferencesList();
 
-            return new SelectList(communicationPreferencesList, "Value", "Text", new CommunicationPreferencesModel().communicationPreferencesID);
-        }
+        //    return new SelectList(communicationPreferencesList, "Value", "Text", new CommunicationPreferencesModel().communicationPreferencesID);
+        //}
 
-        public SelectList GetContactTypeList()
-        {
-            SelectList contactTypeList = dataController.GetContactTypeList();
+        //public SelectList GetContactTypeList()
+        //{
+        //    SelectList contactTypeList = dataController.GetContactTypeList();
 
-            return new SelectList(contactTypeList, "Value", "Text", new ContactTypeModel().contactTypeID);
-        }
+        //    return new SelectList(contactTypeList, "Value", "Text", new ContactTypeModel().contactTypeID);
+        //}
 
-        public SelectList GetStateCodeList()
-        {
-            SelectList stateCodeList = dataController.GetStateCodeList();
+        //public SelectList GetStateCodeList()
+        //{
+        //    SelectList stateCodeList = dataController.GetStateCodeList();
 
-            return new SelectList(stateCodeList, "Value", "Text", new StateCodeModel().stateCodeID);
-        }
+        //    return new SelectList(stateCodeList, "Value", "Text", new StateCodeModel().stateCodeID);
+        //}
 
-        public SelectList GetFamilyMemberTypeList()
-        {
-            SelectList familyMemberTypeList = dataController.GetFamilyMemberTypeList();
+        //public SelectList GetFamilyMemberTypeList()
+        //{
+        //    SelectList familyMemberTypeList = dataController.GetFamilyMemberTypeList();
 
-            return new SelectList(familyMemberTypeList, "Value", "Text", new FamilyMemberTypeModel().familyMemberTypeID);
-        }
+        //    return new SelectList(familyMemberTypeList, "Value", "Text", new FamilyMemberTypeModel().familyMemberTypeID);
+        //}
 
         public SelectList GetStaffTypeList()
         {
@@ -119,19 +119,19 @@ namespace eciWEB2016.Controllers
             return new SelectList(staffTypeList, "Value", "Text");
         }
 
-        public SelectList GetPrimaryLanguageList()
-        {
-            SelectList primaryLanguageList = dataController.GetPrimaryLanguageList();
+        //public SelectList GetPrimaryLanguageList()
+        //{
+        //    SelectList primaryLanguageList = dataController.GetPrimaryLanguageList();
 
-            return new SelectList(primaryLanguageList, "Value", "Text", new PrimaryLanguageModel().primaryLanguageID);
-        }
+        //    return new SelectList(primaryLanguageList, "Value", "Text", new PrimaryLanguageModel().primaryLanguageID);
+        //}
 
-        public SelectList GetSchoolInfoList()
-        {
-            SelectList schoolInfoList = dataController.GetSchoolInfoList();
+        //public SelectList GetSchoolInfoList()
+        //{
+        //    SelectList schoolInfoList = dataController.GetSchoolInfoList();
 
-            return new SelectList(schoolInfoList, "Value", "Text", new SchoolInfoModel().schoolInfoID);
-        }
+        //    return new SelectList(schoolInfoList, "Value", "Text", new SchoolInfoModel().schoolInfoID);
+        //}
 
         [HttpGet]
         [ActionName("GetAjaxClientList")]
