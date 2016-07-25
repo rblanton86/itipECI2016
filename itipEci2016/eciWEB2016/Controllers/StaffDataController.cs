@@ -247,10 +247,10 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Staff, "@staffID", DbType.String, thisStaff.staffID);
                 db.AddInParameter(upd_Staff, "@firstName", DbType.String, thisStaff.firstName);
                 db.AddInParameter(upd_Staff, "@lastName", DbType.String, thisStaff.lastName);
-                db.AddInParameter(upd_Staff, "@handicapped", DbType.Boolean, thisStaff.handicapped);
+                db.AddInParameter(upd_Staff, "@handicapped", DbType.Boolean, 0);
                 db.AddInParameter(upd_Staff, "@staffAltID", DbType.String, thisStaff.staffAltID);
                 db.AddInParameter(upd_Staff, "@deleted", DbType.Boolean, thisStaff.deleted);
-                db.AddInParameter(upd_Staff, "@staffSSN", DbType.String, thisStaff.firstName);
+                db.AddInParameter(upd_Staff, "@staffSSN", DbType.Int32, thisStaff.SSN);
 
                 db.ExecuteNonQuery(upd_Staff);
 
@@ -355,7 +355,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 DbCommand upd_StaffAltID = db.GetStoredProcCommand("upd_StaffAltID");
 
                 db.AddInParameter(upd_StaffAltID, "@staffID", DbType.Int32, staffID);
-                db.AddInParameter(upd_StaffAltID, "@staffAltID", DbType.String, staffID);
+                db.AddInParameter(upd_StaffAltID, "@staffAltID", DbType.String, staffAltID);
                 db.ExecuteNonQuery(upd_StaffAltID);
 
                 return true;

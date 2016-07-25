@@ -24,7 +24,7 @@
     selectedRowStyle: "webgrid-selected-row",
     rowStyle: "webgrid-row-style",
     columns: grid.Columns(
-    grid.Column(columnName: "staffAltID", header: "Staff Alt ID"),
+    grid.Column(columnName: "staffID", header: "Staff Alt ID"),
     grid.Column(columnName: "weekEnding", header: "Week Ending"),
     grid.Column("Select", format: (item) => Html.ActionLink("Select", "StaffTimeSheet", "TimeSheet", new { timeHeaderID = item.timeHeaderID }, null)
     )))
