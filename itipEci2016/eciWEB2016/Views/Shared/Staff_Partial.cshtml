@@ -10,7 +10,6 @@
 }
 
 <ul class="flex">
-
     <li>
         <label>Staff Alt ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
         <label>Status</label>
@@ -18,13 +17,17 @@
     </li>
     <li>
         
-        <label>Staff Last Name:</label><input type="Text" name="staffLast" value="@currentStaffMember.lastName">
-        <label>Staff First Name:</label><input type="Text" name="staffFirst" value="@currentStaffMember.firstName">
-        <label>Middle Initial:</label><input type="Text" size=1 name="staffMidInit" value="@currentStaffMember.middleInitial">
+        <label>Staff Last Name:</label>
+        @Html.TextBoxFor(Staff => Staff.lastName, new { Value = currentStaffMember.lastName})
+        <label>Staff First Name:</label>
+        @Html.TextBoxFor(Staff => Staff.firstName, new { Value = currentStaffMember.firstName })
+        <label>Middle Initial:</label>
+        @Html.TextBoxFor(Staff => Staff.middleInitial, new { Value = currentStaffMember.middleInitial })
     </li>
 
     <li>
-        <label>Date of Birth:</label><input type="Text" name="staffDOB" value="@currentStaffMember.DOB.ToString("yyyy-MM-dd")">
+        <label>Date of Birth:</label>
+        <input type="Text" name="staffDOB" value="@currentStaffMember.DOB.ToString("yyyy-MM-dd")">
         <label>SSN:</label><input type="Text" size=1 name="staffSSN" value="@currentStaffMember.SSN">
     </li>
 </ul>
@@ -32,15 +35,18 @@
     <span>
         <li>
             <label>Address:</label>
-                @Html.TextBoxFor(Staff => Staff.staffAddress.address1, null, new { Value = currentStaffMember.staffAddress.address1})
-            <label>Zip:</label><input type="Text" size=3 name="staffZip" value="@currentStaffMember.staffAddress.zip">
-            <label>City:</label><input type="Text" size=8 name="staffCity" value="@currentStaffMember.staffAddress.city">
+            @Html.TextBoxFor(Staff => Staff.staffAddress.address1, null, new { Value = currentStaffMember.staffAddress.address1})
+            <label>Zip:</label>
+            @Html.TextBoxFor(Staff => Staff.staffAddress.zip, new { Value = currentStaffMember.staffAddress.zip })
+            <label>City:</label>
+            @Html.TextBoxFor(Staff => Staff.staffAddress.city, new { Value = currentStaffMember.staffAddress.city })
             <label>State:</label><select>
                 <option value="1">AL</option>
             </select>
         </li>
         <li>
-            <label>Home Phone:</label><input type="Text" name="StaffHomePhone" value="@currentStaffMember.staffContact.additionalContactInfo">
+            <label>Home Phone:</label>
+            @Html.TextBoxFor(Staff => Staff.staffContact.additionalContactInfo, new { Value = currentStaffMember.staffContact.additionalContactInfo })
             <label>Cell:</label><input type="Text" name="staffCell">
             <label>Work:</label><input type="Text" name="staffWork">
         </li>

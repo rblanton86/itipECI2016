@@ -15,17 +15,18 @@ Change History:
 @using TimeSheetController = eciWEB2016.Controllers.TimeSheetController
 @model eciWEB2016.Models.Staff
 
-
+@using (Ajax.BeginForm("staffUpdate", "Staff", new AjaxOptions { UpdateTargetId = "targets" }))
+{
 <header>
     <h1>Staff Update</h1>
 </header>
 <nav>
     <button type="button" onclick="location.href='@Url.Action("Add_Staff", "Staff")'"> Add Staff </button>
     <button> Change Data </button>
-    <button> Delete Staff </button>
-    <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
+    <button type="submit"> Delete Staff </button>
+    <button>Close</button>
 </nav>
-
+<div class="targets"></div>
 <div class="center">
     @*populates the select staff member dropdown*@
     @Html.Label("Select Staff:", new { @class = "select" })
@@ -34,7 +35,7 @@ Change History:
 <div class="main">
     @Html.Partial("Staff_Partial")
 </div>
-
+}
 
 @section JavaScript
 {

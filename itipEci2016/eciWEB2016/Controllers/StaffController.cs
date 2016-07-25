@@ -295,6 +295,8 @@ namespace eciWEB2016.Controllers
 
             StaffDataController dataController = new StaffDataController();
 
+            staff.deleted = true;
+
             success = dataController.InsertStaff(staff, address, aci);
 
             return Content(success.ToString());
