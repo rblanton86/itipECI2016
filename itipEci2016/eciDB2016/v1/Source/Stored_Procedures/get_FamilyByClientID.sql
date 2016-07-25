@@ -4,7 +4,7 @@ Author: Jennifer M Graves
 Date: 07-13-2016
 Change History:
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_FamilyByClientID]
+ALTER PROCEDURE [dbo].[get_FamilyByClientID]
 	@clientID int
 
 AS
@@ -31,7 +31,7 @@ AS
 			LEFT JOIN FamilyMemberType fmt
 				ON fmt.familyMemberTypeID = fm.FamilyMemberTypeID
 
-		WHERE lcf.clientID = 4026
+		WHERE lcf.clientID = @clientID
 
 	END TRY
 	BEGIN CATCH

@@ -9,6 +9,7 @@ using eciWEB2016.Controllers.DataControllers;
 using System.Data;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using Pulzonic.Multipartial;
 
 namespace eciWEB2016.Controllers
 {
@@ -247,6 +248,8 @@ namespace eciWEB2016.Controllers
         [WebMethod(EnableSession = true)]
         public ActionResult GetClient(string identifier)
         {
+            MultipartialResult result = new MultipartialResult(this);
+
             if (Session["client"] != null)
             {
                 int clientID;
@@ -257,9 +260,12 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
+                //result.AddView("Client_Partial", "clientMain", currentClient);
+                //result.AddView("Client_FamilyGrid_Partial", "familyGridContainer", currentClient.clientFamily);
+                result.AddContent("Hello World", "clientMain");
             }
 
-            return PartialView("Client_Partial");
+            return result;
         }
 
         /************************************************************************** UPDATE ********************************************************/

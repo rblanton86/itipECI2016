@@ -89,6 +89,10 @@
       <HintPath>..\packages\Newtonsoft.Json.8.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
     </Reference>
+    <Reference Include="Pulzonic.Multipartial, Version=1.0.0.2, Culture=neutral, PublicKeyToken=59c22725941f3444, processorArchitecture=MSIL">
+      <HintPath>..\packages\Multipartial.1.0.0.2\lib\net40\Pulzonic.Multipartial.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
