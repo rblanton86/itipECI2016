@@ -106,7 +106,7 @@ namespace eciWEB2016.Controllers.DataControllers
             currentClient.clientInsurance = GetClientInsurance(thisClientID);
 
             // Calls method to return client's Insurance Authorizations as a list.
-            currentClient.clientInsAuths = GetClientInsuranceAuths(thisClientID);
+            //currentClient.clientInsAuths = GetClientInsuranceAuths(thisClientID);
 
             // Calls method to return client's Comments.
             currentClient.clientComments = GetClientComments(thisClientID);
