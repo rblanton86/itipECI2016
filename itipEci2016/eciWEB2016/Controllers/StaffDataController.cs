@@ -211,12 +211,14 @@ namespace eciWEB2016.Controllers.DataControllers
                 additionalContactInfoType = dr.Field<string>("additionalContactInfoType"),
             };
 
-            var timeHeaderList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new TimeHeaderModel()
-                              {
-                                  weekEnding = drRow.Field<string>("weekEnding")
+            //var timeHeaderList = (from drRow in ds.Tables[0].AsEnumerable()
+            //                  select new TimeHeaderModel()
+            //                  {
+            //                      weekEnding = drRow.Field<string>("weekEnding")
 
-                              }).ToList();
+            //                  }).ToList();
+
+            
 
             currentStaff.staffAddress = thisAddress;
             currentStaff.staffContact = thisContact;
@@ -352,8 +354,8 @@ namespace eciWEB2016.Controllers.DataControllers
 
                 DbCommand upd_StaffAltID = db.GetStoredProcCommand("upd_StaffAltID");
 
-                db.AddInParameter(upd_StaffAltID, "@staffID", DbType.Int32, thisStaff.staffID);
-                db.AddInParameter(upd_StaffAltID, "@staffAltID", DbType.Int32, staffID);
+                db.AddInParameter(upd_StaffAltID, "@staffID", DbType.Int32, staffID);
+                db.AddInParameter(upd_StaffAltID, "@staffAltID", DbType.String, staffID);
                 db.ExecuteNonQuery(upd_StaffAltID);
 
                 return true;

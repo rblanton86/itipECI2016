@@ -463,4 +463,41 @@
   <ItemGroup>
     <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AllOffice.cs.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Stored_Procedures\get_AllAdditionalContactInfoType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllAddressTypes.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllMemberType.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllStatus.sql" />
+    <None Include="v1\Source\Stored_Procedures\upd_StaffAltID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AllStatus.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AllMemberType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AllAdditionalContactInfoType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AllAddressTypes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_StaffType.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_Addresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Schema\alt_Staff.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_StaffMember.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_StaffByID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_AdditonalContactInfo.sql" />
+  </ItemGroup>
 </Project>

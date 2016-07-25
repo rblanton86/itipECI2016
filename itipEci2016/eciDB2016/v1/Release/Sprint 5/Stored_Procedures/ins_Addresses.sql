@@ -37,7 +37,7 @@ AS
 			
 						WHERE	addressesTypeID = @addressTypeID
 								AND address1 = @address1
-								AND address2 = ISNULL(@address2, '')
+								AND address2 = @address2 
 								AND city = @city 
 								AND st = @st 
 								AND zip = @zip
@@ -57,7 +57,7 @@ AS
 
 				VALUES (@addressTypeID, 
 						@address1, 
-						ISNULL(@address2, ''),
+						@address2, 
 						@city, 
 						@st, 
 						@zip,
@@ -68,7 +68,7 @@ AS
 			
 						WHERE	addressesTypeID = @addressTypeID
 								AND address1 = @address1
-								AND address2 = ISNULL(@address2, '')
+								AND address2 = @address2 
 								AND city = @city 
 								AND st = @st 
 								AND zip = @zip
