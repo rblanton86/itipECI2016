@@ -204,7 +204,7 @@
     <Compile Include="App_Start\IdentityConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
-    <Compile Include="Class\AddContactInfo.cs" />
+    <Compile Include="Class\AdditionalContactInfo.cs" />
     <Compile Include="Class\Addresses.cs" />
     <Compile Include="Class\SessionExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
@@ -234,6 +234,7 @@
     <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\InsuranceAuthorization.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\TypeModels.cs" />
     <Compile Include="Models\Physician.cs" />
     <Compile Include="Models\ReferralSource.cs" />
     <Compile Include="Models\ReferralViewModel.cs" />

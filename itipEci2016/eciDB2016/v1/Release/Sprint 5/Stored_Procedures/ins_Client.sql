@@ -21,6 +21,7 @@ ALTER PROCEDURE [dbo].[ins_Client]
 	@sexID INT,
 	@officeID INT,
 	@addressesID INT,
+	@altID VARCHAR(25),
 	@firstName VARCHAR(20),
 	@middleInitial VARCHAR(1),
 	@lastName VARCHAR(20),
@@ -36,8 +37,7 @@ ALTER PROCEDURE [dbo].[ins_Client]
 	@eci VARCHAR(25),
 	@accountingSystemID VARCHAR(25),
 	@success BIT OUTPUT,
-	@clientID INT OUTPUT,
-	@altID VARCHAR(25)
+	@clientID INT OUTPUT
 
 AS
 	BEGIN
@@ -58,6 +58,7 @@ AS
 								sexID,
 								officeID,
 								addressesID,
+								altID,
 								firstName,
 								middleInitial,
 								lastName,
@@ -83,6 +84,7 @@ AS
 						@sexID,
 						@officeID,
 						@addressesID,
+						@altID,
 						@firstName,
 						@middleInitial,
 						@lastName,
@@ -126,8 +128,6 @@ AS
 												eci = @eci AND
 												accountingSystemID = @accountingSystemID
 									)
-
-					SET @success = 1
 				END
 			ELSE
 				BEGIN

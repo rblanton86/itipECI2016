@@ -23,13 +23,5 @@ namespace eciWEB2016.Controllers.DataControllers
                 db = new SqlDatabase(WebConfigurationManager.ConnectionStrings["eciConnectionString"].ToString());
             }
         }
-
-        // GET: DiagnosisTypes
-        public IEnumerable<DiagnosisTypes> GetDiagnosisTypes()
-        {
-            DbCommand get_diagnosisTypes = db.GetStoredProcCommand("get_diagnosisTypes");
-
-            DataSet ds = db.ExecuteDataSet(get_diagnosisTypes);
-        }
     }
 }

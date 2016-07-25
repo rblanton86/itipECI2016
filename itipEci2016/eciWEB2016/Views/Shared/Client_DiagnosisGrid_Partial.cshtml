@@ -1,13 +1,13 @@
 ﻿@*/****************************************************************************
-Description: Client_Update diagnosis webgrid partial view.
+    Description: Client_Update diagnosis webgrid partial view.
 
-Author: Jennifer M. Graves
+    Author: Jennifer M. Graves
 
-Date: 07-12-2016
+    Date: 07-12-2016
 
-Change History:
+    Change History:
 
-****************************************************************************/*@
+    ****************************************************************************/*@
 @model eciWEB2016.Models.Client
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
@@ -17,33 +17,30 @@ Change History:
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-<ul class="flex">
-    <li>
-        @Html.LabelFor(c => c.clientDiagnosis)
-        @*@Html.DropDownListFor(c => c.clientDiagnosis)*@
-    </li>
-    <li>
-        <table>
+<h3>@Html.LabelFor(c => c.clientDiagnosis)</h3>
+@if (currentClient.clientDiagnosis.Count == 0)
+{
+    <p>Client has no diagnosis list.</p>
+}
+else
+{
+    <table>
+        <tr>
+            <th>Diagnosis Type</th>
+            <th>Diagnosis Code</th>
+            <th>Diagnosis</th>
+            <th>Diagnosis From</th>
+            <th>Diagnosis To</th>
+        </tr>
+        @foreach (var item in Model.clientDiagnosis)
+        {
             <tr>
-                <th>Diagnosis Type</th>
-                <th>Diagnosis Code</th>
-                <th>Diagnosis</th>
-                <th>Diagnosis From</th>
-                <th>Diagnosis To</th>
+                <td>@item.diagnosisType</td>
+                <td>@item.diagnosisCode</td>
+                <td>@item.diagnosisDescription</td>
+                <td>@item.diagnosisFrom</td>
+                <td>@item.diagnosisTo</td>
             </tr>
-            @foreach (var item in Model.clientDiagnosis)
-            {
-                <tr>
-                    <td>@item.diagnosisType</td>
-                    <td>@item.diagnosisCode</td>
-                    <td>@item.diagnosisDescription</td>
-                    <td>@item.diagnosisFrom</td>
-                    <td>@item.diagnosisTo</td>
-                </tr>
-            }
-        </table>
-    </li>
-    <li>
-        <button type="button">Add</button>
-    </li>
-</ul>
+        }
+    </table>
+}

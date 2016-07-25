@@ -14,6 +14,7 @@ ALTER PROCEDURE [dbo].[ins_FamilyMember]
 	@lastName varchar (25),
 	@isGuardian bit,
 	@sexID int,
+	@deleted bit,
 	@raceID bit,
 	@occupation varchar(50),
 	@employer varchar(50),
@@ -36,6 +37,7 @@ AS
 										lastName,
 										isGuardian,
 										sexID,
+										deleted,
 										raceID,
 										occupation,
 										employer,
@@ -47,6 +49,7 @@ AS
 						@lastName,
 						@isGuardian,
 						@sexID,
+						@deleted,
 						@raceID,
 						@occupation,
 						@employer,
@@ -60,6 +63,7 @@ AS
 										lastName = @lastName AND
 										isGuardian = @isGuardian AND
 										sexID = @sexID AND
+										deleted = @deleted AND
 										raceID = @raceID AND
 										occupation = @occupation AND
 										employer = @employer AND

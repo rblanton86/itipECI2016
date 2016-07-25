@@ -6,12 +6,11 @@ Author:
 Date: 
 	6.23.16
 Change History:
-	
+	07-24-2016: Removed additional contact ID int, doesn't exist on family table.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[upd_FamilyMember]
+ALTER PROCEDURE [dbo].[upd_FamilyMember]
 	@familyMemberID int,
 	@familyMemberTypeID int,
-	@additionalContactInfoID int,
 	@firstName varchar (25),
 	@lastName varchar (25),
 	@isGuardian bit
@@ -24,16 +23,11 @@ AS
 			UPDATE FamilyMember 
 			
 			SET		familyMemberTypeID = @familyMemberTypeID,
-					additionalContactInfoID = @additionalContactInfoID,
 					firstName = @firstName,
 					lastName = @lastName,
 					isGuardian = @isGuardian
 									
-			WHERE familyMemberID = @familyMemberID  
-					
-					
-					
-						
+			WHERE familyMemberID = @familyMemberID
 
 		END TRY
 		BEGIN CATCH

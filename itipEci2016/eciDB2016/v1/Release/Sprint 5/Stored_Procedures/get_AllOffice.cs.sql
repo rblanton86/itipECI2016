@@ -1,36 +1,24 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that updates address information into the Addresses Table
+Description: Stored Procedure to pull type information from Office
 	 
 Author: 
-	Tyrell Powers-Crane 
+	Jennifer M Graves
 Date: 
-	6.23.16
+	7/25/2015
 Change History:
-	07/24/2016: JMG - Corrected spelling error.
+	
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[upd_Addresses]
-	@addressesID int,
-	@addressesTypeID int,
-	@address1 varchar(20),
-	@address2 varchar(20),
-	@city varchar(15),
-	@st varchar(10),
-	@zip int
+CREATE PROCEDURE [dbo].[get_AllOffice]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			UPDATE Addresses 
+			SELECT ISNULL(officeName, ' ') AS officeName,
+				ISNULL(officeID, 1) AS officeID
 
-			SET addressesTypeID = @addressesTypeID,
-				address1 = @address1,
-				address2 = @address2,
-				city = @city,
-				st = @st,
-				zip = @zip
+			FROM Office
 
-			WHERE addressesID = @addressesID
 
 		END TRY
 		BEGIN CATCH
@@ -47,5 +35,4 @@ AS
 
 		END CATCH
 	END
-
 
