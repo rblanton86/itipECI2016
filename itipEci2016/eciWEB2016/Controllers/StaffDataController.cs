@@ -218,8 +218,6 @@ namespace eciWEB2016.Controllers.DataControllers
 
                               }).ToList();
 
-            erag
-
             currentStaff.staffAddress = thisAddress;
             currentStaff.staffContact = thisContact;
             

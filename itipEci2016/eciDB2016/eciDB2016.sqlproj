@@ -73,10 +73,10 @@
     <Folder Include="v1\Release\Sprint4\Stored_Procedures" />
     <Folder Include="v1\Source\Unused" />
     <Folder Include="v1\Source\Stored_Procedures" />
-    <Folder Include="v1\Release\Sprint3\Schema\Stored_Procedures" />
     <Folder Include="v1\Release\Sprint 5" />
     <Folder Include="v1\Release\Sprint 5\Schema" />
     <Folder Include="v1\Release\Sprint 5\Stored_Procedures" />
+    <Folder Include="v1\Release\Sprint3\Stored_Procedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Docs\eci.table.Client.pdf" />
@@ -104,6 +104,7 @@
     <None Include="v1\Source\Schema\del_LnkFamilyAddresses.sql" />
     <None Include="v1\Source\Stored_Procedures\upd_Diagnosis.sql" />
     <None Include="v1\Source\Stored_Procedures\ins_Diagnosis.sql" />
+    <None Include="v1\Source\Schema\alt_ErrorLog.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -223,9 +224,6 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Unused\del_AdditionalContactInfo.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Source\Unused\del_Addresses.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Unused\del_Comments.sql" />
@@ -386,17 +384,17 @@
     <None Include="v1\Source\Unused\ins_Race.sql" />
     <None Include="v1\Source\Unused\ins_Ethnicity.sql" />
     <None Include="v1\Source\Unused\ins_Sex.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_CommunicationPreferences.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_CommunicationPreferences.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_DiagnosisType.sql" />
   </ItemGroup>
   <ItemGroup>
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_FamilyMemberType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_MemberType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_Office.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_PrimaryLanguage.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ReferralSourceType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_StaffType.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_ClientStatus.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_FamilyMemberType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_MemberType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_Office.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_PrimaryLanguage.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ReferralSourceType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_StaffType.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_ClientStatus.sql" />
     <None Include="v1\Source\Stored_Procedures\get_ClientStatus.sql" />
     <None Include="v1\Source\Stored_Procedures\get_CommunicationPreferences.sql" />
     <None Include="v1\Source\Stored_Procedures\get_DiagnosisType.sql" />
@@ -410,17 +408,7 @@
     <None Include="v1\Source\Stored_Procedures\del_ClientByID.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AddressesByMemberID.sql" />
     <None Include="v1\Release\Sprint4\Schema\init_LnkAddressMember.sql" />
-    <Build Include="v1\Release\Sprint4\Stored_Procedures\get_AddressesByMemberID.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\get_AllClients.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\get_ClientByAltID.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\get_ClientByID.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\get_TimeDetail.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\get_TimeHeader.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\ins_AdditonalContactInfo.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\ins_Addresses.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\ins_StaffMember.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\upd_Clients.sql" />
-    <None Include="v1\Release\Sprint3\Schema\Stored_Procedures\upd_Staff.sql" />
+    <None Include="v1\Release\Sprint4\Stored_Procedures\get_AddressesByMemberID.sql" />
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_Staff.sql" />
     <None Include="v1\Release\Sprint4\Stored_Procedures\del_LnkFamilyAddresses.sql" />
     <None Include="v1\Release\Sprint4\Stored_Procedures\upd_Addresses.sql" />
@@ -441,8 +429,34 @@
     <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AdditionalContactInfo.sql" />
     <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_FamilyMember.sql" />
     <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_Client.sql" />
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\upd_FamilyMember.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\get_AllClients.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\get_ClientByAltID.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\get_ClientByID.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\get_TimeDetail.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\get_TimeHeader.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\ins_AdditonalContactInfo.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\ins_Addresses.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\ins_StaffMember.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\upd_Clients.sql" />
+    <None Include="v1\Release\Sprint3\Stored_Procedures\upd_Staff.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Stored_Procedures\del_Clients.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Schema\alt_ErrorLog.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\upd_Addresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\del_ClientByID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Stored_Procedures\del_Addresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\del_Addresses.sql" />
   </ItemGroup>
 </Project>

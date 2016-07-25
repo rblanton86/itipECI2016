@@ -47,5 +47,3 @@ AS
 
 		END CATCH
 	END
-
-

@@ -1,36 +1,27 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure that updates address information into the Addresses Table
+Description: Stored Procedure that deletes information from the Addresses Table
 	 
 Author: 
 	Tyrell Powers-Crane 
 Date: 
 	6.23.16
 Change History:
-	07/24/2016: JMG - Corrected spelling error.
+	07/24/2016: JMG - Updated and added back to stored_proc folder.
 ************************************************************************************************************/
-ALTER PROCEDURE [dbo].[upd_Addresses]
-	@addressesID int,
-	@addressesTypeID int,
-	@address1 varchar(20),
-	@address2 varchar(20),
-	@city varchar(15),
-	@st varchar(10),
-	@zip int
+CREATE PROCEDURE [dbo].[del_Addresses]
+	@addressesID INT,
+	@success BIT OUTPUT
+
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			UPDATE Addresses 
-
-			SET addressesTypeID = @addressesTypeID,
-				address1 = @address1,
-				address2 = @address2,
-				city = @city,
-				st = @st,
-				zip = @zip
-
+			UPDATE Addresses
+			SET deleted = 1
 			WHERE addressesID = @addressesID
+
+			SET @success = 1
 
 		END TRY
 		BEGIN CATCH
@@ -45,7 +36,10 @@ AS
 			
 			EXECUTE dbo.log_ErrorTimeStamp @timeStamp, @errorMessage, @errorProcedure
 
+			SET @success = 0
+
 		END CATCH
 	END
+
 
 

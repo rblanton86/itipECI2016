@@ -10,6 +10,8 @@ namespace eciWEB2016.Models
     {
         [Required]
         public int familyMemberID { get; set; }
+        public int memberTypeID { get; set; }
+        public string memberType { get; set; }
         public int familyMemberTypeID { get; set; }
         public string familyMemberType { get; set; }
         public string firstName { get; set; }
@@ -23,16 +25,24 @@ namespace eciWEB2016.Models
         public string occupation { get; set; }
         public string employer { get; set; }
         public List<AdditionalContactInfoModel> familyContact { get; set; }
-        public List<Address> familyAddrs { get; set; }
+        public List<Address> familyAddressList { get; set; }
+        public Address familyAddress { get; set; }
 
         public Family()
         {
             familyMemberID = 0;
+            memberTypeID = 2;
             familyMemberTypeID = 1;
             familyMemberType = "";
             firstName = "";
             lastName = "";
             dob = (DateTime)System.Data.SqlTypes.SqlDateTime.MinValue;
+
+            familyContact = new List<AdditionalContactInfoModel>();
+
+            familyAddressList = new List<Address>();
+
+            familyAddress = new Address();
         }
     }
 }

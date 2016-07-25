@@ -54,16 +54,16 @@
         </li>
     </ul>
     <div id="diagnosisGridContainer">
-        @Html.Partial("Client_DiagnosisGrid_Partial")
+        @Html.Partial("Client_DiagnosisGrid_Partial", currentClient.clientDiagnosis)
     </div>
     <div id="clientPhysicianContainer">
         @Html.Partial("Client_PhysicianMedical_Partial")
     </div>
     <div id="familyGridContainer">
-        @Html.Partial("Client_FamilyGrid_Partial")
+        @Html.Partial("Client_FamilyGrid_Partial", currentClient.clientFamily)
     </div>
     <div id="physicianGridContainer">
-        @Html.Partial("Client_PhysicianGrid_Partial")
+        @Html.Partial("Client_PhysicianGrid_Partial", currentClient.clientPhysicians)
     </div>
 </div>
 @section JavaScript
@@ -149,11 +149,6 @@
                         );
                 }
             });
-        })
-    </script>
-    <script>
-        $(function () {
-            $(".datefield").datepicker();
         })
     </script>
 }

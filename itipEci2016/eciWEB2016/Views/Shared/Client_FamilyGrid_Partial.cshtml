@@ -1,14 +1,15 @@
 ﻿@*/****************************************************************************
-Description: Client_Update family webgrid partial view.
+    Description: Client_Update family webgrid partial view.
 
-Author: Jennifer M. Graves
+    Author: Jennifer M. Graves
 
-Date: 07-12-2016
+    Date: 07-12-2016
 
-Change History:
+    Change History:
 
-****************************************************************************/*@
-@model eciWEB2016.Models.Client
+    ****************************************************************************/*@
+using eciWEB2016.Models
+@model List<eciWEB2016.Models.Family>
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
 
@@ -17,334 +18,97 @@ Change History:
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-@if(currentClient.clientFamily.Count == 0)
+<h4>Guardians:</h4>
+@if (currentClient.clientFamily.Count == 0)
 {
     <p>Client has no family members yet added.</p>
 }
 else
 {
-    <ul>
-        @foreach (var family in currentClient.clientFamily)
-        {
-            <li>@Html.Label(family.familyMemberType)</li>
-            <li>@Html.TextBox(family.familyMemberType)</li>
-            <li>@Html.Label(family.firstName)</li>
-            <li>@Html.Label(family.lastName)</li>
-        }
-    </ul>
+    foreach (var family in currentClient.clientFamily)
+    {
+        <div class="guardian">
+            @Html.Label(family.familyMemberType)
+            @Html.TextBox(family.familyMemberType)
+            @Html.Label(family.firstName)
+            @Html.Label(family.lastName)
+        </div>
+    }
 }
-<ul>
-    <li><h4>Guardian 1:</h4></li>
-    <li>
-        <label>Last Name:</label>
-        <input type="text" />
-    </li>
-    <li>
-        <label>First Name:</label>
-        <input type="text" />
-    </li>
-    <li>
-        <label>Relationship:</label>
-        <select>
-            <option value="1">Mother</option>
-            <option value="2">Father</option>
-        </select>
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Address 1:</label>
-        <input type="text" size="50">
-    </li>
-    <li>
-        <label>Address 2:</label>
-        <input type="text" size="50">
-    </li>
-    <li>
-        <label>City:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>State:</label>
-        <input list="states" />
-        <datalist id="states" name="state">
-            <option stateCode="AL">Alabama</option>
-            <option stateCode="AK">Alaska</option>
-            <option stateCode="AZ">Arizona</option>
-            <option stateCode="AR">Arkansas</option>
-            <option stateCode="CA">California</option>
-            <option stateCode="CO">Colorado</option>
-            <option stateCode="CT">Connecticut</option>
-            <option stateCode="DE">Delaware</option>
-            <option stateCode="DC">District Of Columbia</option>
-            <option stateCode="FL">Florida</option>
-            <option stateCode="GA">Georgia</option>
-            <option stateCode="HI">Hawaii</option>
-            <option stateCode="ID">Idaho</option>
-            <option stateCode="IL">Illinois</option>
-            <option stateCode="IN">Indiana</option>
-            <option stateCode="IA">Iowa</option>
-            <option stateCode="KS">Kansas</option>
-            <option stateCode="KY">Kentucky</option>
-            <option stateCode="LA">Louisiana</option>
-            <option stateCode="ME">Maine</option>
-            <option stateCode="MD">Maryland</option>
-            <option stateCode="MA">Massachusetts</option>
-            <option stateCode="MI">Michigan</option>
-            <option stateCode="MN">Minnesota</option>
-            <option stateCode="MS">Mississippi</option>
-            <option stateCode="MO">Missouri</option>
-            <option stateCode="MT">Montana</option>
-            <option stateCode="NE">Nebraska</option>
-            <option stateCode="NV">Nevada</option>
-            <option stateCode="NH">New Hampshire</option>
-            <option stateCode="NJ">New Jersey</option>
-            <option stateCode="NM">New Mexico</option>
-            <option stateCode="NY">New York</option>
-            <option stateCode="NC">North Carolina</option>
-            <option stateCode="ND">North Dakota</option>
-            <option stateCode="OH">Ohio</option>
-            <option stateCode="OK">Oklahoma</option>
-            <option stateCode="OR">Oregon</option>
-            <option stateCode="PA">Pennsylvania</option>
-            <option stateCode="RI">Rhode Island</option>
-            <option stateCode="SC">South Carolina</option>
-            <option stateCode="SD">South Dakota</option>
-            <option stateCode="TN">Tennessee</option>
-            <option stateCode="TX">Texas</option>
-            <option stateCode="UT">Utah</option>
-            <option stateCode="VT">Vermont</option>
-            <option stateCode="VA">Virginia</option>
-            <option stateCode="WA">Washington</option>
-            <option stateCode="WV">West Virginia</option>
-            <option stateCode="WI">Wisconsin</option>
-            <option stateCode="WY">Wyoming</option>
-            <option stateCode="AS">American Samoa</option>
-            <option stateCode="GU">Guam</option>
-            <option stateCode="MP">Northern Mariana Islands</option>
-            <option stateCode="PR">Puerto Rico</option>
-            <option stateCode="UM">United States Minor Outlying Islands</option>
-            <option stateCode="VI">Virgin Islands</option>
-        </datalist>
-    </li>
-    <li>
-        <label>Zip:</label>
-        <input list="zipCode" size="6">
-        <input type="text" size="4">
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Home Phone:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>Work Phone:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>Cell Phone:</label>
-        <input type="text">
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Email:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>Communication Preference:</label>
-        <input list="communicationPreference">
-    </li>
-    <li>
-        <label>Best to Call:</label>
-        <input list="bestToCall">
-    </li>
-    <li>
-        <label>Sex:</label>
-        <select>
-            <option value="1">M</option>
-            <option value="1">F</option>
-        </select>
-    </li>
-    <li>
-        <label>Race:</label>
-        <select></select>
-    </li>
-    <li>
-        <label>Occupation:</label>
-        <input type="Text" />
-    </li>
-    <li>
-        <label>Employer:</label>
-        <input type="Text" />
-    </li>
-</ul>
-<ul>
-    <li><h4>Guardian 2:</h4></li>
-    <li>
-        <label>Last Name:</label>
-        <input type="text" />
-    </li>
-    <li>
-        <label>First Name:</label>
-        <input type="text" />
-    </li>
-    <li>
-        <label>Relationship:</label>
-        <select>
-            <option value="1">Mother</option>
-            <option value="2">Father</option>
-        </select>
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Address 1:</label>
-        <input type="text" size="50">
-    </li>
-    <li>
-        <label>Address 2:</label>
-        <input type="text" size="50">
-    </li>
-    <li>
-        <label>City:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>State:</label>
-        <input list="states" />
-        <datalist id="states" name="state">
-            <option stateCode="AL">Alabama</option>
-            <option stateCode="AK">Alaska</option>
-            <option stateCode="AZ">Arizona</option>
-            <option stateCode="AR">Arkansas</option>
-            <option stateCode="CA">California</option>
-            <option stateCode="CO">Colorado</option>
-            <option stateCode="CT">Connecticut</option>
-            <option stateCode="DE">Delaware</option>
-            <option stateCode="DC">District Of Columbia</option>
-            <option stateCode="FL">Florida</option>
-            <option stateCode="GA">Georgia</option>
-            <option stateCode="HI">Hawaii</option>
-            <option stateCode="ID">Idaho</option>
-            <option stateCode="IL">Illinois</option>
-            <option stateCode="IN">Indiana</option>
-            <option stateCode="IA">Iowa</option>
-            <option stateCode="KS">Kansas</option>
-            <option stateCode="KY">Kentucky</option>
-            <option stateCode="LA">Louisiana</option>
-            <option stateCode="ME">Maine</option>
-            <option stateCode="MD">Maryland</option>
-            <option stateCode="MA">Massachusetts</option>
-            <option stateCode="MI">Michigan</option>
-            <option stateCode="MN">Minnesota</option>
-            <option stateCode="MS">Mississippi</option>
-            <option stateCode="MO">Missouri</option>
-            <option stateCode="MT">Montana</option>
-            <option stateCode="NE">Nebraska</option>
-            <option stateCode="NV">Nevada</option>
-            <option stateCode="NH">New Hampshire</option>
-            <option stateCode="NJ">New Jersey</option>
-            <option stateCode="NM">New Mexico</option>
-            <option stateCode="NY">New York</option>
-            <option stateCode="NC">North Carolina</option>
-            <option stateCode="ND">North Dakota</option>
-            <option stateCode="OH">Ohio</option>
-            <option stateCode="OK">Oklahoma</option>
-            <option stateCode="OR">Oregon</option>
-            <option stateCode="PA">Pennsylvania</option>
-            <option stateCode="RI">Rhode Island</option>
-            <option stateCode="SC">South Carolina</option>
-            <option stateCode="SD">South Dakota</option>
-            <option stateCode="TN">Tennessee</option>
-            <option stateCode="TX">Texas</option>
-            <option stateCode="UT">Utah</option>
-            <option stateCode="VT">Vermont</option>
-            <option stateCode="VA">Virginia</option>
-            <option stateCode="WA">Washington</option>
-            <option stateCode="WV">West Virginia</option>
-            <option stateCode="WI">Wisconsin</option>
-            <option stateCode="WY">Wyoming</option>
-            <option stateCode="AS">American Samoa</option>
-            <option stateCode="GU">Guam</option>
-            <option stateCode="MP">Northern Mariana Islands</option>
-            <option stateCode="PR">Puerto Rico</option>
-            <option stateCode="UM">United States Minor Outlying Islands</option>
-            <option stateCode="VI">Virgin Islands</option>
-        </datalist>
-    </li>
-    <li>
-        <label>Zip:</label>
-        <input list="zipCode" size="6">
-        <input type="text" size="4">
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Home Phone:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>Work Phone:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>Cell Phone:</label>
-        <input type="text">
-    </li>
-</ul>
-<ul>
-    <li>
-        <label>Email:</label>
-        <input type="text">
-    </li>
-    <li>
-        <label>Communication Preference:</label>
-        <input list="communicationPreference">
-    </li>
-    <li>
-        <label>Best to Call:</label>
-        <input list="bestToCall">
-    </li>
-    <li>
-        <label>Sex:</label>
-        <select>
-            <option value="1">M</option>
-            <option value="1">F</option>
-        </select>
-    </li>
-    <li>
-        <label>Race:</label>
-        <select></select>
-    </li>
-    <li>
-        <label>Occupation:</label>
-        <input type="Text" />
-    </li>
-    <li>
-        <label>Employer:</label>
-        <input type="Text" />
-    </li>
-</ul>
-<ul>
-    <li>
-        Sibling Information:
-    </li>
-    <li>
-        <table>
-            <tr>
-                <th>Name</th>
-                <th>Birth Date</th>
-            </tr>
-            <tr>
-                <td>Data</td>
-                <td>data</td>
-            </tr>
-        </table>
-    </li>
-    <li>
-        <label>Release Comments:</label>
-        <textarea name="familyReleaseComments" rows="20" cols="20"></textarea>
-    </li>
-</ul>
+
+<div id="addGuardian">
+    @*@Html.LabelFor(model => model)
+    @Html.TextBoxFor(model => model.lastName)
+
+
+    @Html.LabelFor(model => model.firstName)
+    @Html.TextBoxFor(model => model.firstName)*@
+
+
+    <label>Relationship:</label>
+    <select>
+        <option value="1">Mother</option>
+        <option value="2">Father</option>
+    </select>
+    
+    @*@Html.LabelFor(model => model.familyAddress.address1)
+    @Html.TextBoxFor(model => model.familyAddress.address1)*@
+
+    <label>Address 2:</label>
+    <input type="text" size="50">
+
+    <label>City:</label>
+    <input type="text">
+
+    @*@Html.DropDownListFor()*@
+
+    <label>Zip:</label>
+    <input list="zipCode" size="11">
+
+    <label>Home Phone:</label>
+    <input type="text">
+
+    <label>Work Phone:</label>
+    <input type="text">
+
+    <label>Cell Phone:</label>
+    <input type="text">
+
+    <label>Email:</label>
+    <input type="text">
+
+    <label>Communication Preference:</label>
+    <input list="communicationPreference">
+
+    <label>Best to Call:</label>
+    <input list="bestToCall">
+
+    <label>Sex:</label>
+    <select>
+        <option value="1">M</option>
+        <option value="1">F</option>
+    </select>
+
+    <label>Race:</label>
+    <select></select>
+
+    <label>Occupation:</label>
+    <input type="Text" />
+
+    <label>Employer:</label>
+    <input type="Text" />
+</div>
+
+<h4>Sibling Information:</h4>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Birth Date</th>
+    </tr>
+    <tr>
+        <td>Data</td>
+        <td>data</td>
+    </tr>
+</table>
+<label>Release Comments:</label>
+<textarea name="familyReleaseComments" rows="20" cols="20"></textarea>

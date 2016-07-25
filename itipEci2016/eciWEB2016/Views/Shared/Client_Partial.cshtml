@@ -59,7 +59,7 @@ Change History:
     </li>
     <li>
         @Html.LabelFor(c => c.dob):
-        @Html.TextBoxFor(c => c.dob, null , new { Value = client.dob, name = "dob", @class = "datefield" })
+        @Html.EditorFor(c => c.dob, null , new { Value = client.dob, name = "dob" })
     </li>
         @Html.LabelFor(c => c.sexID):
         @*@Html.DropDownListFor(c => c.sexID)*@
@@ -75,7 +75,7 @@ Change History:
     </li>
     <li>
         @Html.LabelFor(c => c.ssn):
-        @Html.TextBoxFor(c => c.ssn, null, new { Value = client.ssn, name = "ssn" })
+        @Html.EditorFor(c => c.ssn, null, new { Value = client.ssn, name = "ssn" })
     </li>
 </ul>
 <ul class="flex">
@@ -124,8 +124,8 @@ Change History:
         @Html.CheckBoxFor(c => c.serviceAreaException)
     </li>
     <li>
-        @Html.LabelFor(c => c.clientStaff):
-        @Html.TextBoxFor(c => c.clientStaff , null, new { Value = client.clientStaff, name = "caseManager" })
+        @Html.LabelFor(c => c.caseManager):
+        @* @Html.DropDownList *@
     </li>
     <li>
         @Html.LabelFor(c => c.TKIDcaseNumber):
