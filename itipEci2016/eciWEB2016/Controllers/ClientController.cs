@@ -248,7 +248,6 @@ namespace eciWEB2016.Controllers
         [WebMethod(EnableSession = true)]
         public ActionResult GetClient(string identifier)
         {
-            MultipartialResult result = new MultipartialResult(this);
 
             if (Session["client"] != null)
             {
@@ -260,12 +259,48 @@ namespace eciWEB2016.Controllers
                 ClientDataController dataController = new ClientDataController();
                 currentClient = dataController.GetClient(currentClient.clientID);
                 Session["client"] = currentClient;
-                //result.AddView("Client_Partial", "clientMain", currentClient);
-                //result.AddView("Client_FamilyGrid_Partial", "familyGridContainer", currentClient.clientFamily);
-                result.AddContent("Hello World", "clientMain");
             }
 
-            return result;
+            return PartialView("Client_Partial");
+        }
+
+        [HttpPost]
+        [ActionName("GetAjaxFamily")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetFamily(Client currentClient)
+        {
+            if (Session["client"] != null)
+            {
+                currentClient = (Client)Session["client"];
+            }
+
+            return PartialView("Client_FamilyGrid_Partial", currentClient.clientFamily);
+        }
+
+        [HttpPost]
+        [ActionName("GetAjaxDiagnosis")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetDiagnosis(Client currentClient)
+        {
+            if (Session["client"] != null)
+            {
+                currentClient = (Client)Session["client"];
+            }
+
+            return PartialView("Client_DiagnosisGrid_Partial", currentClient.clientDiagnosis);
+        }
+
+        [HttpPost]
+        [ActionName("GetAjaxPhysician")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetPhysician(Client currentClient)
+        {
+            if (Session["client"] != null)
+            {
+                currentClient = (Client)Session["client"];
+            }
+
+            return PartialView("Client_PhysicianGrid_Partial", currentClient.clientPhysicians);
         }
 
         /************************************************************************** UPDATE ********************************************************/
