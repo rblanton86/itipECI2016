@@ -1,3 +1,4 @@
+@model eciWEB2016.Models.Client
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
 
@@ -40,7 +41,7 @@
 </div>
 <div class="main">
     <div id="clientMain">
-        @Html.Partial("Client_Partial")
+        @{Html.RenderPartial("Client_Partial", Model);}
     </div>
     <ul class="flex">
         <li>
@@ -54,16 +55,16 @@
         </li>
     </ul>
     <div id="diagnosisGridContainer">
-   @*     @Html.Partial("Client_DiagnosisGrid_Partial", currentClient.clientDiagnosis)*@
+        @{Html.RenderPartial("Client_DiagnosisGrid_Partial", currentClient.clientDiagnosis);}
     </div>
     <div id="clientPhysicianContainer">
-   @*     @Html.Partial("Client_PhysicianMedical_Partial")*@
+        @*@{Html.Partial("Client_PhysicianMedical_Partial"); }*@
     </div>
     <div id="familyGridContainer">
-  @*      @Html.Partial("Client_FamilyGrid_Partial", currentClient.clientFamily)*@
+        @{Html.RenderPartial("Client_FamilyGrid_Partial", currentClient.clientFamily);}
     </div>
     <div id="physicianGridContainer">
-   @*     @Html.Partial("Client_PhysicianGrid_Partial", currentClient.clientPhysicians)*@
+        @{Html.RenderPartial("Client_PhysicianGrid_Partial", currentClient.clientPhysicians);}
     </div>
 </div>
 @section JavaScript
@@ -105,8 +106,27 @@
                     $.post(
                         url,
                         { identifier: ui.item.clientId },
-                        function (data) { $('#clientMain').html(data); }
-                        );
+                        function (data) {
+                            $('#clientMain').html(data);
+                        });
+                    var familyUrl = '@Url.Action("GetAjaxFamily", "Client")';
+                    $.post(
+                        familyUrl,
+                        function (data) {
+                            $('#familyGridContainer').html(data);
+                        });
+                    var diagnosisUrl = '@Url.Action("GetAjaxDiagnosis", "Client")';
+                    $.post(
+                        diagnosisUrl,
+                        function (data) {
+                            $('#diagnosisGridContainer').html(data);
+                        });
+                    var physicianUrl = '@Url.Action("GetAjaxPhysician", "Client")';
+                    $.post(
+                        physicianUrl,
+                        function (data) {
+                            $('#physicianGridContainer').html(data);
+                        });
                 }
             });
 

@@ -1,15 +1,15 @@
 ﻿@*/****************************************************************************
-    Description: Client_Update family webgrid partial view.
+Description: Client_Update family webgrid partial view.
 
-    Author: Jennifer M. Graves
+Author: Jennifer M. Graves
 
-    Date: 07-12-2016
+Date: 07-12-2016
 
-    Change History:
+Change History:
 
-    ****************************************************************************/*@
-using eciWEB2016.Models
-@model List<eciWEB2016.Models.Family>
+****************************************************************************/*@
+@using eciWEB2016.Models
+@model List<Family>
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
 
@@ -18,8 +18,38 @@ using eciWEB2016.Models
         currentClient = (eciWEB2016.Models.Client)Session["client"];
     }
 }
-<h4>Guardians:</h4>
-@if (currentClient.clientFamily.Count == 0)
+<h4>Guardian List:</h4>
+@{ 
+    var grid = new WebGrid(ajaxUpdateContainerId: "familyGrid");
+
+    if (Model != null && Model.Count > 0)
+    {
+        grid = new WebGrid(source: Model, rowsPerPage: 10, ajaxUpdateContainerId: "familyGrid", defaultSort: "familyMemberID");
+
+    }
+    else
+    {
+        List<Family> familyList = new List<Family>();
+        grid = new WebGrid(familyList, rowsPerPage: 10, ajaxUpdateContainerId: "familyGrid", defaultSort: "familyMemberID");
+        @:No Data to display.
+    }
+}
+
+@grid.GetHtml(tableStyle: "gTable",
+    headerStyle: "webgrid-header",
+    footerStyle: "webgrid-footer",
+    alternatingRowStyle: "webgrid-alternating-row",
+    selectedRowStyle: "webgrid-selected-row",
+    rowStyle: "webgrid-row-style",
+    columns: grid.Columns(
+        grid.Column(columnName: "firstName", header: "First Name"),
+        grid.Column(columnName: "lastName", header: "Last Name"),
+        grid.Column(columnName: "isGuardian", header: "Guardian")
+        ))
+
+
+
+@*@if (currentClient.clientFamily.Count == 0)
 {
     <p>Client has no family members yet added.</p>
 }
@@ -37,7 +67,7 @@ else
 }
 
 <div id="addGuardian">
-    @*@Html.LabelFor(model => model)
+    @Html.LabelFor(model => model)
     @Html.TextBoxFor(model => model.lastName)
 
 
@@ -45,14 +75,14 @@ else
     @Html.TextBoxFor(model => model.firstName)*@
 
 
-    <label>Relationship:</label>
+    @*<label>Relationship:</label>
     <select>
         <option value="1">Mother</option>
         <option value="2">Father</option>
     </select>
     
-    @*@Html.LabelFor(model => model.familyAddress.address1)
-    @Html.TextBoxFor(model => model.familyAddress.address1)*@
+    @Html.LabelFor(model => model.familyAddress.address1)
+    @Html.TextBoxFor(model => model.familyAddress.address1)
 
     <label>Address 2:</label>
     <input type="text" size="50">
@@ -60,7 +90,7 @@ else
     <label>City:</label>
     <input type="text">
 
-    @*@Html.DropDownListFor()*@
+    @Html.DropDownListFor()
 
     <label>Zip:</label>
     <input list="zipCode" size="11">
@@ -111,4 +141,4 @@ else
     </tr>
 </table>
 <label>Release Comments:</label>
-<textarea name="familyReleaseComments" rows="20" cols="20"></textarea>
+<textarea name="familyReleaseComments" rows="20" cols="20"></textarea>*@

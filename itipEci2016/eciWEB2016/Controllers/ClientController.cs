@@ -9,6 +9,7 @@ using eciWEB2016.Controllers.DataControllers;
 using System.Data;
 using System.Web.Script.Serialization;
 using System.Web.Services;
+using Pulzonic.Multipartial;
 
 namespace eciWEB2016.Controllers
 {
@@ -247,6 +248,7 @@ namespace eciWEB2016.Controllers
         [WebMethod(EnableSession = true)]
         public ActionResult GetClient(string identifier)
         {
+
             if (Session["client"] != null)
             {
                 int clientID;
@@ -260,6 +262,45 @@ namespace eciWEB2016.Controllers
             }
 
             return PartialView("Client_Partial");
+        }
+
+        [HttpPost]
+        [ActionName("GetAjaxFamily")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetFamily(Client currentClient)
+        {
+            if (Session["client"] != null)
+            {
+                currentClient = (Client)Session["client"];
+            }
+
+            return PartialView("Client_FamilyGrid_Partial", currentClient.clientFamily);
+        }
+
+        [HttpPost]
+        [ActionName("GetAjaxDiagnosis")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetDiagnosis(Client currentClient)
+        {
+            if (Session["client"] != null)
+            {
+                currentClient = (Client)Session["client"];
+            }
+
+            return PartialView("Client_DiagnosisGrid_Partial", currentClient.clientDiagnosis);
+        }
+
+        [HttpPost]
+        [ActionName("GetAjaxPhysician")]
+        [WebMethod(EnableSession = true)]
+        public ActionResult GetPhysician(Client currentClient)
+        {
+            if (Session["client"] != null)
+            {
+                currentClient = (Client)Session["client"];
+            }
+
+            return PartialView("Client_PhysicianGrid_Partial", currentClient.clientPhysicians);
         }
 
         /************************************************************************** UPDATE ********************************************************/

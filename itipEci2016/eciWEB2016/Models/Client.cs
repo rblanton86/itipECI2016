@@ -126,7 +126,6 @@ namespace eciWEB2016.Models
         public DateTime referralOutcomeDate { get; set; }
         [Display(Name = "Insurance")]
         public List<ClientInsurance> clientInsurance { get; set; }
-        [Display(Name = "Insurance Authorization")]
         public List<Family> clientFamily { get; set; }
         [Display(Name = "Staff")]
         public List<Staff> clientStaff { get; set; }
