@@ -44,7 +44,8 @@ namespace eciWEB2016.Controllers.DataControllers
                                timeHeaderID = drRow.Field<int>("timeHeaderID"),
                                staffID = drRow.Field<int>("staffID"),
                                weekEnding = drRow.Field<string>("weekEnding"),
-                               deleted = drRow.Field<bool>("deleted")
+                               deleted = drRow.Field<bool>("deleted"),
+                               TimeDetails = GetTimeSheet(drRow.Field<int>("timeHeaderID"))
                            }).ToList();
 
             return headers;
@@ -61,14 +62,14 @@ namespace eciWEB2016.Controllers.DataControllers
             DataSet ds = db.ExecuteDataSet(dbCommand);
 
             var details = (from drRow in ds.Tables[0].AsEnumerable()
-                           select new TimeDetailModel()
-                           {
-                               actualTime = drRow.Field<decimal>("actualTime"),
-                               insuranceTime = drRow.Field<decimal>("insuranceTime"),
-                               placeOfService = drRow.Field<string>("placeOfService"),
-                               canceled = drRow.Field<string>("canceled"),
-                               deleted = drRow.Field<bool>("deleted")
-                           }).ToList();
+                        select new TimeDetailModel()
+                        {
+                        actualTime = drRow.Field<decimal>("actualTime"),
+                        insuranceTime = drRow.Field<decimal>("insuranceTime"),
+                        placeOfService = drRow.Field<string>("placeOfService"),
+                        canceled = drRow.Field<string>("canceled"),
+                        deleted = drRow.Field<bool>("deleted")
+                    }).ToList();
 
             return details;
         }

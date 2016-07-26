@@ -16,6 +16,45 @@
         }
 
     } 
+    <style>
+    #outerGrid, #outerGrid tr {
+    border: 1px solid #0D857B;
+    }
+
+    #innerGrid, #innerGrid tr {
+    border: 1px solid #f3f3f3;
+    }
+
+    #innerGrid {
+    margin: 0px 0px 0px 10px;
+    padding: 5px;
+    width: 95%;
+    }
+
+    #innerGrid th {
+    font-size: 12px;
+    }
+
+    .hoverEff {
+    cursor: pointer;
+    }
+
+    .hoverEff:hover {
+    background-color: rgb(248, 242, 242);
+    }
+
+    .expand {
+    background-image: url(/Images/pm.png);
+    background-position-x: -22px;
+    background-repeat: no-repeat;
+    }
+
+        .collapse {
+            background-image: url(/Images/pm.png);
+            background-position-x: -2px;
+            background-repeat: no-repeat;
+        }
+        </style>
 
     @grid.GetHtml(tableStyle: "gTable",
     headerStyle: "webgrid-header",
@@ -23,9 +62,24 @@
     alternatingRowStyle: "webgrid-alternating-row",
     selectedRowStyle: "webgrid-selected-row",
     rowStyle: "webgrid-row-style",
+    htmlAttributes: new { id = "outerGrid" },
     columns: grid.Columns(
     grid.Column(columnName: "staffID", header: "Staff Alt ID"),
     grid.Column(columnName: "weekEnding", header: "Week Ending"),
-    grid.Column("Select", format: (item) => Html.ActionLink("Select", "StaffTimeSheet", "TimeSheet", new { timeHeaderID = item.timeHeaderID }, null)
+    grid.Column(columnName: null, format: @<input type="hidden" id="hiddenHeaderID" value="@item.timeHeaderID"/>),
+    grid.Column("Sheet Details", format: (item) =>
+    {
+        var secondaryGrid = new WebGrid(source: item.timeDetails);
+
+        return secondaryGrid.GetHtml(
+               tableStyle: "innerGrid",
+                htmlAttributes: new { id = "innerGrid" },
+                columns: new[] {
+                    secondaryGrid.Column(columnName: "actualTime", header: "Actual Time"),
+                    secondaryGrid.Column(columnName: "insuranceTime", header: "Insurance Time"),
+                    secondaryGrid.Column(columnName: "placeOfService", header: "Place of Service"),
+                    secondaryGrid.Column(columnName: "canceled", header: "Canceled")
+    });
+    }
     )))
 </div>

@@ -386,3 +386,49 @@ div.scroll1 {
     .selectedRow {
         background-color: #ff6a00 !important;
     }
+
+
+    th, td {
+            padding: 5px;
+        }
+
+        th {
+            background-color: rgb(248, 248, 248);
+        }
+
+        #outerGrid, #outerGrid tr {
+            border: 1px solid #0D857B;
+        }
+
+        #innerGrid, #innerGrid tr {
+            border: 1px solid #f3f3f3;
+        }
+
+        #innerGrid {
+            margin: 0px 0px 0px 10px;
+            padding: 5px;
+            width: 95%;
+        }
+
+            #innerGrid th {
+                font-size: 12px;
+            }
+
+        .hoverEff {
+            cursor: pointer;
+        }
+
+            .hoverEff:hover {
+                background-color: rgb(248, 242, 242);
+            }
+
+        .expand {
+            background-image: url(/Images/pm.png);
+            background-position-x: -22px;
+            background-repeat: no-repeat;
+        }
+
+        .collapse {
+            background-image: url(/Images/pm.png);
+            background-position-x: -2px;
+            background-repeat: no-repeat;
