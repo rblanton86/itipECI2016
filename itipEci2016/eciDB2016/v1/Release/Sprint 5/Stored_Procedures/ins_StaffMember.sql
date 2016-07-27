@@ -28,7 +28,12 @@ AS
 		
 		IF EXISTS (SELECT * FROM Staff WHERE (ssn = @ssn) OR (firstName = @firstName AND lastName = @lastName AND dob = @dob))
 			BEGIN
-				RETURN 0		
+				SET @staffID = (SELECT staffID FROM Staff 
+								Where firstName = @firstName AND
+								lastName = @lastName AND
+								staffAltID = @staffAltID AND
+								ssn = @ssn)		
+				RETURN @staffID
 			END
 		ELSE
 			BEGIN

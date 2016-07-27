@@ -15,7 +15,10 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT clnt.*
+			SELECT clnt.firstName,
+					clnt.lastName,
+					clnt.clientID,
+					clnt.altID
 
 			FROM Clients clnt
 

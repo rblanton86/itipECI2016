@@ -11,7 +11,7 @@ Change History:
 	07-11-2016: JMG - Update to stored procedure to include additionally added information.
 	07-13-2016: JMG - Updated to wrap selects in ISNULL.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_ClientByID]
+ALTER PROCEDURE [dbo].[get_ClientByID]
 	@clientID int
 
 AS

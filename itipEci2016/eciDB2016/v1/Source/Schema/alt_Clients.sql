@@ -284,18 +284,18 @@ ELSE
 		--		PRINT 'Did not drop diagnosisID column: no longer exists.'
 		--	END
 
-		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='updDate')
-			BEGIN
-				ALTER TABLE Clients ADD CONSTRAINT
-				DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
-				PRINT 'Altered updDate column: Added Constraint'
-			END
-		ELSE
-			BEGIN
-				ALTER TABLE Clients
-					ADD updDate DATETIME DEFAULT (GETDATE()) 
-				PRINT 'Added updDate column to Clients table.'
-			END
+		--IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='updDate')
+		--	BEGIN
+		--		ALTER TABLE Clients ADD CONSTRAINT
+		--		DF_MyTable_Inserted DEFAULT GETDATE() FOR updDate
+		--		PRINT 'Altered updDate column: Added Constraint'
+		--	END
+		--ELSE
+		--	BEGIN
+		--		ALTER TABLE Clients
+		--			ADD updDate DATETIME DEFAULT (GETDATE()) 
+		--		PRINT 'Added updDate column to Clients table.'
+		--	END
 
 		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='insuranceAuthID')
 			BEGIN
@@ -348,4 +348,17 @@ ELSE
 			BEGIN
 				PRINT 'Did not drop commentsID column: no longer exists.'
 			END
+
+		
+		IF EXISTS (SELECT * FROM sys.columns WHERE @clients = OBJECT_ID AND name ='officeID')
+			BEGIN
+				PRINT 'officeID already exists'
+			END
+		ELSE
+			BEGIN
+				ALTER TABLE Clients
+					ADD officeID INT FOREIGN KEY REFERENCES Office(officeID)
+				PRINT 'Added officeID column to table.'
+			END
 	END
+
