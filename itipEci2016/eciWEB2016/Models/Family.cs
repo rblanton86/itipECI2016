@@ -6,6 +6,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Family object which contains properties belonging to a family member or guardian.
+    /// </summary>
     public class Family
     {
         [Required]
@@ -28,6 +31,9 @@ namespace eciWEB2016.Models
         public List<Address> familyAddressList { get; set; }
         public Address familyAddress { get; set; }
 
+        /// <summary>
+        /// Default constructor for a family member or guardian, initiates default values to prevent errors on views containing blank family members.
+        /// </summary>
         public Family()
         {
             familyMemberID = 0;

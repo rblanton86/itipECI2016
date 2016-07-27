@@ -506,4 +506,7 @@
   <ItemGroup>
     <None Include="v1\Source\Stored_Procedures\get_AdditionalContactInfoByMemberID.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AdditionalContactInfoByMemberID.sql" />
+  </ItemGroup>
 </Project>

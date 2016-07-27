@@ -16,6 +16,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Client object which contains properties belonging to the client.
+    /// </summary>
     public class Client
     {
 
@@ -140,7 +143,9 @@ namespace eciWEB2016.Models
         [Display(Name = "Deleted")]
         public bool deleted { get; set; }
 
-        // Default constructor for client, so no null values are returned.
+        /// <summary>
+        /// Default constructor for client, so no null values are returned on initial views.
+        /// </summary>
         public Client()
         {
             raceID = 1;
