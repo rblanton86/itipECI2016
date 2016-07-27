@@ -77,6 +77,9 @@
     <Folder Include="v1\Release\Sprint 5\Schema" />
     <Folder Include="v1\Release\Sprint 5\Stored_Procedures" />
     <Folder Include="v1\Release\Sprint3\Stored_Procedures" />
+    <Folder Include="v1\Release\Sprint 6" />
+    <Folder Include="v1\Release\Sprint 6\Schema" />
+    <Folder Include="v1\Release\Sprint 6\Stored_Procedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Docs\eci.table.Client.pdf" />
