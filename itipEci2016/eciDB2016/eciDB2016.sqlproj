@@ -500,4 +500,10 @@
   <ItemGroup>
     <None Include="v1\Release\Sprint 5\Stored_Procedures\ins_AdditonalContactInfo.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\upd_StaffAltID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Source\Stored_Procedures\get_AdditionalContactInfoByMemberID.sql" />
+  </ItemGroup>
 </Project>
