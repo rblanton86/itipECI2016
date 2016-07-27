@@ -1,23 +1,23 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from Office
+Description: Stored Procedure to pull type information from Race table.
 	 
 Author: 
 	Jennifer M Graves
 Date: 
-	7/25/2015
+	7/27/2015
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllOffice]
+CREATE PROCEDURE [dbo].[get_AllRace]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(officeName, ' ') AS officeName,
-				ISNULL(officeID, 1) AS officeID
+			SELECT ISNULL(race, ' ') AS race,
+				ISNULL(raceID, 1) AS raceID
 
-			FROM Office
+			FROM Race
 
 
 		END TRY
