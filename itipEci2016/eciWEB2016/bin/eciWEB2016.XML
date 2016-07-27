@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>eciWEB2016</name>
+    </assembly>
+    <members>
+        <member name="M:eciWEB2016.Controllers.DataControllers.StaffDataController.StringTool.Truncate(System.String,System.Int32)">
+            <summary>
+            Get a substring of the first N characters.
+            </summary>
+        </member>
+        <member name="M:eciWEB2016.Controllers.DataControllers.StaffDataController.StringTool.Truncate2(System.String,System.Int32)">
+            <summary>
+            Get a substring of the first N characters. [Slow]
+            </summary>
+        </member>
+    </members>
+</doc>
