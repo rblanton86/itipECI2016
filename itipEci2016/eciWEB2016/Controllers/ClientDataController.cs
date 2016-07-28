@@ -140,9 +140,9 @@ namespace eciWEB2016.Controllers.DataControllers
 
         public SelectList GetCommunicationPreferencesList()
         {
-            DbCommand get_CommunicationPreferences = db.GetStoredProcCommand("get_CommunicationPreferences");
+            DbCommand get_AllCommunicationPreferences = db.GetStoredProcCommand("get_AllCommunicationPreferences");
 
-            DataSet ds = db.ExecuteDataSet(get_CommunicationPreferences);
+            DataSet ds = db.ExecuteDataSet(get_AllCommunicationPreferences);
 
             var selectList = (from drRow in ds.Tables[0].AsEnumerable()
                               select new SelectListItem()
@@ -239,29 +239,44 @@ namespace eciWEB2016.Controllers.DataControllers
             var selectList = (from drRow in ds.Tables[0].AsEnumerable()
                               select new SelectListItem()
                               {
-                                  Text = drRow.Field<string>("familyFamilyMemberType"),
-                                  Value = drRow.Field<int>("familyFamilyMemberTypeID").ToString()
+                                  Text = drRow.Field<string>("familyMemberType"),
+                                  Value = drRow.Field<int>("familyMemberTypeID").ToString()
 
                               }).ToList();
 
             return new SelectList(selectList, "Value", "Text");
         }
 
+        /// <summary>
+        /// Queries the database for a list of all languages defined on the database.
+        /// </summary>
+        /// <returns>SelectList of all languages defined on the database.</returns>
         public SelectList GetPrimaryLanguageList()
         {
             DbCommand get_AllPrimaryLanguages = db.GetStoredProcCommand("get_AllPrimaryLanguages");
 
-            DataSet ds = db.ExecuteDataSet(get_AllPrimaryLanguages);
+            List<SelectListItem> languageList = new List<SelectListItem>();
 
-            var selectList = (from drRow in ds.Tables[0].AsEnumerable()
-                              select new SelectListItem()
-                              {
-                                  Text = drRow.Field<string>("PrimaryLanguage"),
-                                  Value = drRow.Field<int>("PrimaryLanguageID").ToString()
+            try
+            {
+                DataSet ds = db.ExecuteDataSet(get_AllPrimaryLanguages);
 
-                              }).ToList();
+                var selectList = (from drRow in ds.Tables[0].AsEnumerable()
+                                  select new SelectListItem()
+                                  {
+                                      Text = drRow.Field<string>("PrimaryLanguage"),
+                                      Value = drRow.Field<int>("PrimaryLanguageID").ToString()
 
-            return new SelectList(selectList, "Value", "Text");
+                                  }).ToList();
+
+                languageList = selectList;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("GetPrimaryLanguageList failed, exception: {0}.", e);
+            }
+
+            return new SelectList(languageList, "Value", "Text");
         }
 
         public SelectList GetSchoolInfoList()
@@ -333,7 +348,6 @@ namespace eciWEB2016.Controllers.DataControllers
             {
                 Debug.WriteLine("InsertClient failed, exception: {0}.", e);
                 success = false;
-                throw;
             }
 
             return createdClient;
@@ -665,7 +679,7 @@ namespace eciWEB2016.Controllers.DataControllers
             // Executes the database command, returns values as a DataSet.
             DataSet dds = db.ExecuteDataSet(get_DiagnosisByClientID);
 
-            // TODO: Jen - Finish all fields.
+            // Selects diagnosis information into client object.
             List<Diagnosis> DiagnosisList = (from drRow in dds.Tables[0].AsEnumerable()
                                              select new Diagnosis()
                                              {
@@ -693,7 +707,7 @@ namespace eciWEB2016.Controllers.DataControllers
             // Executes the database command, returns values as a DataSet.
             DataSet fds = db.ExecuteDataSet(get_FamilyByClientID);
 
-            // TODO: Jen - Finish all fields.
+            // TODO: Selects family information into client object
             List<Family> FamilyList = (from drRow in fds.Tables[0].AsEnumerable()
                                        select new Family
                                        {
@@ -749,7 +763,7 @@ namespace eciWEB2016.Controllers.DataControllers
             // Executes the database command, returns values as a DataSet.
             DataSet sds = db.ExecuteDataSet(get_StaffByClientID);
 
-            // TODO: Jen - Finish all fields.
+            // Selects staff informaiton into staff list.
             List<Staff> StaffList = (from drRow in sds.Tables[0].AsEnumerable()
                                      select new Staff()
                                      {
@@ -805,7 +819,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 // Executes the database command, returns values as a DataSet.
                 DataSet iads = db.ExecuteDataSet(get_InsAuthsByClientID);
 
-                // TODO: Jen - Finish all fields.
+                // Selects InsuranceAuthorization information into an InsuranceAuthorization list.
                 var authorizations = (from drRow in iads.Tables[0].AsEnumerable()
                                       select new InsuranceAuthorization()
                                       {
@@ -835,7 +849,7 @@ namespace eciWEB2016.Controllers.DataControllers
             {
                 DataSet cds = db.ExecuteDataSet(get_CommentsByClientID);
 
-                // TODO: Jen - Finish all fields.
+                // Selects all comments into list of comments.
                 CommentsList = (from drRow in cds.Tables[0].AsEnumerable()
                                 select new Comments()
                                 {

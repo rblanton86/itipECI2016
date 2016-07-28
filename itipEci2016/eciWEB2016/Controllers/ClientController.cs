@@ -10,6 +10,7 @@ using System.Data;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 using Pulzonic.Multipartial;
+using System.Data.Common;
 
 namespace eciWEB2016.Controllers
 {
@@ -48,6 +49,7 @@ namespace eciWEB2016.Controllers
             ViewBag.stateCodeList = GetStateCodeList();
             ViewBag.familyMemberTypeList = GetFamilyMemberTypeList();
             ViewBag.staffTypeList = GetStaffTypeList();
+            ViewBag.staffList = GetStaffList();
             ViewBag.primaryLanguageList = GetPrimaryLanguageList();
             ViewBag.schoolInfoList = GetSchoolInfoList();
 
@@ -165,6 +167,14 @@ namespace eciWEB2016.Controllers
             return new SelectList(staffTypeList, "Value", "Text");
         }
 
+        public SelectList GetStaffList()
+        {
+            StaffDataController staffController = new StaffDataController();
+            SelectList staffList = staffController.GetStaffDropDown();
+
+            return new SelectList(staffList, "Value", "Text");
+        }
+
         /// <summary>
         /// Calls a method to query the database for all languages listed on the database.
         /// </summary>
@@ -202,102 +212,9 @@ namespace eciWEB2016.Controllers
             return Json(clientList, JsonRequestBehavior.AllowGet);
         }
 
-
         /************************************************************************** CREATE *******************************************************/
 
-        public ActionResult InsertClient(Client newClient)
-        {
-            // Inserts client demographics and miscellaneous client only information.
-            newClient = clientDataController.InsertClient(newClient);
-
-            // Inserts client's address.
-            newClient = clientDataController.InsertClientAddress(newClient);
-
-            // Inserts all family members attached to the new client's family list.
-            for (var family = 0; family <= newClient.clientFamily.Count; family++)
-            {
-                newClient.clientFamily[family] = clientDataController.InsertClientFamily(newClient.clientFamily[family], newClient.clientID);
-            }
-
-            // Inserts all insurances attached to the new Client.
-            for (var insurance = 0; insurance <= newClient.clientInsurance.Count; insurance++)
-            {
-                newClient.clientInsurance[insurance] = clientDataController.InsertClientInsurance(newClient.clientInsurance[insurance], newClient.clientID);
-            }
-
-            // Inserts all staff attached to the new Client.
-            for (var staff = 0; staff <= newClient.clientStaff.Count; staff++)
-            {
-                newClient.clientStaff[staff] = clientDataController.InsertClientStaff(newClient.clientStaff[staff], newClient.clientID);
-            }
-
-            // Inserts all diagnoses attached to the new Client.
-            for (var diagnosis = 0; diagnosis <= newClient.clientDiagnosis.Count; diagnosis++)
-            {
-                newClient.clientDiagnosis[diagnosis] = clientDataController.InsertClientDiagnosis(newClient.clientDiagnosis[diagnosis], newClient.clientID);
-            }
-
-            // Inserts all physicians attached to the new Client.
-            for (var physician = 0; physician <= newClient.clientDiagnosis.Count; physician++)
-            {
-                newClient.clientPhysicians[physician] = clientDataController.InsertClientPhysician(newClient.clientPhysicians[physician], newClient.clientID);
-            }
-
-            // Inserts all comments attached to the new Client.
-            for (var comments = 0; comments <= newClient.clientComments.Count; comments++)
-            {
-                newClient.clientComments[comments] = clientDataController.InsertClientComments(newClient.clientComments[comments], newClient.clientID, newClient.memberTypeID);
-            }
-
-
-            // Updates the current in session client to the newly created client.
-            Session["client"] = newClient;
-
-            return View("Referral", newClient);
-        }
-
-        public ActionResult InsertClientFamily(Family newFamilyMember)
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientInsurance()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientInsAuth()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientStaff()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientDiagnosis()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientComments()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientPhysician()
-        {
-
-
-            return View();
-        }
+        // Clients are created on the referral page, see Referral Controller for Create methods.
 
         /************************************************************************** READ ********************************************************/
         [HttpPost]

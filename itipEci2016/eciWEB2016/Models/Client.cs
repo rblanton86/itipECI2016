@@ -93,12 +93,6 @@ namespace eciWEB2016.Models
         public bool serviceAreaException { get; set; }
         [Display(Name = "ECI")]
         public bool ECI { get; set; }
-        [Display(Name = "Referral Reason")]
-        public string referralReason { get; set; }
-        [Display(Name = "Referral Comments")]
-        public string referralComments { get; set; }
-        [Display(Name = "Referral Outcome")]
-        public string referralOutcome { get; set; }
         [Display(Name = "Other FA to ITIPFA")]
         public bool otherFAtoITIPFA { get; set; }
         [Display(Name = "ITIP Comp to ITIPFA")]
@@ -115,31 +109,42 @@ namespace eciWEB2016.Models
         [DataType(DataType.Date)]
         [Display(Name = "ECI Referred Date")]
         public DateTime ECIReferredDate { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Referral Date")]
-        public DateTime referralDate { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Referral Due Date")]
-        public DateTime referralDueDate { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Previous Referral Date")]
-        public DateTime prevReferralDate { get; set; }
-        [DataType(DataType.Date)]
-        [Display(Name = "Referral Outcome Date")]
-        public DateTime referralOutcomeDate { get; set; }
         [Display(Name = "Insurance")]
+
+
         public List<ClientInsurance> clientInsurance { get; set; }
+
+
         public List<Family> clientFamily { get; set; }
-        [Display(Name = "Staff")]
+
+
         public List<Staff> clientStaff { get; set; }
+
         [Display(Name = "Case Manager")]
         public Staff caseManager { get; set; }
+        [Display(Name = "Intake Coordinator")]
+        public Staff intakeCoordinator { get; set; }
+        [Display(Name = "Service Coordinator")]
+        public Staff serviceCoordinator { get; set; }
+
+
+
         [Display(Name = "Diagnosis")]
         public List<Diagnosis> clientDiagnosis { get; set; }
+
+
+
         [Display(Name = "Comments")]
         public List<Comments> clientComments { get; set; }
+
+
+
         [Display(Name = "Physician")]
         public List<Physician> clientPhysicians { get; set; }
+        public List<Referral> clientReferrals { get; set; }
+
+
+
         [Display(Name = "Deleted")]
         public bool deleted { get; set; }
 
@@ -193,10 +198,15 @@ namespace eciWEB2016.Models
             clientPhysicians = new List<Physician>();
 
             clientStaff = new List<Staff>();
+            intakeCoordinator = new Models.Staff();
+            serviceCoordinator = new Staff();
+            caseManager = new Staff();
 
             clientInsurance = new List<ClientInsurance>();
 
             clientComments = new List<Comments>();
+
+            clientReferrals = new List<Referral>();
 
             caseManager = new Staff();
         }
