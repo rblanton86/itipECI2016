@@ -1,13 +1,14 @@
-﻿@*/****************************************************************************
-    Description: Client_Update partial view.
+﻿<!----------------------------------------------------------------------------
+Description: Partial view that displays the clients demographic and miscellaneous
+    information. Contained within the Client_Update page.
 
-    Author: Jennifer M. Graves
+Author: Jennifer M Graves
 
-    Date: 07-11-2016
+Date: 07/27/2016
 
-    Change History:
+Change History:
+------------------------------------------------------------------------------>
 
-    ****************************************************************************/*@
 @model eciWEB2016.Models.Client
 @{
     eciWEB2016.Models.Client client = new eciWEB2016.Models.Client();
@@ -31,10 +32,10 @@
             @Html.LabelFor(c => c.fullName):
             @Html.TextBoxFor(c => c.fullName, new { Value = client.fullName, name = "fullName" })
         </li>
-        @*<li>
+        <li>
             @Html.Label("Office Name:")
             @Html.DropDownListFor(c => c.officeID, (SelectList)ViewBag.officeList, "--select--", new { @Value = client.officeID })
-        </li>*@
+        </li>
     </ul>
     <ul class="flex">
         <li>
@@ -49,10 +50,10 @@
             @Html.LabelFor(c => c.middleInitial):
             @Html.TextBoxFor(c => c.middleInitial, new { Value = client.middleInitial, name = "middleInitial" })
         </li>
-        @*<li>
+        <li>
             @Html.LabelFor(c => c.clientStatusID):
-            @Html.DropDownListFor(c => c.clientStatusID)
-        </li>*@
+            @Html.DropDownListFor(c => c.clientStatusID, (SelectList)ViewBag.clientStatusList, null, new { @Value = client.clientStatusID } )
+        </li>
         <li>
             @Html.LabelFor(c => c.ageInMonths):
             @Html.TextBoxFor(c => c.ageInMonths, new { Value = client.ageInMonths, name = "ageInMonths" })
@@ -61,18 +62,18 @@
             @Html.LabelFor(c => c.dob):
             @Html.EditorFor(c => c.dob, null, new { Value = client.dob, name = "dob" })
         </li>
-        @*<li>
+        <li>
             @Html.LabelFor(c => c.sexID):
-            @Html.DropDownListFor(c => c.sexID)
-        </li>*@
-        @*<li>
+            @Html.DropDownListFor(c => c.sexID, (SelectList)ViewBag.sexList, null, new { @Value = client.sexID})
+        </li>
+        <li>
             @Html.LabelFor(c => c.ethnicityID):
-            @Html.DropDownListFor(c => c.ethnicityID)
-        </li>*@
-        @*<li>
+            @Html.DropDownListFor(c => c.ethnicityID, (SelectList)ViewBag.ethnicityList, null, new { @Value = client.ethnicityID })
+        </li>
+        <li>
             @Html.LabelFor(c => c.raceID):
-            @Html.DropDownListFor(c => c.sexID)
-        </li>*@
+            @Html.DropDownListFor(c => c.sexID, (SelectList)ViewBag.sexList, null, new { @Value = client.sexID})
+        </li>
         <li>
             @Html.LabelFor(c => c.ssn):
             @Html.EditorFor(c => c.ssn, null, new { Value = client.ssn, name = "ssn" })

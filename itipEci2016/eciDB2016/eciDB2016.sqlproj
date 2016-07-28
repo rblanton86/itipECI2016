@@ -77,6 +77,9 @@
     <Folder Include="v1\Release\Sprint 5\Schema" />
     <Folder Include="v1\Release\Sprint 5\Stored_Procedures" />
     <Folder Include="v1\Release\Sprint3\Stored_Procedures" />
+    <Folder Include="v1\Release\Sprint 6" />
+    <Folder Include="v1\Release\Sprint 6\Schema" />
+    <Folder Include="v1\Release\Sprint 6\Stored_Procedures" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Docs\eci.table.Client.pdf" />
@@ -106,6 +109,12 @@
     <None Include="v1\Source\Stored_Procedures\ins_Diagnosis.sql" />
     <None Include="v1\Source\Schema\alt_ErrorLog.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AllOffice.cs.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllSex.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllRace.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllEthnicity.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllFamilyMemberTypes.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllPrimaryLanguages.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllSchoolInfo.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -505,5 +514,29 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Source\Stored_Procedures\get_AdditionalContactInfoByMemberID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_AdditionalContactInfoByMemberID.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllSex.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllRace.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllEthnicity.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 5\Stored_Procedures\get_CommunicationPreferences.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllFamilyMemberTypes.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllPrimaryLanguages.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllSchoolInfo.sql" />
   </ItemGroup>
 </Project>

@@ -1,10 +1,20 @@
+<!----------------------------------------------------------------------------
+Description: Referral page. Allows user to add a client to program.
+
+Author: Jennifer M Graves
+
+Date: 07/27/2016
+
+Change History:
+------------------------------------------------------------------------------>
+
 <header>
     <h1>Referral Input</h1>
 </header>
 <nav>
     <button type="button">Print</button>
-    <button type="button">Add Client</button>
-    <button type="button">Delete Client</button>
+    <button type="button" onclick="location.href='@Url.Action("InsertClient", "Client")'">Add Client</button>
+    <button type="button" onclick="location.href='@Url.Action("ClearReferral", "Client")'">Delete Client</button>
     <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
 </nav>
 <div class="main">

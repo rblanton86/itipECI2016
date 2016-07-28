@@ -5,6 +5,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Insurance object, contains properties related to each insurance.
+    /// </summary>
     public class Insurance
     {
         public int insuranceID { get; set; }
@@ -14,6 +17,9 @@ namespace eciWEB2016.Models
         public bool deleted { get; set; }
     }
 
+    /// <summary>
+    /// ClientInsurance object which contains an insurance object as well as a list of Insurance Authorizations.
+    /// </summary>
     public class ClientInsurance : Insurance
     {
         public List<InsuranceAuthorization> insuranceAuthorization { get; set; }

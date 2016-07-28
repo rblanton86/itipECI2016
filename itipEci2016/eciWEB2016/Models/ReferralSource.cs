@@ -6,6 +6,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Referral source object which cotains a list of properties related to each referral source such as their name and contact information.
+    /// </summary>
     public class ReferralSource
     {
         [Required]

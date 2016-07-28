@@ -13,18 +13,23 @@ using Pulzonic.Multipartial;
 
 namespace eciWEB2016.Controllers
 {
+    /// <summary>
+    /// Controller that interfaces with the database to return data needed for the Client object and views.
+    /// </summary>
     public class ClientController : Controller
     {
+        private ClientDataController clientDataController = new ClientDataController();
 
-        private ClientDataController dataController = new ClientDataController();
-
+        /// <summary>
+        /// Method which checks whether a client is loaded in the user session. Adds blank client if no client loaded. Also calls methods and returns to ViewBag data for all drop down lists on the Client_Update page.
+        /// </summary>
+        /// <returns>Returns client object to the Client_Update view, either a blank object or filled client object with information to current client in Session.</returns>
         public ActionResult Client_Update()
         {
             Client client = new Client();
             if (Session["client"] == null)
             {
                 // Creates a blank client for the inital view.
-
                 Session["client"] = client;
             }
             else
@@ -34,84 +39,124 @@ namespace eciWEB2016.Controllers
             }
 
             ViewBag.officeList = GetOfficeList();
-            //ViewBag.sexList = GetSexList();
-            //ViewBag.raceList = GetRaceList();
-            //ViewBag.ethnicityList = GetEthnicityList();
-            //ViewBag.clientStatusList = GetClientStatusList();
-            //ViewBag.communicationPreferencesList = GetCommunicationPreferencesList();
-            //ViewBag.contactTypeList = GetContactTypeList();
-            //ViewBag.stateCodeList = GetStateCodeList();
-            //ViewBag.familyMemberTypeList = GetFamilyMemberTypeList();
-            //ViewBag.staffTypeList = GetStaffTypeList();
-            //ViewBag.primaryLanguageList = GetPrimaryLanguageList();
-            //ViewBag.schoolInfoList = GetSchoolInfoList();
+            ViewBag.sexList = GetSexList();
+            ViewBag.raceList = GetRaceList();
+            ViewBag.ethnicityList = GetEthnicityList();
+            ViewBag.clientStatusList = GetClientStatusList();
+            ViewBag.communicationPreferencesList = GetCommunicationPreferencesList();
+            ViewBag.contactTypeList = GetContactTypeList();
+            ViewBag.stateCodeList = GetStateCodeList();
+            ViewBag.familyMemberTypeList = GetFamilyMemberTypeList();
+            ViewBag.staffTypeList = GetStaffTypeList();
+            ViewBag.primaryLanguageList = GetPrimaryLanguageList();
+            ViewBag.schoolInfoList = GetSchoolInfoList();
 
             return View(client);
         }
 
+        /// <summary>
+        /// Calls a method to query the database for all offices in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all offices.</returns>
         public SelectList GetOfficeList()
         {
-            SelectList officeList = dataController.GetOfficeList();
+            SelectList officeList = clientDataController.GetOfficeList();
 
             return new SelectList(officeList, "Value", "Text", new OfficeModel().officeID);
         }
 
-        //public SelectList GetSexList()
-        //{
-        //    SelectList sexList = dataController.GetSexList();
+        /// <summary>
+        /// Calls a method to query the database for all sexes defined in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all sexes defined.</returns>
+        public SelectList GetSexList()
+        {
+            SelectList sexList = clientDataController.GetSexList();
 
-        //    return new SelectList(sexList, "Value", "Text", new SexModel().sexID);
-        //}
+            return new SelectList(sexList, "Value", "Text", new SexModel().sexID);
+        }
 
-        //public SelectList GetRaceList()
-        //{
-        //    SelectList raceList = dataController.GetRaceList();
+        /// <summary>
+        /// Calls a method to query the database for all races defined in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all races defined.</returns>
+        public SelectList GetRaceList()
+        {
+            SelectList raceList = clientDataController.GetRaceList();
 
-        //    return new SelectList(raceList, "Value", "Text", new RaceModel().raceID);
-        //}
+            return new SelectList(raceList, "Value", "Text", new RaceModel().raceID);
+        }
 
-        //public SelectList GetEthnicityList()
-        //{
-        //    SelectList ethnicityList = dataController.GetEthnicityList();
+        /// <summary>
+        /// Calls a method to query the database for all ethnicities defined in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all ethnicities defined.</returns>
+        public SelectList GetEthnicityList()
+        {
+            SelectList ethnicityList = clientDataController.GetEthnicityList();
 
-        //    return new SelectList(ethnicityList, "Value", "Text", new EthnicityModel().ethnicityID);
-        //}
+            return new SelectList(ethnicityList, "Value", "Text", new EthnicityModel().ethnicityID);
+        }
 
-        //public SelectList GetClientStatusList()
-        //{
-        //    SelectList clientStatusList = dataController.GetClientStatusList();
+        /// <summary>
+        /// Calls a method to query the database for all client statuses defined in the database (active/inactive).
+        /// </summary>
+        /// <returns>Returns a select list of all client statuses defined, such as active or inactive.</returns>
+        public SelectList GetClientStatusList()
+        {
+            SelectList clientStatusList = clientDataController.GetClientStatusList();
 
-        //    return new SelectList(clientStatusList, "Value", "Text", new ClientStatusModel().clientStatusID);
-        //}
+            return new SelectList(clientStatusList, "Value", "Text", new ClientStatusModel().clientStatusID);
+        }
 
-        //public SelectList GetCommunicationPreferencesList()
-        //{
-        //    SelectList communicationPreferencesList = dataController.GetCommunicationPreferencesList();
+        /// <summary>
+        /// Calls a method to query the database for all communication preferences defined in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all communication preferences defined.</returns>
+        public SelectList GetCommunicationPreferencesList()
+        {
+            SelectList communicationPreferencesList = clientDataController.GetCommunicationPreferencesList();
 
-        //    return new SelectList(communicationPreferencesList, "Value", "Text", new CommunicationPreferencesModel().communicationPreferencesID);
-        //}
+            return new SelectList(communicationPreferencesList, "Value", "Text", new CommunicationPreferencesModel().communicationPreferencesID);
+        }
 
-        //public SelectList GetContactTypeList()
-        //{
-        //    SelectList contactTypeList = dataController.GetContactTypeList();
+        /// <summary>
+        /// Calls a method to query the database for all contact types defined in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all contact types defined.</returns>
+        public SelectList GetContactTypeList()
+        {
+            SelectList contactTypeList = clientDataController.GetContactTypeList();
 
-        //    return new SelectList(contactTypeList, "Value", "Text", new ContactTypeModel().contactTypeID);
-        //}
+            return new SelectList(contactTypeList, "Value", "Text", new ContactTypeModel().contactTypeID);
+        }
 
-        //public SelectList GetStateCodeList()
-        //{
-        //    SelectList stateCodeList = dataController.GetStateCodeList();
+        /// <summary>
+        /// Calls a method to query the database for all state codes.
+        /// </summary>
+        /// <returns>Returns a select list of all state codes.</returns>
+        public SelectList GetStateCodeList()
+        {
+            SelectList stateCodeList = clientDataController.GetStateCodeList();
 
-        //    return new SelectList(stateCodeList, "Value", "Text", new StateCodeModel().stateCodeID);
-        //}
+            return new SelectList(stateCodeList, "Value", "Text", new StateCodeModel().stateCodeID);
+        }
 
-        //public SelectList GetFamilyMemberTypeList()
-        //{
-        //    SelectList familyMemberTypeList = dataController.GetFamilyMemberTypeList();
+        /// <summary>
+        /// Calls a method to query the database for all family member types, or guardian types, defined in the database.
+        /// </summary>
+        /// <returns>Returns a select list of all family member types.</returns>
+        public SelectList GetFamilyMemberTypeList()
+        {
+            SelectList familyMemberTypeList = clientDataController.GetFamilyMemberTypeList();
 
-        //    return new SelectList(familyMemberTypeList, "Value", "Text", new FamilyMemberTypeModel().familyMemberTypeID);
-        //}
+            return new SelectList(familyMemberTypeList, "Value", "Text", new FamilyMemberTypeModel().familyMemberTypeID);
+        }
 
+        /// <summary>
+        /// Calls a method to query the database for all staff types on the database.
+        /// </summary>
+        /// <returns>Returns a select list of all staff types defined.</returns>
         public SelectList GetStaffTypeList()
         {
             StaffDataController staffController = new StaffDataController();
@@ -120,26 +165,38 @@ namespace eciWEB2016.Controllers
             return new SelectList(staffTypeList, "Value", "Text");
         }
 
-        //public SelectList GetPrimaryLanguageList()
-        //{
-        //    SelectList primaryLanguageList = dataController.GetPrimaryLanguageList();
+        /// <summary>
+        /// Calls a method to query the database for all languages listed on the database.
+        /// </summary>
+        /// <returns>Returns a select list of all languages defined.</returns>
+        public SelectList GetPrimaryLanguageList()
+        {
+            SelectList primaryLanguageList = clientDataController.GetPrimaryLanguageList();
 
-        //    return new SelectList(primaryLanguageList, "Value", "Text", new PrimaryLanguageModel().primaryLanguageID);
-        //}
+            return new SelectList(primaryLanguageList, "Value", "Text", new PrimaryLanguageModel().primaryLanguageID);
+        }
 
-        //public SelectList GetSchoolInfoList()
-        //{
-        //    SelectList schoolInfoList = dataController.GetSchoolInfoList();
+        /// <summary>
+        /// Calls a method to query the database for all ISD held on the database.
+        /// </summary>
+        /// <returns>Returns a select list of all ISD defined.</returns>
+        public SelectList GetSchoolInfoList()
+        {
+            SelectList schoolInfoList = clientDataController.GetSchoolInfoList();
 
-        //    return new SelectList(schoolInfoList, "Value", "Text", new SchoolInfoModel().schoolInfoID);
-        //}
+            return new SelectList(schoolInfoList, "Value", "Text", new SchoolInfoModel().schoolInfoID);
+        }
 
+        /// <summary>
+        /// Calls a method to fill a list with every client currently on the database.
+        /// </summary>
+        /// <returns>Returns first name, last name, client ID and alt ID for every client on the database.</returns>
         [HttpGet]
         [ActionName("GetAjaxClientList")]
         public JsonResult GetClientList()
         {
             List<Client> clientList = new List<Client>();
-            clientList = dataController.GetListClients();
+            clientList = clientDataController.GetListClients();
 
             // Takes select list of all clients, returns at Json object.
             return Json(clientList, JsonRequestBehavior.AllowGet);
@@ -151,45 +208,45 @@ namespace eciWEB2016.Controllers
         public ActionResult InsertClient(Client newClient)
         {
             // Inserts client demographics and miscellaneous client only information.
-            newClient = dataController.InsertClient(newClient);
+            newClient = clientDataController.InsertClient(newClient);
 
             // Inserts client's address.
-            newClient = dataController.InsertClientAddress(newClient);
+            newClient = clientDataController.InsertClientAddress(newClient);
 
             // Inserts all family members attached to the new client's family list.
             for (var family = 0; family <= newClient.clientFamily.Count; family++)
             {
-                newClient.clientFamily[family] = dataController.InsertClientFamily(newClient.clientFamily[family], newClient.clientID);
+                newClient.clientFamily[family] = clientDataController.InsertClientFamily(newClient.clientFamily[family], newClient.clientID);
             }
 
             // Inserts all insurances attached to the new Client.
             for (var insurance = 0; insurance <= newClient.clientInsurance.Count; insurance++)
             {
-                newClient.clientInsurance[insurance] = dataController.InsertClientInsurance(newClient.clientInsurance[insurance], newClient.clientID);
+                newClient.clientInsurance[insurance] = clientDataController.InsertClientInsurance(newClient.clientInsurance[insurance], newClient.clientID);
             }
 
             // Inserts all staff attached to the new Client.
             for (var staff = 0; staff <= newClient.clientStaff.Count; staff++)
             {
-                newClient.clientStaff[staff] = dataController.InsertClientStaff(newClient.clientStaff[staff], newClient.clientID);
+                newClient.clientStaff[staff] = clientDataController.InsertClientStaff(newClient.clientStaff[staff], newClient.clientID);
             }
 
             // Inserts all diagnoses attached to the new Client.
             for (var diagnosis = 0; diagnosis <= newClient.clientDiagnosis.Count; diagnosis++)
             {
-                newClient.clientDiagnosis[diagnosis] = dataController.InsertClientDiagnosis(newClient.clientDiagnosis[diagnosis], newClient.clientID);
+                newClient.clientDiagnosis[diagnosis] = clientDataController.InsertClientDiagnosis(newClient.clientDiagnosis[diagnosis], newClient.clientID);
             }
 
             // Inserts all physicians attached to the new Client.
             for (var physician = 0; physician <= newClient.clientDiagnosis.Count; physician++)
             {
-                newClient.clientPhysicians[physician] = dataController.InsertClientPhysician(newClient.clientPhysicians[physician], newClient.clientID);
+                newClient.clientPhysicians[physician] = clientDataController.InsertClientPhysician(newClient.clientPhysicians[physician], newClient.clientID);
             }
 
             // Inserts all comments attached to the new Client.
             for (var comments = 0; comments <= newClient.clientComments.Count; comments++)
             {
-                newClient.clientComments[comments] = dataController.InsertClientComments(newClient.clientComments[comments], newClient.clientID, newClient.memberTypeID);
+                newClient.clientComments[comments] = clientDataController.InsertClientComments(newClient.clientComments[comments], newClient.clientID, newClient.memberTypeID);
             }
 
 

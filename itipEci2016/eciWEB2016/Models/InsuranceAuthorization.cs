@@ -6,6 +6,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// InsuranceAuthorization object which contains properties suce as date of authorization and type of authorization.
+    /// </summary>
     public class InsuranceAuthorization
     {
         public int insuranceAuthID { get; set; }

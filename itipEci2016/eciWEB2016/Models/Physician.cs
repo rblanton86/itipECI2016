@@ -19,6 +19,9 @@ using eciWEB2016.Controllers.DataControllers;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Physician object which contains basic properties of each physician suce as title and first and last name.
+    /// </summary>
     public class Physician
     {
         [Required]

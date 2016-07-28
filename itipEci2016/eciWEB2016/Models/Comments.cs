@@ -5,6 +5,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Comments object which contains properties related to each comment object.
+    /// </summary>
     public class Comments
     {
         public int commentsID { get; set; }

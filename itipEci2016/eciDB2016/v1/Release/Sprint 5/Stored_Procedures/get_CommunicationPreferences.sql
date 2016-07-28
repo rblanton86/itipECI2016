@@ -1,24 +1,23 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from Office
-	 
+Description: Stored Procedure to pull type information from CommunicationPreferences
+
 Author: 
-	Jennifer M Graves
+	Tyrell Powers-Crane 
 Date: 
-	7/25/2015
+	7.14.16
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllOffice]
+CREATE PROCEDURE [dbo].[get_CommunicationPreferences]
+	@communicationPreferencesID int
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(officeName, ' ') AS officeName,
-				ISNULL(officeID, 1) AS officeID
-
-			FROM Office
-
+			SELECT ISNULL(communicationPreferences, ' ') AS communicationPreferences
+			FROM CommunicationPreferences
+			WHERE communicationPreferencesID = @communicationPreferencesID 
 
 		END TRY
 		BEGIN CATCH
@@ -35,3 +34,4 @@ AS
 
 		END CATCH
 	END
+

@@ -6,6 +6,9 @@ using System.Web;
 
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Address object which contains properties relating to any kind of address.
+    /// </summary>
     public class Address
     {
         public int addressesID { get; set; }
@@ -27,6 +30,9 @@ namespace eciWEB2016.Models
         public string mapsco { get; set; }
         public bool deleted { get; set; }
 
+        /// <summary>
+        /// Default constructor for Address object, contains empty values and prevents errors on initial pageviews with blank address objects.
+        /// </summary>
         public Address()
         {
             addressTypeID = 1;

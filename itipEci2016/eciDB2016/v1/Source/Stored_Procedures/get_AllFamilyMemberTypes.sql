@@ -1,23 +1,23 @@
 ﻿/***********************************************************************************************************
-Description: Stored Procedure to pull type information from Office
+Description: Stored Procedure to pull type information from FamilyMemberType table.
 	 
 Author: 
 	Jennifer M Graves
 Date: 
-	7/25/2015
+	7/27/2015
 Change History:
 	
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AllOffice]
+CREATE PROCEDURE [dbo].[get_AllFamilyMemberTypes]
 
 AS
 	BEGIN
 		BEGIN TRY
 
-			SELECT ISNULL(officeName, ' ') AS officeName,
-				ISNULL(officeID, 1) AS officeID
+			SELECT ISNULL(familyMemberType, ' ') AS familyMemberType,
+				ISNULL(familyMemberTypeID, 1) AS familyMemberTypeID
 
-			FROM Office
+			FROM FamilyMemberType
 
 
 		END TRY

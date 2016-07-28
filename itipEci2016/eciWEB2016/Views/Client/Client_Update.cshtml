@@ -1,3 +1,15 @@
+<!----------------------------------------------------------------------------
+Description: Client Update page.
+
+Author: Jennifer M Graves
+
+Date: 06/21/2016
+
+Change History:
+    07/08/2016: JMG - Autocomplete added and working.
+    07/11/2016: JMG - Separated into partial views.
+------------------------------------------------------------------------------>
+
 @model eciWEB2016.Models.Client
 @{
     eciWEB2016.Models.Client currentClient = new eciWEB2016.Models.Client();
@@ -139,7 +151,6 @@
                 url: "GetAjaxClientList/Client",
                 dataType: "json",
                 success: function (data) {
-                    var result;
                     $.each(data, function (index, value) {
                         clientListAltIDData.push(
                             {

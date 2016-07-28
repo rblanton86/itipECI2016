@@ -8,8 +8,14 @@ using System.ComponentModel.DataAnnotations;
 using eciWEB2016.Controllers.DataControllers;
 namespace eciWEB2016.Models
 {
+    /// <summary>
+    /// Additional Contact Information object which contains properties which relate to the contact information. Can hold phone, email or any other kind of contact information.
+    /// </summary>
     public class AdditionalContactInfoModel
     {
+        /// <summary>
+        /// Default constructor which contains default values to prevent errors on initial page loads with contact information.
+        /// </summary>
         public AdditionalContactInfoModel()
         {
             additionalContactInfoID = 0;
