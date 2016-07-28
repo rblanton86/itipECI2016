@@ -7,7 +7,15 @@ Date: 07/27/2016
 
 Change History:
 ------------------------------------------------------------------------------>
-
+@model eciWEB2016.Models.Referral
+@{
+    if (Session["client"] != null)
+    {
+        // Removes the current client from session and replaces with a blank client.
+        eciWEB2016.Models.Client client = new eciWEB2016.Models.Client();
+        Session["client"] = client;
+    }
+}
 <header>
     <h1>Referral Input</h1>
 </header>
@@ -18,29 +26,29 @@ Change History:
     <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
 </nav>
 <div class="main">
-    @model eciWEB2016.Models.ReferralViewModel
-    @using (Html.BeginForm("InsertReferral", "Referral", FormMethod.Post, new { }))
+    @using (Html.BeginForm("InsertClient", "Referral", FormMethod.Post))
     {
+
         <ul>
             <li>
-                @Html.Label("Office:")
-                @Html.TextBox("officeList", null, new { @id = "officeSearch" })
+                @Html.Label("Office Name")
+                @Html.DropDownListFor(r => r.referredClient.officeID, (SelectList)ViewBag.officeList, "")
             </li>
             <li>
-                @Html.Label("Referral Date:")
-                @Html.TextBoxFor(r => r.Client.referralDate, null, new { name = "referralDate", @class = "date" })
+                @Html.LabelFor(r => r.referralDate)
+                @Html.EditorFor(r => r.referralDate, null)
             </li>
             <li>
-                @Html.Label("Due Date:")
-                @Html.TextBoxFor(r => r.Client.referralDueDate, null, new { name = "referralDueDate", @class = "date" })
+                @Html.LabelFor(r => r.referralDueDate)
+                @Html.EditorFor(r => r.referralDueDate, null)
             </li>
             <li>
-                @Html.Label("Intake Coordinator:")
-                @Html.TextBox("intakeStaffList", null, new { id = "staffSearch", memberTypeID = "intakeCoordinator" })
+                @Html.LabelFor(r => r.referredClient.intakeCoordinator.staffID)
+                @Html.DropDownListFor(r => r.referredClient.intakeCoordinator.staffID, (SelectList)ViewBag.staffList, "")
             </li>
             <li>
-                @Html.Label("Service Coordinator:")
-                @Html.TextBox("serviceCoordinatorStaffList", null, new { id = "staffSearch", memberTypeID = "serviceCoordinator" })
+                @Html.LabelFor(r => r.referredClient.serviceCoordinator.staffID)
+                @Html.DropDownListFor(r => r.referredClient.serviceCoordinator.staffID, (SelectList)ViewBag.staffList, "")
             </li>
         </ul>
         <ul>
@@ -52,31 +60,28 @@ Change History:
         <ul class="flex">
             <li>
                 @Html.Label("Re-Referral?")
-                @Html.CheckBoxFor(r => r.Client.reReferral)
             </li>
             <li>
                 @Html.Label("Previous Referral Date:")
-                @Html.TextBoxFor(r => r.Client.referralDueDate, null, new { name = "referralDueDate", @class = "date" })
             </li>
         </ul>
         <ul class="flex">
             <li>
                 @Html.Label("Referral Source (name of person calling):")
-                @Html.TextBoxFor(r => r.ReferralSource.referralSourceName, null, new { name = "referralSource" })
             </li>
             <li>
                 @Html.Label("Referral Code:")
-                @Html.TextBox("referralCodeList", null, new { name = "referralCodeList"})
+                @Html.TextBox("referralCodeList", null, new { name = "referralCodeList" })
             </li>
         </ul>
         <ul class="flex">
             <li>
                 @Html.Label("Secondary Referral Source:")
-                @Html.TextBox("secondaryReferralSourceList", null, new { name = "referralSourceList"})
+                @Html.TextBox("secondaryReferralSourceList", null, new { name = "referralSourceList" })
             </li>
             <li>
                 @Html.Label("Referral Code:")
-                @Html.TextBox("referralCode", null, new { name = "referralCode"})
+                @Html.TextBox("referralCode", null, new { name = "referralCode" })
             </li>
         </ul>
         <ul>
@@ -88,245 +93,111 @@ Change History:
         <ul class="flex">
             <li>
                 @Html.Label("Outreach Code:")
-                @Html.TextBox("outreachCode", null, new { name = "outreachCode"})
+                @Html.TextBox("outreachCode", null, new { name = "outreachCode" })
             </li>
             <li>
                 @Html.Label("TKIDs Case Number:")
-                @Html.TextBoxFor(r => r.Client.TKIDcaseNumber)
             </li>
         </ul>
         <ul>
             <li>
-                @Html.Label("Select Provider:")
-                @Html.TextBox("physiciansList")
-                <button type="button" name="addPhysician">Add Physician</button>
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("From Other Follow Along to ITIP's FA?")
-                <input type="checkbox">
+                @Html.LabelFor(r => r.referredClient.altID)
+                @Html.TextBoxFor(r => r.referredClient.altID)
             </li>
             <li>
-                @Html.Label("From ITIP's Comp to ITIP's Follow Along?")
-                <input type="checkbox">
+                @Html.LabelFor(r => r.referredClient.clientID)
+                @Html.TextBoxFor(r => r.referredClient.clientID)
             </li>
             <li>
-                @Html.Label("Referral Outcome:")
-                <select name="referralOutcome">
-                    <option>*D</option>
-                </select>
+                @Html.LabelFor(r => r.referredClient.lastName)
+                @Html.TextBoxFor(r => r.referredClient.lastName)
             </li>
             <li>
-                @Html.Label("Outcome Date:")
-                <input type="date">
+                @Html.LabelFor(r => r.referredClient.firstName)
+                @Html.TextBoxFor(r => r.referredClient.firstName)
             </li>
             <li>
-                @Html.Label("From ITIP's FA to ITIP's Comp?")
-                <input type="checkbox">
+                @Html.LabelFor(r => r.referredClient.middleInitial)
+                @Html.TextBoxFor(r => r.referredClient.middleInitial)
             </li>
             <li>
-                @Html.Label("Transferred from another ECI program?")
-                <input type="checkbox">
+                @Html.LabelFor(r => r.referredClient.dob)
+                @Html.EditorFor(r => r.referredClient.dob)
             </li>
             <li>
-                @Html.Label("Agency transferred from:")
-                <input type="text">
+                <input type="submit" Value="Add Client" />
             </li>
             <li>
-                @Html.Label("City/State where transferring agency is located:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Point of Access Referral?")
-                <input type="checkbox">
-            </li>
-            <li>
-                @Html.Label("ECI Agency Referred To:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Date referred:")
-                <input type="date">
-            </li>
-        </ul>
-        <ul class="center">
-            <li>
-                @Html.Label("Referral Sent By:")
-            </li>
-            <li>
-                @Html.Label("Fax:")
-                <input type="checkbox">
-            </li>
-            <li>
-                @Html.Label("Phone:")
-                <input type="checkbox">
-            </li>
-        </ul>
-        <ul class="center">
-            <li>
-                @Html.Label("Alt ID:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Client ID:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Last Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("First Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("MI:")
-                <input type="text" size="1">
-            </li>
-            <li>
-                @Html.Label("DOB:")
-                <input type="date">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Relationship:")
-                <select>
-                    <option>Mother</option>
-                </select>
-            </li>
-            <li>
-                @Html.Label("Last Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("First Name:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Home Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Work Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Cell Phone:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Email:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Communication Preference:")
-                <input list="communicationPreference">
-            </li>
-            <li>
-                @Html.Label("Best to Call:")
-                <input list="bestToCall">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Relationship:")
-                <select>
-                    <option>Mother</option>
-                </select>
-            </li>
-            <li>
-                @Html.Label("Last Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("First Name:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Home Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Work Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Cell Phone:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul class="flex">
-            <li>
-                @Html.Label("Email:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Communication Preference:")
-                <input list="communicationPreference">
-            </li>
-            <li>
-                @Html.Label("Best to Call:")
-                <input list="bestToCall">
-            </li>
-        </ul>
-        <ul>
-            <li>
-                @Html.Label("Address 1:")
-                <input type="text" size="50">
-            </li>
-            <li>
-                @Html.Label("Address 2:")
-                <input type="text" size="50">
-            </li>
-            <li class="inline">
-                @Html.Label("City:")
-                <input type="text">
-            </li>
-            <li class="inline">
-                @Html.Label("State:")
-                <input type="text" size="2">
-            </li>
-            <li class="inline">
-                @Html.Label("Zip:")
-                <input list="zipCode" size="6">
-                <input type="text" size="4">
-            </li>
-            <li class="inline">
-                @Html.Label("County:")
-                <input type="text">
-            </li>
-        </ul>
-        <ul>
-            <li>
-                @Html.Label("Primary Language:")
-                <input list="language">
-            </li>
-            <li>
-                @Html.Label("Interpreter Needed?")
-                <input type="checkbox">
-            </li>
-            <li>
-                @Html.Label("ISD:")
-                <input list="isd">
-            </li>
-            <li>
-                @Html.Label("Medical Coverage:")
-                <select>
-                    <option></option>
-                </select>
+                <input type="submit" Value="Add Referral" />
             </li>
         </ul>
     }
+    @*@{Html.RenderPartial("Referral_PhysicianPartial", client.clientPhysicians);}*@
+    @using (Html.BeginForm("InsertReferralDetails", "Referral", FormMethod.Post))
+    {
+        <ul class="flex">
+        <li>
+            @Html.Label("From Other Follow Along to ITIP's FA?")
+            <input type="checkbox">
+        </li>
+        <li>
+            @Html.Label("From ITIP's Comp to ITIP's Follow Along?")
+            <input type="checkbox">
+        </li>
+        <li>
+            @Html.Label("Referral Outcome:")
+            <select name="referralOutcome">
+                <option>*D</option>
+            </select>
+        </li>
+        <li>
+            @Html.Label("Outcome Date:")
+            <input type="date">
+        </li>
+        <li>
+            @Html.Label("From ITIP's FA to ITIP's Comp?")
+            <input type="checkbox">
+        </li>
+        <li>
+            @Html.Label("Transferred from another ECI program?")
+            <input type="checkbox">
+        </li>
+        <li>
+            @Html.Label("Agency transferred from:")
+            <input type="text">
+        </li>
+        <li>
+            @Html.Label("City/State where transferring agency is located:")
+            <input type="text">
+        </li>
+    </ul>
+    <ul class="flex">
+        <li>
+            @Html.Label("Point of Access Referral?")
+            <input type="checkbox">
+        </li>
+        <li>
+            @Html.Label("ECI Agency Referred To:")
+            <input type="text">
+        </li>
+        <li>
+            @Html.Label("Date referred:")
+            <input type="date">
+        </li>
+    </ul>
+    <ul class="center">
+        <li>
+            @Html.Label("Referral Sent By:")
+        </li>
+        <li>
+            @Html.Label("Fax:")
+            <input type="checkbox">
+        </li>
+        <li>
+            @Html.Label("Phone:")
+            <input type="checkbox">
+        </li>
+    </ul>
+    }
+    @{Html.RenderPartial("Referral_FamilyPartial", Model.referredClient.clientFamily);}
 </div>

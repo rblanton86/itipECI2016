@@ -115,6 +115,8 @@
     <None Include="v1\Source\Stored_Procedures\get_AllFamilyMemberTypes.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AllPrimaryLanguages.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AllSchoolInfo.sql" />
+    <None Include="v1\Source\Stored_Procedures\get_AllCommunicationPreferences.sql" />
+    <None Include="v1\Source\Stored_Procedures\ins_ClientStaff.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -538,5 +540,17 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllSchoolInfo.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AllCommunicationPreferences.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\ins_ClientStaff.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\ins_Addresses.sql" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\ins_Client.sql" />
   </ItemGroup>
 </Project>

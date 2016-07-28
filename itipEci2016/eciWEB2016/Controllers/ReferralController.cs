@@ -10,98 +10,122 @@ namespace eciWEB2016.Controllers
 {
     public class ReferralController : Controller
     {
-        // GET: Referral
+        private ClientDataController clientDataController = new ClientDataController();
+
+        private ClientController clientController = new ClientController();
+
+        private ReferralDataController referralDataController = new ReferralDataController();
+
+        /// <summary>
+        /// Controller that interfaces withe the view to return data received from the database.
+        /// </summary>
         public ActionResult Referral()
         {
-            return View();
-        }
+            Referral newReferral = new Referral();
 
-        // GET: Referral/Details/5
-        public ActionResult ReferralSourceDetails(int id)
-        {
-            ReferralSource thisReferralSource = new ReferralSource()
+            if (Session["client"] != null)
             {
-                referralSourceID = id
-            };
+                Session["client"] = newReferral.referredClient;
+            }
 
-            ReferralDataController dataController = new ReferralDataController();
+            ViewBag.officeList = clientController.GetOfficeList();
+            ViewBag.sexList = clientController.GetSexList();
+            ViewBag.raceList = clientController.GetRaceList();
+            ViewBag.ethnicityList = clientController.GetEthnicityList();
+            ViewBag.clientStatusList = clientController.GetClientStatusList();
+            ViewBag.communicationPreferencesList = clientController.GetCommunicationPreferencesList();
+            ViewBag.contactTypeList = clientController.GetContactTypeList();
+            ViewBag.stateCodeList = clientController.GetStateCodeList();
+            ViewBag.familyMemberTypeList = clientController.GetFamilyMemberTypeList();
+            ViewBag.staffTypeList = clientController.GetStaffTypeList();
+            ViewBag.staffList = clientController.GetStaffList();
+            ViewBag.primaryLanguageList = clientController.GetPrimaryLanguageList();
+            ViewBag.schoolInfoList = clientController.GetSchoolInfoList();
 
-            thisReferralSource = dataController.GetReferralSourceDetails(thisReferralSource);
-
-            return Json(thisReferralSource, JsonRequestBehavior.AllowGet);
+            return View(newReferral);
         }
 
-        public List<ReferralSource> GetAllReferralSources()
-        {
-            List<ReferralSource> listReferralSources = new List<ReferralSource>();
 
-            return listReferralSources;
-        }
-
-        // GET: Referral/Create
-        public ActionResult Create()
-        {
-            return View();
-        }
-
-        // POST: Referral/Create
+        /************************************************************************** CREATE *******************************************************/
+        
         [HttpPost]
-        public ActionResult Create(FormCollection collection)
+        public ActionResult InsertReferral(Referral newReferral)
         {
-            try
-            {
-                // TODO: Add insert logic here
+            newReferral.referredClient = InsertClient(newReferral.referredClient);
+            newReferral.referredClient = InsertClientStaff(newReferral.referredClient);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        // GET: Referral/Edit/5
-        public ActionResult Edit(int id)
-        {
             return View();
         }
 
-        // POST: Referral/Edit/5
-        [HttpPost]
-        public ActionResult Edit(int id, FormCollection collection)
+        public Client InsertClient(Client newClient)
         {
-            try
-            {
-                // TODO: Add update logic here
+            newClient = referralDataController.InsertClient(newClient);
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return newClient;
         }
 
-        // GET: Referral/Delete/5
-        public ActionResult Delete(int id)
+        public ActionResult InsertClientFamily(Family newFamilyMember)
         {
+
             return View();
         }
 
-        // POST: Referral/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
+        public ActionResult InsertClientInsurance()
         {
-            try
-            {
-                // TODO: Add delete logic here
 
-                return RedirectToAction("Index");
-            }
-            catch
-            {
-                return View();
-            }
+            return View();
         }
+
+        public ActionResult InsertClientInsAuth()
+        {
+
+            return View();
+        }
+
+        public Client InsertClientStaff(Client newClient)
+        {
+            if (newClient.intakeCoordinator != null)
+            {
+                newClient.intakeCoordinator = referralDataController.InsertClientStaff(newClient.intakeCoordinator, newClient.clientID);
+
+                newClient.clientStaff.Add(newClient.intakeCoordinator);
+            }
+
+            if (newClient.serviceCoordinator != null)
+            {
+                newClient.serviceCoordinator = referralDataController.InsertClientStaff(newClient.serviceCoordinator, newClient.clientID);
+
+                newClient.clientStaff.Add(newClient.serviceCoordinator);
+            }
+
+            if (newClient.caseManager != null)
+            {
+                newClient.caseManager = referralDataController.InsertClientStaff(newClient.caseManager, newClient.clientID);
+
+                newClient.clientStaff.Add(newClient.caseManager);
+            }
+
+            return newClient;
+        }
+
+        public ActionResult InsertClientDiagnosis()
+        {
+
+            return View();
+        }
+
+        public ActionResult InsertClientComments()
+        {
+
+            return View();
+        }
+
+        public ActionResult InsertClientPhysician()
+        {
+
+
+            return View();
+        }
+
     }
 }

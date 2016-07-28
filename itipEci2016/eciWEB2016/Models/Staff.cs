@@ -6,7 +6,7 @@ Author:
 Date: 
 	06-21-2016
 Change History:
-	
+	07/28/2016: JMG - Added List<AdditionalContactInfo>.
 ************************************************************************************************************/
 
 using System;
@@ -42,6 +42,7 @@ namespace eciWEB2016.Models
             handicapped = false;
             staffAddress = new Address();
             staffContact = new AdditionalContactInfoModel();
+            staffContactList = new List<AdditionalContactInfoModel>();
 
         }
         [Required]
@@ -66,6 +67,7 @@ namespace eciWEB2016.Models
         public bool handicapped { get; set; }
         public int status { get; set; }
         public List<TimeHeaderModel> timeHeaders { get; set; }
+        public List<AdditionalContactInfoModel> staffContactList { get; set; }
 
         
        //TODO: add staff home, cell, work...remove phone....probably aci table
