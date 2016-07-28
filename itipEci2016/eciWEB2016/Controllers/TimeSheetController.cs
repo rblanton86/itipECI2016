@@ -50,6 +50,7 @@ namespace eciWEB2016.Controllers
                 return PartialView("TimeDetails_Grid_Partial", details);
 
 
+
             }
             catch (Exception ex)
             {

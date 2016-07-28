@@ -418,17 +418,18 @@ div.scroll1 {
             cursor: pointer;
         }
 
-            .hoverEff:hover {
-                background-color: rgb(248, 242, 242);
-            }
+        .hoverEff:hover {
+            background-color: rgb(248, 242, 242);
+        }
 
         .expand {
-            background-image: url(/Images/pm.png);
+            background-image: url(/Images/grey_plus_button.png);
             background-position-x: -22px;
             background-repeat: no-repeat;
         }
 
         .collapse {
-            background-image: url(/Images/pm.png);
+            background-image: url(/Images/grey_plus_button.png);
             background-position-x: -2px;
             background-repeat: no-repeat;
+        }

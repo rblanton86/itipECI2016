@@ -45,7 +45,7 @@ namespace eciWEB2016.Controllers.DataControllers
                                staffID = drRow.Field<int>("staffID"),
                                weekEnding = drRow.Field<string>("weekEnding"),
                                deleted = drRow.Field<bool>("deleted"),
-                               TimeDetails = GetTimeSheet(drRow.Field<int>("timeHeaderID"))
+                               TimeDetails = new List<TimeDetailModel>()
                            }).ToList();
 
             return headers;
