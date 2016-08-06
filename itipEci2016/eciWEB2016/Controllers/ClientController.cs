@@ -39,6 +39,13 @@ namespace eciWEB2016.Controllers
                 client = (Client)Session["client"];
             }
 
+            GetAllLists();
+
+            return View(client);
+        }
+
+        public void GetAllLists()
+        {
             ViewBag.officeList = GetOfficeList();
             ViewBag.sexList = GetSexList();
             ViewBag.raceList = GetRaceList();
@@ -52,8 +59,6 @@ namespace eciWEB2016.Controllers
             ViewBag.staffList = GetStaffList();
             ViewBag.primaryLanguageList = GetPrimaryLanguageList();
             ViewBag.schoolInfoList = GetSchoolInfoList();
-
-            return View(client);
         }
 
         /// <summary>
@@ -235,6 +240,8 @@ namespace eciWEB2016.Controllers
                 Session["client"] = currentClient;
             }
 
+            GetAllLists();
+
             return PartialView("Client_Partial");
         }
 
@@ -247,6 +254,8 @@ namespace eciWEB2016.Controllers
             {
                 currentClient = (Client)Session["client"];
             }
+
+            GetAllLists();
 
             return PartialView("Client_FamilyGrid_Partial", currentClient.clientFamily);
         }
@@ -261,6 +270,8 @@ namespace eciWEB2016.Controllers
                 currentClient = (Client)Session["client"];
             }
 
+            GetAllLists();
+
             return PartialView("Client_DiagnosisGrid_Partial", currentClient.clientDiagnosis);
         }
 
@@ -273,6 +284,8 @@ namespace eciWEB2016.Controllers
             {
                 currentClient = (Client)Session["client"];
             }
+
+            GetAllLists();
 
             return PartialView("Client_PhysicianGrid_Partial", currentClient.clientPhysicians);
         }
@@ -289,6 +302,8 @@ namespace eciWEB2016.Controllers
             success = dataController.UpdateClient(currentClient);
 
             Session["client"] = currentClient;
+
+            GetAllLists();
 
             return View("Client_Update", currentClient);
         }

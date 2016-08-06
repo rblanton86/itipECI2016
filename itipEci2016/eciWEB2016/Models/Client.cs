@@ -63,8 +63,6 @@ namespace eciWEB2016.Models
         public string referralSource { get; set; }
         [Display(Name = "Agency From")]
         public string agencyFrom { get; set; }
-        [Display(Name = "Re Referral")]
-        public bool reReferral { get; set; }
 
         [Display(Name = "First Name")]
         public string firstName { get; set; }
@@ -105,7 +103,7 @@ namespace eciWEB2016.Models
         public bool pointOfAccess { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "ECI Referred To")]
-        public DateTime ECIReferredTo { get; set; }
+        public string ECIReferredTo { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "ECI Referred Date")]
         public DateTime ECIReferredDate { get; set; }
@@ -122,10 +120,17 @@ namespace eciWEB2016.Models
 
         [Display(Name = "Case Manager")]
         public Staff caseManager { get; set; }
+
+        [Display(Name = "Case Manager")]
+        public int caseManagerID { get; set; }
         [Display(Name = "Intake Coordinator")]
         public Staff intakeCoordinator { get; set; }
+        [Display(Name = "Intake Coordinator")]
+        public int intakeCoordinatorID { get; set; }
         [Display(Name = "Service Coordinator")]
         public Staff serviceCoordinator { get; set; }
+        [Display(Name = "Service Coordinator")]
+        public int serviceCoordinatorID { get; set; }
 
 
 
@@ -174,7 +179,6 @@ namespace eciWEB2016.Models
             // Referral
             referralSource = "";
             agencyFrom = "";
-            reReferral = false;
 
             // Demographics
             firstName = "";

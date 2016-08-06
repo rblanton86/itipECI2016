@@ -17,12 +17,15 @@ namespace eciWEB2016.Models
         }
 
         public Client referredClient { get; set; }
+        [Display(Name = "Referral Source")]
         public ReferralSource referralSource { get; set; }
+        [Display(Name = "Secondary Referral Source")]
+        public ReferralSource secondaryReferralSource { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Referral Date")]
         public DateTime referralDate { get; set; }
         [DataType(DataType.Date)]
-        [Display(Name = "Referral Due Date")]
+        [Display(Name = "Due Date")]
         public DateTime referralDueDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Previous Referral Date")]
@@ -36,6 +39,10 @@ namespace eciWEB2016.Models
         public string referralComments { get; set; }
         [Display(Name = "Referral Outcome")]
         public string referralOutcome { get; set; }
+        public bool reReferral { get; set; }
+        public string transferringLocation { get; set; }
+        public bool sentByPhone { get; set; }
+        public bool sentByFax { get; set; }
     }
 
     /// <summary>
