@@ -15,8 +15,11 @@ namespace eciWEB2016.Models
         public int memberTypeID { get; set; }
         public string memberType { get; set; }
         public int familyMemberTypeID { get; set; }
+        [Display(Name = "Relationship")]
         public string familyMemberType { get; set; }
+        [Display(Name = "First Name")]
         public string firstName { get; set; }
+        [Display(Name = "Last Name")]
         public string lastName { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]

@@ -50,11 +50,14 @@ namespace eciWEB2016.Models
 
         [DataType(DataType.Date)]
         [Display(Name = "Intake Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime intakeDate { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "IFSP Date")]
         public DateTime ifspDate { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "CompSvc Date")]
         public DateTime compSvcDate { get; set; }
 
@@ -73,6 +76,7 @@ namespace eciWEB2016.Models
         public string fullName { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime dob { get; set; }
         [Display(Name = "Age (In Months)")]
         public int ageInMonths { get; set; }
@@ -104,18 +108,19 @@ namespace eciWEB2016.Models
         [Display(Name = "ECI Referred To")]
         public string ECIReferredTo { get; set; }
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         [Display(Name = "ECI Referred Date")]
         public DateTime ECIReferredDate { get; set; }
-        [Display(Name = "Insurance")]
-
 
         public List<ClientInsurance> clientInsurance { get; set; }
 
 
         public List<Family> clientFamily { get; set; }
+        public Family guardian { get; set; }
 
 
         public List<Staff> clientStaff { get; set; }
+        public bool interpreterNeeded { get; set; }
 
         [Display(Name = "Case Manager")]
         public Staff caseManager { get; set; }
@@ -197,6 +202,7 @@ namespace eciWEB2016.Models
             clientDiagnosis = new List<Diagnosis>();
 
             clientFamily = new List<Family>();
+            guardian = new Family();
 
             clientPhysicians = new List<Physician>();
 

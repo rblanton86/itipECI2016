@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.Services;
 
 namespace eciWEB2016.Controllers
 {
@@ -21,13 +22,25 @@ namespace eciWEB2016.Controllers
         /// </summary>
         public ActionResult Referral()
         {
+            // Creates empty view to avoid errors caused by null model.
             Referral newReferral = new Referral();
+            Client newClient = new Client();
+
+            ReferralViewModel view = new ReferralViewModel();
 
             if (Session["client"] != null)
             {
-                Session["client"] = newReferral.referredClient;
+                // Clears session of current client.
+                Session["client"] = newClient;
             }
 
+            GetAllLists();
+
+            return View(view);
+        }
+
+        public void GetAllLists()
+        {
             ViewBag.officeList = clientController.GetOfficeList();
             ViewBag.sexList = clientController.GetSexList();
             ViewBag.raceList = clientController.GetRaceList();
@@ -41,90 +54,65 @@ namespace eciWEB2016.Controllers
             ViewBag.staffList = clientController.GetStaffList();
             ViewBag.primaryLanguageList = clientController.GetPrimaryLanguageList();
             ViewBag.schoolInfoList = clientController.GetSchoolInfoList();
-
-            return View(newReferral);
         }
 
+        
 
         /************************************************************************** CREATE *******************************************************/
-        
+
+        /// <summary>
+        /// Inserts a new referral into the database and saves it to session.
+        /// </summary>
+        /// <param name="newReferral"></param>
+        /// <returns>Referral view with new referral loaded.</returns>
         [HttpPost]
-        public ActionResult InsertReferral(Referral newReferral)
+        [WebMethod(EnableSession = true)]
+        public ActionResult InsertReferral(ReferralViewModel newReferral)
         {
-            newReferral.referredClient = InsertClient(newReferral.referredClient);
-            newReferral.referredClient = InsertClientStaff(newReferral.referredClient);
+            Client newClient = new Client();
 
-            return View();
-        }
-
-        public Client InsertClient(Client newClient)
-        {
-            newClient = referralDataController.InsertClient(newClient);
-
-            return newClient;
-        }
-
-        public ActionResult InsertClientFamily(Family newFamilyMember)
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientInsurance()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientInsAuth()
-        {
-
-            return View();
-        }
-
-        public Client InsertClientStaff(Client newClient)
-        {
-            if (newClient.intakeCoordinator != null)
+            if(Session["client"] != null)
             {
-                newClient.intakeCoordinator = referralDataController.InsertClientStaff(newClient.intakeCoordinator, newClient.clientID);
-
-                newClient.clientStaff.Add(newClient.intakeCoordinator);
+                newClient = (Client)Session["client"];
             }
 
-            if (newClient.serviceCoordinator != null)
+            if(newClient.firstName != "" && newClient.lastName != "" && newClient.clientID != 0)
             {
-                newClient.serviceCoordinator = referralDataController.InsertClientStaff(newClient.serviceCoordinator, newClient.clientID);
-
-                newClient.clientStaff.Add(newClient.serviceCoordinator);
+                newClient = referralDataController.InsertClient(newClient);
             }
 
-            if (newClient.caseManager != null)
-            {
-                newClient.caseManager = referralDataController.InsertClientStaff(newClient.caseManager, newClient.clientID);
+            newReferral.client.guardian.isGuardian = true;
 
-                newClient.clientStaff.Add(newClient.caseManager);
+            newClient.clientFamily.Add(newReferral.client.guardian);
+            newClient.clientReferrals.Add(newReferral.referral);
+
+            Session["client"] = newClient;
+
+            GetAllLists();
+
+            return View("Referral", newReferral);
+        }
+
+        [HttpPost]
+        [WebMethod(EnableSession = true)]
+        public ActionResult InsertNewFamily()
+        {
+            Client client = new Client();
+
+            Family newFamilyMember = new Family();
+
+            if (Session["client"] != null)
+            {
+                client = (Client)Session["client"];
             }
 
-            return newClient;
-        }
+            client.clientFamily.Add(newFamilyMember);
 
-        public ActionResult InsertClientDiagnosis()
-        {
+            Session["client"] = client;
 
-            return View();
-        }
+            clientController.GetAllLists();
 
-        public ActionResult InsertClientComments()
-        {
-
-            return View();
-        }
-
-        public ActionResult InsertClientPhysician()
-        {
-
-
-            return View();
+            return PartialView("_FamilyPartial", client.clientFamily);
         }
     }
 }
