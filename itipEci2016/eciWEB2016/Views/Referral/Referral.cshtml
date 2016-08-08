@@ -184,121 +184,162 @@ Change History:
                         @Html.LabelFor(r => r.sentByPhone)
                         @Html.CheckBoxFor(r => r.sentByPhone)
                     </div>
-                    <ul class="twoCol">
-                        <li>
-                            @Html.Label("Relationship:")
-                            <select>
-                                <option>Mother</option>
-                            </select>
-                        </li>
-                        <li>
-                            @Html.Label("Last Name:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("First Name:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Home Phone:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Work Phone:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Cell Phone:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Email:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Communication Preference:")
-                            <input list="communicationPreference">
-                        </li>
-                        <li>
-                            @Html.Label("Best to Call:")
-                            <input list="bestToCall">
-                        </li>
-                        <li>
-                            @Html.Label("Relationship:")
-                            <select>
-                                <option>Mother</option>
-                            </select>
-                        </li>
-                        <li>
-                            @Html.Label("Last Name:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("First Name:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Home Phone:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Work Phone:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Cell Phone:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Email:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Communication Preference:")
-                            <input list="communicationPreference">
-                        </li>
-                        <li>
-                            @Html.Label("Best to Call:")
-                            <input list="bestToCall">
-                        </li>
-                        <li>
-                            @Html.Label("Address 1:")
-                            <input type="text" size="50">
-                        </li>
-                        <li>
-                            @Html.Label("Address 2:")
-                            <input type="text" size="50">
-                        </li>
-                        <li class="inline">
-                            @Html.Label("City:")
-                            <input type="text">
-                        </li>
-                        <li class="inline">
-                            @Html.Label("State:")
-                            <input type="text" size="2">
-                        </li>
-                        <li class="inline">
-                            @Html.Label("Zip:")
-                            <input list="zipCode" size="6">
-                            <input type="text" size="4">
-                        </li>
-                        <li class="inline">
-                            @Html.Label("County:")
-                            <input type="text">
-                        </li>
-                        <li>
-                            @Html.Label("Primary Language:")
-                            <input list="language">
-                        </li>
-                        <li>
-                            @Html.Label("Interpreter Needed?")
-                            <input type="checkbox">
-                        </li>
-                        <li>
-                            @Html.Label("ISD:")
-                            <input list="isd">
-                        </li>
-                    </ul>
+                        @foreach(var family in Model.referredClient.clientFamily)
+                        {
+                            <div class="familyInformation">
+                                <div class="familyAddress">
+                                    <ul>
+                                        <li>
+                                            @Html.LabelFor(r => family.memberType)
+                                            @Html.TextBoxFor(r => family.memberType)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.firstName)
+                                            @Html.TextBoxFor(r => family.firstName)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.lastName)
+                                            @Html.TextBoxFor(r => family.lastName)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.familyAddress.address1)
+                                            @Html.TextBoxFor(r => family.familyAddress.address1)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.familyAddress.address2)
+                                            @Html.TextBoxFor(r => family.familyAddress.address2)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.familyAddress.city)
+                                            @Html.TextBoxFor(r => family.familyAddress.city)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.familyAddress.state)
+                                            @Html.TextBoxFor(r => family.familyAddress.state)
+                                        </li>
+                                        <li>
+                                            @Html.LabelFor(r => family.familyAddress.zip)
+                                            @Html.TextBoxFor(r => family.familyAddress.zip)
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="familyContact">
+                                </div>
+                            </div>
+                        }
+        <ul class="twoCol">
+            <li>
+                @Html.Label("Relationship:")
+
+            </li>
+            <li>
+                @Html.Label("Last Name:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("First Name:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Home Phone:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Work Phone:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Cell Phone:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Email:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Communication Preference:")
+                <input list="communicationPreference">
+            </li>
+            <li>
+                @Html.Label("Best to Call:")
+                <input list="bestToCall">
+            </li>
+            <li>
+                @Html.Label("Relationship:")
+                <select>
+                    <option>Mother</option>
+                </select>
+            </li>
+            <li>
+                @Html.Label("Last Name:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("First Name:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Home Phone:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Work Phone:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Cell Phone:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Email:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Communication Preference:")
+                <input list="communicationPreference">
+            </li>
+            <li>
+                @Html.Label("Best to Call:")
+                <input list="bestToCall">
+            </li>
+            <li>
+                @Html.Label("Address 1:")
+                <input type="text" size="50">
+            </li>
+            <li>
+                @Html.Label("Address 2:")
+                <input type="text" size="50">
+            </li>
+            <li class="inline">
+                @Html.Label("City:")
+                <input type="text">
+            </li>
+            <li class="inline">
+                @Html.Label("State:")
+                <input type="text" size="2">
+            </li>
+            <li class="inline">
+                @Html.Label("Zip:")
+                <input list="zipCode" size="6">
+                <input type="text" size="4">
+            </li>
+            <li class="inline">
+                @Html.Label("County:")
+                <input type="text">
+            </li>
+            <li>
+                @Html.Label("Primary Language:")
+                <input list="language">
+            </li>
+            <li>
+                @Html.Label("Interpreter Needed?")
+                <input type="checkbox">
+            </li>
+            <li>
+                @Html.Label("ISD:")
+                <input list="isd">
+            </li>
+        </ul>
     }
     @{Html.RenderPartial("Referral_FamilyPartial", Model.referredClient.clientFamily);}
 </div>

@@ -23,7 +23,6 @@ namespace eciWEB2016.Models
     {
 
         // Set by values in the database.
-        [Required]
         public int clientID { get; set; }
         public int memberTypeID { get; set; }
         [Display(Name = "Race")]

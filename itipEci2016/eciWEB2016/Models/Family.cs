@@ -11,7 +11,6 @@ namespace eciWEB2016.Models
     /// </summary>
     public class Family
     {
-        [Required]
         public int familyMemberID { get; set; }
         public int memberTypeID { get; set; }
         public string memberType { get; set; }
