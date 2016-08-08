@@ -23,11 +23,11 @@ body {
 
 div.menu, div.main {
     border: 2px solid black;
-    border-bottom-left-radius: 10px;
-    border-bottom-right-radius: 10px;
+    border-bottom-left-radius: 1em;
+    border-bottom-right-radius: 1em;
     background-color: rgb(255, 255, 255);
-    padding: 15px;
-    margin-bottom: 20px;
+    padding: 2%;
+    margin-bottom: 2%;
 }
 
 div.menu {
@@ -471,4 +471,38 @@ th {
 
 .long label {
     width: 60%;
+}
+
+.staffLabel {
+    display: inline-block;
+}
+
+.staffLabelLong{
+    float: left;
+    width: 10%;
+}
+
+.staffLabelCol2 {
+    margin-left: 3%;
+    float: left;
+    width: 7%;
+}
+
+.staffLabelVeryLong {
+    float: left;
+    width: 13%;
+}
+
+.staffLabelCol2Long {
+    margin-left: 3%;
+    float: left;
+    width: 11%;
+}
+
+label {
+    margin-bottom: 1%;
+}
+
+li {
+    overflow: hidden;
 }

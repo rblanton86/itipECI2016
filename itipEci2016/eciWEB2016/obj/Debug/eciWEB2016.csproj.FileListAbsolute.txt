@@ -330,6 +330,7 @@ C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.O
 C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.csprojResolveAssemblyReference.cache
 C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.dll
 C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.pdb
+C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Pulzonic.Multipartial.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\ApplicationInsights.config
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\roslyn\csc.exe
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
@@ -402,7 +403,6 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsof
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.csprojResolveAssemblyReference.cache
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.pdb
-C:\Users\jgraves\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Pulzonic.Multipartial.dll
+C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.csprojResolveAssemblyReference.cache
