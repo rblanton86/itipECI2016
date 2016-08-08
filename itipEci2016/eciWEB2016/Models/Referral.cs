@@ -11,27 +11,25 @@ namespace eciWEB2016.Models
     /// </summary>
     public class Referral
     {
-        public Referral()
-        {
-            referredClient = new Client();
-        }
-
-        public Client referredClient { get; set; }
         [Display(Name = "Referral Source")]
         public ReferralSource referralSource { get; set; }
         [Display(Name = "Secondary Referral Source")]
         public ReferralSource secondaryReferralSource { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Referral Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime referralDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Due Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime referralDueDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Previous Referral Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime prevReferralDate { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Referral Outcome Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime referralOutcomeDate { get; set; }
         [Display(Name = "Referral Reason")]
         public string referralReason { get; set; }

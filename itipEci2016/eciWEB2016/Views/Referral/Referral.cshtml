@@ -7,339 +7,277 @@ Date: 07/27/2016
 
 Change History:
 ------------------------------------------------------------------------------>
-@model eciWEB2016.Models.Referral
+@model eciWEB2016.Models.ReferralViewModel
 @{
-    if (Session["client"] != null)
-    {
-        // Removes the current client from session and replaces with a blank client.
-        eciWEB2016.Models.Client client = new eciWEB2016.Models.Client();
-        Session["client"] = client;
-    }
+
 }
 <header>
     <h1>Referral Input</h1>
 </header>
 <nav>
     <button type="button">Print</button>
-    <button type="button" onclick="location.href='@Url.Action("InsertClient", "Referral")'">Add Client</button>
+    <button type="button" id="addClient">Add Client</button>
     <button type="button" onclick="location.href='@Url.Action("Referral", "Referral")'">Delete Client</button>
     <button type="button" onclick="location.href='@Url.Action("Index", "Home")'">Close</button>
 </nav>
 <div class="main">
-    @using (Html.BeginForm("InsertClient", "Referral", FormMethod.Post, new { id = "referralForm" }))
-    {
+    <div id="referral">
+        <form id="referralForm">
+            <ul class="threeCol">
+                <li>
+                    @Html.Label("Office Name")
+                    @Html.DropDownListFor(r => r.client.officeID, (SelectList)ViewBag.officeList, "")
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.referralDate)
+                    @Html.EditorFor(r => r.referral.referralDate)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.referralDueDate)
+                    @Html.EditorFor(r => r.referral.referralDueDate)
+                </li>
+                <li>
 
-        <ul class="threeCol">
-            <li>
-                @Html.Label("Office Name")
-                @Html.DropDownListFor(r => r.referredClient.officeID, (SelectList)ViewBag.officeList, "")
-            </li>
-            <li>
-                @Html.LabelFor(r => r.referralDate)
-                @Html.EditorFor(r => r.referralDate)
-            </li>
-            <li>
-                @Html.LabelFor(r => r.referralDueDate)
-                @Html.EditorFor(r => r.referralDueDate)
-            </li>
-            <li>
-
-            </li>
-            <li>
-                @Html.LabelFor(r => r.referredClient.intakeCoordinator.staffID)
-                @Html.DropDownListFor(r => r.referredClient.intakeCoordinator.staffID, (SelectList)ViewBag.staffList, "")
-            </li>
-            <li>
-                @Html.LabelFor(r => r.referredClient.serviceCoordinator.staffID)
-                @Html.DropDownListFor(r => r.referredClient.serviceCoordinator.staffID, (SelectList)ViewBag.staffList, "")
-            </li>
-        </ul>
-        <div>
-            @Html.LabelFor(r => r.referralReason)
-            @Html.TextAreaFor(r => r.referralReason, new { rows = 10, columns = 40 })
-        </div>
-        <ul class="twoCol">
-            <li>
-                @Html.LabelFor(r => r.reReferral)
-                @Html.CheckBoxFor(r => r.reReferral)
-            </li>
-            <li class="twoCol">
-                @Html.LabelFor(r => r.prevReferralDate)
-                @Html.EditorFor(r => r.prevReferralDate)
-            </li>
-        </ul>
-        <ul class="twoCol">
-            <li>
-                @Html.LabelFor(r => r.referralSource)
-                @Html.TextBoxFor(r => r.referralSource)
-            </li>
-            <li>
-                @*@Html.LabelFor(r => r.referralCode)*@
-                @*Html.DropDownListFor(r => r.referralCode, (SelectList)ViewBag.referralCodeList)*@
-            </li>
-            <li>
-                @Html.LabelFor(r => r.secondaryReferralSource)
-                @Html.TextBoxFor(r => r.secondaryReferralSource)
-            </li>
-            <li>
-                @*@Html.LabelFor(r => r.referralCode)*@
-                @*Html.DropDownListFor(r => r.referralCode, (SelectList)ViewBag.referralCodeList)*@
-            </li>
-        </ul>
-        <div>
-            @Html.LabelFor(r => r.referralComments)
-            @Html.TextAreaFor(r => r.referralComments, new { rows = 10, columns = 40 })
-        </div>
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.intakeCoordinator.staffID)
+                    @Html.DropDownListFor(r => r.client.intakeCoordinator.staffID, (SelectList)ViewBag.staffList, "")
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.serviceCoordinator.staffID)
+                    @Html.DropDownListFor(r => r.client.serviceCoordinator.staffID, (SelectList)ViewBag.staffList, "")
+                </li>
+            </ul>
+            <div>
+                @Html.LabelFor(r => r.referral.referralReason)
+                @Html.TextAreaFor(r => r.referral.referralReason, new { rows = 10, columns = 40 })
+            </div>
+            <ul class="twoCol">
+                <li>
+                    @Html.LabelFor(r => r.referral.reReferral)
+                    @Html.CheckBoxFor(r => r.referral.reReferral)
+                </li>
+                <li class="twoCol">
+                    @Html.LabelFor(r => r.referral.prevReferralDate)
+                    @Html.EditorFor(r => r.referral.prevReferralDate)
+                </li>
+            </ul>
+            <ul class="twoCol">
+                <li>
+                    @Html.LabelFor(r => r.referral.referralSource)
+                    @Html.TextBoxFor(r => r.referral.referralSource)
+                </li>
+                <li>
+                    @*@Html.LabelFor(r => r.referral.referralCode)*@
+                    @*Html.DropDownListFor(r => r.referral.referralCode, (SelectList)ViewBag.referralCodeList)*@
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.secondaryReferralSource)
+                    @Html.TextBoxFor(r => r.referral.secondaryReferralSource)
+                </li>
+                <li>
+                    @*@Html.LabelFor(r => r.referral.referralCode)*@
+                    @*Html.DropDownListFor(r => r.referral.referralCode, (SelectList)ViewBag.referralCodeList)*@
+                </li>
+            </ul>
+            <div>
+                @Html.LabelFor(r => r.referral.referralComments)
+                @Html.TextAreaFor(r => r.referral.referralComments, new { rows = 10, columns = 40 })
+            </div>
+        </form>
+    </div>
+    <div id="physician">
+        <form id="physicianForm">
+            @*   @{Html.RenderPartial("Referral_PhysicianPartial", r.client.clientPhysicians);} *@
+        </form>
+    </div>
+    <div id="referralDetails">
+        <form id="referralDetailsForm">
             <ul class="twoCol short">
                 <li>
                     @Html.Label("Outreach Code:")
                     @Html.TextBox("outreachCode", null, new { name = "outreachCode" })
                 </li>
                 <li>
-                    @Html.LabelFor(r => r.referredClient.TKIDcaseNumber)
-                    @Html.TextBoxFor(r => r.referredClient.TKIDcaseNumber)
+                    @Html.LabelFor(r => r.client.TKIDcaseNumber)
+                    @Html.TextBoxFor(r => r.client.TKIDcaseNumber)
                 </li>
             </ul>
-            <ul class="twoCol short">
+            <ul class="threeCol long">
                 <li>
-                    @Html.LabelFor(r => r.referredClient.altID)
-                    @Html.TextBoxFor(r => r.referredClient.altID)
+                    @Html.LabelFor(r => r.client.otherFAtoITIPFA)
+                    @Html.CheckBoxFor(r => r.client.otherFAtoITIPFA)
                 </li>
                 <li>
-                    @Html.LabelFor(r => r.referredClient.clientID)
-                    @Html.TextBoxFor(r => r.referredClient.clientID)
+                    @Html.LabelFor(r => r.client.ITIPcomptoITIPFA)
+                    @Html.CheckBoxFor(r => r.client.ITIPcomptoITIPFA)
                 </li>
                 <li>
-                    @Html.LabelFor(r => r.referredClient.lastName)
-                    @Html.TextBoxFor(r => r.referredClient.lastName)
+                    @*
+                        @Html.LabelFor(r => r.referral.referralOutcome)
+                        @Html.DropDownListFor(r => r.referral.referralOutcome, (SelectList)ViewBag.ReferralOutcomes)
+                    *@
                 </li>
                 <li>
-                    @Html.LabelFor(r => r.referredClient.firstName)
-                    @Html.TextBoxFor(r => r.referredClient.firstName)
+                    @Html.LabelFor(r => r.referral.referralOutcomeDate)
+                    @Html.EditorFor(r => r.referral.referralOutcomeDate)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ITIPFAtoITIPcomp)
+                    @Html.CheckBoxFor(r => r.client.ITIPFAtoITIPcomp)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.fromOtherECI)
+                    @Html.CheckBoxFor(r => r.client.fromOtherECI)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.agencyFrom)
+                    @Html.TextBoxFor(r => r.client.agencyFrom)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.transferringLocation)
+                    @Html.TextBoxFor(r => r.referral.transferringLocation)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.pointOfAccess)
+                    @Html.CheckBoxFor(r => r.client.pointOfAccess)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ECIReferredTo)
+                    @Html.TextBoxFor(r => r.client.ECIReferredTo)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ECIReferredDate)
+                    @Html.EditorFor(r => r.client.ECIReferredDate)
                 </li>
             </ul>
-                    <ul class="threeCol">
+            <div style="border: 1px solid black;">
+                Referral Sent By:
+                @Html.LabelFor(r => r.referral.sentByFax)
+                @Html.CheckBoxFor(r => r.referral.sentByFax)
+                @Html.LabelFor(r => r.referral.sentByPhone)
+                @Html.CheckBoxFor(r => r.referral.sentByPhone)
+            </div>
+        </form>
+    </div>
+    <div id="clientMain">
+        <form id="clientReferralForm">
+            @{Html.RenderPartial("_ClientPartial", Model.client);}
+        </form>
+    </div>
+    <div id="familyMain">
+        <form id="familyReferralForm">
+            <div class="familyInformation">
+                <div class="familyAddress">
+                    <ul>
                         <li>
-                            @Html.LabelFor(r => r.referredClient.middleInitial)
-                            @Html.TextBoxFor(r => r.referredClient.middleInitial)
+                            @Html.LabelFor(r => r.client.guardian.familyMemberType)
+                            @Html.TextBoxFor(r => r.client.guardian.familyMemberType)
                         </li>
                         <li>
-                            @Html.LabelFor(r => r.referredClient.dob)
-                            @Html.EditorFor(r => r.referredClient.dob)
-                        </li>
-                    </ul>
-                    @*   @{Html.RenderPartial("Referral_PhysicianPartial", Model.referredClient.clientPhysicians);} *@
-                    <ul class="threeCol long">
-                        <li>
-                            @Html.LabelFor(r => r.referredClient.otherFAtoITIPFA)
-                            @Html.CheckBoxFor(r => r.referredClient.otherFAtoITIPFA)
+                            @Html.LabelFor(r => r.client.guardian.firstName)
+                            @Html.TextBoxFor(r => r.client.guardian.firstName)
                         </li>
                         <li>
-                            @Html.LabelFor(r => r.referredClient.ITIPcomptoITIPFA)
-                            @Html.CheckBoxFor(r => r.referredClient.ITIPcomptoITIPFA)
+                            @Html.LabelFor(r => r.client.guardian.lastName)
+                            @Html.TextBoxFor(r => r.client.guardian.lastName)
                         </li>
                         <li>
-                            @*
-                                @Html.LabelFor(r => r.referralOutcome)
-                                @Html.DropDownListFor(r => r.referralOutcome, (SelectList)ViewBag.ReferralOutcomes)
-                            *@
+                            @Html.LabelFor(r => r.client.guardian.familyAddress.address1)
+                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.address1)
                         </li>
                         <li>
-                            @Html.LabelFor(r => r.referralOutcomeDate)
-                            @Html.EditorFor(r => r.referralOutcomeDate)
+                            @Html.LabelFor(r => r.client.guardian.familyAddress.address2)
+                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.address2)
                         </li>
                         <li>
-                            @Html.LabelFor(r => r.referredClient.ITIPFAtoITIPcomp)
-                            @Html.CheckBoxFor(r => r.referredClient.ITIPFAtoITIPcomp)
+                            @Html.LabelFor(r => r.client.guardian.familyAddress.city)
+                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.city)
                         </li>
                         <li>
-                            @Html.LabelFor(r => r.referredClient.fromOtherECI)
-                            @Html.CheckBoxFor(r => r.referredClient.fromOtherECI)
+                            @Html.LabelFor(r => r.client.guardian.familyAddress.state)
+                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.state)
                         </li>
                         <li>
-                            @Html.LabelFor(r => r.referredClient.agencyFrom)
-                            @Html.TextBoxFor(r => r.referredClient.agencyFrom)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.transferringLocation)
-                            @Html.TextBoxFor(r => r.transferringLocation)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.referredClient.pointOfAccess)
-                            @Html.CheckBoxFor(r => r.referredClient.pointOfAccess)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.referredClient.ECIReferredTo)
-                            @Html.TextBoxFor(r => r.referredClient.ECIReferredTo)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.referredClient.ECIReferredDate)
-                            @Html.EditorFor(r => r.referredClient.ECIReferredDate)
+                            @Html.LabelFor(r => r.client.guardian.familyAddress.zip)
+                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.zip)
                         </li>
                     </ul>
-                    <div style="border: 1px solid black;">
-                        Referral Sent By:
-                        @Html.LabelFor(r => r.sentByFax)
-                        @Html.CheckBoxFor(r => r.sentByFax)
-                        @Html.LabelFor(r => r.sentByPhone)
-                        @Html.CheckBoxFor(r => r.sentByPhone)
-                    </div>
-                        @foreach(var family in Model.referredClient.clientFamily)
-                        {
-                            <div class="familyInformation">
-                                <div class="familyAddress">
-                                    <ul>
-                                        <li>
-                                            @Html.LabelFor(r => family.memberType)
-                                            @Html.TextBoxFor(r => family.memberType)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.firstName)
-                                            @Html.TextBoxFor(r => family.firstName)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.lastName)
-                                            @Html.TextBoxFor(r => family.lastName)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.familyAddress.address1)
-                                            @Html.TextBoxFor(r => family.familyAddress.address1)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.familyAddress.address2)
-                                            @Html.TextBoxFor(r => family.familyAddress.address2)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.familyAddress.city)
-                                            @Html.TextBoxFor(r => family.familyAddress.city)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.familyAddress.state)
-                                            @Html.TextBoxFor(r => family.familyAddress.state)
-                                        </li>
-                                        <li>
-                                            @Html.LabelFor(r => family.familyAddress.zip)
-                                            @Html.TextBoxFor(r => family.familyAddress.zip)
-                                        </li>
-                                    </ul>
-                                </div>
-                                <div class="familyContact">
-                                </div>
-                            </div>
-                        }
-        <ul class="twoCol">
-            <li>
-                @Html.Label("Relationship:")
+                </div>
+                <div class="familyContact">
+                    <ul>
+                        <li>
+                            @Html.Label("Home Phone:")
+                            @Html.TextBox("HomePhone", null)
+                        </li>
+                        <li>
+                            @Html.Label("Cell Phone:")
+                            @Html.TextBox("CellPhone", null)
+                        </li>
+                        <li>
+                            @Html.Label("Work Phone:")
+                            @Html.TextBox("WorkPhone", null)
+                        </li>
+                        <li>
+                            @Html.Label("Email:")
+                            @Html.TextBox("Email", null)
+                        </li>
+                    </ul>
+                </div>
+            </div>
 
-            </li>
-            <li>
-                @Html.Label("Last Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("First Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Home Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Work Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Cell Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Email:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Communication Preference:")
-                <input list="communicationPreference">
-            </li>
-            <li>
-                @Html.Label("Best to Call:")
-                <input list="bestToCall">
-            </li>
-            <li>
-                @Html.Label("Relationship:")
-                <select>
-                    <option>Mother</option>
-                </select>
-            </li>
-            <li>
-                @Html.Label("Last Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("First Name:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Home Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Work Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Cell Phone:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Email:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Communication Preference:")
-                <input list="communicationPreference">
-            </li>
-            <li>
-                @Html.Label("Best to Call:")
-                <input list="bestToCall">
-            </li>
-            <li>
-                @Html.Label("Address 1:")
-                <input type="text" size="50">
-            </li>
-            <li>
-                @Html.Label("Address 2:")
-                <input type="text" size="50">
-            </li>
-            <li class="inline">
-                @Html.Label("City:")
-                <input type="text">
-            </li>
-            <li class="inline">
-                @Html.Label("State:")
-                <input type="text" size="2">
-            </li>
-            <li class="inline">
-                @Html.Label("Zip:")
-                <input list="zipCode" size="6">
-                <input type="text" size="4">
-            </li>
-            <li class="inline">
-                @Html.Label("County:")
-                <input type="text">
-            </li>
-            <li>
-                @Html.Label("Primary Language:")
-                <input list="language">
-            </li>
-            <li>
-                @Html.Label("Interpreter Needed?")
-                <input type="checkbox">
-            </li>
-            <li>
-                @Html.Label("ISD:")
-                <input list="isd">
-            </li>
-        </ul>
-    }
-    @{Html.RenderPartial("Referral_FamilyPartial", Model.referredClient.clientFamily);}
+            @{Html.RenderPartial("_FamilyPartial", Model.client.clientFamily);}
+        </form>
+        <button type="button" id="addNewFamily">Add Family</button>
+    </div>
+    <div id="referralClientDetails">
+        <form id="referralClientDetailsForm">
+            <ul>
+                <li>
+                    @Html.LabelFor(r => r.client.primaryLanguageID):
+                    @Html.DropDownListFor(r => r.client.primaryLanguageID, (SelectList)ViewBag.primaryLanguageList, null, new { @Value = Model.client.primaryLanguageID })
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.interpreterNeeded)
+                    @Html.CheckBoxFor(r => r.client.interpreterNeeded)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.schoolInfoID):
+                    @Html.DropDownListFor(r => r.client.schoolInfoID, (SelectList)ViewBag.schoolInfoList, null, new { @Value = Model.client.schoolInfoID })
+                </li>
+            </ul>
+        </form>
+    </div>
 </div>
+
+@section JavaScript
+{
+    @* Generates new family section to add additional family members. *@
+    <script>
+        $("#addNewFamily").click(function () {
+            var url = '@Url.Action("InsertNewFamily", "Referral")';
+            $.post(
+                url,
+                function (data) {
+                    $('#familyMain').html(data);
+                });
+        });
+    </script>
+
+    <script>
+        $("#addClient").click(function sendform(target) {
+
+            // Sends contents of Referral and Referral details form to controller for entry to the client in session.
+            $.ajax({
+                type: "POST",
+                url: "InsertReferral/Referral",
+                data: $("#referralForm, #referralDetailsForm, #familyReferralForm, #physicianForm, #clientReferralForm, #referralClientDetailsForm").serialize(),
+                datatype: "html",
+                success: function (data) {
+                    console.log(data);
+                }
+            });
+
+        });
+    </script>
+}

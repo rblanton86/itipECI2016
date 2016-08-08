@@ -212,6 +212,7 @@
     <Compile Include="Models\Insurance.cs" />
     <Compile Include="Models\InsuranceAuthorization.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\ReferralViewModel.cs" />
     <Compile Include="Models\TypeModels.cs" />
     <Compile Include="Models\Physician.cs" />
     <Compile Include="Models\Referral.cs" />
@@ -339,9 +340,10 @@
     <Content Include="Views\Shared\StaffAddressPartial.cshtml" />
     <Content Include="Views\Shared\StaffAdditionalContactInfoPartial.cshtml" />
     <Content Include="Views\Shared\TimeDetails_Grid_Partial.cshtml" />
-    <Content Include="Views\Referral\Referral_PhysicianPartial.cshtml" />
-    <Content Include="Views\Referral\Referral_FamilyPartial.cshtml" />
-    <Content Include="Views\Referral\Referral_InsurancePartial.cshtml" />
+    <Content Include="Views\Referral\_PhysicianPartial.cshtml" />
+    <Content Include="Views\Referral\_FamilyPartial.cshtml" />
+    <Content Include="Views\Referral\_InsurancePartial.cshtml" />
+    <Content Include="Views\Referral\_ClientPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

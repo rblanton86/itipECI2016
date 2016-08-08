@@ -1,0 +1,69 @@
+﻿@model List<eciWEB2016.Models.Family>
+@using eciWEB2016.Models
+@{
+    if(Model.Count == 0)
+    {
+        Family newFamily = new Family();
+    }
+}
+@foreach (var family in Model)
+{
+    <div class="familyInformation">
+        <div class="familyAddress">
+            <ul>
+                <li>
+                    @Html.LabelFor(f => family.familyMemberType)
+                    @Html.TextBoxFor(f => family.familyMemberType)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.firstName)
+                    @Html.TextBoxFor(f => family.firstName)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.lastName)
+                    @Html.TextBoxFor(f => family.lastName)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.familyAddress.address1)
+                    @Html.TextBoxFor(f => family.familyAddress.address1)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.familyAddress.address2)
+                    @Html.TextBoxFor(f => family.familyAddress.address2)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.familyAddress.city)
+                    @Html.TextBoxFor(f => family.familyAddress.city)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.familyAddress.state)
+                    @Html.TextBoxFor(f => family.familyAddress.state)
+                </li>
+                <li>
+                    @Html.LabelFor(f => family.familyAddress.zip)
+                    @Html.TextBoxFor(f => family.familyAddress.zip)
+                </li>
+            </ul>
+        </div>
+        <div class="familyContact">
+            <ul>
+                <li>
+                    @Html.Label("Home Phone:")
+                    @Html.TextBox("HomePhone", null)
+                </li>
+                <li>
+                    @Html.Label("Cell Phone:")
+                    @Html.TextBox("CellPhone", null)
+                </li>
+                <li>
+                    @Html.Label("Work Phone:")
+                    @Html.TextBox("WorkPhone", null)
+                </li>
+                <li>
+                    @Html.Label("Email:")
+                    @Html.TextBox("Email", null)
+                </li>
+            </ul>
+        </div>
+    </div>
+}
