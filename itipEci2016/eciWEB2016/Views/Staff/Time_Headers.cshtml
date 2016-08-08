@@ -80,16 +80,10 @@ Change History:
                 // ADD CLICK EVENT FOR MAKE COLLAPSIBLE
                 // Call method to fill sub grid with data
                 $(".hoverEff").on("click", this, function () {
-                    $("#gridContent #outerGrid > tbody > tr").each(function (i, el) {
-                        //alert('id ' + timeHeaderID);
-                        //alert(' this ' + $(this).find('table').attr('id'));
-                        //alert(i);
-                        if ($(this).find('table').attr('id') != timeHeaderID)
-                        {
-                        }
-                    })
-                    alert($(this).find('table').index());
+                    $('.expanded').slideToggle();
+                    $('.expanded').removeClass('expanded');
                     $(this).parent().closest("tr").next().slideToggle(100);
+                    $(this).parent().closest("tr").next().addClass("expanded");
                     $(this).toggleClass("expand collapse");
                     $.post('@Url.Action("StaffTimeSheet", "TimeSheet")', { timeHeaderID: parseInt(timeHeaderID)}, function(data) {
                         $('#' + timeHeaderID).replaceWith(data);
