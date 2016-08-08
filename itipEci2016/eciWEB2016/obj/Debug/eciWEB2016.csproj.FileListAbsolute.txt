@@ -349,13 +349,6 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\eciWEB20
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Antlr3.Runtime.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\EntityFramework.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\EntityFramework.SqlServer.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.Agent.Intercept.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.DependencyCollector.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.PerfCounterCollector.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.ServerTelemetryChannel.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.Web.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.WindowsServer.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.ApplicationInsights.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AspNet.Identity.Core.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -383,11 +376,6 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\System.W
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\System.Web.WebPages.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\System.Web.WebPages.Razor.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\WebGrease.dll
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.DependencyCollector.xml
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.ServerTelemetryChannel.xml
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.Web.xml
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.WindowsServer.xml
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.ApplicationInsights.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Practices.EnterpriseLibrary.Data.xml
@@ -414,5 +402,6 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsof
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.Google.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.Twitter.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.csprojResolveAssemblyReference.cache
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.pdb
