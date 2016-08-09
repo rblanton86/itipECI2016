@@ -34,11 +34,13 @@ namespace eciWEB2016.Class
             //then assign values from that row to a new Address model
             Address thisAddress = new Address()
             {
+                addressesID = dr.Field<int>("addressesID"),
                 address1 = dr.Field<string>("address1"),
                 address2 = dr.Field<string>("address2"),
                 city = dr.Field<string>("city"),
                 state = dr.Field<string>("st"),
                 zip = dr.Field<int>("zip"),
+                county = dr.Field<string>("county"),
                 mapsco = dr.Field<string>("mapsco"),
 
             };
@@ -54,14 +56,16 @@ namespace eciWEB2016.Class
             List<Address> AddressList = (from drRow in ds.Tables[0].AsEnumerable()
                                          select new Address()
                                          {
-                                             addressesType = drRow.Field<string>(""),
-                                             address1 = drRow.Field<string>(""),
-                                             address2 = drRow.Field<string>(""),
-                                             city = drRow.Field<string>(""),
-                                             state = drRow.Field<string>(""),
-                                             zip = drRow.Field<int>(""),
-                                             county = drRow.Field<string>(""),
-                                             mapsco = drRow.Field<string>("")
+                                             addressTypeID = drRow.Field<int>("addressesTypeID"),
+                                             addressesType = drRow.Field<string>("addressesType"),
+                                             addressesID = drRow.Field<int>("addressessID"),
+                                             address1 = drRow.Field<string>("address1"),
+                                             address2 = drRow.Field<string>("address2"),
+                                             city = drRow.Field<string>("city"),
+                                             state = drRow.Field<string>("st"),
+                                             zip = drRow.Field<int>("zip"),
+                                             county = drRow.Field<string>("county"),
+                                             mapsco = drRow.Field<string>("mapsco")
 
                                          }).ToList();
             return AddressList;

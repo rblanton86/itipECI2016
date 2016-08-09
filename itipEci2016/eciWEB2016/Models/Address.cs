@@ -15,16 +15,21 @@ namespace eciWEB2016.Models
         public string addressesType { get; set; }
         public int addressTypeID { get; set; }
         [Display(Name = "Address 1")]
+        [Required(ErrorMessage = "Please enter an address.")]
         public string address1 { get; set; }
         [Display(Name = "Address 2")]
         public string address2 { get; set; }
         [Display(Name = "City")]
+        [Required(ErrorMessage = "Please enter a city.")]
         public string city { get; set; }
         [Display(Name = "State")]
+        [Required(ErrorMessage = "Please enter a state.")]
         public string state { get; set; }
         [Display(Name = "Zip Code")]
+        [Required(ErrorMessage = "Please enter a zip code.")]
         public int zip { get; set; }
         [Display(Name = "County")]
+        [Required(ErrorMessage = "Please enter a county.")]
         public string county { get; set; }
         [Display(Name = "Mapsco")]
         public string mapsco { get; set; }

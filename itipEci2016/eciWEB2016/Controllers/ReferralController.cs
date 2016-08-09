@@ -82,8 +82,13 @@ namespace eciWEB2016.Controllers
             }
 
             newReferral.client.guardian.isGuardian = true;
+            
+            newReferral.client.clientAddress = newReferral.client.guardian.familyAddress;
+
+            newReferral.client.phone = newReferral.client.guardian.familyContact.Find(c => c.additionalContactInfoTypeID == 1);
 
             newClient.clientFamily.Add(newReferral.client.guardian);
+
             newClient.clientReferrals.Add(newReferral.referral);
 
             Session["client"] = newClient;
