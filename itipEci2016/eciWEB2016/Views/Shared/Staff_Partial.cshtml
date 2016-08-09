@@ -9,91 +9,107 @@
     }
 }
 
-<ul class="flex">
+<ul>
+    
     <li>
-        <label>Staff Alt ID:</label><Input type="text" name="staffID" value="@currentStaffMember.staffAltID">
-        <label>Status</label>
+      
+         <label class="staffLabelLong">Staff Alt ID:</label><Input type="text" style="float: left; width: 10.555%;" name="staffID" value="@currentStaffMember.staffAltID">
+   
+        <label class="staffLabelCol2" style="margin-left: 7.777%;">Status:</label>
         @Html.DropDownListFor(Staff => Staff.status, (SelectList)ViewBag.statusList, "--select--", new { @Value = currentStaffMember.status })
+
+        <label style="margin-left: 5.677%">SSN:</label><input type="Text" size=7 name="staffSSN" value="@currentStaffMember.SSN" style="margin-left: 3%">
+    </li>
+    <li >
+        
+        <label class="staffLabelLong">Last Name:</label>
+        @Html.TextBoxFor(Staff => Staff.lastName, new { Value = currentStaffMember.lastName, Style="float: left; width: 15.255%;"})
+
+        <label class="staffLabelCol2">DOB:</label>
+        <input style="float: left;"type="Text" name="staffDOB" size="8" value="@currentStaffMember.DOB.ToString("yyyy-MM-dd")">
+    
     </li>
     <li>
-        
-        <label>Staff Last Name:</label>
-        @Html.TextBoxFor(Staff => Staff.lastName, new { Value = currentStaffMember.lastName})
-        <label>Staff First Name:</label>
-        @Html.TextBoxFor(Staff => Staff.firstName, new { Value = currentStaffMember.firstName })
-        <label>Middle Initial:</label>
-        @Html.TextBoxFor(Staff => Staff.middleInitial, new { Value = currentStaffMember.middleInitial })
+        <label class="staffLabelLong">First Name:</label>
+        @Html.TextBoxFor(Staff => Staff.firstName, new { Value = currentStaffMember.firstName, Style = "width: 15.255%; float: left;" })
+
+        <label class="staffLabelCol2">Middle Initial:</label>
+        @Html.TextBoxFor(Staff => Staff.middleInitial, new { Value = currentStaffMember.middleInitial, Style = "width: 1em; float: left;" })
     </li>
 
-    <li>
-        <label>Date of Birth:</label>
-        <input type="Text" name="staffDOB" value="@currentStaffMember.DOB.ToString("yyyy-MM-dd")">
-        <label>SSN:</label><input type="Text" size=1 name="staffSSN" value="@currentStaffMember.SSN">
-    </li>
 </ul>
 <ul>
-    <span>
-        <li>
-            <label>Address:</label>
-            @Html.TextBoxFor(Staff => Staff.staffAddress.address1, null, new { Value = currentStaffMember.staffAddress.address1})
-            <label>Zip:</label>
-            @Html.TextBoxFor(Staff => Staff.staffAddress.zip, new { Value = currentStaffMember.staffAddress.zip })
-            <label>City:</label>
-            @Html.TextBoxFor(Staff => Staff.staffAddress.city, new { Value = currentStaffMember.staffAddress.city })
-            <label>State:</label><select>
-                <option value="1">AL</option>
-            </select>
+        <li style="margin-top: 2%;">
+           
+            <label class="staffLabelLong">Address:</label>
+            @Html.TextBoxFor(Staff => Staff.staffAddress.address1, null, new { Value = currentStaffMember.staffAddress.address1, Style = "float: left; width: 15.255%;" })
+
+            <label class="staffLabelCol2">City:</label>
+            @Html.TextBoxFor(Staff => Staff.staffAddress.city, new { Value = currentStaffMember.staffAddress.city, Style = "width: 10%; float: left;" })
+
+            <label class="staffLabelCol2">State:</label><select>
+            <option value="1">AL</option></select>
+
+            <label style="margin-left: 4%">Zip:</label>
+            @Html.TextBoxFor(Staff => Staff.staffAddress.zip, new { Value = currentStaffMember.staffAddress.zip, Style = "clear: both; width: 7%;" })
+
         </li>
         <li>
-            <label>Home Phone:</label>
-            @Html.TextBoxFor(Staff => Staff.staffContact.additionalContactInfo, new { Value = currentStaffMember.staffContact.additionalContactInfo })
-            <label>Cell:</label><input type="Text" name="staffCell">
-            <label>Work:</label><input type="Text" name="staffWork">
+
+            <label class="staffLabelLong">Home Phone:</label>
+            @Html.TextBoxFor(Staff => Staff.staffContact.additionalContactInfo, new { Value = currentStaffMember.staffContact.additionalContactInfo, Style = "width: 15.255%; float: left;"  })
+            <label class="staffLabelCol2">Cell:</label><input type="Text" style="width: 15.255%; float: left;" name="staffCell">
+            <label class="staffLabelCol2">Work:</label><input type="Text"  style="width: 15%; float: left;"name="staffWork">
+
         </li>
 
-    </span>
-    <li>
-        <label>Sex:</label><select>
+    <li style="margin-top: 2%;">
+
+        <label class="staffLabelLong">Handicap:</label><select style="width: 6.555%; float: left;">
+            <option value="1">Yes</option>
+            <option value="2">No</option>
+        </select>
+        <label class="staffLabelCol2">Sex:</label><select style="width: 6.555%; float: left;">
             <option value="1">M</option>
             <option value="2">F</option>
         </select>
-        <label>Race:</label><select></select>
-        <label>Handicapped:</label><select>
-            <option value="1">Yes</option>
-            <option value="2">No</option>
-        </select>
+        <label class="staffLabelCol2">Race:</label><select style="width: 5%; float: left;"></select>
+
     </li>
-    <li>
-        <label>Full Time:</label><select>
+    <li style="margin-top: 1%;">
+
+        <label class="staffLabelLong">Full Time:</label><select style="width: 6.555%; float: left;">
             <option value="1">Yes</option>
             <option value="2">No</option>
         </select>
-        <label>Full Time Equivalant:</label><select>
+        <label class="staffLabelCol2">Full Time Equiv:</label><select style="width: 6.555%; float: left;">
             <option value="1">Some Option</option>
         </select>
-        <label>100% ECI?:</label><select>
+        <label class="staffLabelCol2">100% ECI?:</label><select style="width: 6.555%; float: left;">
             <option value="1">Yes</option>
             <option value="2">No</option>
         </select>
+
+    </li>
+    <li style="margin-top: 1%">
+        <label class="staffLabelVeryLong">Profl Licence #:</label><input type="Text" style="width: 9.555%; float: left;">
+        <label class="staffLabelCol2Long">Reg/Certif #:</label><input type="Text" style="width: 9.555%; float: left;">
+        <label class="staffLabelCol2">NPI #:</label><input type="Text" style="width: 9.555%; float: left;">
+    </li>
+    <li>
+        <label class="staffLabelVeryLong">Med Provider #:</label><input type="Text" style="width: 9.555%; float: left;">
+        <label class="staffLabelCol2Long">Taxonomy #:</label><input type="Text" style="width: 9.555%; float: left;">
+    </li>
+    <li>
+        <label>Tricare Provider #:</label><input type="Text" style="width: 9.555%; float: left;">
+        <label>BCBS Provider #:</label><input type="Text" style="width: 9.555%; float: left;">
     </li>
 
-    <li>
-        <label>Profl Licence #:</label><input type="Text" size=10>
-        <label>Reg/Certif #:</label><input type="Text" size=10>
-        <label>NPI #:</label><input type="Text" size=10>
+    <li style="margin-top: 1%">
+        <label class="staffLabelVeryLong">Auto Liability Exp:</label><input type="Text" style="width: 9.555%; float: left;">
+        <label class="staffLabelCol2Long">Cert Exp Date:</label><input type="Text" name="AutoExp" style="width: 9.555%; float: left;">
     </li>
-    <li>
-        <label>Med Provider #:</label><input type="Text">
-        <label>Taxonomy #:</label><input type="Text" size=10>
-    </li>
-    <li>
-        <label>Tricare Provider #:</label><input type="Text">
-        <label>BCBS Provider #:</label><input type="Text">
-    </li>
-    <li>
-        <label>Auto Liability Expire:</label><input type="Text" size=10>
-        <label>Cert Expiration Date:</label><input type="Text" name="AutoExp" size=10>
-    </li>
+
     <li>
         <label>Prof Licence Expiration:</label><input type="Text">
         <label>Incl Time Entry?:</label><input type="checkbox">
