@@ -257,7 +257,8 @@ namespace eciWEB2016.Controllers.DataControllers
                 //update Staff's Addresses
                 DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
-
+                db.AddInParameter(upd_Addresses, "@memberID", DbType.Int32, thisStaff.staffID);
+                db.AddInParameter(upd_Addresses, "@memberTypeID", DbType.Int32, thisStaff.memberTypeID);
                 db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, staffAddress.addressesID);
                 db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, staffAddress.addressesType);
                 db.AddInParameter(upd_Addresses, "@address1", DbType.String, staffAddress.address1);
@@ -265,6 +266,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Addresses, "@city", DbType.String, staffAddress.city);
                 db.AddInParameter(upd_Addresses, "@st", DbType.String, staffAddress.state);
                 db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, staffAddress.zip);
+                db.AddInParameter(upd_Addresses, "@county", DbType.String, "");
                 db.AddInParameter(upd_Addresses, "@deleted", DbType.Boolean, staffAddress.deleted);
 
                 db.ExecuteNonQuery(upd_Addresses);

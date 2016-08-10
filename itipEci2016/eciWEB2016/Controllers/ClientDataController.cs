@@ -653,13 +653,15 @@ namespace eciWEB2016.Controllers.DataControllers
             if(currentClient.clientAddress.addressesID != 0)
             {
                 DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
-
+                db.AddInParameter(upd_Addresses, "@memberID", DbType.Int32, currentClient.clientID);
+                db.AddInParameter(upd_Addresses, "@memberTypeID", DbType.Int32, currentClient.memberTypeID);
                 db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, currentClient.clientAddress.addressesID);
                 db.AddInParameter(upd_Addresses, "@addressesTypeID", DbType.Int32, currentClient.clientAddress.addressTypeID);
                 db.AddInParameter(upd_Addresses, "@address1", DbType.String, currentClient.clientAddress.address1);
                 db.AddInParameter(upd_Addresses, "@address2", DbType.String, currentClient.clientAddress.address2);
                 db.AddInParameter(upd_Addresses, "@city", DbType.String, currentClient.clientAddress.city);
                 db.AddInParameter(upd_Addresses, "@st", DbType.String, currentClient.clientAddress.state);
+                db.AddInParameter(upd_Addresses, "@county", DbType.String, currentClient.clientAddress.county);
                 db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, currentClient.clientAddress.zip);
 
                 try

@@ -29,7 +29,7 @@ namespace eciWEB2016.Models
         [Required(ErrorMessage = "Please enter a zip code.")]
         public int zip { get; set; }
         [Display(Name = "County")]
-        [Required(ErrorMessage = "Please enter a county.")]
+        [Required]
         public string county { get; set; }
         [Display(Name = "Mapsco")]
         public string mapsco { get; set; }

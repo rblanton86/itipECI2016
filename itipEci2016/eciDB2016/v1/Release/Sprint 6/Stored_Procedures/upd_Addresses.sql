@@ -7,10 +7,12 @@ Date:
 	6.23.16
 Change History:
 	07/24/2016: JMG - Corrected spelling error.
-	08/09/2016: JMG - Updated to add county column.
+	08/09/2016: JMG - Updated to add county column and needed memberID and memberTypeID.
 ************************************************************************************************************/
 ALTER PROCEDURE [dbo].[upd_Addresses]
 	@addressesID INT,
+	@memberID INT,
+	@memberTypeID INT,
 	@addressesTypeID int,
 	@address1 varchar(50),
 	@address2 varchar(25),
@@ -24,16 +26,38 @@ AS
 	BEGIN
 		BEGIN TRY
 
-			UPDATE Addresses
+			IF EXISTS (SELECT *
+						FROM LnkAddressMember
+						WHERE memberID = @memberID
+							AND memberTypeID = @memberTypeID)
+				BEGIN
+					UPDATE Addresses
 
-			SET addressesTypeID = @addressesTypeID,
-				address1 = @address1,
-				address2 = @address2,
-				city = @city,
-				st = @st,
-				zip = @zip
+					SET addressesTypeID = @addressesTypeID,
+						address1 = @address1,
+						address2 = @address2,
+						city = @city,
+						st = @st,
+						zip = @zip
 
-			WHERE addressesID = @addressesID
+					WHERE addressesID = @addressesID
+				END
+			ELSE
+				BEGIN
+					UPDATE Addresses
+
+					SET addressesTypeID = @addressesTypeID,
+						address1 = @address1,
+						address2 = @address2,
+						city = @city,
+						st = @st,
+						zip = @zip
+
+					WHERE addressesID = @addressesID
+
+					INSERT INTO LnkAddressTable (memberID, memberTypeID, addressesID)
+						VALUES (@memberID, @memberTypeID, @addressesID)
+				END
 
 		END TRY
 		BEGIN CATCH
@@ -50,5 +74,3 @@ AS
 
 		END CATCH
 	END
-
-

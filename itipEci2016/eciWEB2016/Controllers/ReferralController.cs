@@ -95,7 +95,7 @@ namespace eciWEB2016.Controllers
 
             GetAllLists();
 
-            return View("Referral", newReferral);
+            return JsonResult("Referral", newReferral);
         }
 
         [HttpPost]

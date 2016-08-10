@@ -506,3 +506,10 @@ label {
 li {
     overflow: hidden;
 }
+
+/* Validation styling */
+
+.input-validation-error {
+    background-color: pink; 
+    border: 1px solid red;
+}
