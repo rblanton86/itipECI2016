@@ -32,9 +32,10 @@ AS
 						addressesTypeID = @addressTypeID
 						AND address1 = @address1
 						AND address2 = ISNULL(@address2, '')
-						AND city = @city 
-						AND st = @st 
+						AND city = @city
+						AND st = @st
 						AND zip = @zip
+						AND county = ISNULL(@county, '')
 						AND mapsco = ISNULL(@mapsco, '')
 						)
 
@@ -48,6 +49,7 @@ AS
 									AND city = @city 
 									AND st = @st 
 									AND zip = @zip
+									AND county = ISNULL(@county, '')
 									AND mapsco = ISNULL(@mapsco, '')
 								)
 
@@ -72,6 +74,7 @@ AS
 									city, 
 									st, 
 									zip,
+									county,
 									mapsco,
 									deleted)
 
@@ -81,6 +84,7 @@ AS
 						@city, 
 						@st, 
 						@zip,
+						ISNULL(@county, ''),
 						ISNULL(@mapsco, ''),
 						@deleted)
 
@@ -93,6 +97,7 @@ AS
 								AND city = @city 
 								AND st = @st 
 								AND zip = @zip
+								AND county = ISNULL(@county, '')
 								AND mapsco = ISNULL(@mapsco, '')
 								)
 

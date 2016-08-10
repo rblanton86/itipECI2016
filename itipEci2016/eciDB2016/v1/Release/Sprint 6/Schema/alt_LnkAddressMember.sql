@@ -30,7 +30,6 @@ IF ISNULL(@lnkaddressmember, 0) = 0
 			memberID INT
 			PRIMARY KEY (memberTypeID, addressesID)
 		)
-
 		PRINT 'Created LnkAddressMember on database.'
 	END
 ELSE
@@ -39,6 +38,7 @@ ELSE
 			BEGIN
 				PRINT 'Did not add memberID column, already exists.'
 			END
+		ELSE
 			BEGIN
 				ALTER TABLE LnkAddressMember
 					ADD memberID INT

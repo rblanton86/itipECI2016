@@ -8,7 +8,7 @@ Date: 07-15-2016
 Change History:
         	08-09-2016: JMG - Added county column. Updated to select based on memberID as well.
 ****************************************************************************/
-CREATE PROCEDURE [dbo].[get_Addresses]
+ALTER PROCEDURE [dbo].[get_Addresses]
 	@memberID INT,
 	@memberTypeID INT
 AS
