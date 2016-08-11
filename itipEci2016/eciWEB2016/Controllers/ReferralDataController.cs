@@ -19,6 +19,12 @@ namespace eciWEB2016.Controllers
     {
         public static SqlDatabase db;
 
+        private ClientDataController clientDataController = new ClientDataController();
+
+        private ClientController clientController = new ClientController();
+
+        private AddressesDataController addressDataControler = new AddressesDataController();
+
         /// <summary>
         /// Creates a database connection if one has not been initiated.
         /// </summary>
@@ -30,43 +36,8 @@ namespace eciWEB2016.Controllers
             }
         }
 
-        public Client InsertClientAddress(Client newClient)
-        {
-            DbCommand ins_Address = db.GetStoredProcCommand("ins_Addresses");
-            db.AddInParameter(ins_Address, "@addressTypeID", DbType.Int32, newClient.clientAddress.addressTypeID);
-            db.AddInParameter(ins_Address, "@address1", DbType.String, newClient.clientAddress.address1);
-            db.AddInParameter(ins_Address, "@address2", DbType.String, newClient.clientAddress.address2);
-            db.AddInParameter(ins_Address, "@city", DbType.String, newClient.clientAddress.city);
-            db.AddInParameter(ins_Address, "@st", DbType.String, newClient.clientAddress.state);
-            db.AddInParameter(ins_Address, "@zip", DbType.Int32, newClient.clientAddress.zip);
-            db.AddInParameter(ins_Address, "@mapsco", DbType.String, newClient.clientAddress.mapsco);
-            db.AddInParameter(ins_Address, "@deleted", DbType.Int32, 0);
-
-            db.AddOutParameter(ins_Address, "@addressID", DbType.Int32, sizeof(int));
-
-            try
-            {
-                db.ExecuteNonQuery(ins_Address);
-
-                newClient.clientAddress.addressesID = Convert.ToInt32(db.GetParameterValue(ins_Address, "@addressID"));
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("InsertClientAddress failed, exception: {0}", e);
-                throw;
-            }
-
-
-            return newClient;
-        }
-
         public Client InsertClient(Client newClient)
         {
-            if (newClient.clientAddress.addressesID == 0)
-            {
-                newClient = InsertClientAddress(newClient);
-            }
-
             DbCommand ins_Client = db.GetStoredProcCommand("ins_Client");
             db.AddInParameter(ins_Client, "@raceID", DbType.Int32, newClient.raceID);
             db.AddInParameter(ins_Client, "@ethnicityID", DbType.Int32, newClient.ethnicityID);
@@ -76,7 +47,6 @@ namespace eciWEB2016.Controllers
             db.AddInParameter(ins_Client, "@communicationPreferencesID", DbType.Int32, newClient.communicationPreferencesID);
             db.AddInParameter(ins_Client, "@sexID", DbType.Int32, newClient.sexID);
             db.AddInParameter(ins_Client, "@officeID", DbType.Int32, newClient.officeID);
-            db.AddInParameter(ins_Client, "@addressesID", DbType.Int32, newClient.clientAddress.addressesID);
             db.AddInParameter(ins_Client, "@firstName", DbType.String, newClient.firstName);
             db.AddInParameter(ins_Client, "@middleInitial", DbType.String, newClient.middleInitial);
             db.AddInParameter(ins_Client, "@lastName", DbType.String, newClient.lastName);
@@ -190,6 +160,206 @@ namespace eciWEB2016.Controllers
             }
 
             return newStaff;
+        }
+
+        public Referral InsertClientReferral(Referral createdReferral, int clientID)
+        {
+            //// Creates a call to the stored procedure with which each referral will be added.
+            //DbCommand ins_Referral = db.GetStoredProcCommand("ins_Referral");
+            //db.AddInParameter();
+
+            return createdReferral;
+        }
+
+        public Family InsertClientFamily(Family createdFamily, int clientID)
+        {
+            // Creates a call to the stored procedure with which each family member will be added.
+            DbCommand ins_FamilyMember = db.GetStoredProcCommand("ins_FamilyMember");
+
+            // Adds in/out parameters.
+            db.AddInParameter(ins_FamilyMember, "@familyMemberTypeID", DbType.Int32, createdFamily.familyMemberTypeID);
+            db.AddInParameter(ins_FamilyMember, "@clientID", DbType.Int32, clientID);
+            db.AddInParameter(ins_FamilyMember, "@firstName", DbType.String, createdFamily.firstName);
+            db.AddInParameter(ins_FamilyMember, "@lastName", DbType.String, createdFamily.lastName);
+            db.AddInParameter(ins_FamilyMember, "@isGuardian", DbType.Boolean, createdFamily.isGuardian);
+            db.AddInParameter(ins_FamilyMember, "@sexID", DbType.Int32, createdFamily.sexID);
+            db.AddInParameter(ins_FamilyMember, "@raceID", DbType.Int32, createdFamily.raceID);
+            db.AddInParameter(ins_FamilyMember, "@occupation", DbType.String, createdFamily.occupation);
+            db.AddInParameter(ins_FamilyMember, "@employer", DbType.String, createdFamily.employer);
+            db.AddInParameter(ins_FamilyMember, "@dob", DbType.Date, createdFamily.dob);
+
+            db.AddOutParameter(ins_FamilyMember, "@success", DbType.Boolean, 1);
+            db.AddOutParameter(ins_FamilyMember, "@familyMemberID", DbType.Int32, sizeof(Int32));
+
+            bool success;
+
+            try
+            {
+                // Inserts the family member on the database and links to the patient.
+                db.ExecuteNonQuery(ins_FamilyMember);
+
+                // Returns the familyMemberID created on the database.
+                success = Convert.ToBoolean(db.GetParameterValue(ins_FamilyMember, "@success"));
+                createdFamily.familyMemberID = Convert.ToInt32(db.GetParameterValue(ins_FamilyMember, "@familyMemberID")); ;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("InsertClientFamily failed, exception: {0}.", e);
+                success = false;
+            }
+
+            return createdFamily;
+        }
+
+        public ClientInsurance InsertClientInsurance(ClientInsurance createdInsurance, int clientID)
+        {
+            DbCommand ins_ClientInsurance = db.GetStoredProcCommand("ins_ClientInsurance");
+
+            db.AddInParameter(ins_ClientInsurance, "@clientID", DbType.Int32, clientID);
+            db.AddInParameter(ins_ClientInsurance, "@insuranceID", DbType.Int32, createdInsurance.insuranceID);
+            db.AddInParameter(ins_ClientInsurance, "@insurancePolicyID", DbType.String, createdInsurance.insurancePolicyID);
+            db.AddInParameter(ins_ClientInsurance, "@insurancePolicyName", DbType.String, createdInsurance.insuranceName);
+            db.AddInParameter(ins_ClientInsurance, "@insuranceMedPreAuthNumber", DbType.Int32, createdInsurance.medPreAuthNumber);
+
+            db.AddOutParameter(ins_ClientInsurance, "@success", DbType.Boolean, 1);
+            db.AddOutParameter(ins_ClientInsurance, "@insuranceID", DbType.Int32, sizeof(int));
+
+            bool success;
+            try
+            {
+                db.ExecuteNonQuery(ins_ClientInsurance);
+                success = Convert.ToBoolean(db.GetParameterValue(ins_ClientInsurance, "@success"));
+
+                if (createdInsurance.insuranceAuthorization.Count > 0)
+                {
+                    createdInsurance = InsertInsuranceAuthorizations(createdInsurance, clientID);
+                }
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("InsertClientInsurance failed, exception: {0}.", e);
+                success = false;
+                throw;
+            }
+
+            return createdInsurance;
+        }
+
+        public ClientInsurance InsertInsuranceAuthorizations(ClientInsurance ins, int clientID)
+        {
+            for (int insAuth = 0; insAuth < ins.insuranceAuthorization.Count; insAuth++)
+            {
+                DbCommand ins_InsuranceAuthorization = db.GetStoredProcCommand("ins_InsuranceAuthorization");
+                db.AddInParameter(ins_InsuranceAuthorization, "@clientID", DbType.Int32, clientID);
+                db.AddInParameter(ins_InsuranceAuthorization, "@insuranceID", DbType.Int32, ins.insuranceID);
+                db.AddInParameter(ins_InsuranceAuthorization, "@authorized_From", DbType.Boolean, ins.insuranceAuthorization[insAuth].authorizedFrom);
+                db.AddInParameter(ins_InsuranceAuthorization, "@authorized_To", DbType.Boolean, ins.insuranceAuthorization[insAuth].authorizedTo);
+                db.AddInParameter(ins_InsuranceAuthorization, "@insuranceAuthorizationType", DbType.String, ins.insuranceAuthorization[insAuth].insuranceAuthorizationType);
+
+                db.AddOutParameter(ins_InsuranceAuthorization, "@success", DbType.Boolean, 1);
+                db.AddOutParameter(ins_InsuranceAuthorization, "@insuranceAuthorizationID", DbType.Int32, sizeof(int));
+
+                bool success;
+                try
+                {
+                    db.ExecuteNonQuery(ins_InsuranceAuthorization);
+                    success = Convert.ToBoolean(db.GetParameterValue(ins_InsuranceAuthorization, "@success"));
+                    ins.insuranceAuthorization[insAuth].insuranceAuthID = Convert.ToInt32(db.GetParameterValue(ins_InsuranceAuthorization, "@insuranceAuthorizationID"));
+                }
+                catch (Exception e)
+                {
+                    Debug.WriteLine("InsertClientInsuranceAuthorization failed, exception: {0}.", e);
+                    success = false;
+                    throw;
+                }
+            }
+
+            return ins;
+        }
+
+        public Physician InsertClientPhysician(Physician linkedPhysician, int clientID)
+        {
+            DbCommand ins_ClientPhysician = db.GetStoredProcCommand("ins_ClientPhysician");
+
+            db.AddInParameter(ins_ClientPhysician, "@clientID", DbType.Int32, clientID);
+            db.AddInParameter(ins_ClientPhysician, "@physicianID", DbType.Int32, linkedPhysician.physicianID);
+
+            db.AddOutParameter(ins_ClientPhysician, "@physicianID", DbType.Boolean, 1);
+
+            bool success;
+
+            try
+            {
+                db.ExecuteNonQuery(ins_ClientPhysician);
+                success = Convert.ToBoolean(db.GetParameterValue(ins_ClientPhysician, "@success"));
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("InsertClientPhysician failed, exception: {0}.", e);
+                success = false;
+                throw;
+            }
+
+
+            return linkedPhysician;
+        }
+
+        public Diagnosis InsertClientDiagnosis(Diagnosis clientDiagnosis, int clientID)
+        {
+            DbCommand ins_ClientDiagnosis = db.GetStoredProcCommand("ins_ClientDiagnosis");
+            db.AddInParameter(ins_ClientDiagnosis, "@clientID", DbType.Int32, clientID);
+            db.AddInParameter(ins_ClientDiagnosis, "@diagnosisCodeID", DbType.Int32, clientDiagnosis.diagnosisCodeID);
+            db.AddInParameter(ins_ClientDiagnosis, "@diagnosisTypeID", DbType.Int32, clientDiagnosis.diagnosisTypeID);
+            db.AddInParameter(ins_ClientDiagnosis, "@diagnosis_From", DbType.DateTime, clientDiagnosis.diagnosisFrom);
+            db.AddInParameter(ins_ClientDiagnosis, "@diagnosis_To", DbType.DateTime, clientDiagnosis.diagnosisTo);
+            db.AddInParameter(ins_ClientDiagnosis, "@isPrimary", DbType.Boolean, clientDiagnosis.isPrimary);
+
+            db.AddOutParameter(ins_ClientDiagnosis, "@success", DbType.Boolean, 1);
+            db.AddOutParameter(ins_ClientDiagnosis, "@diagnosisID", DbType.Int32, sizeof(int));
+
+            bool success;
+            try
+            {
+                db.ExecuteNonQuery(ins_ClientDiagnosis);
+                success = Convert.ToBoolean(db.GetParameterValue(ins_ClientDiagnosis, "@success"));
+                clientDiagnosis.diagnosisID = Convert.ToInt32(db.GetParameterValue(ins_ClientDiagnosis, "@diagnosisID"));
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("InsertClientDiagnosis failed, exception: {0}.", e);
+                success = false;
+                throw;
+            }
+
+            return clientDiagnosis;
+        }
+
+        public Comments InsertClientComments(Comments clientComments, int clientID, int memberTypeID)
+        {
+            DbCommand ins_ClientComments = db.GetStoredProcCommand("ins_ClientComments");
+            db.AddInParameter(ins_ClientComments, "@memberID", DbType.Int32, clientID);
+            db.AddInParameter(ins_ClientComments, "@memberTypeID", DbType.Int32, memberTypeID);
+            db.AddInParameter(ins_ClientComments, "@comments", DbType.String, clientComments.comments);
+            db.AddInParameter(ins_ClientComments, "@commentsTypeID", DbType.Int32, clientComments.commentsTypeID);
+
+            db.AddOutParameter(ins_ClientComments, "@commentsID", DbType.Int32, sizeof(int));
+            db.AddOutParameter(ins_ClientComments, "@success", DbType.Boolean, 1);
+
+            bool success;
+            try
+            {
+                db.ExecuteNonQuery(ins_ClientComments);
+
+                clientComments.commentsID = Convert.ToInt32(db.GetParameterValue(ins_ClientComments, "@commentsID"));
+                success = Convert.ToBoolean(db.GetParameterValue(ins_ClientComments, "@success"));
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("InsertClientComments failed, exception: {0}.", e);
+                success = false;
+                throw;
+            }
+            return clientComments;
         }
 
         public static class StringTool

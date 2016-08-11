@@ -100,7 +100,7 @@ Change History:
             @Html.TextBoxFor(c => c.clientAddress.city, null, new { Value = client.clientAddress.city, name = "city" })
         </li>
         <li class="inline">
-            @Html.LabelFor(c => c.clientAddress.state):
+            @Html.LabelFor(c => c.clientAddress.state): @Html.ValidationMessageFor(c => c.clientAddress.state)
             @Html.TextBoxFor(c => c.clientAddress.state, null, new { Value = client.clientAddress.state, name = "state" })
         </li>
         <li class="inline">
@@ -147,6 +147,6 @@ Change History:
         </li>
     </ul>
     <li>
-        <input type="submit" Value="UpdateClient" />
+        <input type="submit" Value="Update Client" />
     </li>
 }

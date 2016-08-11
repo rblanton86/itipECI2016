@@ -6,9 +6,9 @@ Author:
 Date: 
 	7/28/2016
 Change History:
-	
+	08/09/2015: JMG - Edited to allow for address linking table.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[ins_ClientStaff]
+ALTER PROCEDURE [dbo].[ins_ClientStaff]
 	@clientID INT,
 	@staffID INT
 
@@ -56,8 +56,11 @@ BEGIN
 			ISNULL(adr.mapsco, '') AS mapsco
 
 		FROM Addresses adr
+			LEFT JOIN LnkAddressMember lam
+				ON adr.addressesID = lam.addressesId
 			LEFT JOIN Staff stf
-				ON adr.addressesID = stf.addressesId
+				ON lam.memberID = stf.staffID
+				AND lam.memberTypeID = stf.memberTypeID
 
 		WHERE stf.staffID = @staffID
 

@@ -9,7 +9,7 @@ Change History:
 	07.21.2016 - Added output parameters and input parameter for memberType. Additional If statments added.
 	08.09.2016 - Correction to if statement.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[get_AdditionalContactInfoByMemberID]
+ALTER PROCEDURE [dbo].[get_AdditionalContactInfoByMemberID]
 	@memberID INT,
 	@memberTypeID INT,
 	@additionalContactInfoID INT OUTPUT,

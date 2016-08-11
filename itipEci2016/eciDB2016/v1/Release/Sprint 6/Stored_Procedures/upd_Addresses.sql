@@ -9,7 +9,7 @@ Change History:
 	07/24/2016: JMG - Corrected spelling error.
 	08/09/2016: JMG - Updated to add county column and needed memberID and memberTypeID.
 ************************************************************************************************************/
-CREATE PROCEDURE [dbo].[upd_Addresses]
+ALTER PROCEDURE [dbo].[upd_Addresses]
 	@addressesID INT,
 	@memberID INT,
 	@memberTypeID INT,

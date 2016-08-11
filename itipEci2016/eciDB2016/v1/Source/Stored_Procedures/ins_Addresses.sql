@@ -8,6 +8,7 @@ Date:
 Change History:
 	07/25/2016: JMG & TPC - Updated stored procedure to return current value if exists.
 	07/28/2016: JMG - Added input parameter for mapsco.
+	08/09/2016: JMG - Edits to allow for new linking table.
 ************************************************************************************************************/
 ALTER PROCEDURE [dbo].[ins_Addresses]
 	@addressTypeID int,
@@ -17,6 +18,9 @@ ALTER PROCEDURE [dbo].[ins_Addresses]
 	@st varchar(2),
 	@zip int,
 	@mapsco VARCHAR(25),
+	@county VARCHAR(25),
+	@memberID INT,
+	@memberTypeID INT,
 	@deleted bit,
 	@addressID INT OUTPUT
 
@@ -28,9 +32,10 @@ AS
 						addressesTypeID = @addressTypeID
 						AND address1 = @address1
 						AND address2 = ISNULL(@address2, '')
-						AND city = @city 
-						AND st = @st 
+						AND city = @city
+						AND st = @st
 						AND zip = @zip
+						AND county = ISNULL(@county, '')
 						AND mapsco = ISNULL(@mapsco, '')
 						)
 
@@ -39,15 +44,27 @@ AS
 						SELECT addressesID FROM Addresses
 			
 						WHERE	addressesTypeID = @addressTypeID
-								AND address1 = @address1
-								AND address2 = ISNULL(@address2, '')
-								AND city = @city 
-								AND st = @st 
-								AND zip = @zip
-								AND mapsco = ISNULL(@mapsco, '')
+									AND address1 = @address1
+									AND address2 = ISNULL(@address2, '')
+									AND city = @city 
+									AND st = @st 
+									AND zip = @zip
+									AND county = ISNULL(@county, '')
+									AND mapsco = ISNULL(@mapsco, '')
 								)
 
-				RETURN @addressID 
+				IF EXISTS (SELECT *
+							FROM LnkAddressMember
+							WHERE memberID = @memberID AND
+								memberTypeID = @memberTypeID)
+					BEGIN
+						RETURN @addressID
+					END
+				ELSE
+					BEGIN
+						INSERT INTO LnkAddressMember (memberTypeID, addressesID, memberID)
+							VALUES (@memberTypeID, @addressID, @memberID)
+					END
 			END
 		ELSE
 			BEGIN
@@ -57,6 +74,7 @@ AS
 									city, 
 									st, 
 									zip,
+									county,
 									mapsco,
 									deleted)
 
@@ -66,6 +84,7 @@ AS
 						@city, 
 						@st, 
 						@zip,
+						ISNULL(@county, ''),
 						ISNULL(@mapsco, ''),
 						@deleted)
 
@@ -78,8 +97,13 @@ AS
 								AND city = @city 
 								AND st = @st 
 								AND zip = @zip
+								AND county = ISNULL(@county, '')
 								AND mapsco = ISNULL(@mapsco, '')
 								)
+
+				
+				INSERT INTO LnkAddressMember (memberTypeID, addressesID, memberID)
+						VALUES (@memberTypeID, @addressID, @memberID)
 
 				RETURN @addressID 
 			END
@@ -100,5 +124,3 @@ AS
 
 		END CATCH
 	END
-
-

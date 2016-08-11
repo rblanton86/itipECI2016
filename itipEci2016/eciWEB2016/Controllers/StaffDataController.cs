@@ -257,7 +257,8 @@ namespace eciWEB2016.Controllers.DataControllers
                 //update Staff's Addresses
                 DbCommand upd_Addresses = db.GetStoredProcCommand("upd_Addresses");
 
-
+                db.AddInParameter(upd_Addresses, "@memberID", DbType.Int32, thisStaff.staffID);
+                db.AddInParameter(upd_Addresses, "@memberTypeID", DbType.Int32, thisStaff.memberTypeID);
                 db.AddInParameter(upd_Addresses, "@addressesID", DbType.Int32, staffAddress.addressesID);
                 db.AddInParameter(upd_Addresses, "@addressTypeID", DbType.Int32, staffAddress.addressesType);
                 db.AddInParameter(upd_Addresses, "@address1", DbType.String, staffAddress.address1);
@@ -265,6 +266,7 @@ namespace eciWEB2016.Controllers.DataControllers
                 db.AddInParameter(upd_Addresses, "@city", DbType.String, staffAddress.city);
                 db.AddInParameter(upd_Addresses, "@st", DbType.String, staffAddress.state);
                 db.AddInParameter(upd_Addresses, "@zip", DbType.Int32, staffAddress.zip);
+                db.AddInParameter(upd_Addresses, "@county", DbType.String, "");
                 db.AddInParameter(upd_Addresses, "@deleted", DbType.Boolean, staffAddress.deleted);
 
                 db.ExecuteNonQuery(upd_Addresses);
@@ -306,13 +308,15 @@ namespace eciWEB2016.Controllers.DataControllers
 
                 //insert Staff's Addresses
                 DbCommand ins_Addresses = db.GetStoredProcCommand("ins_Addresses");
-
+                db.AddInParameter(ins_Addresses, "@memberID", DbType.Int32, thisStaff.staffID);
+                db.AddInParameter(ins_Addresses, "@memberTypeID", DbType.Int32, thisStaff.memberTypeID);
                 db.AddInParameter(ins_Addresses, "@addressTypeID", DbType.Int32, thisAddress.addressTypeID);
                 db.AddInParameter(ins_Addresses, "@address1", DbType.String, thisAddress.address1);
                 db.AddInParameter(ins_Addresses, "@address2", DbType.String, thisAddress.address2);
                 db.AddInParameter(ins_Addresses, "@city", DbType.String, thisAddress.city);
                 db.AddInParameter(ins_Addresses, "@st", DbType.String, thisAddress.state);
                 db.AddInParameter(ins_Addresses, "@zip", DbType.Int32, thisAddress.zip);
+                db.AddInParameter(ins_Addresses, "@county", DbType.String, "");
                 db.AddInParameter(ins_Addresses, "@deleted", DbType.Boolean, false);
                 db.AddOutParameter(ins_Addresses, "@addressID", DbType.Int32, sizeof(Int32));
                 db.ExecuteScalar(ins_Addresses);

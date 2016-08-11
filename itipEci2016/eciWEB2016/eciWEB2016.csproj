@@ -186,6 +186,7 @@
     <Compile Include="Class\Addresses.cs" />
     <Compile Include="Class\SessionExtensions.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AddressesDataController.cs" />
     <Compile Include="Controllers\ClientController.cs" />
     <Compile Include="Controllers\ClientDataController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -349,6 +350,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\AddressesData\" />
     <Folder Include="Views\ClientData\" />
     <Folder Include="Views\eciDropDownList\" />
     <Folder Include="Views\ReferralData\" />

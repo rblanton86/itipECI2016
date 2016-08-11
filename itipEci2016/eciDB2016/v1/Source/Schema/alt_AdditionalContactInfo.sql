@@ -57,7 +57,21 @@ ELSE
 		IF EXISTS (SELECT * FROM sys.columns WHERE @aci = OBJECT_ID AND name = 'updDate')
 			BEGIN
 
-				IF EXISTS (SELECT * FROM INFORMATION_SCHEMA WHERE CONSTRAINT_NAME = 'DF_MyTable_Inserted')
+		-- Checks if memberID column exists.
+		IF EXISTS (SELECT * FROM sys.columns WHERE @aci = OBJECT_ID AND name = 'memberID')
+			BEGIN
+				-- Advises DBA no column added, as already exists.
+				PRINT 'Unneeded: memberID column exists.'
+			END
+		ELSE
+			BEGIN
+				-- Creates column, advises DBA.
+				ALTER TABLE AdditionalContactInfo
+					ADD memberID INT
+				PRINT 'Added memberID column on AdditionalContactInfo table.'
+			END
+
+		IF EXISTS (SELECT * FROM INFORMATION_SCHEMA WHERE CONSTRAINT_NAME = 'DF_MyTable_Inserted')
 					BEGIN
 						PRINT 'updDate Column not added or updated, exists and is correct.'
 					END
@@ -73,19 +87,5 @@ ELSE
 				ALTER TABLE AdditionalContactInfo
 					ADD updDate DATETIME DEFAULT (GETDATE()) 
 				PRINT 'Added updDate column to aci table.'
-			END
-
-		-- Checks if memberID column exists.
-		IF EXISTS (SELECT * FROM sys.columns WHERE @aci = OBJECT_ID AND name = 'memberID')
-			BEGIN
-				-- Advises DBA no column added, as already exists.
-				PRINT 'Unneeded: memberID column exists.'
-			END
-		ELSE
-			BEGIN
-				-- Creates column, advises DBA.
-				ALTER TABLE AdditionalContactInfo
-					ADD memberID INT
-				PRINT 'Added memberID column on AdditionalContactInfo table.'
 			END
 	END

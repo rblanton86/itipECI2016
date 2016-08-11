@@ -8,8 +8,9 @@ Date:
 Change History:
 	07-11-2016: JMG - Added sexID, officeID, addressesID, altID, intakeDate, ifspDate, compSvcDate,
 			serviceAreaException, tkidsCaseNumber, consentToRelease, eci, and accountingSystemID columns.
-	07-22-2015: JMG - Removed commentsID, as is no longer on Clients table. Selected outputting clientID and
+	07-22-2016: JMG - Removed commentsID, as is no longer on Clients table. Selected outputting clientID and
 			returned value as output.
+	08-09-2016: JMG - Removed addressesID parameter, etc, as it has been removed from the Clients table.
 ************************************************************************************************************/
 ALTER PROCEDURE [dbo].[ins_Client]
 	@raceID INT,
@@ -20,7 +21,6 @@ ALTER PROCEDURE [dbo].[ins_Client]
 	@communicationPreferencesID INT,
 	@sexID INT,
 	@officeID INT,
-	@addressesID INT,
 	@firstName VARCHAR(20),
 	@middleInitial VARCHAR(1),
 	@lastName VARCHAR(20),
@@ -56,7 +56,6 @@ AS
 								communicationPreferencesID,
 								sexID,
 								officeID,
-								addressesID,
 								firstName,
 								middleInitial,
 								lastName,
@@ -81,7 +80,6 @@ AS
 						@communicationPreferencesID,
 						@sexID,
 						@officeID,
-						@addressesID,
 						@firstName,
 						@middleInitial,
 						@lastName,
@@ -108,7 +106,6 @@ AS
 												communicationPreferencesID = @communicationPreferencesID AND
 												sexID = @sexID AND
 												officeID = @officeID AND
-												addressesID = @addressesID AND
 												firstName = @firstName AND
 												middleInitial = @middleInitial AND
 												lastName = @lastName AND
@@ -149,5 +146,3 @@ AS
 
 		END CATCH
 	END
-
-
