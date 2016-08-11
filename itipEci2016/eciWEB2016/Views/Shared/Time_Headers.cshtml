@@ -16,7 +16,7 @@ Change History:
 @model eciWEB2016.Models.Staff
 @{
     ViewBag.Title = "Time_Headers";
-
+    var currentStaffID = ViewBag.staffID;
 } 
 
 <link rel="stylesheet" href="~/Content/style.css" />
@@ -43,6 +43,15 @@ Change History:
 
     </nav>
     <div class="main">
+
+        <ul>
+            <li>
+                <button id="NewTimeSheet">New Time Sheet</button>
+           
+                <button id="EditTimeSheet" style="margin-left: 2%">Edit Time Sheet</button>
+            </li>
+        </ul>
+
         <li class="left">
             Time Headers For This Staff Member
         </li>
@@ -51,15 +60,91 @@ Change History:
             @Html.Partial("TimeSheet_Grid_Partial")
         </div>
     </div>
-@section JavaScript
-{
+
+    @using (Html.BeginForm("addTimeSheet", "TimeSheet", FormMethod.Post, new { id = "form1" }))
+    {
+
+        <div class="target"></div>
+        <div id="dialog" title="Time Sheet">
+             <p>
+                 <label> StaffID:</label>
+            </p>
+                @Html.TextBox("staffID")
+            <p>
+                <label>Week Ending:</label>
+            </p>
+                @Html.TextBox("weekEnding")
+            <p>
+                <input type="submit" id="dialogButton" value="submit" />
+            </p>
+        </div>
+
+    }
+
+    @using (Html.BeginForm("addTimeDetails", "TimeSheet", FormMethod.Post))
+    {
+
+        <div id="DetailsDialog" title="Time Sheet Details">
+            <p>
+                <label> Actual Time:</label>
+            </p>
+            @Html.TextBox("actualTime")
+
+            <p>
+                <label> Insurance Time:</label>
+            </p>
+            @Html.TextBox("insuranceTime")
+
+            <p>
+                <label> Place of Service:</label>
+            </p>
+            @Html.TextBox("placeOfService")
+
+            <p>
+                <label> Canceled:</label>
+            </p>
+            @Html.CheckBox("canceled")
+
+            <p>
+                <label> TimeHeaderID</label>
+            </p>
+            @Html.TextBox("hiddenID")
+
+            <p style="visibility: hidden">
+                @Html.TextBox("hiddenStaffID")
+            </p>
+
+
+            <p>
+                <button type="submit"> submit </button>
+            </p>
+        </div>
+    }
+
+    @section JavaScript
+    {
 <script>
 
+
     $(document).ready(function () {
-        function modifyGrid () {
-            //$("#gridContent #outerGrid > thead > tr >th:contains('timeHeaderID'").remove(); // remove last hidden column header
-            var size = $("#gridContent #outerGrid > thead > tr >th").size(); // get total column
-            alert(size);
+
+        
+        var thisStaffID = '@ViewBag.staffID'
+        $('.staffIDLabel').html(thisStaffID);
+     
+
+        $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: thisStaffID }, function (data) {
+           
+            $('#gridContent').html(data);
+            modifyGrid();
+            
+        });
+
+        $('.staffIDLabel').html(@currentStaffID);
+            function modifyGrid () {
+                //$("#gridContent #outerGrid > thead > tr >th:contains('timeHeaderID'").remove(); // remove last hidden column header
+                var size = $("#gridContent #outerGrid > thead > tr >th").size(); // get total column
+            //alert(size);
             $("#gridContent #outerGrid > thead > tr >th").last().remove(); // remove last column
             $("#gridContent #outerGrid > thead > tr").prepend("<th></th>"); // add one column at first for collapsible column
             $("#gridContent #outerGrid > tbody > tr").each(function (i, el) {
@@ -71,9 +156,9 @@ Change History:
                         .attr('title', "click for show/hide")
                 );
 
-                //Now get sub table from last column and add this to the next new added row
-                var table = $("table", this).parent().html();
-                var timeHeaderID = $(this).find('table').attr('id');
+                    //Now get sub table from last column and add this to the next new added row
+                    var table = $("table", this).parent().html();
+                    var timeHeaderID = $(this).find('table').attr('id');
                 //add new row with this subtable
                 $(this).after("<tr><td></td><td style='padding:5px; margin:0px;' colspan='" + (size - 1) + "'>" + table + "</td></tr>");
                 $("table", this).parent().remove();
@@ -87,21 +172,34 @@ Change History:
                     $(this).toggleClass("expand collapse");
                     $.post('@Url.Action("StaffTimeSheet", "TimeSheet")', { timeHeaderID: parseInt(timeHeaderID)}, function(data) {
                         $('#' + timeHeaderID).replaceWith(data);
-                    })
+                        })
+
+                    $("#hiddenID").val(timeHeaderID);
+
+                    });
                 });
-            });
 
             //by default make all subgrid in collapse mode
             $("#gridContent #outerGrid > tbody > tr td.expand").each(function (i, el) {
                 $(this).toggleClass("expand collapse");
                 $(this).parent().closest("tr").next().slideToggle(100);
+                });
+            $("#gridContent").css("visibility", "visible");
+            }
+
+            //calls modifyGrid on document Ready
+
+
+        @*$("#dialogButton").click(function () {
+
+            var staffID2 = $("#staffID").val();
+
+            $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID2 }, function (data) {
+                $('#gridContent').replaceWith(data);
+                modifyGrid();
             });
-        }
+        });*@
 
-        //calls modifyGrid on document Ready
-        //modifyGrid();
-
-        
         //on dropdown change, will fill grid with timeheaders for that staff member
         $("#staffListID").change(function () {
 
@@ -109,10 +207,14 @@ Change History:
 
             $.get('@Url.Action("TimeSheet_Grid_Partial", "TimeSheet")', { staffID: staffID }, function (data) {
                 $('#gridContent').replaceWith(data);
+                modifyGrid();
+               
+                $('#hiddenStaffID').val(staffID);
+               
+                
             });
 
-            //calls modifyGrid on change
-            modifyGrid();
+
 
             //calls webmethod to get and store selected staff member in the session
             $.getJSON('@Url.Action("GetStaffMemberFromSession", "Staff")', { staffID: staffID },
@@ -124,6 +226,22 @@ Change History:
                     $('.staffStatus').html(data.status);
                 }
             );
+        });
+
+        //hide dialog box on pageload
+        $("#form1").dialog({ autoOpen: false });
+
+        //open dialog box timeheaders
+        $("#NewTimeSheet").click(function () {
+            $("#form1").dialog('open');
+        });
+
+        //hide dialog box on pageload
+        $("#DetailsDialog").dialog({ autoOpen: false });
+
+        //open dialog box timedetails
+        $("#EditTimeSheet").click(function () {
+            $("#DetailsDialog").dialog('open');
         });
     });
 </script>
