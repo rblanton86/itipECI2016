@@ -169,15 +169,18 @@ Change History:
         <form id="familyReferralForm">
             <div class="familyInformation" id="guardianInformation">
                 <div class="familyDemographics">
-                    @Html.LabelFor(r => r.client.guardian.familyMemberType)
-                    @Html.DropDownListFor(r => r.client.guardian.familyMemberType, (SelectList)ViewBag.familyMemberTypeList, null, new { @Value = Model.client.guardian.familyMemberTypeID })
-                    @Html.LabelFor(r => r.client.guardian.firstName)
-                    @Html.TextBoxFor(r => r.client.guardian.firstName)
-                    @Html.LabelFor(r => r.client.guardian.lastName)
-                    @Html.TextBoxFor(r => r.client.guardian.lastName)
+                    <span>
+                        @Html.LabelFor(r => r.client.guardian.firstName)
+                        @Html.TextBoxFor(r => r.client.guardian.firstName)
+                        @Html.LabelFor(r => r.client.guardian.lastName)
+                        @Html.TextBoxFor(r => r.client.guardian.lastName)
+                    </span>
+                    <span>
+                        @Html.LabelFor(r => r.client.guardian.familyMemberType)
+                        @Html.DropDownListFor(r => r.client.guardian.familyMemberTypeID, (SelectList)ViewBag.familyMemberTypeList, null, new { @Value = Model.client.guardian.familyMemberTypeID })
+                    </span>
                 </div>
                 <div class="Address">
-                    <p>Address:</p>
                     <span>
                         @Html.LabelFor(r => r.client.guardian.familyAddress.address1)
                         @Html.TextBoxFor(r => r.client.guardian.familyAddress.address1)
@@ -196,13 +199,13 @@ Change History:
                     </span>
                 </div>
                 <div class="familyContact">
-                    @Html.Label("Home Phone:")
+                    @Html.Label("Home Phone")
                     @Html.TextBox("HomePhone", null)
-                    @Html.Label("Cell Phone:")
+                    @Html.Label("Cell Phone")
                     @Html.TextBox("CellPhone", null)
-                    @Html.Label("Work Phone:")
+                    @Html.Label("Work Phone")
                     @Html.TextBox("WorkPhone", null)
-                    @Html.Label("Email:")
+                    @Html.Label("Email")
                     @Html.TextBox("Email", null)
                 </div>
             </div>

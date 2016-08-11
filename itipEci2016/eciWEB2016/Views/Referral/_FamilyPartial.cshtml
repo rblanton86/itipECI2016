@@ -4,15 +4,18 @@
 {
     <div class="familyInformation" style="margin-top: 1em;">
         <div class="familyDemographics">
-            @Html.LabelFor(f => family.familyMemberType)
-            @Html.DropDownListFor(f => family.familyMemberTypeID, (SelectList)ViewBag.familyMemberTypeList, null, new { @Value = family.familyMemberTypeID })
-            @Html.LabelFor(f => family.firstName)
-            @Html.TextBoxFor(f => family.firstName)
-            @Html.LabelFor(f => family.lastName)
-            @Html.TextBoxFor(f => family.lastName)
+            <span>
+                @Html.LabelFor(f => family.firstName)
+                @Html.TextBoxFor(f => family.firstName)
+                @Html.LabelFor(f => family.lastName)
+                @Html.TextBoxFor(f => family.lastName)
+            </span>
+            <span>
+                @Html.LabelFor(f => family.familyMemberType)
+                @Html.DropDownListFor(f => family.familyMemberTypeID, (SelectList)ViewBag.familyMemberTypeList, null, new { @Value = family.familyMemberTypeID })
+            </span>
         </div>
         <div class="Address">
-            <p>Address:</p>
             <span>
                 @Html.LabelFor(f => family.familyAddress.address1)
                 @Html.TextBoxFor(f => family.familyAddress.address1)
@@ -31,13 +34,13 @@
             </span>
         </div>
         <div class="familyContact">
-            @Html.Label("Home Phone:")
+            @Html.Label("Home Phone")
             @Html.TextBox("HomePhone", null)
-            @Html.Label("Cell Phone:")
+            @Html.Label("Cell Phone")
             @Html.TextBox("CellPhone", null)
-            @Html.Label("Work Phone:")
+            @Html.Label("Work Phone")
             @Html.TextBox("WorkPhone", null)
-            @Html.Label("Email:")
+            @Html.Label("Email")
             @Html.TextBox("Email", null)
         </div>
     </div>
