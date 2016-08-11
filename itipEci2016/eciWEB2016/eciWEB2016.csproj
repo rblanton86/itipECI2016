@@ -268,9 +268,11 @@
     <Content Include="Content\themes\base\tooltip.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\button_plus_blue.png" />
     <Content Include="Images\childServices.jpg" />
     <Content Include="Images\childServices_bg.jpg" />
     <Content Include="Images\grey_plus_button.png" />
+    <Content Include="Images\plus-symbol-button.png" />
     <Content Include="Images\theballpit.jpg" />
     <Content Include="ApplicationInsights.config">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -328,7 +330,7 @@
     <Content Include="Views\Client\Client_Update.cshtml" />
     <Content Include="Views\Referral\Referral.cshtml" />
     <Content Include="Views\Staff\Time_Sheet_Input.cshtml" />
-    <Content Include="Views\Staff\Time_Headers.cshtml" />
+    <Content Include="Views\Shared\Time_Headers.cshtml" />
     <Content Include="Views\Staff\Time_Sheet_Service_Code.cshtml" />
     <Content Include="Views\Staff\Time_Sheets.cshtml" />
     <Content Include="Views\Shared\TimeSheet_Grid_Partial.cshtml" />

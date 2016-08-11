@@ -74,5 +74,49 @@ namespace eciWEB2016.Controllers.DataControllers
             return details;
         }
 
+
+        //insert time header
+        public string insertTimeHeader(TimeHeaderModel model)
+        {
+            try
+            {
+
+                DbCommand dbCommand = db.GetStoredProcCommand("ins_TimeHeader");
+                db.AddInParameter(dbCommand, "staffID", DbType.Int32, model.staffID);
+                db.AddInParameter(dbCommand, "weekEnding", DbType.String, model.weekEnding);
+
+                db.ExecuteNonQuery(dbCommand);
+
+                return "success";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
+
+        public string insertTimeDetail(TimeDetailModel model)
+        {
+            try
+            {
+
+                DbCommand dbCommand = db.GetStoredProcCommand("ins_TimeDetails");
+                db.AddInParameter(dbCommand, "timeHeaderID", DbType.Int32, model.timeHeaderID);
+                db.AddInParameter(dbCommand, "actualTime", DbType.Decimal, model.actualTime);
+                db.AddInParameter(dbCommand, "insuranceTime", DbType.Decimal, model.insuranceTime);
+                db.AddInParameter(dbCommand, "placeOfService", DbType.String, model.placeOfService);
+                db.AddInParameter(dbCommand, "canceled", DbType.Boolean, model.canceled);
+
+                db.ExecuteNonQuery(dbCommand);
+
+                return "success";
+            }
+            catch
+            {
+                return "fail";
+            }
+        }
+
     }
 }

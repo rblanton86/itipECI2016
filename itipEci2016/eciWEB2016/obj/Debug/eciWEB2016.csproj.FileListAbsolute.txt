@@ -106,6 +106,13 @@ E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\eciWEB2016.pdb
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Antlr3.Runtime.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\EntityFramework.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\EntityFramework.SqlServer.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.Agent.Intercept.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.DependencyCollector.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.Web.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.WindowsServer.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.ApplicationInsights.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AspNet.Identity.Core.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AspNet.Identity.EntityFramework.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AspNet.Identity.Owin.dll
@@ -132,6 +139,11 @@ E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\System.Web.WebPages.Deplo
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\System.Web.WebPages.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\System.Web.WebPages.Razor.dll
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\WebGrease.dll
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.DependencyCollector.xml
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.Web.xml
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.AI.WindowsServer.xml
+E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.ApplicationInsights.xml
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Practices.EnterpriseLibrary.Common.xml
 E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Practices.EnterpriseLibrary.Data.xml
@@ -393,5 +405,3 @@ C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsof
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.dll
 C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.pdb
-C:\Users\tyrell\Documents\GitHub\itipECI2016\itipEci2016\eciWEB2016\obj\Debug\eciWEB2016.csprojResolveAssemblyReference.cache
-E:\Source\Repos\itipECI2016\itipEci2016\eciWEB2016\bin\Pulzonic.Multipartial.dll

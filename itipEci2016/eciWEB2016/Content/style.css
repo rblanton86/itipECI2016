@@ -413,15 +413,18 @@ th {
     }
 
 .expand {
-    background-image: url(/Images/grey_plus_button.png);
-    background-position-x: -22px;
+    background-image: url(/Images/plus-symbol-button.png);
+    background-position-x: -1px;
     background-repeat: no-repeat;
+    background-size: contain;
 }
 
 .collapse {
-    background-image: url(/Images/grey_plus_button.png);
-    background-position-x: -2px;
+    background-image: url(/Images/plus-symbol-button.png);
+    background-position-x: -1px;
     background-repeat: no-repeat;
+    background-size: contain;
+}
 }
 
 /* Forms */

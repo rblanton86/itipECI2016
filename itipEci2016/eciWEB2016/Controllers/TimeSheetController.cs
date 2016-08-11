@@ -6,6 +6,7 @@ using System.Web.Mvc;
 using eciWEB2016.Models;
 using eciWEB2016.Controllers.DataControllers;
 using System.Data;
+using System.Web.Services;
 
 namespace eciWEB2016.Controllers
 {
@@ -16,7 +17,58 @@ namespace eciWEB2016.Controllers
         {
             return View();
         }
-        
+
+
+        [HttpPost]
+        public ActionResult addTimeSheet(FormCollection col)
+        {
+
+            TimeHeaderModel timeHeader = new TimeHeaderModel();
+
+            timeHeader.staffID = Convert.ToInt32(col["staffID"]);
+            timeHeader.weekEnding = col["weekEnding"];
+
+            TimeSheetDataController dataController = new TimeSheetDataController();
+
+            dataController.insertTimeHeader(timeHeader);
+
+            Staff staff = new Staff();
+            StaffController staffController = new StaffController();
+            ViewBag.staffList = staffController.GetStaffList();
+            ViewBag.staffID = timeHeader.staffID;
+
+            return View("Time_Headers");
+            
+        }
+
+
+        [HttpPost]
+        public ActionResult addTimeDetails(FormCollection col)
+        {
+            TimeDetailModel details = new TimeDetailModel();
+
+            details.timeHeaderID = Convert.ToInt32(col["hiddenID"]);
+            details.actualTime = Convert.ToDecimal(col["actualTime"]);
+            details.insuranceTime = Convert.ToDecimal(col["insuranceTime"]);
+            details.placeOfService = col["placeOfService"];
+            details.canceled = col["canceled"];
+
+            int staffID = Convert.ToInt32(col["hiddenStaffID"]);
+
+            TimeSheetDataController dataController = new TimeSheetDataController();
+
+            dataController.insertTimeDetail(details);
+
+            Staff staff = new Staff();
+            StaffController staffController = new StaffController();
+            ViewBag.staffList = staffController.GetStaffList();
+            ViewBag.staffID = staffID;
+
+            return View("Time_Headers");
+
+        }
+
+
         public ActionResult TimeSheet_Grid_Partial(int staffID)
         {
             try

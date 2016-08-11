@@ -117,7 +117,6 @@
     <None Include="v1\Source\Stored_Procedures\get_AllSchoolInfo.sql" />
     <None Include="v1\Source\Stored_Procedures\get_AllCommunicationPreferences.sql" />
     <None Include="v1\Source\Stored_Procedures\ins_ClientStaff.sql" />
-    <None Include="v1\Source\Schema\alt_LnkAddressMember.sql" />
   </ItemGroup>
   <ItemGroup>
     <None Include="v1\Release\Sprint1\init_Database.sql" />
@@ -186,6 +185,7 @@
     <None Include="v1\Release\Sprint2\Stored_Procedures\upd_Race.sql" />
     <None Include="v1\Release\Sprint2\Stored_Procedures\upd_ReferralSource.sql" />
     <None Include="v1\Release\Sprint2\Stored_Procedures\upd_Sex.sql" />
+    <None Include="v1\Source\Schema\alt_Addresses.sql" />
     <None Include="v1\Source\Schema\alt_Clients.sql" />
     <None Include="v1\Source\Schema\alt_FamilyMember.sql" />
     <None Include="v1\Source\Schema\alt_InsuranceAuthorization.sql" />
@@ -554,45 +554,11 @@
     <None Include="v1\Release\Sprint 6\Stored_Procedures\ins_Client.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AdditionalContactInfoByMemberID.sql" />
+    <None Include="v1\Source\Stored_Procedures\ins_TimeHeader.sql" />
+    <Build Include="v1\Release\Sprint 6\Stored_Procedures\ins_TimeHeader.sql" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Schema\alt_Addresses.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Schema\init_Database.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Source\Schema\alt_Addresses.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AddressesByMemberID.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Schema\alt_LnkAddressMember.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Schema\init_LnkAddressMember.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Schema\alt_Clients.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_AddressesByFamilyMemberID.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_Addresses.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_ClientByAltID.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\get_ClientByID.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\upd_Addresses.sql" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="v1\Release\Sprint 6\Stored_Procedures\ins_FamilyMember.sql" />
+    <None Include="v1\Source\Stored_Procedures\ins_TimeDetails.sql" />
+    <Build Include="v1\Release\Sprint 6\Stored_Procedures\ins_TimeDetails.sql" />
   </ItemGroup>
 </Project>
