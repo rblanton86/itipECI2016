@@ -61,6 +61,26 @@ namespace eciWEB2016.Controllers
 
         /************************************************************************** CREATE *******************************************************/
 
+        [HttpGet]
+        public ActionResult InsertNewReferral()
+        {
+            Client newClient = new Client();
+            Referral newReferral = new Referral();
+
+            newClient = (Client)Session["client"];
+
+            if(newClient.clientID == 0)
+            {
+                newClient = referralDataController.InsertClient(newClient);
+
+                Session["client"] = newClient;
+            }
+
+
+            return View("Referral");
+        }
+
+
         /// <summary>
         /// Inserts a new referral into the database and saves it to session.
         /// </summary>
@@ -73,20 +93,17 @@ namespace eciWEB2016.Controllers
             // Checks if client has already been inserted to database, inserts if client has not.
             if(newReferral.client.clientID == 0)
             {
-                // Calls method to insert new client and returns client information. Returns with ID value for later checks.
-                newReferral.client = InsertNewClient(newReferral.client);
-
                 // Adds guardian to the list of family members belonging to the patient.
                 newReferral.client.clientFamily.Add(newReferral.client.guardian);
 
                 // Adds the new referral to client object.
                 newReferral.client.clientReferrals.Add(newReferral.referral);
 
-                // Checks if each referral information has been added to the database
-                for (int referral = 0; referral <= newReferral.client.clientReferrals.Count(); referral ++)
-                {
-                    newReferral.client.clientReferrals[referral] = referralDataController.InsertClientReferral(newReferral.client.clientReferrals[referral], newReferral.client.clientID);
-                }
+                //// Checks if each referral information has been added to the database
+                //for (int referral = 0; referral <= newReferral.client.clientReferrals.Count(); referral ++)
+                //{
+                //    newReferral.client.clientReferrals[referral] = referralDataController.InsertClientReferral(newReferral.client.clientReferrals[referral], newReferral.client.clientID);
+                //}
             }
 
             Session["client"] = newReferral.client;
@@ -99,28 +116,34 @@ namespace eciWEB2016.Controllers
         /// <summary>
         /// Calls data controller to insert client into the database.
         /// </summary>
-        /// <param name="newClient"></param>
+        /// <param name="newReferral"></param>
         /// <returns>Returns a client object with clientID for further checks agains.</returns>
-        public Client InsertNewClient(Client newClient)
+        [HttpPost]
+        public ActionResult InsertClient(ReferralViewModel newReferral)
         {
-            // Sets primary guardian isGuardian value to true after entry.
-            if (newClient.guardian.isGuardian == false)
+
+            if(newReferral.client.guardian.familyMemberID == 0)
             {
-                newClient.guardian.isGuardian = true;
+                // Checks if guardian is marked as guardian, so entry cannot be duplicated.
+                if(newReferral.client.guardian.isGuardian == false)
+                {
+                    // Marks family member as guardian.
+                    newReferral.client.guardian.isGuardian = true;
+
+                    // Adds guardian's home address to client's address.
+                    newReferral.client.clientAddress = newReferral.client.guardian.familyAddress;
+
+                    // Adds home number to client's main phone.
+                    newReferral.client.phone = newReferral.client.guardian.familyContact.Find(c => c.additionalContactInfoTypeID == 1);
+
+                    // Adds guardian to client object's family list.
+                    newReferral.client.clientFamily.Add(newReferral.client.guardian);
+                }
             }
 
-            // Assigns primary guardian's address to client Address.
-            newClient.clientAddress = newClient.guardian.familyAddress;
+            Session["client"] = newReferral.client;
 
-            newClient.clientAddress = InsertNewAddress(newClient.clientAddress, newClient.clientID, 1);
-
-            // Assigns primary guardian's home phone to client as primary phone.
-            newClient.phone = newClient.guardian.familyContact.Find(c => c.additionalContactInfoTypeID == 1);
-
-            // Calls method in the data controller to insert client into the database and returns a client object with client ID for further checks against.
-            newClient = referralDataController.InsertClient(newClient);
-
-            return newClient;
+            return PartialView("_ClientPartial", newReferral);
         }
 
         /// <summary>
@@ -186,7 +209,7 @@ namespace eciWEB2016.Controllers
 
             GetAllLists();
 
-            return PartialView("_FamilyPartial", client.clientFamily);
+            return PartialView("_FamilyListPartial", client.clientFamily);
         }
     }
 }

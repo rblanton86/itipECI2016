@@ -1,25 +1,14 @@
-﻿@model eciWEB2016.Models.Client
-<ul class="twoCol short">
-    <li>
-        @Html.LabelFor(c => c.altID)
-        @Html.TextBoxFor(c => c.altID)
-    </li>
-    <li>
-        @Html.LabelFor(c => c.lastName)
-        @Html.TextBoxFor(c => c.lastName)
-    </li>
-    <li>
-        @Html.LabelFor(c => c.firstName)
-        @Html.TextBoxFor(c => c.firstName)
-    </li>
-</ul>
-<ul class="threeCol">
-    <li>
-        @Html.LabelFor(c => c.middleInitial)
-        @Html.TextBoxFor(c => c.middleInitial)
-    </li>
-    <li>
-        @Html.LabelFor(c => c.dob)
-        @Html.EditorFor(c => c.dob)
-    </li>
-</ul>
+﻿@model eciWEB2016.Models.ReferralViewModel
+@using (Html.BeginForm("InsertClient", "Referral", FormMethod.Post, new { id = "clientReferralForm" }))
+{
+    @Html.LabelFor(r => r.client.altID)
+    @Html.TextBoxFor(r => r.client.altID)
+    @Html.LabelFor(r => r.client.dob)
+    @Html.EditorFor(r => r.client.dob)
+    @Html.LabelFor(r => r.client.lastName)
+    @Html.TextBoxFor(r => r.client.lastName)
+    @Html.LabelFor(r => r.client.firstName)
+    @Html.TextBoxFor(r => r.client.firstName)
+    @Html.LabelFor(r => r.client.middleInitial)
+    @Html.TextBoxFor(r => r.client.middleInitial)
+}

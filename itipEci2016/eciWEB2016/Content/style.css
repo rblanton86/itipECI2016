@@ -520,6 +520,12 @@ li {
 
 /* Family */
 
+#familyMain {
+    border-left: 1px solid rgb(65, 181, 190);
+    padding-left: 1%;
+    box-sizing: border-box;
+}
+
 .Address {
     clear: both;
     overflow: hidden;
@@ -667,6 +673,68 @@ li {
             margin: 0.5em 0;
         }
 
+/* Client Styling */
+
+#clientReferralForm {
+    overflow: hidden;
+    display: block;
+    clear: both;
+    margin: 0.5em 0;
+    border-left: 1px solid rgb(65, 181, 190);
+    padding-left: 1%;
+    box-sizing: border-box;
+}
+
+    #clientReferralForm label,
+    #clientReferralForm input {
+        float: left;
+        margin: 0.5em 0;
+    }
+
+    #clientReferralForm label {
+        width: 10%;
+    }
+
+    #clientReferralForm input:nth-child(2) {
+        width: 15%;
+    }
+
+    #clientReferralForm label:nth-child(3) {
+        width: 15%;
+    }
+
+    #clientReferralForm input:nth-child(4) {
+        margin-right: 37%;
+        width: 15%;
+        box-sizing: border-box;
+    }
+
+    #clientReferralForm label:nth-child(5) {
+        margin-left: 0;
+        clear: both;
+    }
+
+    #clientReferralForm input:nth-child(6),
+    #clientReferralForm input:nth-child(8) {
+        width: 20%;
+    }
+
+    #clientReferralForm label:nth-child(9) {
+        width: 15%;
+    }
+
+    #clientReferralForm input:nth-child(10) {
+        width: 5%;
+    }
+
+    #clientReferralForm label:nth-child(3),
+    #clientReferralForm label:nth-child(7),
+    #clientReferralForm label:nth-child(9) {
+        margin-left: 2%;
+    }
+
+/* Responsive */
+
 @media(max-width: 2000px) {
     .Address,
     .familyDemographics span:nth-child(1) {
@@ -745,8 +813,7 @@ li {
         }
 }
 
-@media(max-width: 1250px)
-{
+@media(max-width: 1250px) {
     .Address,
     .familyDemographics,
     .familyContact {
@@ -756,62 +823,56 @@ li {
         clear: both;
     }
 
-    .familyDemographics span:nth-child(1) label {
-        width: 20%;
-    }
+        .familyDemographics span:nth-child(1) label {
+            width: 20%;
+        }
 
-    .familyDemographics span:nth-child(1) label:nth-child(3) {
-        margin: 0 0 0 1%;
-    }
+            .familyDemographics span:nth-child(1) label:nth-child(3) {
+                margin: 0 0 0 1%;
+            }
 
-    .familyDemographics span:nth-child(1) {
-        width: 75%;
-    }
+        .familyDemographics span:nth-child(1) {
+            width: 75%;
+        }
 
-    .familyDemographics span:nth-child(1) input:nth-child(2),
-    .familyDemographics span:nth-child(1) input:nth-child(4) {
-        width: 30%;
-        box-sizing: border-box;
-    }
+            .familyDemographics span:nth-child(1) input:nth-child(2),
+            .familyDemographics span:nth-child(1) input:nth-child(4) {
+                width: 30%;
+                box-sizing: border-box;
+            }
 
-    .familyDemographics span:nth-child(2) {
-        width: 25%;
-        padding: 0;
-        margin-top: 1.25em;
-    }
+        .familyDemographics span:nth-child(2) {
+            width: 25%;
+            padding: 0;
+            margin-top: 1.25em;
+        }
 
-    .familyDemographics span:nth-child(2) select {
-        width: 100%;
-        box-sizing: border-box;
-    }
+            .familyDemographics span:nth-child(2) select {
+                width: 100%;
+                box-sizing: border-box;
+            }
 
-    .familyContact label {
-        width: 10%;
-        font-size: 0.75em;
-    }
+        .familyContact label {
+            width: 10%;
+            font-size: 0.75em;
+        }
 
-    .familyContact label:nth-child(n + 2)
-    {
-        padding-left: 1%;
-        box-sizing: border-box;
-    }
+            .familyContact label:nth-child(n + 2) {
+                padding-left: 1%;
+                box-sizing: border-box;
+            }
 
-    .familyContact input {
-        width: 15%;
-        padding-left: 0;
-        font-size: 0.75em;
-    }
+        .familyContact input {
+            width: 15%;
+            padding-left: 0;
+            font-size: 0.75em;
+        }
 
-    .familyContact label:nth-child(7) {
-        width: 7.5%;
-    }
+        .familyContact label:nth-child(7) {
+            width: 7.5%;
+        }
 
-    .familyContact input:nth-child(8) {
-        width: 17.5%;
-    }
-}
-
-@media(max-width: 1075px)
-{
-
+        .familyContact input:nth-child(8) {
+            width: 17.5%;
+        }
 }

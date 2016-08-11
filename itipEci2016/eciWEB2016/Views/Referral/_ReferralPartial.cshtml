@@ -1,0 +1,65 @@
+﻿@model eciWEB2016.Models.ReferralViewModel
+@using (Html.BeginForm("InsertReferral", "Referral", FormMethod.Post, new { id = "referralForm" }))
+{
+    <ul class="threeCol">
+        <li>
+            @Html.Label("Office Name")
+            @Html.DropDownListFor(r => r.client.officeID, (SelectList)ViewBag.officeList, "")
+        </li>
+        <li>
+            @Html.LabelFor(r => r.referral.referralDate)
+            @Html.EditorFor(r => r.referral.referralDate)
+        </li>
+        <li>
+            @Html.LabelFor(r => r.referral.referralDueDate)
+            @Html.EditorFor(r => r.referral.referralDueDate)
+        </li>
+        <li>
+
+        </li>
+        <li>
+            @Html.LabelFor(r => r.client.intakeCoordinator.staffID)
+            @Html.DropDownListFor(r => r.client.intakeCoordinator.staffID, (SelectList)ViewBag.staffList, "")
+        </li>
+        <li>
+            @Html.LabelFor(r => r.client.serviceCoordinator.staffID)
+            @Html.DropDownListFor(r => r.client.serviceCoordinator.staffID, (SelectList)ViewBag.staffList, "")
+        </li>
+    </ul>
+            <div>
+                @Html.LabelFor(r => r.referral.referralReason)
+                @Html.TextAreaFor(r => r.referral.referralReason, new { rows = 10, columns = 40 })
+            </div>
+            <ul class="twoCol">
+                <li>
+                    @Html.LabelFor(r => r.referral.reReferral)
+                    @Html.CheckBoxFor(r => r.referral.reReferral)
+                </li>
+                <li class="twoCol">
+                    @Html.LabelFor(r => r.referral.prevReferralDate)
+                    @Html.EditorFor(r => r.referral.prevReferralDate)
+                </li>
+            </ul>
+            <ul class="twoCol">
+                <li>
+                    @Html.LabelFor(r => r.referral.referralSource)
+                    @Html.TextBoxFor(r => r.referral.referralSource)
+                </li>
+                <li>
+                    @*@Html.LabelFor(r => r.referral.referralCode)*@
+                    @*Html.DropDownListFor(r => r.referral.referralCode, (SelectList)ViewBag.referralCodeList)*@
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.secondaryReferralSource)
+                    @Html.TextBoxFor(r => r.referral.secondaryReferralSource)
+                </li>
+                <li>
+                    @*@Html.LabelFor(r => r.referral.referralCode)*@
+                    @*Html.DropDownListFor(r => r.referral.referralCode, (SelectList)ViewBag.referralCodeList)*@
+                </li>
+            </ul>
+            <div>
+                @Html.LabelFor(r => r.referral.referralComments)
+                @Html.TextAreaFor(r => r.referral.referralComments, new { rows = 10, columns = 40 })
+            </div>
+}

@@ -345,6 +345,10 @@
     <Content Include="Views\Referral\_FamilyPartial.cshtml" />
     <Content Include="Views\Referral\_InsurancePartial.cshtml" />
     <Content Include="Views\Referral\_ClientPartial.cshtml" />
+    <Content Include="Views\Referral\_ReferralPartial.cshtml" />
+    <Content Include="Views\Referral\_FamilyListPartial.cshtml" />
+    <Content Include="Views\Referral\_ClientDetailsPartial.cshtml" />
+    <Content Include="Views\Referral\_ReferralDetailsPartial.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

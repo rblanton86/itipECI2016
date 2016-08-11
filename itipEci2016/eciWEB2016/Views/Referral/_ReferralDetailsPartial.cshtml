@@ -1,0 +1,70 @@
+﻿@model eciWEB2016.Models.ReferralViewModel
+
+@using (Html.BeginForm("InsertReferralDetails", "Referral", FormMethod.Post, new { id = "referralDetailsForm" }))
+{
+    <ul class="twoCol short">
+        <li>
+            @Html.Label("Outreach Code:")
+            @Html.TextBox("outreachCode", null, new { name = "outreachCode" })
+        </li>
+        <li>
+            @Html.LabelFor(r => r.client.TKIDcaseNumber)
+            @Html.TextBoxFor(r => r.client.TKIDcaseNumber)
+        </li>
+    </ul>
+            <ul class="threeCol long">
+                <li>
+                    @Html.LabelFor(r => r.client.otherFAtoITIPFA)
+                    @Html.CheckBoxFor(r => r.client.otherFAtoITIPFA)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ITIPcomptoITIPFA)
+                    @Html.CheckBoxFor(r => r.client.ITIPcomptoITIPFA)
+                </li>
+                <li>
+                    @*
+                        @Html.LabelFor(r => r.referral.referralOutcome)
+                        @Html.DropDownListFor(r => r.referral.referralOutcome, (SelectList)ViewBag.ReferralOutcomes)
+                    *@
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.referralOutcomeDate)
+                    @Html.EditorFor(r => r.referral.referralOutcomeDate)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ITIPFAtoITIPcomp)
+                    @Html.CheckBoxFor(r => r.client.ITIPFAtoITIPcomp)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.fromOtherECI)
+                    @Html.CheckBoxFor(r => r.client.fromOtherECI)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.agencyFrom)
+                    @Html.TextBoxFor(r => r.client.agencyFrom)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.referral.transferringLocation)
+                    @Html.TextBoxFor(r => r.referral.transferringLocation)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.pointOfAccess)
+                    @Html.CheckBoxFor(r => r.client.pointOfAccess)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ECIReferredTo)
+                    @Html.TextBoxFor(r => r.client.ECIReferredTo)
+                </li>
+                <li>
+                    @Html.LabelFor(r => r.client.ECIReferredDate)
+                    @Html.EditorFor(r => r.client.ECIReferredDate)
+                </li>
+            </ul>
+            <div style="border: 1px solid black; overflow: hidden; clear: both;">
+                Referral Sent By:
+                @Html.LabelFor(r => r.referral.sentByFax)
+                @Html.CheckBoxFor(r => r.referral.sentByFax)
+                @Html.LabelFor(r => r.referral.sentByPhone)
+                @Html.CheckBoxFor(r => r.referral.sentByPhone)
+            </div>
+}

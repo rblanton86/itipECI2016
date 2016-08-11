@@ -1,0 +1,46 @@
+﻿@model List<eciWEB2016.Models.Family>
+@foreach (var family in Model)
+{
+    <div class="familyInformation" style="margin-top: 1em;">
+        <div class="familyDemographics">
+            <span>
+                @Html.LabelFor(f => family.firstName)
+                @Html.TextBoxFor(f => family.firstName)
+                @Html.LabelFor(f => family.lastName)
+                @Html.TextBoxFor(f => family.lastName)
+            </span>
+            <span>
+                @Html.LabelFor(f => family.familyMemberType)
+                @Html.DropDownListFor(f => family.familyMemberTypeID, (SelectList)ViewBag.familyMemberTypeList, null, new { @Value = family.familyMemberTypeID })
+            </span>
+        </div>
+        <div class="Address">
+            <span>
+                @Html.LabelFor(f => family.familyAddress.address1)
+                @Html.TextBoxFor(f => family.familyAddress.address1)
+                @Html.LabelFor(f => family.familyAddress.address2)
+                @Html.TextBoxFor(f => family.familyAddress.address2)
+            </span>
+            <span>
+                @Html.LabelFor(f => family.familyAddress.city)
+                @Html.TextBoxFor(f => family.familyAddress.city)
+                @Html.LabelFor(f => family.familyAddress.state)
+                @Html.TextBoxFor(f => family.familyAddress.state)
+                @Html.LabelFor(f => family.familyAddress.zip)
+                @Html.TextBoxFor(f => family.familyAddress.zip)
+                @Html.LabelFor(f => family.familyAddress.county)
+                @Html.TextBoxFor(f => family.familyAddress.county)
+            </span>
+        </div>
+        <div class="familyContact">
+            @Html.Label("Home Phone")
+            @Html.TextBox("HomePhone", null)
+            @Html.Label("Cell Phone")
+            @Html.TextBox("CellPhone", null)
+            @Html.Label("Work Phone")
+            @Html.TextBox("WorkPhone", null)
+            @Html.Label("Email")
+            @Html.TextBox("Email", null)
+        </div>
+    </div>
+}

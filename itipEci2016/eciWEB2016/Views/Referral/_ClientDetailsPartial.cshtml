@@ -1,0 +1,19 @@
+﻿@model eciWEB2016.Models.ReferralViewModel
+
+@using (Html.BeginForm("InsertClientDetails", "Referral", FormMethod.Post, new { id = "referralClientDetailsForm" }))
+{
+    <ul>
+        <li>
+            @Html.LabelFor(r => r.client.primaryLanguageID):
+            @Html.DropDownListFor(r => r.client.primaryLanguageID, (SelectList)ViewBag.primaryLanguageList, null, new { @Value = Model.client.primaryLanguageID })
+        </li>
+        <li>
+            @Html.LabelFor(r => r.client.interpreterNeeded)
+            @Html.CheckBoxFor(r => r.client.interpreterNeeded)
+        </li>
+        <li>
+            @Html.LabelFor(r => r.client.schoolInfoID):
+            @Html.DropDownListFor(r => r.client.schoolInfoID, (SelectList)ViewBag.schoolInfoList, null, new { @Value = Model.client.schoolInfoID })
+        </li>
+    </ul>
+}
