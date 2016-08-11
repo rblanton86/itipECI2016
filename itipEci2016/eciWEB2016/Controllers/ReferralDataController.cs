@@ -23,6 +23,8 @@ namespace eciWEB2016.Controllers
 
         private ClientController clientController = new ClientController();
 
+        private AddressesDataController addressDataControler = new AddressesDataController();
+
         /// <summary>
         /// Creates a database connection if one has not been initiated.
         /// </summary>
@@ -34,48 +36,8 @@ namespace eciWEB2016.Controllers
             }
         }
 
-        public Client InsertClientAddress(Client newClient)
-        {
-            DbCommand ins_Address = db.GetStoredProcCommand("ins_Addresses");
-            db.AddInParameter(ins_Address, "@memberID", DbType.Int32, newClient.clientID);
-            db.AddInParameter(ins_Address, "@memberTypeID", DbType.Int32, newClient.memberTypeID);
-            db.AddInParameter(ins_Address, "@addressTypeID", DbType.Int32, newClient.clientAddress.addressTypeID);
-            db.AddInParameter(ins_Address, "@address1", DbType.String, newClient.clientAddress.address1);
-            db.AddInParameter(ins_Address, "@address2", DbType.String, newClient.clientAddress.address2);
-            db.AddInParameter(ins_Address, "@city", DbType.String, newClient.clientAddress.city);
-            db.AddInParameter(ins_Address, "@st", DbType.String, newClient.clientAddress.state);
-            db.AddInParameter(ins_Address, "@zip", DbType.Int32, newClient.clientAddress.zip);
-            db.AddInParameter(ins_Address, "@mapsco", DbType.String, newClient.clientAddress.mapsco);
-            db.AddInParameter(ins_Address, "@county", DbType.String, newClient.clientAddress.county);
-            db.AddInParameter(ins_Address, "@deleted", DbType.Int32, 0);
-
-            db.AddOutParameter(ins_Address, "@addressID", DbType.Int32, sizeof(int));
-
-            DataSet test = db.ExecuteDataSet(ins_Address);
-
-            try
-            {
-                db.ExecuteNonQuery(ins_Address);
-
-                newClient.clientAddress.addressesID = Convert.ToInt32(db.GetParameterValue(ins_Address, "@addressID"));
-            }
-            catch (Exception e)
-            {
-                Debug.WriteLine("InsertClientAddress failed, exception: {0}", e);
-                throw;
-            }
-
-
-            return newClient;
-        }
-
         public Client InsertClient(Client newClient)
         {
-            if (newClient.clientAddress.addressesID == 0)
-            {
-                newClient = InsertClientAddress(newClient);
-            }
-
             DbCommand ins_Client = db.GetStoredProcCommand("ins_Client");
             db.AddInParameter(ins_Client, "@raceID", DbType.Int32, newClient.raceID);
             db.AddInParameter(ins_Client, "@ethnicityID", DbType.Int32, newClient.ethnicityID);
@@ -85,7 +47,6 @@ namespace eciWEB2016.Controllers
             db.AddInParameter(ins_Client, "@communicationPreferencesID", DbType.Int32, newClient.communicationPreferencesID);
             db.AddInParameter(ins_Client, "@sexID", DbType.Int32, newClient.sexID);
             db.AddInParameter(ins_Client, "@officeID", DbType.Int32, newClient.officeID);
-            db.AddInParameter(ins_Client, "@addressesID", DbType.Int32, newClient.clientAddress.addressesID);
             db.AddInParameter(ins_Client, "@firstName", DbType.String, newClient.firstName);
             db.AddInParameter(ins_Client, "@middleInitial", DbType.String, newClient.middleInitial);
             db.AddInParameter(ins_Client, "@lastName", DbType.String, newClient.lastName);
@@ -201,6 +162,15 @@ namespace eciWEB2016.Controllers
             return newStaff;
         }
 
+        public Referral InsertClientReferral(Referral createdReferral, int clientID)
+        {
+            //// Creates a call to the stored procedure with which each referral will be added.
+            //DbCommand ins_Referral = db.GetStoredProcCommand("ins_Referral");
+            //db.AddInParameter();
+
+            return createdReferral;
+        }
+
         public Family InsertClientFamily(Family createdFamily, int clientID)
         {
             // Creates a call to the stored procedure with which each family member will be added.
@@ -208,6 +178,7 @@ namespace eciWEB2016.Controllers
 
             // Adds in/out parameters.
             db.AddInParameter(ins_FamilyMember, "@familyMemberTypeID", DbType.Int32, createdFamily.familyMemberTypeID);
+            db.AddInParameter(ins_FamilyMember, "@clientID", DbType.Int32, clientID);
             db.AddInParameter(ins_FamilyMember, "@firstName", DbType.String, createdFamily.firstName);
             db.AddInParameter(ins_FamilyMember, "@lastName", DbType.String, createdFamily.lastName);
             db.AddInParameter(ins_FamilyMember, "@isGuardian", DbType.Boolean, createdFamily.isGuardian);
@@ -235,7 +206,6 @@ namespace eciWEB2016.Controllers
             {
                 Debug.WriteLine("InsertClientFamily failed, exception: {0}.", e);
                 success = false;
-                throw;
             }
 
             return createdFamily;

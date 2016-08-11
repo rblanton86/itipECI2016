@@ -27,6 +27,8 @@ namespace eciWEB2016.Controllers.DataControllers
             }
         }
 
+        private AddressesDataController addressesDataController = new AddressesDataController();
+
         // Gets Client list for view.
         public List<Client> GetListClients()
         {
@@ -274,6 +276,7 @@ namespace eciWEB2016.Controllers.DataControllers
             catch (Exception e)
             {
                 Debug.WriteLine("GetPrimaryLanguageList failed, exception: {0}.", e);
+                throw;
             }
 
             return new SelectList(languageList, "Value", "Text");
@@ -555,15 +558,13 @@ namespace eciWEB2016.Controllers.DataControllers
 
                 // Inserts the created list of comments into the client.
                 selectedClient.clientComments.AddRange(CommentsList);
-
-                return selectedClient;
             }
             catch (Exception e)
             {
                 Debug.WriteLine("GetClientComments failed, exception: {0}", e);
-                return selectedClient;
-                throw;
             }
+
+            return selectedClient;
         }
 
         public Client GetClientAdditionalContactInfo(Client selectedClient)
@@ -578,23 +579,30 @@ namespace eciWEB2016.Controllers.DataControllers
             db.AddOutParameter(get_AdditionalContactInfoByMemberID, "additionalContactInfoType", DbType.String, 25);
             db.AddOutParameter(get_AdditionalContactInfoByMemberID, "memberType", DbType.String, 25);
             db.AddOutParameter(get_AdditionalContactInfoByMemberID, "success", DbType.Boolean, 1);
-            
-            db.ExecuteNonQuery(get_AdditionalContactInfoByMemberID);
 
-            bool success = Convert.ToBoolean(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@success"));
-
-            AdditionalContactInfoModel contactInfo = new AdditionalContactInfoModel();
-
-            if (contactInfo.additionalContactInfoID != 0)
+            try
             {
-                contactInfo.additionalContactInfoID = Convert.ToInt32(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfoID"));
-                contactInfo.additionalContactInfo = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfo"));
-                contactInfo.additionalContactInfoTypeID = Convert.ToInt32(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfoTypeID"));
-                contactInfo.additionalContactInfoType = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfoType"));
-                contactInfo.memberType = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@memberType"));
-            }
+                db.ExecuteNonQuery(get_AdditionalContactInfoByMemberID);
 
-            selectedClient.phone = contactInfo;
+                bool success = Convert.ToBoolean(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@success"));
+
+                AdditionalContactInfoModel contactInfo = new AdditionalContactInfoModel();
+
+                if (contactInfo.additionalContactInfoID != 0)
+                {
+                    contactInfo.additionalContactInfoID = Convert.ToInt32(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfoID"));
+                    contactInfo.additionalContactInfo = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfo"));
+                    contactInfo.additionalContactInfoTypeID = Convert.ToInt32(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfoTypeID"));
+                    contactInfo.additionalContactInfoType = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@additionalContactInfoType"));
+                    contactInfo.memberType = Convert.ToString(db.GetParameterValue(get_AdditionalContactInfoByMemberID, "@memberType"));
+                }
+
+                selectedClient.phone = contactInfo;
+            }
+            catch (Exception e)
+            {
+                Debug.WriteLine("GetClientAdditionalContactInfo did not complete, exception: {0}", e);
+            }
 
             return selectedClient;
         }
@@ -677,7 +685,7 @@ namespace eciWEB2016.Controllers.DataControllers
             else
             {
                 ReferralDataController referralDataController = new ReferralDataController();
-                currentClient = referralDataController.InsertClientAddress(currentClient);
+                currentClient.clientAddress = addressesDataController.InsertAddress(currentClient.clientAddress, currentClient.clientID, 1);
             }
 
             return currentClient;

@@ -592,4 +592,7 @@
   <ItemGroup>
     <None Include="v1\Release\Sprint 6\Stored_Procedures\upd_Addresses.sql" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="v1\Release\Sprint 6\Stored_Procedures\ins_FamilyMember.sql" />
+  </ItemGroup>
 </Project>

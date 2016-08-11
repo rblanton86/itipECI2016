@@ -8,25 +8,20 @@ Date:
 Change History:
 	
 ************************************************************************************************************/
-using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Web;
 using eciWEB2016.Models;
 using System.Data;
-using System.Data.Common;
-using eciWEB2016.Controllers.DataControllers;
-using Microsoft.Practices.EnterpriseLibrary.Common.Configuration;
-using Microsoft.Practices.EnterpriseLibrary.Data;
-using Microsoft.Practices.EnterpriseLibrary.Data.Sql;
-using System.Web.Configuration;
 
 namespace eciWEB2016.Class
 {
     public class Addresses
     {
-
-        //gets addresses for any dataset sent through and returns as a address model
+        /// <summary>
+        /// Takes a dataset as input and returns address as object.
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns>Address object with all parameters.</returns>
         public Address GetAddressByDataSet(DataSet ds)
         {
             //datasets passed through only have one row so we access that row
@@ -48,7 +43,11 @@ namespace eciWEB2016.Class
             return thisAddress;
         }
 
-        //gets All addresses associated with a client by familyID and returns as a list
+        /// <summary>
+        /// Takes a dataset as input and returns a list of addresses as an object.
+        /// </summary>
+        /// <param name="ds"></param>
+        /// <returns>List of Address object.</returns>
         public List<Address> GetAddressesByDataSet(DataSet ds)
         {
 
@@ -70,6 +69,5 @@ namespace eciWEB2016.Class
                                          }).ToList();
             return AddressList;
         }
-
     }
 }

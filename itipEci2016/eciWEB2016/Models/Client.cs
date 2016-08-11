@@ -65,17 +65,19 @@ namespace eciWEB2016.Models
         public string referralSource { get; set; }
         [Display(Name = "Agency From")]
         public string agencyFrom { get; set; }
-
         [Display(Name = "First Name")]
+        [Required]
         public string firstName { get; set; }
         [Display(Name = "Middle Initial")]
         public string middleInitial { get; set; }
         [Display(Name = "Last Name")]
+        [Required]
         public string lastName { get; set; }
         [Display(Name = "Full Name")]
         public string fullName { get; set; }
         [DataType(DataType.Date)]
         [Display(Name = "Date Of Birth")]
+        [Required]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime dob { get; set; }
         [Display(Name = "Age (In Months)")]

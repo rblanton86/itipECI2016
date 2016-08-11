@@ -165,68 +165,50 @@ Change History:
             @{Html.RenderPartial("_ClientPartial", Model.client);}
         </form>
     </div>
-    <div id="familyMain">
+    <div id="familyMain" style="clear: both;">
         <form id="familyReferralForm">
-            <div class="familyInformation">
-                <div class="familyAddress">
-                    <ul>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.familyMemberType)
-                            @Html.TextBoxFor(r => r.client.guardian.familyMemberType)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.firstName)
-                            @Html.TextBoxFor(r => r.client.guardian.firstName)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.lastName)
-                            @Html.TextBoxFor(r => r.client.guardian.lastName)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.familyAddress.address1)
-                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.address1)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.familyAddress.address2)
-                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.address2)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.familyAddress.city)
-                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.city)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.familyAddress.state)
-                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.state)
-                        </li>
-                        <li>
-                            @Html.LabelFor(r => r.client.guardian.familyAddress.zip)
-                            @Html.TextBoxFor(r => r.client.guardian.familyAddress.zip)
-                        </li>
-                    </ul>
+            <div class="familyInformation" id="guardianInformation">
+                <div class="familyDemographics">
+                    @Html.LabelFor(r => r.client.guardian.familyMemberType)
+                    @Html.DropDownListFor(r => r.client.guardian.familyMemberType, (SelectList)ViewBag.familyMemberTypeList, null, new { @Value = Model.client.guardian.familyMemberTypeID })
+                    @Html.LabelFor(r => r.client.guardian.firstName)
+                    @Html.TextBoxFor(r => r.client.guardian.firstName)
+                    @Html.LabelFor(r => r.client.guardian.lastName)
+                    @Html.TextBoxFor(r => r.client.guardian.lastName)
+                </div>
+                <div class="Address">
+                    <p>Address:</p>
+                    <span>
+                        @Html.LabelFor(r => r.client.guardian.familyAddress.address1)
+                        @Html.TextBoxFor(r => r.client.guardian.familyAddress.address1)
+                        @Html.LabelFor(r => r.client.guardian.familyAddress.address2)
+                        @Html.TextBoxFor(r => r.client.guardian.familyAddress.address2)
+                    </span>
+                    <span>
+                        @Html.LabelFor(r => r.client.guardian.familyAddress.city)
+                        @Html.TextBoxFor(r => r.client.guardian.familyAddress.city)
+                        @Html.LabelFor(r => r.client.guardian.familyAddress.state)
+                        @Html.TextBoxFor(r => r.client.guardian.familyAddress.state)
+                        @Html.LabelFor(r => r.client.guardian.familyAddress.zip)
+                        @Html.TextBoxFor(r => r.client.guardian.familyAddress.zip)
+                        @Html.LabelFor(r => r.client.guardian.familyAddress.county)
+                        @Html.TextBoxFor(r => r.client.guardian.familyAddress.county)
+                    </span>
                 </div>
                 <div class="familyContact">
-                    <ul>
-                        <li>
-                            @Html.Label("Home Phone:")
-                            @Html.TextBox("HomePhone", null)
-                        </li>
-                        <li>
-                            @Html.Label("Cell Phone:")
-                            @Html.TextBox("CellPhone", null)
-                        </li>
-                        <li>
-                            @Html.Label("Work Phone:")
-                            @Html.TextBox("WorkPhone", null)
-                        </li>
-                        <li>
-                            @Html.Label("Email:")
-                            @Html.TextBox("Email", null)
-                        </li>
-                    </ul>
+                    @Html.Label("Home Phone:")
+                    @Html.TextBox("HomePhone", null)
+                    @Html.Label("Cell Phone:")
+                    @Html.TextBox("CellPhone", null)
+                    @Html.Label("Work Phone:")
+                    @Html.TextBox("WorkPhone", null)
+                    @Html.Label("Email:")
+                    @Html.TextBox("Email", null)
                 </div>
             </div>
-
-            @{Html.RenderPartial("_FamilyPartial", Model.client.clientFamily);}
+            <div id="familyList" style="clear: both;">
+                @{Html.RenderPartial("_FamilyPartial", Model.client.clientFamily);}
+            </div>
         </form>
         <button type="button" id="addNewFamily">Add Family</button>
     </div>
@@ -255,11 +237,11 @@ Change History:
     @* Generates new family section to add additional family members. *@
     <script>
         $("#addNewFamily").click(function () {
-            var url = '@Url.Action("InsertNewFamily", "Referral")';
+            var url = '@Url.Action("AddFamilyToList", "Referral")';
             $.post(
                 url,
                 function (data) {
-                    $('#familyMain').html(data);
+                    $('#familyList').html(data);
                 });
         });
     </script>

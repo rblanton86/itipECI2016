@@ -477,7 +477,7 @@ th {
     display: inline-block;
 }
 
-.staffLabelLong{
+.staffLabelLong {
     float: left;
     width: 10%;
 }
@@ -507,9 +507,157 @@ li {
     overflow: hidden;
 }
 
+#familyMain ul {
+    overflow: hidden;
+}
+
 /* Validation styling */
 
 .input-validation-error {
-    background-color: pink; 
+    background-color: pink;
     border: 1px solid red;
 }
+
+.Address {
+    clear: both;
+    overflow: hidden;
+    border-left: 1px solid rgb(65, 181, 190);
+    padding: 0 0 0 1%;
+    width: 75%;
+    float: left;
+    box-sizing: border-box;
+    margin: 0.5em 0 0 0;
+    line-height: 1.5em;
+}
+
+    .Address p {
+        margin: 0;
+        padding: 0;
+        float: left;
+        width: 100%;
+    }
+
+    .Address input, .Address label {
+        margin: .5em 0;
+    }
+
+    .Address span:nth-child(2),
+    .Address span:nth-child(3) {
+        width: 100%;
+        overflow: hidden;
+        clear: both;
+        display: inline-block;
+        margin: 0;
+    }
+
+        .Address span:nth-child(2) label,
+        .Address span:nth-child(3) label:nth-child(1) {
+            width: 15%;
+            float: left;
+        }
+
+        .Address span:nth-child(2) input {
+            width: 85%;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .Address span:nth-child(3) input:nth-child(2) {
+            width: 15%;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .Address span:nth-child(3) label:nth-child(3) {
+            width: 7%;
+            float: left;
+            margin-left: 2%;
+        }
+
+        .Address span:nth-child(3) input:nth-child(4) {
+            width: 7%;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .Address span:nth-child(3) label:nth-child(5),
+        .Address span:nth-child(3) label:nth-child(7) {
+            width: 10%;
+            float: left;
+            margin-left: 2%;
+        }
+
+        .Address span:nth-child(3) input:nth-child(6),
+        .Address span:nth-child(3) input:nth-child(8) {
+            box-sizing: border-box;
+            float: left;
+            width: 15%;
+        }
+
+.familyContact {
+    margin: 0.5em 0 0 0;
+    width: 25%;
+    float: left;
+    padding: 0 0 0 1%;
+    box-sizing: border-box;
+    overflow: hidden;
+    line-height: 1.5em;
+}
+
+    .familyContact label {
+        width: 30%;
+        float: left;
+        margin: 0;
+        margin: .5em 0;
+    }
+
+    .familyContact input {
+        width: 70%;
+        float: left;
+        box-sizing: border-box;
+        margin: 0;
+        margin: .5em 0;
+    }
+
+.familyDemographics {
+    margin: 0.5em 0 0 0;
+    width: 100%;
+    border-left: 1px solid rgb(65, 181, 190);
+    padding: 1% 0 0 1%;
+    clear: both;
+    overflow: hidden;
+    box-sizing: border-box;
+}
+
+    .familyDemographics input,
+    .familyDemographics label,
+    .familyDemographics select {
+        margin: 0;
+    }
+
+        .familyDemographics label:nth-child(1) {
+            width: 15%;
+            float: left;
+        }
+
+        .familyDemographics select:nth-child(2) {
+            background-color: aliceblue;
+            width: 21%;
+            float: left;
+            box-sizing: border-box;
+        }
+
+        .familyDemographics label:nth-child(3),
+        .familyDemographics label:nth-child(5) {
+            margin-left: 2%;
+            width: 15%;
+            float: left;
+        }
+
+        .familyDemographics input:nth-child(4),
+        .familyDemographics input:nth-child(6) {
+            background-color: aqua;
+            width: 15%;
+            float: left;
+            box-sizing: border-box;
+        }
