@@ -36,6 +36,29 @@ namespace eciWEB2016.Controllers
             }
         }
 
+        public Client InsertNewClient(Client newClient)
+        {
+            if (newClient.clientID == 0)
+            {
+                newClient = InsertClient(newClient);
+            };
+
+            for (int family = 0; family <= newClient.clientFamily.Count(); family++)
+            {
+                if (newClient.clientFamily[family].familyMemberID == 0)
+                {
+                    newClient.clientFamily[family] = InsertClientFamily(newClient.clientFamily[family], newClient.clientID);
+                }
+            };
+
+            for (int referral = 0; referral <= newClient.clientReferrals.Count(); referral++)
+            {
+                newClient.clientReferrals[referral] = InsertClientReferral(newClient.clientReferrals[referral], newClient.clientID);
+            };
+
+            return newClient;
+        }
+
         public Client InsertClient(Client newClient)
         {
             DbCommand ins_Client = db.GetStoredProcCommand("ins_Client");

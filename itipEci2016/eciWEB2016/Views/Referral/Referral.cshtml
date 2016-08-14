@@ -41,7 +41,7 @@ Change History:
 </div>
 
 @section JavaScript
-        {
+{
     @* Generates new family section to add additional family members. *@
     <script>
         $("#addNewFamily").click(function () {
@@ -56,32 +56,30 @@ Change History:
 
     <script>
         // Submits all forms.
-        var url = "/Referral/InsertNewClient";
+        var url = "/Referral/InsertNewReferral";
+        var formSuccess = [false, false, false, false, false]
+
+        var allSucceed;
 
         $("#addClient").click(function sendform() {
-
-            $('form#clientReferralForm').valid(function () {
-                $(this).trigger('submit');
+            $('form#clientReferralForm').validate({
+                success: $('form#clientReferralForm').submit()
             }),
 
-            $('form#familyReferralForm').valid(function () {
-                $(this).trigger('submit');
+            $('form#familyReferralForm').validate({
+                success: $('form#familyReferralForm').submit()
             }),
 
-            $('form#referralDetailsForm').valid(function () {
-                $(this).trigger('submit');
+            $('form#referralDetailsForm').validate({
+                success: $('form#referralDetailsForm').submit()
             }),
 
-            $('form#referralClientDetailsForm').valid(function () {
-                $(this).trigger('submit');
+            $('form#referralClientDetailsForm').validate({
+                success: $('form#referralClientDetailsForm').submit()
             }),
 
-            $('form#referralForm').valid(function () {
-                $(this).trigger('submit');
-            }),
-
-            $.get(url, null, function (response) {
-                $('#main').html(response);
+            $('form#referralForm').validate({
+                success: $('form#referralForm').submit()
             })
         });
     </script>
