@@ -61,71 +61,113 @@ namespace eciWEB2016.Controllers
 
         /************************************************************************** CREATE *******************************************************/
 
-        [HttpGet]
-        public ActionResult InsertNewReferral()
-        {
-            Client newClient = new Client();
-            Referral newReferral = new Referral();
-
-            newClient = (Client)Session["client"];
-
-            if(newClient.clientID == 0)
-            {
-                newClient = referralDataController.InsertClient(newClient);
-
-                Session["client"] = newClient;
-            }
-
-
-            return View("Referral");
-        }
-
-
         /// <summary>
-        /// Inserts a new referral into the database and saves it to session.
+        /// Inserts a new referral to the client in Session.
         /// </summary>
         /// <param name="newReferral"></param>
-        /// <returns>Referral view with new referral loaded.</returns>
+        /// <returns>Partial view with updated client and referral objects.</returns>
         [HttpPost]
         [WebMethod(EnableSession = true)]
         public ActionResult InsertReferral(ReferralViewModel newReferral)
         {
-            // Checks if client has already been inserted to database, inserts if client has not.
-            if(newReferral.client.clientID == 0)
+            Client newClient = new Client();
+            newClient = (Client)Session["client"];
+
+            if (newClient.clientReferrals != null)
             {
-                // Adds guardian to the list of family members belonging to the patient.
-                newReferral.client.clientFamily.Add(newReferral.client.guardian);
+                var thisReferral = newClient.clientReferrals.FindIndex(r => r.insertReferralDetailsComplete);
+                newClient.clientReferrals[thisReferral] = newReferral.referral;
 
-                // Adds the new referral to client object.
-                newReferral.client.clientReferrals.Add(newReferral.referral);
+                // Marks client object as insert referral completed.
+                newReferral.referral.insertReferralMainComplete = true;
 
-                //// Checks if each referral information has been added to the database
-                //for (int referral = 0; referral <= newReferral.client.clientReferrals.Count(); referral ++)
-                //{
-                //    newReferral.client.clientReferrals[referral] = referralDataController.InsertClientReferral(newReferral.client.clientReferrals[referral], newReferral.client.clientID);
-                //}
+                // Adds new referral object to the client object.
+                newClient.clientReferrals.Add(newReferral.referral);
+
+                // Marks entire referral as entry complete.
+                newClient.insertReferralComplete = true;
+            }
+            else
+            {
+                newReferral.referral.insertReferralMainComplete = true;
+
+                newClient.clientReferrals.Add(newReferral.referral);
             }
 
-            Session["client"] = newReferral.client;
+            // Returns updated client to session.
+            Session["client"] = newClient;
 
+            // Calls method to insert client if all insert properties are true.
+            InsertNewClient(newReferral.client);
+
+            // Gets list again for view.
             GetAllLists();
 
-            return Json(newReferral);
+            return PartialView("_ReferralPartial", newReferral);
         }
 
         /// <summary>
-        /// Calls data controller to insert client into the database.
+        /// Inserts detailed referral information to the client in Session.
         /// </summary>
         /// <param name="newReferral"></param>
-        /// <returns>Returns a client object with clientID for further checks agains.</returns>
+        /// <returns>Partial view with updated client and referral objects.</returns>
         [HttpPost]
+        [WebMethod(EnableSession = true)]
+        public ActionResult InsertReferralDetails(ReferralViewModel newReferral)
+        {
+            if (!newReferral.referral.insertReferralDetailsComplete)
+            {
+                // Assigns client in session to a client object.
+                Client newClient = new Client();
+
+                if(Session["client"] != null)
+                {
+                    newClient = (Client)Session["client"];
+                }
+
+                if (newReferral.referral.insertReferralMainComplete)
+                {
+                    // Updates the client's referral to include the new referral details.
+                    var thisReferral = newClient.clientReferrals.FindIndex(r => r.insertReferralMainComplete);
+
+                    // Inserts the referral details.
+                    newClient.clientReferrals[thisReferral] = newReferral.referral;
+
+                    // Marks insert of referral Details as complete.
+                    newClient.clientReferrals[thisReferral].insertReferralDetailsComplete = true;
+
+                    // Marks entire referral object as complete on the client object.
+                    newClient.insertReferralComplete = true;
+                }
+                else
+                {
+                    newReferral.referral.insertReferralDetailsComplete = true;
+                    newClient.clientReferrals.Add(newReferral.referral);
+                }
+
+                // Returns updated client object to Session.
+                Session["client"] = newClient;
+
+                // Calls method to insert client if all insert properties are true.
+                InsertNewClient(newClient);
+            }
+
+            return PartialView("_ReferralDetailsPartial", newReferral);
+        }
+
+        /// <summary>
+        /// Inserts client information into client in Session.
+        /// </summary>
+        /// <param name="newReferral"></param>
+        /// <returns>Partial view with updated client and referral objects.</returns>
+        [HttpPost]
+        [WebMethod(EnableSession = true)]
         public ActionResult InsertClient(ReferralViewModel newReferral)
         {
-
-            if(newReferral.client.guardian.familyMemberID == 0)
+            if (!newReferral.client.insertClientComplete)
             {
                 // Checks if guardian is marked as guardian, so entry cannot be duplicated.
-                if(newReferral.client.guardian.isGuardian == false)
+                if (!newReferral.client.guardian.isGuardian)
                 {
                     // Marks family member as guardian.
                     newReferral.client.guardian.isGuardian = true;
@@ -139,52 +181,80 @@ namespace eciWEB2016.Controllers
                     // Adds guardian to client object's family list.
                     newReferral.client.clientFamily.Add(newReferral.client.guardian);
                 }
-            }
 
-            Session["client"] = newReferral.client;
+                // Marks client object as insert client completed.
+                newReferral.client.insertClientComplete = true;
+
+                // Returns updated client object to Session.
+                Session["client"] = newReferral.client;
+
+                // Calls method to insert client if all insert properties are true.
+                InsertNewClient(newReferral.client);
+            }
 
             return PartialView("_ClientPartial", newReferral);
         }
 
         /// <summary>
-        /// Calls data controller to insert client into the database.
+        /// Inserts additional client detail information to the new client in session.
         /// </summary>
-        /// <param name="newAddress"></param>
-        /// <returns>Returns an address object with addressesID for further checks against.</returns>
-        public Address InsertNewAddress(Address newAddress, int memberID, int memberTypeID)
+        /// <param name="newReferral"></param>
+        /// <returns>Partial view with client and referral objects.</returns>
+        public ActionResult InsertClientDetails(ReferralViewModel newReferral)
         {
-            if(newAddress.addressesID == 0)
+            if (!newReferral.client.insertClientDetailsComplete)
             {
-                newAddress = addressesDataController.InsertAddress(newAddress, memberID, memberTypeID);
-            }
-            else
-            {
-                newAddress = addressesDataController.UpdateAddress(newAddress, memberID, memberTypeID);
+                // Marks client object as insert client completed.
+                newReferral.client.insertClientDetailsComplete = true;
+
+                // Returns updated client object to Session.
+                Session["client"] = newReferral.client;
+
+                // Calls method to insert client if all insert properties are true.
+                InsertNewClient(newReferral.client);
             }
 
-            return newAddress;
+            return PartialView("_ClientDetailsPartial", newReferral);
         }
 
         /// <summary>
-        /// Calls data controller to insert client's family members into the database.
+        /// Inserts family information into client in Session.
         /// </summary>
-        /// <param name="newFamily"></param>
-        /// <param name="ClientID"></param>
-        /// <returns>Family object with familyMemberID assigned for further checks against.</returns>
-        public List<Family> InsertNewFamily(List<Family> familyList, int clientID)
+        /// <param name="newReferral"></param>
+        /// <returns>Partial view with updated client and referral objects.</returns>
+        [HttpPost]
+        [WebMethod(EnableSession = true)]
+        public ActionResult InsertFamily(ReferralViewModel newReferral)
         {
-            // Inserts all new family members into database.
-            for (int familyMember = 0; familyMember <= familyList.Count(); familyMember++)
+            if (!newReferral.client.insertFamilyComplete)
             {
-                // Checks if selected family member has already been entered into the database.
-                if (familyList[familyMember].familyMemberID == 0)
+                // Check if guardian has been entered into family list, adds if not.
+                if (!newReferral.client.guardian.isGuardian)
                 {
-                    // Inserts family member into the database, returns with ID value for later checks.
-                    familyList[familyMember] = referralDataController.InsertClientFamily(familyList[familyMember], clientID);
+                    // Marks family member as guardian.
+                    newReferral.client.guardian.isGuardian = true;
+
+                    // Adds guardian's home address to client's address.
+                    newReferral.client.clientAddress = newReferral.client.guardian.familyAddress;
+
+                    // Adds home number to client's main phone.
+                    newReferral.client.phone = newReferral.client.guardian.familyContact.Find(c => c.additionalContactInfoTypeID == 1);
+
+                    // Adds guardian to client object's family list.
+                    newReferral.client.clientFamily.Add(newReferral.client.guardian);
                 }
+
+                // Marks client object as insert family completed.
+                newReferral.client.insertFamilyComplete = true;
+
+                // Returns updated client object to Session.
+                Session["client"] = newReferral.client;
+
+                // Calls method to insert client if all insert properties are true.
+                InsertNewClient(newReferral.client);
             }
 
-            return familyList;
+            return PartialView("_FamilyPartial", newReferral);
         }
 
         [HttpPost]
@@ -210,6 +280,15 @@ namespace eciWEB2016.Controllers
             GetAllLists();
 
             return PartialView("_FamilyListPartial", client.clientFamily);
+        }
+
+        public void InsertNewClient(Client newClient)
+        {
+            if (newClient.insertClientComplete && newClient.insertClientDetailsComplete && newClient.insertReferralComplete && newClient.insertReferralComplete)
+            {
+                newClient = referralDataController.InsertNewClient(newClient);
+                Session["client"] = newClient;
+            };
         }
     }
 }

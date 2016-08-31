@@ -1,6 +1,6 @@
 ﻿@model eciWEB2016.Models.ReferralViewModel
 
-    @using (Html.BeginForm("InsertFamily", "Referral", FormMethod.Post, new { id = "familyReferralForm" }))
+    @using (Ajax.BeginForm("InsertFamily", "Referral", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "familyMain" } , new { id = "familyReferralForm" }))
     {
         <div class="familyInformation" id="guardianInformation">
             <div class="familyDemographics">

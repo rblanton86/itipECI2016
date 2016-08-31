@@ -1,5 +1,5 @@
 ﻿@model eciWEB2016.Models.ReferralViewModel
-@using (Html.BeginForm("InsertReferral", "Referral", FormMethod.Post, new { id = "referralForm" }))
+@using (Ajax.BeginForm("InsertReferral", "Referral", new AjaxOptions { HttpMethod = "POST", UpdateTargetId = "referral"}, new { id = "referralForm" }))
 {
     <ul class="threeCol">
         <li>
@@ -8,21 +8,21 @@
         </li>
         <li>
             @Html.LabelFor(r => r.referral.referralDate)
-            @Html.EditorFor(r => r.referral.referralDate)
+            @Html.EditorFor(r => r.referral.referralDate, new { placeholder = "Date" })
         </li>
         <li>
             @Html.LabelFor(r => r.referral.referralDueDate)
-            @Html.EditorFor(r => r.referral.referralDueDate)
+            @Html.EditorFor(r => r.referral.referralDueDate, new { placeholder = "Date" })
         </li>
         <li>
 
         </li>
         <li>
-            @Html.LabelFor(r => r.client.intakeCoordinator.staffID)
+            @Html.LabelFor(r => r.client.intakeCoordinator)
             @Html.DropDownListFor(r => r.client.intakeCoordinator.staffID, (SelectList)ViewBag.staffList, "")
         </li>
         <li>
-            @Html.LabelFor(r => r.client.serviceCoordinator.staffID)
+            @Html.LabelFor(r => r.client.serviceCoordinator)
             @Html.DropDownListFor(r => r.client.serviceCoordinator.staffID, (SelectList)ViewBag.staffList, "")
         </li>
     </ul>
@@ -37,7 +37,7 @@
                 </li>
                 <li class="twoCol">
                     @Html.LabelFor(r => r.referral.prevReferralDate)
-                    @Html.EditorFor(r => r.referral.prevReferralDate)
+                    @Html.EditorFor(r => r.referral.prevReferralDate, new { placeholder = "Date" })
                 </li>
             </ul>
             <ul class="twoCol">
